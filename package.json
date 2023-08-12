@@ -1,6 +1,6 @@
 {
   "name": "@hatsprotocol/modules-registry",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "author": "Haberdasher Labs",
   "license": "MIT",
   "main": "dist/modules-registry.cjs.js",

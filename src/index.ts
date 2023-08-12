@@ -1,3 +1,3 @@
-import { eligibilityModules } from "eligibility";
+import { eligibilityModules } from "./eligibility/index";
 
 export {eligibilityModules};
