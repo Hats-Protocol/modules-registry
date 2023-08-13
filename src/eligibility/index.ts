@@ -1,11 +1,12 @@
-import * as jokerace from "./jokerace/info.json";
-import * as staking from "./staking/info.json"
+import type { EligibilityModule, EligibilityFactory } from "./types";
+import { factory } from "./factory/index";
+import { jokerace } from "./jokerace/index";
+import { staking } from "./staking/index";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const eligibilityModules: {[key: string]: any} = {
-    "jokerace": jokerace,
-    "staking": staking,
-}
+const eligibilityModules: EligibilityModule[] = [jokerace, staking];
 
+const eligibilityFactory = factory;
 
-export {eligibilityModules};
+export { eligibilityModules, eligibilityFactory };
+
+export type { EligibilityModule, EligibilityFactory };

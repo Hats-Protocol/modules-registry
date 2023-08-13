@@ -1,0 +1,18 @@
+{
+  "name": "Signle Tenant Eligibility Factory",
+  "description": "Deploys instances of eligibility modules, each tied to one specific hat",
+  "github": {
+    "owner": "Hats-Protocol",
+    "repo": "hats-module"
+  },
+  "deployments": {
+    "5": {
+      "address": "0x60f7bE2ffc5672934146713fAe20Df350F21d8E2",
+      "block": "9395052"
+    },
+    "1": {
+      "address": "",
+      "block": ""
+    }
+  }
+}

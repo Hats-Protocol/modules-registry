@@ -5,6 +5,7 @@
   "license": "MIT",
   "main": "dist/modules-registry.cjs.js",
   "module": "dist/modules-registry.esm.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules yarn exec jest -- -i",
     "build": "rollup -c",
