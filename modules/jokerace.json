@@ -1,0 +1,343 @@
+{
+  "name": "JokeRace Eligibility",
+  "description": "Defines eligibility for wearers according to a Jokerace contest results.",
+  "github": {
+    "owner": "Hats-Protocol",
+    "repo": "jokerace-eligibility"
+  },
+  "type": {
+    "eligibility": true,
+    "toggle": false,
+    "hatter": false
+  },
+  "implementationAddress": "0xd7c10b09453007993960FE2f92cE497A32059E08",
+  "deployments": [
+    {
+      "chainId": "5",
+      "block": "9412522"
+    }
+  ],
+  "args": {
+    "immutable": [
+      {
+        "name": "Admin Hat",
+        "description": "Optional admin hat, granted a permission to create a new term (reelection). If not provided (equals zero), then this permission is granted to the admins of the hat",
+        "type": "uint256"
+      }
+    ],
+    "mutable": [
+      {
+        "name": "JokeRace Contest",
+        "description": "The JokeRace constest that facilitates the election",
+        "type": "address"
+      },
+      {
+        "name": "Term End",
+        "description": "Timestamp of the term ending (in seconds)",
+        "type": "uint256"
+      },
+      {
+        "name": "Top K",
+        "description": "First K winners of the election will be eligible",
+        "type": "uint256"
+      }
+    ]
+  },
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_version",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "JokeraceEligibility_ContestNotCompleted",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "JokeraceEligibility_NoTies",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "JokeraceEligibility_NotAdmin",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "JokeraceEligibility_TermNotCompleted",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "version",
+          "type": "uint8"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "NewContest",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newTopK",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newTermEnd",
+          "type": "uint256"
+        }
+      ],
+      "name": "NewTerm",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "ADMIN_HAT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "HATS",
+      "outputs": [
+        {
+          "internalType": "contract IHats",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "IMPLEMENTATION",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "contest",
+          "type": "address"
+        }
+      ],
+      "name": "eligibleWearersPerContest",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "eligible",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "getWearerStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "eligible",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "standing",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hatId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pullElectionResults",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newUnderlyingContest",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newTermEnd",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "newTopK",
+          "type": "uint256"
+        }
+      ],
+      "name": "reelection",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "reelectionAllowed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "allowed",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        }
+      ],
+      "name": "setUp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "termEnd",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "topK",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "underlyingContest",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version_",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}
