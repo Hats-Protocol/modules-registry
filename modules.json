@@ -2,17 +2,9 @@
   {
     "name": "Hats Module Factory",
     "description": "Deploys instances of hats modules.",
-    "github": {
-      "owner": "Hats-Protocol",
-      "repo": "hats-module"
-    },
+    "github": { "owner": "Hats-Protocol", "repo": "hats-module" },
     "implementationAddress": "0x60f7bE2ffc5672934146713fAe20Df350F21d8E2",
-    "deployments": [
-      {
-        "chainId": "5",
-        "block": "9395052"
-      }
-    ],
+    "deployments": [{ "chainId": "5", "block": "9395052" }],
     "abi": [
       {
         "inputs": [
@@ -163,22 +155,10 @@
   {
     "name": "JokeRace Eligibility",
     "description": "Defines eligibility for wearers according to a Jokerace contest results.",
-    "github": {
-      "owner": "Hats-Protocol",
-      "repo": "jokerace-eligibility"
-    },
-    "type": {
-      "eligibility": true,
-      "toggle": false,
-      "hatter": false
-    },
+    "github": { "owner": "Hats-Protocol", "repo": "jokerace-eligibility" },
+    "type": { "eligibility": true, "toggle": false, "hatter": false },
     "implementationAddress": "0xd7c10b09453007993960FE2f92cE497A32059E08",
-    "deployments": [
-      {
-        "chainId": "5",
-        "block": "9412522"
-      }
-    ],
+    "deployments": [{ "chainId": "5", "block": "9412522" }],
     "args": {
       "immutable": [
         {
@@ -212,11 +192,7 @@
     "abi": [
       {
         "inputs": [
-          {
-            "internalType": "string",
-            "name": "_version",
-            "type": "string"
-          }
+          { "internalType": "string", "name": "_version", "type": "string" }
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
@@ -226,16 +202,8 @@
         "name": "JokeraceEligibility_ContestNotCompleted",
         "type": "error"
       },
-      {
-        "inputs": [],
-        "name": "JokeraceEligibility_NoTies",
-        "type": "error"
-      },
-      {
-        "inputs": [],
-        "name": "JokeraceEligibility_NotAdmin",
-        "type": "error"
-      },
+      { "inputs": [], "name": "JokeraceEligibility_NoTies", "type": "error" },
+      { "inputs": [], "name": "JokeraceEligibility_NotAdmin", "type": "error" },
       {
         "inputs": [],
         "name": "JokeraceEligibility_TermNotCompleted",
@@ -283,11 +251,7 @@
         "inputs": [],
         "name": "ADMIN_HAT",
         "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "pure",
         "type": "function"
@@ -296,11 +260,7 @@
         "inputs": [],
         "name": "HATS",
         "outputs": [
-          {
-            "internalType": "contract IHats",
-            "name": "",
-            "type": "address"
-          }
+          { "internalType": "contract IHats", "name": "", "type": "address" }
         ],
         "stateMutability": "pure",
         "type": "function"
@@ -309,64 +269,32 @@
         "inputs": [],
         "name": "IMPLEMENTATION",
         "outputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "", "type": "address" }
         ],
         "stateMutability": "pure",
         "type": "function"
       },
       {
         "inputs": [
-          {
-            "internalType": "address",
-            "name": "wearer",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "contest",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "wearer", "type": "address" },
+          { "internalType": "address", "name": "contest", "type": "address" }
         ],
         "name": "eligibleWearersPerContest",
         "outputs": [
-          {
-            "internalType": "bool",
-            "name": "eligible",
-            "type": "bool"
-          }
+          { "internalType": "bool", "name": "eligible", "type": "bool" }
         ],
         "stateMutability": "view",
         "type": "function"
       },
       {
         "inputs": [
-          {
-            "internalType": "address",
-            "name": "_wearer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "address", "name": "_wearer", "type": "address" },
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "name": "getWearerStatus",
         "outputs": [
-          {
-            "internalType": "bool",
-            "name": "eligible",
-            "type": "bool"
-          },
-          {
-            "internalType": "bool",
-            "name": "standing",
-            "type": "bool"
-          }
+          { "internalType": "bool", "name": "eligible", "type": "bool" },
+          { "internalType": "bool", "name": "standing", "type": "bool" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -375,11 +303,7 @@
         "inputs": [],
         "name": "hatId",
         "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "pure",
         "type": "function"
@@ -403,11 +327,7 @@
             "name": "newTermEnd",
             "type": "uint256"
           },
-          {
-            "internalType": "uint256",
-            "name": "newTopK",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "newTopK", "type": "uint256" }
         ],
         "name": "reelection",
         "outputs": [],
@@ -418,22 +338,14 @@
         "inputs": [],
         "name": "reelectionAllowed",
         "outputs": [
-          {
-            "internalType": "bool",
-            "name": "allowed",
-            "type": "bool"
-          }
+          { "internalType": "bool", "name": "allowed", "type": "bool" }
         ],
         "stateMutability": "view",
         "type": "function"
       },
       {
         "inputs": [
-          {
-            "internalType": "bytes",
-            "name": "_initData",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "_initData", "type": "bytes" }
         ],
         "name": "setUp",
         "outputs": [],
@@ -444,11 +356,7 @@
         "inputs": [],
         "name": "termEnd",
         "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -457,11 +365,7 @@
         "inputs": [],
         "name": "topK",
         "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -470,11 +374,7 @@
         "inputs": [],
         "name": "underlyingContest",
         "outputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "", "type": "address" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -482,26 +382,14 @@
       {
         "inputs": [],
         "name": "version",
-        "outputs": [
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          }
-        ],
+        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
         "stateMutability": "view",
         "type": "function"
       },
       {
         "inputs": [],
         "name": "version_",
-        "outputs": [
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          }
-        ],
+        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
         "stateMutability": "view",
         "type": "function"
       }
@@ -510,22 +398,10 @@
   {
     "name": "Staking Eligibility",
     "description": "Requires wearers of a given Hat to stake a minimum amount of a specified token in order to be eligible, and enables others in the hat tree's organization to slash the stake of a wearer who is behaving badly.",
-    "github": {
-      "owner": "Hats-Protocol",
-      "repo": "staking-eligibility"
-    },
-    "type": {
-      "eligibility": true,
-      "toggle": false,
-      "hatter": false
-    },
+    "github": { "owner": "Hats-Protocol", "repo": "staking-eligibility" },
+    "type": { "eligibility": true, "toggle": false, "hatter": false },
     "implementationAddress": "0x04c8851CDd118b643e38eF32AFD8B76B5197743e",
-    "deployments": [
-      {
-        "chainId": "5",
-        "block": "9406370"
-      }
-    ],
+    "deployments": [{ "chainId": "5", "block": "9406370" }],
     "args": {
       "immutable": [
         {
@@ -565,11 +441,7 @@
     "abi": [
       {
         "inputs": [
-          {
-            "internalType": "string",
-            "name": "_version",
-            "type": "string"
-          }
+          { "internalType": "string", "name": "_version", "type": "string" }
         ],
         "stateMutability": "nonpayable",
         "type": "constructor"
@@ -604,11 +476,7 @@
         "name": "StakingEligibility_NotHatAdmin",
         "type": "error"
       },
-      {
-        "inputs": [],
-        "name": "StakingEligibility_NotJudge",
-        "type": "error"
-      },
+      { "inputs": [], "name": "StakingEligibility_NotJudge", "type": "error" },
       {
         "inputs": [],
         "name": "StakingEligibility_NotRecipient",
@@ -823,11 +691,7 @@
         "inputs": [],
         "name": "HATS",
         "outputs": [
-          {
-            "internalType": "contract IHats",
-            "name": "",
-            "type": "address"
-          }
+          { "internalType": "contract IHats", "name": "", "type": "address" }
         ],
         "stateMutability": "pure",
         "type": "function"
@@ -836,11 +700,7 @@
         "inputs": [],
         "name": "IMPLEMENTATION",
         "outputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "", "type": "address" }
         ],
         "stateMutability": "pure",
         "type": "function"
@@ -849,22 +709,14 @@
         "inputs": [],
         "name": "TOKEN",
         "outputs": [
-          {
-            "internalType": "contract IERC20",
-            "name": "",
-            "type": "address"
-          }
+          { "internalType": "contract IERC20", "name": "", "type": "address" }
         ],
         "stateMutability": "pure",
         "type": "function"
       },
       {
         "inputs": [
-          {
-            "internalType": "uint248",
-            "name": "_amount",
-            "type": "uint248"
-          }
+          { "internalType": "uint248", "name": "_amount", "type": "uint248" }
         ],
         "name": "beginUnstake",
         "outputs": [],
@@ -886,11 +738,7 @@
       },
       {
         "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "_judgeHat",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "_judgeHat", "type": "uint256" }
         ],
         "name": "changeJudgeHat",
         "outputs": [],
@@ -899,11 +747,7 @@
       },
       {
         "inputs": [
-          {
-            "internalType": "uint248",
-            "name": "_minStake",
-            "type": "uint248"
-          }
+          { "internalType": "uint248", "name": "_minStake", "type": "uint248" }
         ],
         "name": "changeMinStake",
         "outputs": [],
@@ -925,11 +769,7 @@
       },
       {
         "inputs": [
-          {
-            "internalType": "address",
-            "name": "_staker",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "_staker", "type": "address" }
         ],
         "name": "completeUnstake",
         "outputs": [],
@@ -947,46 +787,26 @@
         "inputs": [],
         "name": "cooldownPeriod",
         "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
       },
       {
         "inputs": [
-          {
-            "internalType": "address",
-            "name": "staker",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "staker", "type": "address" }
         ],
         "name": "cooldowns",
         "outputs": [
-          {
-            "internalType": "uint248",
-            "name": "amount",
-            "type": "uint248"
-          },
-          {
-            "internalType": "uint256",
-            "name": "endsAt",
-            "type": "uint256"
-          }
+          { "internalType": "uint248", "name": "amount", "type": "uint248" },
+          { "internalType": "uint256", "name": "endsAt", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
       },
       {
         "inputs": [
-          {
-            "internalType": "address",
-            "name": "_staker",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "_staker", "type": "address" }
         ],
         "name": "forgive",
         "outputs": [],
@@ -995,29 +815,13 @@
       },
       {
         "inputs": [
-          {
-            "internalType": "address",
-            "name": "_wearer",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "address", "name": "_wearer", "type": "address" },
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "name": "getWearerStatus",
         "outputs": [
-          {
-            "internalType": "bool",
-            "name": "eligible",
-            "type": "bool"
-          },
-          {
-            "internalType": "bool",
-            "name": "standing",
-            "type": "bool"
-          }
+          { "internalType": "bool", "name": "eligible", "type": "bool" },
+          { "internalType": "bool", "name": "standing", "type": "bool" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -1026,11 +830,7 @@
         "inputs": [],
         "name": "hatId",
         "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "pure",
         "type": "function"
@@ -1039,11 +839,7 @@
         "inputs": [],
         "name": "judgeHat",
         "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -1052,11 +848,7 @@
         "inputs": [],
         "name": "minStake",
         "outputs": [
-          {
-            "internalType": "uint248",
-            "name": "",
-            "type": "uint248"
-          }
+          { "internalType": "uint248", "name": "", "type": "uint248" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -1065,22 +857,14 @@
         "inputs": [],
         "name": "recipientHat",
         "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
+          { "internalType": "uint256", "name": "", "type": "uint256" }
         ],
         "stateMutability": "view",
         "type": "function"
       },
       {
         "inputs": [
-          {
-            "internalType": "bytes",
-            "name": "_initdata",
-            "type": "bytes"
-          }
+          { "internalType": "bytes", "name": "_initdata", "type": "bytes" }
         ],
         "name": "setUp",
         "outputs": [],
@@ -1089,11 +873,7 @@
       },
       {
         "inputs": [
-          {
-            "internalType": "address",
-            "name": "_staker",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "_staker", "type": "address" }
         ],
         "name": "slash",
         "outputs": [],
@@ -1102,11 +882,7 @@
       },
       {
         "inputs": [
-          {
-            "internalType": "uint248",
-            "name": "_amount",
-            "type": "uint248"
-          }
+          { "internalType": "uint248", "name": "_amount", "type": "uint248" }
         ],
         "name": "stake",
         "outputs": [],
@@ -1115,24 +891,12 @@
       },
       {
         "inputs": [
-          {
-            "internalType": "address",
-            "name": "staker",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "staker", "type": "address" }
         ],
         "name": "stakes",
         "outputs": [
-          {
-            "internalType": "uint248",
-            "name": "amount",
-            "type": "uint248"
-          },
-          {
-            "internalType": "bool",
-            "name": "slashed",
-            "type": "bool"
-          }
+          { "internalType": "uint248", "name": "amount", "type": "uint248" },
+          { "internalType": "bool", "name": "slashed", "type": "bool" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -1141,11 +905,7 @@
         "inputs": [],
         "name": "totalSlashedStakes",
         "outputs": [
-          {
-            "internalType": "uint248",
-            "name": "",
-            "type": "uint248"
-          }
+          { "internalType": "uint248", "name": "", "type": "uint248" }
         ],
         "stateMutability": "view",
         "type": "function"
@@ -1153,36 +913,20 @@
       {
         "inputs": [],
         "name": "version",
-        "outputs": [
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          }
-        ],
+        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
         "stateMutability": "view",
         "type": "function"
       },
       {
         "inputs": [],
         "name": "version_",
-        "outputs": [
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          }
-        ],
+        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
         "stateMutability": "view",
         "type": "function"
       },
       {
         "inputs": [
-          {
-            "internalType": "address",
-            "name": "_recipient",
-            "type": "address"
-          }
+          { "internalType": "address", "name": "_recipient", "type": "address" }
         ],
         "name": "withdraw",
         "outputs": [],

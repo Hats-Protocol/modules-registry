@@ -1,16 +1,10 @@
 {
   "name": "@hatsprotocol/modules-registry",
-  "version": "0.3.0",
+  "version": "0.1.0",
   "author": "Haberdasher Labs",
   "license": "MIT",
-  "main": "dist/modules-registry.cjs.js",
-  "module": "dist/modules-registry.esm.js",
-  "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules yarn exec jest -- -i",
-    "build": "rollup -c",
-    "eslint": "eslint . --ext '.ts,.tsx'",
-    "eslint:fix": "eslint . --ext '.ts,.tsx' --fix",
+    "bundle": "node merger.mjs",
     "prettier": "prettier --check --config .prettierrc './**/src/*.{.js,jsx,ts,tsx}'",
     "prettier:fix": "prettier --config .prettierrc './**/src/*.{.js,jsx,ts,tsx}' --write"
   },
