@@ -153,6 +153,166 @@
     ]
   },
   {
+    "name": "ERC1155 Eligibility",
+    "description": "An address is eligible if it holds at least one minimum balance of a set of ERC1155 token Ids",
+    "github": { "owner": "pumpedlunch", "repo": "HatsEligibilityModules" },
+    "type": { "eligibility": true, "toggle": false, "hatter": false },
+    "implementationAddress": "0x900c76737cF45a26315D5BFeBC8c383AC7192513",
+    "deployments": [{ "chainId": "5", "block": "9346764" }],
+    "args": {
+      "immutable": [
+        {
+          "name": "ERC1155 Contract Address",
+          "description": "ERC1155 contract address",
+          "type": "address",
+          "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5"
+        },
+        {
+          "name": "Number Of Tokens",
+          "description": "Number of token IDs in the set of tokens that allow eligiblity",
+          "type": "uint256",
+          "example": "2"
+        },
+        {
+          "name": "Token IDs",
+          "description": "The token IDs within the ERC1155 contract that allow eligibilty",
+          "type": "uint256[]",
+          "example": ["1", "2"]
+        },
+        {
+          "name": "Minimum Balances",
+          "description": "The minimum balances required (for token ID in the corresponding index) for eligibility",
+          "type": "uint256[]",
+          "example": ["100", "500"]
+        }
+      ],
+      "mutable": []
+    },
+    "abi": [
+      {
+        "inputs": [
+          { "internalType": "string", "name": "_version", "type": "string" }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      { "inputs": [], "name": "AlreadyInitialized", "type": "error" },
+      { "inputs": [], "name": "NotInitializing", "type": "error" },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint8",
+            "name": "version",
+            "type": "uint8"
+          }
+        ],
+        "name": "Initialized",
+        "type": "event"
+      },
+      {
+        "inputs": [],
+        "name": "ARRAY_LENGTH",
+        "outputs": [
+          { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "HATS",
+        "outputs": [
+          { "internalType": "contract IHats", "name": "", "type": "address" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "IMPLEMENTATION",
+        "outputs": [
+          { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "MIN_BALANCES",
+        "outputs": [
+          { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "TOKEN_ADDRESS",
+        "outputs": [
+          { "internalType": "address", "name": "", "type": "address" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "TOKEN_IDS",
+        "outputs": [
+          { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          { "internalType": "address", "name": "_wearer", "type": "address" },
+          { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "name": "getWearerStatus",
+        "outputs": [
+          { "internalType": "bool", "name": "eligible", "type": "bool" },
+          { "internalType": "bool", "name": "standing", "type": "bool" }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "hatId",
+        "outputs": [
+          { "internalType": "uint256", "name": "", "type": "uint256" }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+        ],
+        "name": "setUp",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "version",
+        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "version_",
+        "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ]
+  },
+  {
     "name": "ERC20 Eligibility",
     "description": "An address is eligible if it holds at least a configured minimum amount of a chosen erc20 token.",
     "github": { "owner": "pumpedlunch", "repo": "HatsEligibilityModules" },

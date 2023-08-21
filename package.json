@@ -5,10 +5,9 @@
   "license": "MIT",
   "scripts": {
     "bundle": "node merger.mjs",
-    "prettier": "prettier --check --config .prettierrc './**/src/*.{.js,jsx,ts,tsx}'",
-    "prettier:fix": "prettier --config .prettierrc './**/src/*.{.js,jsx,ts,tsx}' --write"
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
-    "prettier": "^3.0.1"
+    "prettier": "3.0.2"
   }
 }
