@@ -5,11 +5,11 @@
     "owner": "Hats-Protocol",
     "repo": "hats-module"
   },
-  "implementationAddress": "0x60f7bE2ffc5672934146713fAe20Df350F21d8E2",
+  "implementationAddress": "0xEcb86bAB1E2494Dd3C4bcE4d0528842E226A869c",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9395052"
+      "block": "9550399"
     }
   ],
   "abi": [
@@ -25,6 +25,7 @@
       "stateMutability": "nonpayable",
       "type": "constructor"
     },
+    { "inputs": [], "name": "BatchArrayLengthMismatch", "type": "error" },
     {
       "inputs": [
         {
@@ -86,6 +87,32 @@
         { "internalType": "contract IHats", "name": "", "type": "address" }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_implementations",
+          "type": "address[]"
+        },
+        { "internalType": "uint256[]", "name": "_hatIds", "type": "uint256[]" },
+        {
+          "internalType": "bytes[]",
+          "name": "_otherImmutableArgsArray",
+          "type": "bytes[]"
+        },
+        {
+          "internalType": "bytes[]",
+          "name": "_initDataArray",
+          "type": "bytes[]"
+        }
+      ],
+      "name": "batchCreateHatsModule",
+      "outputs": [
+        { "internalType": "bool", "name": "success", "type": "bool" }
+      ],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
