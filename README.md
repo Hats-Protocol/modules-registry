@@ -9,8 +9,8 @@ Hats Protocol is open and permission-less, and so anyone is free to use any comp
 
 ## Add New Module
 
-The registry is designed to support any module that inherits the [HatsModule contract](https://github.com/Hats-Protocol/hats-module/blob/main/src/HatsModule.sol). 
-For full documentation on how to build Hats Modules, click [here](https://docs.hatsprotocol.xyz/for-developers/building-hats-modules).
+The registry is designed to support any existing module that inherits the [HatsModule contract](https://github.com/Hats-Protocol/hats-module/blob/main/src/HatsModule.sol). 
+For full documentation on how to build new Hats Modules, click [here](https://docs.hatsprotocol.xyz/for-developers/building-hats-modules).
 
 For each module, the registry contains a JSON file with the following structure:
 ```json
