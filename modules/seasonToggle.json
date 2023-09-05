@@ -1,0 +1,207 @@
+{
+  "name": "Season Toggle",
+  "description": "Allows an organization to configure certain hats to be automatically toggled off after a given interval, i.e. a 'season'.",
+  "github": {
+    "owner": "Hats-Protocol",
+    "repo": "season-toggle"
+  },
+  "type": {
+    "eligibility": false,
+    "toggle": true,
+    "hatter": false
+  },
+  "implementationAddress": "0xFb6bD2e96B123d0854064823f6cb59420A285C00",
+  "deployments": [
+    {
+      "chainId": "5",
+      "block": "9597342"
+    }
+  ],
+  "args": {
+    "immutable": [],
+    "mutable": [
+      {
+        "name": "Extension Delay",
+        "description": "The length of the season, in seconds. Must be larger than 1 hour",
+        "type": "uint256",
+        "example": "2592000"
+      },
+      {
+        "name": "Season Duration",
+        "description": "The proportion of the season that must elapse before the branch can be extended for another season, The value is treated as the numerator `x` in the expression `x / 10,000`",
+        "type": "uint256",
+        "example": "5000"
+      }
+    ]
+  },
+  "abi": [
+    {
+      "inputs": [
+        { "internalType": "string", "name": "__version", "type": "string" }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "SeasonToggle_InvalidExtensionDelay",
+      "type": "error"
+    },
+    { "inputs": [], "name": "SeasonToggle_NotBranchAdmin", "type": "error" },
+    { "inputs": [], "name": "SeasonToggle_NotExtendable", "type": "error" },
+    {
+      "inputs": [],
+      "name": "SeasonToggle_SeasonDurationTooShort",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_branchRoot",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_duration",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_extensionDelay",
+          "type": "uint256"
+        }
+      ],
+      "name": "Extended",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "version",
+          "type": "uint8"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "HATS",
+      "outputs": [
+        { "internalType": "contract IHats", "name": "", "type": "address" }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "IMPLEMENTATION",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MIN_SEASON_DURATION",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint256", "name": "_duration", "type": "uint256" },
+        {
+          "internalType": "uint256",
+          "name": "_extensionDelay",
+          "type": "uint256"
+        }
+      ],
+      "name": "extend",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "extendable",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "extensionDelay",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "extensionThreshold",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "name": "getHatStatus",
+      "outputs": [
+        { "internalType": "bool", "name": "_active", "type": "bool" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hatId",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "seasonDuration",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "seasonEnd",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+      ],
+      "name": "setUp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version_",
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

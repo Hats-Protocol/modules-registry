@@ -10,11 +10,11 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0x04c8851CDd118b643e38eF32AFD8B76B5197743e",
+  "implementationAddress": "0x9E01030aF633Be5a439DF122F2eEf750b44B8aC7",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9406370"
+      "block": "9597271"
     }
   ],
   "args": {

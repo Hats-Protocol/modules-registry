@@ -425,8 +425,8 @@
       "description": "A Hats Protocol hatter contract enabling explicitly eligible wearers to claim a hat.",
       "github": { "owner": "Hats-Protocol", "repo": "claims-hatter" },
       "type": { "eligibility": false, "toggle": false, "hatter": true },
-      "implementationAddress": "0xd42dfDb6cf5CDe8a17E44FB9fA4480A325e9bf4a",
-      "deployments": [{ "chainId": "5", "block": "9556342" }],
+      "implementationAddress": "0xC00236108E64A29Cca05aCf4c37ba21eaE348De1",
+      "deployments": [{ "chainId": "5", "block": "9597457" }],
       "args": { "immutable": [], "mutable": [] },
       "abi": [
         {
@@ -616,8 +616,8 @@
       "description": "An address is eligible if it holds at least one minimum balance of a set of ERC1155 token Ids",
       "github": { "owner": "pumpedlunch", "repo": "HatsEligibilityModules" },
       "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "implementationAddress": "0x900c76737cF45a26315D5BFeBC8c383AC7192513",
-      "deployments": [{ "chainId": "5", "block": "9346764" }],
+      "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
+      "deployments": [{ "chainId": "5", "block": "9608205" }],
       "args": {
         "immutable": [
           {
@@ -780,8 +780,8 @@
       "description": "An address is eligible if it holds at least a configured minimum amount of a chosen erc20 token.",
       "github": { "owner": "pumpedlunch", "repo": "HatsEligibilityModules" },
       "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "implementationAddress": "0x2b7eD034dCEE749FAAcEb534f917Fe290eFFD546",
-      "deployments": [{ "chainId": "5", "block": "9346755" }],
+      "implementationAddress": "0xbA5b218e6685D0607139c06f81442681a32a0EC3",
+      "deployments": [{ "chainId": "5", "block": "9611056" }],
       "args": {
         "immutable": [
           {
@@ -824,6 +824,15 @@
         },
         {
           "inputs": [],
+          "name": "ERC20_TOKEN_ADDRESS",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "HATS",
           "outputs": [
             { "internalType": "contract IHats", "name": "", "type": "address" }
@@ -845,15 +854,6 @@
           "name": "MIN_BALANCE",
           "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "TOKEN_ADDRESS",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
           ],
           "stateMutability": "pure",
           "type": "function"
@@ -914,8 +914,8 @@
       "description": "An address is eligible if it holds at least a configured minimum amount of a chosen erc721 token.",
       "github": { "owner": "pumpedlunch", "repo": "HatsEligibilityModules" },
       "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "implementationAddress": "0x6bAa65D3E024D8ebA717085691dd8A985e9F267E",
-      "deployments": [{ "chainId": "5", "block": "9346760" }],
+      "implementationAddress": "0xF37cf12fB4493D29270806e826fDDf50dd722bab",
+      "deployments": [{ "chainId": "5", "block": "9611065" }],
       "args": {
         "immutable": [
           {
@@ -958,6 +958,15 @@
         },
         {
           "inputs": [],
+          "name": "ERC721_TOKEN_ADDRESS",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "HATS",
           "outputs": [
             { "internalType": "contract IHats", "name": "", "type": "address" }
@@ -979,15 +988,6 @@
           "name": "MIN_BALANCE",
           "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "TOKEN_ADDRESS",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
           ],
           "stateMutability": "pure",
           "type": "function"
@@ -1048,8 +1048,8 @@
       "description": "Defines eligibility for wearers according to a Jokerace contest results.",
       "github": { "owner": "Hats-Protocol", "repo": "jokerace-eligibility" },
       "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "implementationAddress": "0xd7c10b09453007993960FE2f92cE497A32059E08",
-      "deployments": [{ "chainId": "5", "block": "9412522" }],
+      "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
+      "deployments": [{ "chainId": "5", "block": "9597388" }],
       "args": {
         "immutable": [
           {
@@ -1295,12 +1295,235 @@
       ]
     },
     {
+      "name": "Season Toggle",
+      "description": "Allows an organization to configure certain hats to be automatically toggled off after a given interval, i.e. a 'season'.",
+      "github": { "owner": "Hats-Protocol", "repo": "season-toggle" },
+      "type": { "eligibility": false, "toggle": true, "hatter": false },
+      "implementationAddress": "0xFb6bD2e96B123d0854064823f6cb59420A285C00",
+      "deployments": [{ "chainId": "5", "block": "9597342" }],
+      "args": {
+        "immutable": [],
+        "mutable": [
+          {
+            "name": "Extension Delay",
+            "description": "The length of the season, in seconds. Must be larger than 1 hour",
+            "type": "uint256",
+            "example": "2592000"
+          },
+          {
+            "name": "Season Duration",
+            "description": "The proportion of the season that must elapse before the branch can be extended for another season, The value is treated as the numerator `x` in the expression `x / 10,000`",
+            "type": "uint256",
+            "example": "5000"
+          }
+        ]
+      },
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "__version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "SeasonToggle_InvalidExtensionDelay",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "SeasonToggle_NotBranchAdmin",
+          "type": "error"
+        },
+        { "inputs": [], "name": "SeasonToggle_NotExtendable", "type": "error" },
+        {
+          "inputs": [],
+          "name": "SeasonToggle_SeasonDurationTooShort",
+          "type": "error"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_branchRoot",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_duration",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "_extensionDelay",
+              "type": "uint256"
+            }
+          ],
+          "name": "Extended",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MIN_SEASON_DURATION",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "_duration",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "_extensionDelay",
+              "type": "uint256"
+            }
+          ],
+          "name": "extend",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "extendable",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "extensionDelay",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "extensionThreshold",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getHatStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "_active", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "seasonDuration",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "seasonEnd",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
       "name": "Staking Eligibility",
       "description": "Requires wearers of a given Hat to stake a minimum amount of a specified token in order to be eligible, and enables others in the hat tree's organization to slash the stake of a wearer who is behaving badly.",
       "github": { "owner": "Hats-Protocol", "repo": "staking-eligibility" },
       "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "implementationAddress": "0x04c8851CDd118b643e38eF32AFD8B76B5197743e",
-      "deployments": [{ "chainId": "5", "block": "9406370" }],
+      "implementationAddress": "0x9E01030aF633Be5a439DF122F2eEf750b44B8aC7",
+      "deployments": [{ "chainId": "5", "block": "9597271" }],
       "args": {
         "immutable": [
           {
