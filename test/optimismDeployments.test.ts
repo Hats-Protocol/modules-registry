@@ -14,7 +14,7 @@ import type {
   Address,
 } from "viem";
 import type { Anvil } from "@viem/anvil";
-import type { Module } from "@hatsprotocol/modules-sdk";
+import type { Module, Registry } from "@hatsprotocol/modules-sdk";
 import "dotenv/config";
 
 describe("Optimism deployments", () => {
@@ -46,7 +46,7 @@ describe("Optimism deployments", () => {
 
     const modulesFile = new URL("../modules.json", import.meta.url);
     const data = fs.readFileSync(modulesFile, "utf-8");
-    const registryModules: Module[] = JSON.parse(data);
+    const registryModules: Registry = JSON.parse(data);
 
     hatsModulesClient = new HatsModulesClient({
       publicClient,

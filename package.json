@@ -9,7 +9,7 @@
     "prettier": "prettier --write ."
   },
   "devDependencies": {
-    "@hatsprotocol/modules-sdk": "^0.3.3",
+    "@hatsprotocol/modules-sdk": "0.4.0",
     "@types/jest": "^29.5.4",
     "@viem/anvil": "^0.0.6",
     "dotenv": "^16.3.1",

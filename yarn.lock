@@ -309,10 +309,10 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@hatsprotocol/modules-sdk@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@hatsprotocol/modules-sdk/-/modules-sdk-0.3.3.tgz#225e97d1d65e60dcd781791f37e1e299754b33ce"
-  integrity sha512-t9tnbeZS4C1Hal9SANJySfha65NhjViGySPoT090L8VfUj5Yz6cTM/rIVWM4iUSGdmDp9jRoyzDWcGwv1NQFcw==
+"@hatsprotocol/modules-sdk@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@hatsprotocol/modules-sdk/-/modules-sdk-0.4.0.tgz#d061e843a324841dc83a5c7f4119a8646aade9f8"
+  integrity sha512-a01PXxETRvJK0EdUUyj4T1ciQODWjaAkTl9r88ZB4sPK27UnpHMRhVI4/JjX3Qsxqm2Fg5e/vOnY1p683RPoZA==
   dependencies:
     "@octokit/request" "^8.1.1"
     abitype "^0.9.6"
