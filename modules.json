@@ -421,6 +421,360 @@
   },
   "modules": [
     {
+      "name": "Allowlist Eligibility",
+      "description": "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",
+      "github": { "owner": "Hats-Protocol", "repo": "allowlist-eligibility" },
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
+      "deployments": [{ "chainId": "5", "block": "9647259" }],
+      "args": {
+        "immutable": [
+          {
+            "name": "Owner Hat",
+            "description": "The hat ID for the owner hat. The wearer(s) of this hat are authorized to add and remove accounts from the allowlist.",
+            "type": "uint256",
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216"
+          },
+          {
+            "name": "Arbitrator Hat",
+            "description": "The hat ID for the arbitrator hat. The wearer(s) of this hat are authorized to set the standing for accounts.",
+            "type": "uint256",
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216"
+          }
+        ],
+        "mutable": [
+          {
+            "name": "Accounts",
+            "description": "Initial acoount for the allowlist.",
+            "type": "address[]",
+            "example": [
+              "0x0000000000000000000000000000000000000001",
+              "0x0000000000000000000000000000000000000002"
+            ]
+          }
+        ]
+      },
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "AllowlistEligibility_ArrayLengthMismatch",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "AllowlistEligibility_NotArbitrator",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "AllowlistEligibility_NotOwner",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "AllowlistEligibility_NotWearer",
+          "type": "error"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "AccountAdded",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "AccountRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "standing",
+              "type": "bool"
+            }
+          ],
+          "name": "AccountStandingChanged",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address[]",
+              "name": "accounts",
+              "type": "address[]"
+            }
+          ],
+          "name": "AccountsAdded",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address[]",
+              "name": "accounts",
+              "type": "address[]"
+            }
+          ],
+          "name": "AccountsRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address[]",
+              "name": "accounts",
+              "type": "address[]"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool[]",
+              "name": "standing",
+              "type": "bool[]"
+            }
+          ],
+          "name": "AccountsStandingChanged",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ARBITRATOR_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "OWNER_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" }
+          ],
+          "name": "addAccount",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "_accounts",
+              "type": "address[]"
+            }
+          ],
+          "name": "addAccounts",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" }
+          ],
+          "name": "allowlist",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "badStanding", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "_eligible", "type": "bool" },
+            { "internalType": "bool", "name": "_standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" }
+          ],
+          "name": "removeAccount",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" }
+          ],
+          "name": "removeAccountAndBurnHat",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "_accounts",
+              "type": "address[]"
+            }
+          ],
+          "name": "removeAccounts",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" }
+          ],
+          "name": "setBadStandingAndBurnHat",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_account",
+              "type": "address"
+            },
+            { "internalType": "bool", "name": "_standing", "type": "bool" }
+          ],
+          "name": "setStandingForAccount",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "_accounts",
+              "type": "address[]"
+            },
+            { "internalType": "bool[]", "name": "_standing", "type": "bool[]" }
+          ],
+          "name": "setStandingForAccounts",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
       "name": "Claims Hatter",
       "description": "A Hats Protocol hatter contract enabling explicitly eligible wearers to claim a hat.",
       "github": { "owner": "Hats-Protocol", "repo": "claims-hatter" },
@@ -1044,6 +1398,104 @@
       ]
     },
     {
+      "name": "Hat Wearing Eligibility",
+      "description": "A Hats Protocol eligibility module that conditions eligibility for one hat based on wearing another hat.",
+      "github": { "owner": "Hats-Protocol", "repo": "hat-wearing-eligibility" },
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "implementationAddress": "0xF019B6F0f40104c84f44c25Feb9d4BD808162Bc3",
+      "deployments": [{ "chainId": "5", "block": "9647206" }],
+      "args": { "immutable": [], "mutable": [] },
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
       "name": "JokeRace Eligibility",
       "description": "Defines eligibility for wearers according to a Jokerace contest results.",
       "github": { "owner": "Hats-Protocol", "repo": "jokerace-eligibility" },
@@ -1272,6 +1724,114 @@
             { "internalType": "address", "name": "", "type": "address" }
           ],
           "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "Passthrough Eligibility and/or Toggle",
+      "description": "A Hats Protocol module that enables an authorized hat to serve as the eligibility and/or toggle module for other hat(s).",
+      "github": { "owner": "Hats-Protocol", "repo": "passthrough-modules" },
+      "type": { "eligibility": true, "toggle": true, "hatter": false },
+      "implementationAddress": "0x5790e25C58cAe56EB243F0bacE67C38284417771",
+      "deployments": [{ "chainId": "5", "block": "9647239" }],
+      "args": { "immutable": [], "mutable": [] },
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        { "inputs": [], "name": "NotAuthorized", "type": "error" },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
+            { "internalType": "bool", "name": "_newStatus", "type": "bool" }
+          ],
+          "name": "setHatStatus",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "bool", "name": "_eligible", "type": "bool" },
+            { "internalType": "bool", "name": "_standing", "type": "bool" }
+          ],
+          "name": "setHatWearerStatus",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
           "type": "function"
         },
         {

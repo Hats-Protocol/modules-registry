@@ -1,0 +1,115 @@
+{
+  "name": "Passthrough Eligibility and/or Toggle",
+  "description": "A Hats Protocol module that enables an authorized hat to serve as the eligibility and/or toggle module for other hat(s).",
+  "github": {
+    "owner": "Hats-Protocol",
+    "repo": "passthrough-modules"
+  },
+  "type": {
+    "eligibility": true,
+    "toggle": true,
+    "hatter": false
+  },
+  "implementationAddress": "0x5790e25C58cAe56EB243F0bacE67C38284417771",
+  "deployments": [
+    {
+      "chainId": "5",
+      "block": "9647239"
+    }
+  ],
+  "args": {
+    "immutable": [],
+    "mutable": []
+  },
+  "abi": [
+    {
+      "inputs": [
+        { "internalType": "string", "name": "_version", "type": "string" }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    { "inputs": [], "name": "NotAuthorized", "type": "error" },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "version",
+          "type": "uint8"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "HATS",
+      "outputs": [
+        { "internalType": "contract IHats", "name": "", "type": "address" }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "IMPLEMENTATION",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hatId",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
+        { "internalType": "bool", "name": "_newStatus", "type": "bool" }
+      ],
+      "name": "setHatStatus",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
+        { "internalType": "address", "name": "_wearer", "type": "address" },
+        { "internalType": "bool", "name": "_eligible", "type": "bool" },
+        { "internalType": "bool", "name": "_standing", "type": "bool" }
+      ],
+      "name": "setHatWearerStatus",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+      ],
+      "name": "setUp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version_",
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}
