@@ -1,10 +1,26 @@
 {
   "name": "ERC721 Eligibility",
-  "description": "An address is eligible if it holds at least a configured minimum amount of a chosen erc721 token.",
-  "github": {
-    "owner": "pumpedlunch",
-    "repo": "HatsEligibilityModules"
-  },
+  "details": [
+    "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligbility"
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Token Address",
+      "funactionName": "ERC721_TOKEN_ADDRESS",
+      "dispalyType": "default"
+    },
+    {
+      "label": "Minimum Balance",
+      "funactionName": "MIN_BALANCE",
+      "dispalyType": "default"
+    }
+  ],
   "type": {
     "eligibility": true,
     "toggle": false,
@@ -17,19 +33,21 @@
       "block": "9611065"
     }
   ],
-  "args": {
+  "creationArgs": {
     "immutable": [
       {
         "name": "Token Address",
         "description": "ERC721 token address",
         "type": "address",
-        "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5"
+        "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
+        "dispalyType": "default"
       },
       {
         "name": "Minimum Balance",
         "description": "Minimum amount of tokens in order to be eligible",
         "type": "uint256",
-        "example": "500"
+        "example": "500",
+        "dispalyType": "default"
       }
     ],
     "mutable": []

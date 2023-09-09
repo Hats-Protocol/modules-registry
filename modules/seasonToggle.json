@@ -1,10 +1,27 @@
 {
   "name": "Season Toggle",
-  "description": "Allows an organization to configure certain hats to be automatically toggled off after a given interval, i.e. a 'season'.",
-  "github": {
-    "owner": "Hats-Protocol",
-    "repo": "season-toggle"
-  },
+  "details": [
+    "A Hats Protocol toggle module that allows an organization to configure certain hats to be automatically toggled off after a given interval, i.e. a 'season'.",
+    "In Hats Protocol, hats can be configured with Toggle modules that programmatically control whether and when the hat is active or inactive. SeasonToggle adds an automatic expiry for a group of hats within a given branch of an organization's hat tree, unless an admin of that branch explicitly extends it to a new season."
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/Hats-Protocol/season-toggle"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Season End",
+      "funactionName": "seasonEnd",
+      "dispalyType": "timestamp"
+    },
+    {
+      "label": "Season Duration (Current Season Length)",
+      "funactionName": "seasonDuration",
+      "dispalyType": "seconds"
+    }
+  ],
   "type": {
     "eligibility": false,
     "toggle": true,
@@ -17,20 +34,22 @@
       "block": "9597342"
     }
   ],
-  "args": {
+  "creationArgs": {
     "immutable": [],
     "mutable": [
       {
         "name": "Extension Delay",
         "description": "The length of the season, in seconds. Must be larger than 1 hour",
         "type": "uint256",
-        "example": "2592000"
+        "example": "2592000",
+        "dispalyType": "default"
       },
       {
         "name": "Season Duration",
         "description": "The proportion of the season that must elapse before the branch can be extended for another season, The value is treated as the numerator `x` in the expression `x / 10,000`",
         "type": "uint256",
-        "example": "5000"
+        "example": "5000",
+        "dispalyType": "seconds"
       }
     ]
   },

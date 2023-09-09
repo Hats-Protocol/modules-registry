@@ -1,10 +1,27 @@
 {
   "name": "Allowlist Eligibility",
-  "description": "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",
-  "github": {
-    "owner": "Hats-Protocol",
-    "repo": "allowlist-eligibility"
-  },
+  "details": [
+    "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",
+    "This module sets up a simple allowlist to determine eligibility for a hat. For a given account (i.e., potential hat wearer), the allowlist stores values for that account's eligibility and standing for the hat. The wearer(s) of the Owner Hat can add or remove accounts from the allowlist. The wearer(s) of the Arbitrator Hat can set the standing of accounts."
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/Hats-Protocol/allowlist-eligibility"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Owner Hat",
+      "funactionName": "OWNER_HAT",
+      "dispalyType": "default"
+    },
+    {
+      "label": "Arbitrator Hat",
+      "funactionName": "ARBITRATOR_HAT",
+      "dispalyType": "default"
+    }
+  ],
   "type": {
     "eligibility": true,
     "toggle": false,
@@ -17,19 +34,21 @@
       "block": "9647259"
     }
   ],
-  "args": {
+  "creationArgs": {
     "immutable": [
       {
         "name": "Owner Hat",
         "description": "The hat ID for the owner hat. The wearer(s) of this hat are authorized to add and remove accounts from the allowlist.",
         "type": "uint256",
-        "example": "26959946667150639794667015087019630673637144422540572481103610249216"
+        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+        "dispalyType": "hat"
       },
       {
         "name": "Arbitrator Hat",
         "description": "The hat ID for the arbitrator hat. The wearer(s) of this hat are authorized to set the standing for accounts.",
         "type": "uint256",
-        "example": "26959946667150639794667015087019630673637144422540572481103610249216"
+        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+        "dispalyType": "hat"
       }
     ],
     "mutable": [
@@ -40,7 +59,8 @@
         "example": [
           "0x0000000000000000000000000000000000000001",
           "0x0000000000000000000000000000000000000002"
-        ]
+        ],
+        "dispalyType": "default"
       }
     ]
   },

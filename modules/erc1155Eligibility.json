@@ -1,10 +1,31 @@
 {
   "name": "ERC1155 Eligibility",
-  "description": "An address is eligible if it holds at least one minimum balance of a set of ERC1155 token Ids",
-  "github": {
-    "owner": "pumpedlunch",
-    "repo": "HatsEligibilityModules"
-  },
+  "details": [
+    "A Hats Protocol eligibility module that checks if an address holds at least one minimum balance of a set of ERC1155 token Ids to determine eligibility"
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Token Address",
+      "funactionName": "TOKEN_ADDRESS",
+      "dispalyType": "default"
+    },
+    {
+      "label": "Token IDs",
+      "funactionName": "TOKEN_IDS",
+      "dispalyType": "default"
+    },
+    {
+      "label": "Minimum Balances",
+      "funactionName": "MIN_BALANCES",
+      "dispalyType": "default"
+    }
+  ],
   "type": {
     "eligibility": true,
     "toggle": false,
@@ -17,31 +38,35 @@
       "block": "9608205"
     }
   ],
-  "args": {
+  "creationArgs": {
     "immutable": [
       {
         "name": "ERC1155 Contract Address",
         "description": "ERC1155 contract address",
         "type": "address",
-        "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5"
+        "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
+        "dispalyType": "default"
       },
       {
         "name": "Number Of Tokens",
         "description": "Number of token IDs in the set of tokens that allow eligiblity",
         "type": "uint256",
-        "example": "2"
+        "example": "2",
+        "dispalyType": "default"
       },
       {
         "name": "Token IDs",
         "description": "The token IDs within the ERC1155 contract that allow eligibilty",
         "type": "uint256[]",
-        "example": ["1", "2"]
+        "example": ["1", "2"],
+        "dispalyType": "default"
       },
       {
         "name": "Minimum Balances",
         "description": "The minimum balances required (for token ID in the corresponding index) for eligibility",
         "type": "uint256[]",
-        "example": ["100", "500"]
+        "example": ["100", "500"],
+        "dispalyType": "default"
       }
     ],
     "mutable": []

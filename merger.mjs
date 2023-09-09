@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import { keccak256, stringToBytes } from "viem";
 
 export function mergeJson() {
   const final = {
@@ -26,6 +27,10 @@ export function mergeJson() {
     const moduleBuffer = fs.readFileSync(`./modules/${moduleFile}`);
     const module = JSON.parse(moduleBuffer);
     final.modules.push(module);
+
+    //console.log(
+    //  `${module.name}: ${keccak256(stringToBytes(JSON.stringify(module)))}`,
+    //);
   }
 
   fs.writeFileSync("modules.json", JSON.stringify(final));

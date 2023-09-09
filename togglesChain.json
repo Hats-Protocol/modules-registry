@@ -1,10 +1,12 @@
 {
   "name": "Hats Toggles Chain",
-  "description": "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
-  "github": {
-    "owner": "Hats-Protocol",
-    "repo": "hats-module"
-  },
+  "details": "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
+  "links": [
+    {
+      "lable": "GitHub",
+      "link": "https://github.com/Hats-Protocol/hats-module"
+    }
+  ],
   "type": {
     "eligibility": false,
     "toggle": true,
