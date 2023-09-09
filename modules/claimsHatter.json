@@ -5,11 +5,11 @@
   ],
   "links": [
     {
-      "lable": "GitHub",
+      "label": "GitHub",
       "link": "https://github.com/Hats-Protocol/claims-hatter"
     },
     {
-      "lable": "How to make a hat claimable",
+      "label": "How to make a hat claimable",
       "link": "https://docs.hatsprotocol.xyz/hats-integrations/hatter-modules/making-hats-claimable"
     }
   ],
