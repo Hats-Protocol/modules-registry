@@ -1,10 +1,12 @@
 {
   "name": "Hats Eligibilities Chain",
-  "description": "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
-  "github": {
-    "owner": "Hats-Protocol",
-    "repo": "hats-module"
-  },
+  "details": "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
+  "links": [
+    {
+      "lable": "GitHub",
+      "link": "https://github.com/Hats-Protocol/hats-module"
+    }
+  ],
   "type": {
     "eligibility": true,
     "toggle": false,

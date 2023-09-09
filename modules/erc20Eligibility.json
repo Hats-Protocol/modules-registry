@@ -1,10 +1,26 @@
 {
   "name": "ERC20 Eligibility",
-  "description": "An address is eligible if it holds at least a configured minimum amount of a chosen erc20 token.",
-  "github": {
-    "owner": "pumpedlunch",
-    "repo": "HatsEligibilityModules"
-  },
+  "details": [
+    "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC20 token to determine eligbility"
+  ],
+  "links": [
+    {
+      "lable": "GitHub",
+      "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Token Address",
+      "funactionName": "ERC20_TOKEN_ADDRESS",
+      "dispalyType": "default"
+    },
+    {
+      "label": "Minimum Balance",
+      "funactionName": "MIN_BALANCE",
+      "dispalyType": "default"
+    }
+  ],
   "type": {
     "eligibility": true,
     "toggle": false,
@@ -17,19 +33,21 @@
       "block": "9611056"
     }
   ],
-  "args": {
+  "creationArgs": {
     "immutable": [
       {
         "name": "Token Address",
         "description": "ERC20 token address",
         "type": "address",
-        "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106"
+        "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
+        "dispalyType": "default"
       },
       {
         "name": "Minimum Balance",
         "description": "Minimum amount of tokens in order to be eligible",
         "type": "uint256",
-        "example": "500"
+        "example": "500",
+        "dispalyType": "default"
       }
     ],
     "mutable": []

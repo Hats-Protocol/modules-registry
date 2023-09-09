@@ -1,10 +1,19 @@
 {
   "name": "Claims Hatter",
-  "description": "A Hats Protocol hatter contract enabling explicitly eligible wearers to claim a hat.",
-  "github": {
-    "owner": "Hats-Protocol",
-    "repo": "claims-hatter"
-  },
+  "details": [
+    "A Hats Protocol hatter contract enabling explicitly eligible wearers to claim a hat."
+  ],
+  "links": [
+    {
+      "lable": "GitHub",
+      "link": "https://github.com/Hats-Protocol/claims-hatter"
+    },
+    {
+      "lable": "How to make a hat claimable",
+      "link": "https://docs.hatsprotocol.xyz/hats-integrations/hatter-modules/making-hats-claimable"
+    }
+  ],
+  "parameters": [],
   "type": {
     "eligibility": false,
     "toggle": false,
@@ -17,7 +26,7 @@
       "block": "9597457"
     }
   ],
-  "args": {
+  "creationArgs": {
     "immutable": [],
     "mutable": []
   },

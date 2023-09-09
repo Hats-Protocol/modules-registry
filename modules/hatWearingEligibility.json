@@ -1,10 +1,22 @@
 {
   "name": "Hat Wearing Eligibility",
-  "description": "A Hats Protocol eligibility module that conditions eligibility for one hat based on wearing another hat.",
-  "github": {
-    "owner": "Hats-Protocol",
-    "repo": "hat-wearing-eligibility"
-  },
+  "details": [
+    "A Hats Protocol eligibility module that conditions eligibility for one hat based on wearing another hat.",
+    "One use of a hat is to serve as an encapsulation of a set of logic and conditions that serve as baseline eligibility criteria for other hats. This eligibility module builds on that idea by allowing a hat to be used as an eligibility criterion for another hat."
+  ],
+  "links": [
+    {
+      "lable": "GitHub",
+      "link": "https://github.com/Hats-Protocol/hat-wearing-eligibility"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Hat To Wear",
+      "funactionName": "hatId",
+      "dispalyType": "hat"
+    }
+  ],
   "type": {
     "eligibility": true,
     "toggle": false,
@@ -17,7 +29,7 @@
       "block": "9647206"
     }
   ],
-  "args": {
+  "creationArgs": {
     "immutable": [],
     "mutable": []
   },

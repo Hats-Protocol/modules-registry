@@ -1,10 +1,12 @@
 {
   "name": "Hats Module Factory",
-  "description": "Deploys instances of hats modules.",
-  "github": {
-    "owner": "Hats-Protocol",
-    "repo": "hats-module"
-  },
+  "details": "Deploys instances of hats modules.",
+  "links": [
+    {
+      "lable": "GitHub",
+      "link": "https://github.com/Hats-Protocol/hats-module"
+    }
+  ],
   "implementationAddress": "0xEcb86bAB1E2494Dd3C4bcE4d0528842E226A869c",
   "deployments": [
     {
