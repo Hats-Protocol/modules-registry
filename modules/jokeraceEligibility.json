@@ -14,23 +14,23 @@
   "parameters": [
     {
       "label": "Module Admin Hat ID",
-      "funactionName": "ADMIN_HAT",
-      "dispalyType": "hat"
+      "functionName": "ADMIN_HAT",
+      "displayType": "hat"
     },
     {
       "label": "Contest Address",
-      "funactionName": "underlyingContest",
-      "dispalyType": "default"
+      "functionName": "underlyingContest",
+      "displayType": "default"
     },
     {
       "label": "Term End",
-      "funactionName": "termEnd",
-      "dispalyType": "timestamp"
+      "functionName": "termEnd",
+      "displayType": "timestamp"
     },
     {
       "label": "Number Of Elected Hat Wearers",
-      "funactionName": "topK",
-      "dispalyType": "default"
+      "functionName": "topK",
+      "displayType": "default"
     }
   ],
   "type": {
@@ -52,7 +52,7 @@
         "description": "Optional admin hat, granted a permission to create a new term (reelection). If not provided (equals zero), then this permission is granted to the admins of the hat",
         "type": "uint256",
         "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-        "dispalyType": "hat"
+        "displayType": "hat"
       }
     ],
     "mutable": [
@@ -61,21 +61,21 @@
         "description": "The JokeRace constest that facilitates the election",
         "type": "address",
         "example": "0xd00F6a711522a84C73aED9997Fcf207B41E97311",
-        "dispalyType": "default"
+        "displayType": "default"
       },
       {
         "name": "Term End",
         "description": "Timestamp of the term ending (in seconds)",
         "type": "uint256",
         "example": "1723155807",
-        "dispalyType": "timestamp"
+        "displayType": "timestamp"
       },
       {
         "name": "Top K",
         "description": "First K winners of the election will be eligible",
         "type": "uint256",
         "example": "3",
-        "dispalyType": "default"
+        "displayType": "default"
       }
     ]
   },

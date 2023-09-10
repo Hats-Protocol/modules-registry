@@ -13,13 +13,13 @@
   "parameters": [
     {
       "label": "Owner Hat",
-      "funactionName": "OWNER_HAT",
-      "dispalyType": "default"
+      "functionName": "OWNER_HAT",
+      "displayType": "default"
     },
     {
       "label": "Arbitrator Hat",
-      "funactionName": "ARBITRATOR_HAT",
-      "dispalyType": "default"
+      "functionName": "ARBITRATOR_HAT",
+      "displayType": "default"
     }
   ],
   "type": {
@@ -41,14 +41,14 @@
         "description": "The hat ID for the owner hat. The wearer(s) of this hat are authorized to add and remove accounts from the allowlist.",
         "type": "uint256",
         "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-        "dispalyType": "hat"
+        "displayType": "hat"
       },
       {
         "name": "Arbitrator Hat",
         "description": "The hat ID for the arbitrator hat. The wearer(s) of this hat are authorized to set the standing for accounts.",
         "type": "uint256",
         "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-        "dispalyType": "hat"
+        "displayType": "hat"
       }
     ],
     "mutable": [

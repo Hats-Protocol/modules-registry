@@ -12,13 +12,13 @@
   "parameters": [
     {
       "label": "Token Address",
-      "funactionName": "ERC721_TOKEN_ADDRESS",
-      "dispalyType": "default"
+      "functionName": "ERC721_TOKEN_ADDRESS",
+      "displayType": "default"
     },
     {
       "label": "Minimum Balance",
-      "funactionName": "MIN_BALANCE",
-      "dispalyType": "default"
+      "functionName": "MIN_BALANCE",
+      "displayType": "default"
     }
   ],
   "type": {
@@ -40,14 +40,14 @@
         "description": "ERC721 token address",
         "type": "address",
         "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-        "dispalyType": "default"
+        "displayType": "default"
       },
       {
         "name": "Minimum Balance",
         "description": "Minimum amount of tokens in order to be eligible",
         "type": "uint256",
         "example": "500",
-        "dispalyType": "default"
+        "displayType": "default"
       }
     ],
     "mutable": []

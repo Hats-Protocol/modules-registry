@@ -13,13 +13,13 @@
   "parameters": [
     {
       "label": "Season End",
-      "funactionName": "seasonEnd",
-      "dispalyType": "timestamp"
+      "functionName": "seasonEnd",
+      "displayType": "timestamp"
     },
     {
       "label": "Season Duration (Current Season Length)",
-      "funactionName": "seasonDuration",
-      "dispalyType": "seconds"
+      "functionName": "seasonDuration",
+      "displayType": "seconds"
     }
   ],
   "type": {
@@ -42,14 +42,14 @@
         "description": "The length of the season, in seconds. Must be larger than 1 hour",
         "type": "uint256",
         "example": "2592000",
-        "dispalyType": "default"
+        "displayType": "default"
       },
       {
         "name": "Season Duration",
         "description": "The proportion of the season that must elapse before the branch can be extended for another season, The value is treated as the numerator `x` in the expression `x / 10,000`",
         "type": "uint256",
         "example": "5000",
-        "dispalyType": "seconds"
+        "displayType": "seconds"
       }
     ]
   },

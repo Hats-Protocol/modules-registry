@@ -12,13 +12,13 @@
   "parameters": [
     {
       "label": "Token Address",
-      "funactionName": "ERC20_TOKEN_ADDRESS",
-      "dispalyType": "default"
+      "functionName": "ERC20_TOKEN_ADDRESS",
+      "displayType": "default"
     },
     {
       "label": "Minimum Balance",
-      "funactionName": "MIN_BALANCE",
-      "dispalyType": "default"
+      "functionName": "MIN_BALANCE",
+      "displayType": "default"
     }
   ],
   "type": {
@@ -40,14 +40,14 @@
         "description": "ERC20 token address",
         "type": "address",
         "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
-        "dispalyType": "default"
+        "displayType": "default"
       },
       {
         "name": "Minimum Balance",
         "description": "Minimum amount of tokens in order to be eligible",
         "type": "uint256",
         "example": "500",
-        "dispalyType": "default"
+        "displayType": "default"
       }
     ],
     "mutable": []

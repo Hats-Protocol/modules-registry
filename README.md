@@ -17,11 +17,20 @@ For each module, the registry contains a JSON file with the following structure:
 ```json
 {
   "name": "<module's name (string)>",
-  "description": "<short description about the module (string)>",
-  "github": {
-    "owner": "<module's repository owner on github (string)>",
-    "repo": "<module's repository name on github (string)>"
+  "details": ["<first paragraph describing the module (string)>", "<second paragraph describing the module (string)>"],
+  "links": [
+  {
+    "label": "<link's name/description>",
+    "link": "<link's URL>"
+  }
+  ],
+  "parameters": [
+  {
+    "label": "<parameter's name/description>",
+    "functionName": "<parameter's function name to retrieve the parameter from its instance>",
+    "dispalyType": "<parameter's type of content, for display purpose>"
   },
+  ]
   "type": {
     "eligibility": "<whether the module is an eligiblity module (boolean)>",
     "toggle": "<whether the module is a toggle module (boolean)>",
@@ -34,13 +43,14 @@ For each module, the registry contains a JSON file with the following structure:
       "block": "<block number of the deployment transaction (string)>"
     }
   ],
-  "args": {
+  "creationArgs": {
     "immutable": [
       {
         "name": "<argument's name (string)>",
         "description": "<short description (string)>",
         "type": "<argument's solidity type, e.g. 'uint256' (string)>",
-        "example": "<example argument which will be used for automatic testing>"
+        "example": "<example argument which will be used for automatic testing>",
+        "dispalyType": "<parameter's type of content, for display purpose>"
       }
     ],
     "mutable": [
@@ -48,7 +58,8 @@ For each module, the registry contains a JSON file with the following structure:
         "name": "<argument's name (string)>",
         "description": "<short description (string)>",
         "type": "<argument's solidity type, e.g. 'uint256' (string)>",
-        "example": "<example argument which will be used for automatic testing>"
+        "example": "<example argument which will be used for automatic testing>",
+        "dispalyType": "<parameter's type of content, for display purpose>"
       }
     ]
   },
@@ -62,12 +73,17 @@ For each module, the registry contains a JSON file with the following structure:
 
 Here are some notes on its expected structure:
 
-- The "name" and "description" properties should help users understand the module's functionality.
-- The "github" property should point to the module's source code.
+- The "name" property represents the name of the module.
+- The "details" property is structured as an array of strings. Each array entry represents a paragraph (which will be rendered in a UI).
+- The "links" property should have at least one link to the module's source code.
+- The "parameters" property is used in order to fetch and display data from module instances.
+  - The "label" property is used to display the name/description of each parameter.
+  - The "functionName" property represents the name of the function from which the parameter should be retrieved. The function should be a view/pure function with no input and one output (not a tuple, but can be an array).
+  - The "displayType" property is used in order to display a proper UI component for the parameter. For example, displaying a date for a parameter representing a timestamp. The supported types are currently: "default", "timestamp".
 - There should be at least one field on the "type" property which is set to "true". A module might also serve as more than one type, in which case there will be more than one field set to "true".
 - For each chain provided in "deployments", there should be a deployed implementation contract with an address matching the provided "implementationAddress" property and with an ABI
   matching the "abi" property.
-- For both the immutable and mutable arguments, their order should match the order of the arguments as provided to the module.
+- For both the immutable and mutable arguments, their order should match the order of the arguments as provided to the module. The supported types for the "displayType" property are currently: "default", "timestamp".
 - The "example" fields will be used to automatically test the module's deployment.
 
 ### Bundle
@@ -82,6 +98,12 @@ yarn bundle
 
 ```bash
 yarn test
+```
+
+### Format
+
+```bash
+yarn prettier
 ```
 
 י

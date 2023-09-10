@@ -13,8 +13,8 @@
   "parameters": [
     {
       "label": "Eligibilit/Toggle Hat",
-      "funactionName": "hatId",
-      "dispalyType": "hat"
+      "functionName": "hatId",
+      "displayType": "hat"
     }
   ],
   "type": {

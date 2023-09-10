@@ -12,18 +12,18 @@
   "parameters": [
     {
       "label": "Token Address",
-      "funactionName": "TOKEN_ADDRESS",
-      "dispalyType": "default"
+      "functionName": "TOKEN_ADDRESS",
+      "displayType": "default"
     },
     {
       "label": "Token IDs",
-      "funactionName": "TOKEN_IDS",
-      "dispalyType": "default"
+      "functionName": "TOKEN_IDS",
+      "displayType": "default"
     },
     {
       "label": "Minimum Balances",
-      "funactionName": "MIN_BALANCES",
-      "dispalyType": "default"
+      "functionName": "MIN_BALANCES",
+      "displayType": "default"
     }
   ],
   "type": {
@@ -45,28 +45,28 @@
         "description": "ERC1155 contract address",
         "type": "address",
         "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-        "dispalyType": "default"
+        "displayType": "default"
       },
       {
         "name": "Number Of Tokens",
         "description": "Number of token IDs in the set of tokens that allow eligiblity",
         "type": "uint256",
         "example": "2",
-        "dispalyType": "default"
+        "displayType": "default"
       },
       {
         "name": "Token IDs",
         "description": "The token IDs within the ERC1155 contract that allow eligibilty",
         "type": "uint256[]",
         "example": ["1", "2"],
-        "dispalyType": "default"
+        "displayType": "default"
       },
       {
         "name": "Minimum Balances",
         "description": "The minimum balances required (for token ID in the corresponding index) for eligibility",
         "type": "uint256[]",
         "example": ["100", "500"],
-        "dispalyType": "default"
+        "displayType": "default"
       }
     ],
     "mutable": []
