@@ -51,7 +51,6 @@ describe("Arbitrum deployments", () => {
     hatsModulesClient = new HatsModulesClient({
       publicClient,
       walletClient,
-      registryToken: "",
     });
 
     await hatsModulesClient.prepare(registryModules);
