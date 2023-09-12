@@ -28,7 +28,7 @@ For each module, the registry contains a JSON file with the following structure:
   {
     "label": "<parameter's name/description>",
     "functionName": "<parameter's function name to retrieve the parameter from its instance>",
-    "dispalyType": "<parameter's type of content, for display purpose>"
+    "displayType": "<parameter's type of content, for display purpose>"
   },
   ]
   "type": {
@@ -50,7 +50,7 @@ For each module, the registry contains a JSON file with the following structure:
         "description": "<short description (string)>",
         "type": "<argument's solidity type, e.g. 'uint256' (string)>",
         "example": "<example argument which will be used for automatic testing>",
-        "dispalyType": "<parameter's type of content, for display purpose>"
+        "displayType": "<parameter's type of content, for display purpose>"
       }
     ],
     "mutable": [
@@ -59,7 +59,7 @@ For each module, the registry contains a JSON file with the following structure:
         "description": "<short description (string)>",
         "type": "<argument's solidity type, e.g. 'uint256' (string)>",
         "example": "<example argument which will be used for automatic testing>",
-        "dispalyType": "<parameter's type of content, for display purpose>"
+        "displayType": "<parameter's type of content, for display purpose>"
       }
     ]
   },
