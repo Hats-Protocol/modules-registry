@@ -19,16 +19,24 @@
     "toggle": false,
     "hatter": true
   },
-  "implementationAddress": "0xC00236108E64A29Cca05aCf4c37ba21eaE348De1",
+  "implementationAddress": "0x11124220fe23Fd4d25C739508294E6b2305E073C",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9597457"
+      "block": "9652513"
     }
   ],
   "creationArgs": {
     "immutable": [],
-    "mutable": []
+    "mutable": [
+      {
+        "name": "Claimable For",
+        "description": "Enables the hat to be claimable on behalf of eligible wearers. Otherwise, will be claimable only by the receiver.",
+        "type": "bool",
+        "example": true,
+        "displayType": "default"
+      }
+    ]
   },
   "abi": [
     {
