@@ -78,9 +78,7 @@ describe("Arbitrum deployments", () => {
         continue;
       }
 
-      const hatId = BigInt(
-        "0x0000000100000000000000000000000000000000000000000000000000000000",
-      );
+      const hatId = BigInt(module.creationArgs.hatId.example);
       const immutableArgs: unknown[] = [];
       const mutableArgs: unknown[] = [];
 
