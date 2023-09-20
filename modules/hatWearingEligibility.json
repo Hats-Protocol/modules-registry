@@ -22,22 +22,28 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0xF019B6F0f40104c84f44c25Feb9d4BD808162Bc3",
+  "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9647206"
+      "block": "9719807"
+    },
+    {
+      "chainId": "10",
+      "block": "109769331"
     }
   ],
   "creationArgs": {
-    "hatId": {
-      "name": "Required Hat",
-      "description": "The ID of the hat which users will be required to wear in order to be eligible.",
-      "type": "uint256",
-      "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-      "displayType": "hat"
-    },
-    "immutable": [],
+    "useHatId": true,
+    "immutable": [
+      {
+        "name": "Criterion Hat",
+        "description": "The ID of the hat which users will be required to wear in order to be eligible.",
+        "type": "uint256",
+        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+        "displayType": "hat"
+      }
+    ],
     "mutable": []
   },
   "abi": [
@@ -60,6 +66,13 @@
       ],
       "name": "Initialized",
       "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "CRITERION_HAT",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "pure",
+      "type": "function"
     },
     {
       "inputs": [],
