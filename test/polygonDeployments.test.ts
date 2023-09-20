@@ -26,7 +26,7 @@ describe("Polygon deployments", () => {
 
   beforeAll(async () => {
     anvil = createAnvil({
-      forkUrl: process.env.GOERLI_RPC,
+      forkUrl: process.env.POLYGON_RPC,
     });
     await anvil.start();
 
@@ -78,7 +78,11 @@ describe("Polygon deployments", () => {
         continue;
       }
 
-      const hatId = BigInt(module.creationArgs.hatId.example);
+      const hatId = module.creationArgs.useHatId
+        ? BigInt(
+            "0x0000000100000000000000000000000000000000000000000000000000000000",
+          )
+        : BigInt("0");
       const immutableArgs: unknown[] = [];
       const mutableArgs: unknown[] = [];
 
