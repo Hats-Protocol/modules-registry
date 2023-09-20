@@ -44,20 +44,14 @@
     }
   ],
   "creationArgs": {
-    "hatId": {
-      "name": "Target Hat",
-      "description": "The hat ID for which the module will serve as an eligibility.",
-      "type": "uint256",
-      "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-      "displayType": "hat"
-    },
+    "useHatId": true,
     "immutable": [
       {
         "name": "Staking Token",
         "description": "ERC-20 Token which will be used for staking",
         "type": "address",
         "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
-        "displayType": "default"
+        "displayType": "token"
       }
     ],
     "mutable": [
@@ -66,7 +60,7 @@
         "description": "The minimum stake required to be eligible for the hat",
         "type": "uint256",
         "example": "100",
-        "displayType": "default"
+        "displayType": "amountWithDecimals"
       },
       {
         "name": "Judge Hat",

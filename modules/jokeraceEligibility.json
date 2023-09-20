@@ -46,13 +46,7 @@
     }
   ],
   "creationArgs": {
-    "hatId": {
-      "name": "Target Hat",
-      "description": "The hat ID for which the module will serve as an eligibility.",
-      "type": "uint256",
-      "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-      "displayType": "hat"
-    },
+    "useHatId": true,
     "immutable": [
       {
         "name": "Admin Hat",
@@ -68,7 +62,7 @@
         "description": "The JokeRace constest that facilitates the election",
         "type": "address",
         "example": "0xd00F6a711522a84C73aED9997Fcf207B41E97311",
-        "displayType": "default"
+        "displayType": "jokerace"
       },
       {
         "name": "Term End",

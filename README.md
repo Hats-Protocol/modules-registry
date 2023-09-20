@@ -44,6 +44,7 @@ For each module, the registry contains a JSON file with the following structure:
     }
   ],
   "creationArgs": {
+    "useHatId": "<True if the hatId property should be set with the ID of the hat for which the module is deployed, otherwise false>"
     "immutable": [
       {
         "name": "<argument's name (string)>",

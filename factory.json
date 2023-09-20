@@ -7,11 +7,19 @@
       "link": "https://github.com/Hats-Protocol/hats-module"
     }
   ],
-  "implementationAddress": "0xEcb86bAB1E2494Dd3C4bcE4d0528842E226A869c",
+  "implementationAddress": "0xfE661c01891172046feE16D3a57c3Cf456729efA",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9550399"
+      "block": "9713194"
+    },
+    {
+      "chainId": "10",
+      "block": "109695493"
+    },
+    {
+      "chainId": "100",
+      "block": "30023568"
     }
   ],
   "abi": [

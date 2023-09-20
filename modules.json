@@ -8,8 +8,12 @@
         "link": "https://github.com/Hats-Protocol/hats-module"
       }
     ],
-    "implementationAddress": "0xEcb86bAB1E2494Dd3C4bcE4d0528842E226A869c",
-    "deployments": [{ "chainId": "5", "block": "9550399" }],
+    "implementationAddress": "0xfE661c01891172046feE16D3a57c3Cf456729efA",
+    "deployments": [
+      { "chainId": "5", "block": "9713194" },
+      { "chainId": "10", "block": "109695493" },
+      { "chainId": "100", "block": "30023568" }
+    ],
     "abi": [
       {
         "inputs": [
@@ -463,13 +467,7 @@
       "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
       "deployments": [{ "chainId": "5", "block": "9647259" }],
       "creationArgs": {
-        "hatId": {
-          "name": "Target Hat",
-          "description": "The hat ID for which the module will serve as an eligibility.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
+        "useHatId": true,
         "immutable": [
           {
             "name": "Owner Hat",
@@ -839,13 +837,7 @@
       "implementationAddress": "0x11124220fe23Fd4d25C739508294E6b2305E073C",
       "deployments": [{ "chainId": "5", "block": "9652513" }],
       "creationArgs": {
-        "hatId": {
-          "name": "Target Hat",
-          "description": "The ID of the hat which will be claimable.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
+        "useHatId": true,
         "immutable": [],
         "mutable": [
           {
@@ -1072,20 +1064,14 @@
       "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
       "deployments": [{ "chainId": "5", "block": "9608205" }],
       "creationArgs": {
-        "hatId": {
-          "name": "Target Hat",
-          "description": "The hat ID for which the module will serve as an eligibility.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
+        "useHatId": true,
         "immutable": [
           {
             "name": "ERC1155 Contract Address",
             "description": "ERC1155 contract address",
             "type": "address",
             "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-            "displayType": "default"
+            "displayType": "token"
           },
           {
             "name": "Number Of Tokens",
@@ -1266,27 +1252,21 @@
       "implementationAddress": "0xbA5b218e6685D0607139c06f81442681a32a0EC3",
       "deployments": [{ "chainId": "5", "block": "9611056" }],
       "creationArgs": {
-        "hatId": {
-          "name": "Target Hat",
-          "description": "The hat ID for which the module will serve as an eligibility.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
+        "useHatId": true,
         "immutable": [
           {
             "name": "Token Address",
             "description": "ERC20 token address",
             "type": "address",
             "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
-            "displayType": "default"
+            "displayType": "token"
           },
           {
             "name": "Minimum Balance",
             "description": "Minimum amount of tokens in order to be eligible",
             "type": "uint256",
             "example": "500",
-            "displayType": "default"
+            "displayType": "amountWithDecimals"
           }
         ],
         "mutable": []
@@ -1428,20 +1408,14 @@
       "implementationAddress": "0xF37cf12fB4493D29270806e826fDDf50dd722bab",
       "deployments": [{ "chainId": "5", "block": "9611065" }],
       "creationArgs": {
-        "hatId": {
-          "name": "Target Hat",
-          "description": "The hat ID for which the module will serve as an eligibility.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
+        "useHatId": true,
         "immutable": [
           {
             "name": "Token Address",
             "description": "ERC721 token address",
             "type": "address",
             "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-            "displayType": "default"
+            "displayType": "token"
           },
           {
             "name": "Minimum Balance",
@@ -1583,17 +1557,22 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "implementationAddress": "0xF019B6F0f40104c84f44c25Feb9d4BD808162Bc3",
-      "deployments": [{ "chainId": "5", "block": "9647206" }],
+      "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
+      "deployments": [
+        { "chainId": "5", "block": "9719807" },
+        { "chainId": "10", "block": "109769331" }
+      ],
       "creationArgs": {
-        "hatId": {
-          "name": "Required Hat",
-          "description": "The ID of the hat which users will be required to wear in order to be eligible.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
-        "immutable": [],
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Criterion Hat",
+            "description": "The ID of the hat which users will be required to wear in order to be eligible.",
+            "type": "uint256",
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+            "displayType": "hat"
+          }
+        ],
         "mutable": []
       },
       "abi": [
@@ -1616,6 +1595,15 @@
           ],
           "name": "Initialized",
           "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "CRITERION_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
         },
         {
           "inputs": [],
@@ -1725,13 +1713,7 @@
       "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
       "deployments": [{ "chainId": "5", "block": "9597388" }],
       "creationArgs": {
-        "hatId": {
-          "name": "Target Hat",
-          "description": "The hat ID for which the module will serve as an eligibility.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
+        "useHatId": true,
         "immutable": [
           {
             "name": "Admin Hat",
@@ -1747,7 +1729,7 @@
             "description": "The JokeRace constest that facilitates the election",
             "type": "address",
             "example": "0xd00F6a711522a84C73aED9997Fcf207B41E97311",
-            "displayType": "default"
+            "displayType": "jokerace"
           },
           {
             "name": "Term End",
@@ -2001,17 +1983,7 @@
       "type": { "eligibility": true, "toggle": true, "hatter": false },
       "implementationAddress": "0x5790e25C58cAe56EB243F0bacE67C38284417771",
       "deployments": [{ "chainId": "5", "block": "9647239" }],
-      "creationArgs": {
-        "hatId": {
-          "name": "Eligibility/Toggle Hat",
-          "description": "The ID of the hat for which its wearers will serve as toggle/eligibility.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
-        "immutable": [],
-        "mutable": []
-      },
+      "creationArgs": { "useHatId": true, "immutable": [], "mutable": [] },
       "abi": [
         {
           "inputs": [
@@ -2140,25 +2112,19 @@
       "implementationAddress": "0xFb6bD2e96B123d0854064823f6cb59420A285C00",
       "deployments": [{ "chainId": "5", "block": "9597342" }],
       "creationArgs": {
-        "hatId": {
-          "name": "Branch Root",
-          "description": "The ID of the branch root hat.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
+        "useHatId": true,
         "immutable": [],
         "mutable": [
           {
             "name": "Extension Delay",
-            "description": "The length of the season, in seconds. Must be larger than 1 hour",
+            "description": "The proportion of the season that must elapse before the branch can be extended for another season, The value is treated as the numerator `x` in the expression `x / 10,000`",
             "type": "uint256",
             "example": "2592000",
             "displayType": "default"
           },
           {
             "name": "Season Duration",
-            "description": "The proportion of the season that must elapse before the branch can be extended for another season, The value is treated as the numerator `x` in the expression `x / 10,000`",
+            "description": "The length of the season, in seconds. Must be larger than 1 hour",
             "type": "uint256",
             "example": "5000",
             "displayType": "seconds"
@@ -2401,20 +2367,14 @@
       "implementationAddress": "0x9E01030aF633Be5a439DF122F2eEf750b44B8aC7",
       "deployments": [{ "chainId": "5", "block": "9597271" }],
       "creationArgs": {
-        "hatId": {
-          "name": "Target Hat",
-          "description": "The hat ID for which the module will serve as an eligibility.",
-          "type": "uint256",
-          "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-          "displayType": "hat"
-        },
+        "useHatId": true,
         "immutable": [
           {
             "name": "Staking Token",
             "description": "ERC-20 Token which will be used for staking",
             "type": "address",
             "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
-            "displayType": "default"
+            "displayType": "token"
           }
         ],
         "mutable": [
@@ -2423,7 +2383,7 @@
             "description": "The minimum stake required to be eligible for the hat",
             "type": "uint256",
             "example": "100",
-            "displayType": "default"
+            "displayType": "amountWithDecimals"
           },
           {
             "name": "Judge Hat",

@@ -34,27 +34,21 @@
     }
   ],
   "creationArgs": {
-    "hatId": {
-      "name": "Target Hat",
-      "description": "The hat ID for which the module will serve as an eligibility.",
-      "type": "uint256",
-      "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-      "displayType": "hat"
-    },
+    "useHatId": true,
     "immutable": [
       {
         "name": "Token Address",
         "description": "ERC20 token address",
         "type": "address",
         "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
-        "displayType": "default"
+        "displayType": "token"
       },
       {
         "name": "Minimum Balance",
         "description": "Minimum amount of tokens in order to be eligible",
         "type": "uint256",
         "example": "500",
-        "displayType": "default"
+        "displayType": "amountWithDecimals"
       }
     ],
     "mutable": []
