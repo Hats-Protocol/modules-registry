@@ -59,7 +59,7 @@
     "mutable": [
       {
         "name": "JokeRace Contest",
-        "description": "The JokeRace constest that facilitates the election",
+        "description": "The JokeRace contest that facilitates the election",
         "type": "address",
         "example": "0xd00F6a711522a84C73aED9997Fcf207B41E97311",
         "displayType": "jokerace"
