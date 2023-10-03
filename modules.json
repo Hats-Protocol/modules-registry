@@ -12,7 +12,10 @@
     "deployments": [
       { "chainId": "5", "block": "9713194" },
       { "chainId": "10", "block": "109695493" },
-      { "chainId": "100", "block": "30023568" }
+      { "chainId": "100", "block": "30023568" },
+      { "chainId": "1", "block": "18265591" },
+      { "chainId": "137", "block": "48249962" },
+      { "chainId": "42161", "block": "136870116" }
     ],
     "abi": [
       {
@@ -465,7 +468,10 @@
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
       "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
-      "deployments": [{ "chainId": "5", "block": "9647259" }],
+      "deployments": [
+        { "chainId": "5", "block": "9647259" },
+        { "chainId": "10", "block": "109815832" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
@@ -1975,7 +1981,14 @@
       "parameters": [],
       "type": { "eligibility": false, "toggle": false, "hatter": true },
       "implementationAddress": "0xB985eA1be961f7c4A4C45504444C02c88c4fdEF9",
-      "deployments": [{ "chainId": "5", "block": "9797988" }],
+      "deployments": [
+        { "chainId": "5", "block": "9797988" },
+        { "chainId": "1", "block": "18265713" },
+        { "chainId": "10", "block": "110337588" },
+        { "chainId": "137", "block": "48249349" },
+        { "chainId": "42161", "block": "136869560" },
+        { "chainId": "100", "block": "30266574" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [],

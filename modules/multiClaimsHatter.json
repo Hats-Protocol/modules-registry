@@ -20,6 +20,26 @@
     {
       "chainId": "5",
       "block": "9797988"
+    },
+    {
+      "chainId": "1",
+      "block": "18265713"
+    },
+    {
+      "chainId": "10",
+      "block": "110337588"
+    },
+    {
+      "chainId": "137",
+      "block": "48249349"
+    },
+    {
+      "chainId": "42161",
+      "block": "136869560"
+    },
+    {
+      "chainId": "100",
+      "block": "30266574"
     }
   ],
   "creationArgs": {
