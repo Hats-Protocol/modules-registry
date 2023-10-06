@@ -458,12 +458,12 @@
         {
           "label": "Owner Hat",
           "functionName": "OWNER_HAT",
-          "displayType": "default"
+          "displayType": "hat"
         },
         {
           "label": "Arbitrator Hat",
           "functionName": "ARBITRATOR_HAT",
-          "displayType": "default"
+          "displayType": "hat"
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
