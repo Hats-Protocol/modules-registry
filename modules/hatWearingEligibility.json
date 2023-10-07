@@ -13,7 +13,7 @@
   "parameters": [
     {
       "label": "Hat To Wear",
-      "functionName": "hatId",
+      "functionName": "CRITERION_HAT",
       "displayType": "hat"
     }
   ],
