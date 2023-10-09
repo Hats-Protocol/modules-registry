@@ -13,7 +13,7 @@
   "parameters": [
     {
       "label": "Eligibilit/Toggle Hat",
-      "functionName": "hatId",
+      "functionName": "CRITERION_HAT",
       "displayType": "hat"
     }
   ],
@@ -22,16 +22,24 @@
     "toggle": true,
     "hatter": false
   },
-  "implementationAddress": "0x5790e25C58cAe56EB243F0bacE67C38284417771",
+  "implementationAddress": "0x050079a8fbFCE76818C62481BA015b89567D2d35",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9647239"
+      "block": "9838324"
     }
   ],
   "creationArgs": {
     "useHatId": true,
-    "immutable": [],
+    "immutable": [
+      {
+        "name": "Criterion Token",
+        "description": "The hat that will serve as an eligibility and/or toggle module",
+        "type": "uint256",
+        "example": "53919893334301279589334030174039261347274288845081144962207220498432",
+        "displayType": "hat"
+      }
+    ],
     "mutable": []
   },
   "abi": [
@@ -55,6 +63,13 @@
       ],
       "name": "Initialized",
       "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "CRITERION_HAT",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "pure",
+      "type": "function"
     },
     {
       "inputs": [],
