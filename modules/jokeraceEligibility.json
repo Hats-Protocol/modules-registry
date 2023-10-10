@@ -20,7 +20,7 @@
     {
       "label": "Contest Address",
       "functionName": "underlyingContest",
-      "displayType": "default"
+      "displayType": "jokerace"
     },
     {
       "label": "Term End",
