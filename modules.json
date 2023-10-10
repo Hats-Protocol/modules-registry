@@ -855,7 +855,12 @@
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
       "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
-      "deployments": [{ "chainId": "5", "block": "9608205" }],
+      "deployments": [
+        { "chainId": "5", "block": "9608205" },
+        { "chainId": "10", "block": "110684714" },
+        { "chainId": "137", "block": "48563371" },
+        { "chainId": "42161", "block": "139454273" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
@@ -1043,7 +1048,12 @@
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
       "implementationAddress": "0xbA5b218e6685D0607139c06f81442681a32a0EC3",
-      "deployments": [{ "chainId": "5", "block": "9611056" }],
+      "deployments": [
+        { "chainId": "5", "block": "9611056" },
+        { "chainId": "10", "block": "110684393" },
+        { "chainId": "137", "block": "48563085" },
+        { "chainId": "42161", "block": "139452101" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
@@ -1199,7 +1209,12 @@
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
       "implementationAddress": "0xF37cf12fB4493D29270806e826fDDf50dd722bab",
-      "deployments": [{ "chainId": "5", "block": "9611065" }],
+      "deployments": [
+        { "chainId": "5", "block": "9611065" },
+        { "chainId": "10", "block": "110684542" },
+        { "chainId": "137", "block": "48563224" },
+        { "chainId": "42161", "block": "139452888" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
@@ -1353,7 +1368,9 @@
       "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
       "deployments": [
         { "chainId": "5", "block": "9719807" },
-        { "chainId": "10", "block": "109769331" }
+        { "chainId": "10", "block": "109769331" },
+        { "chainId": "137", "block": "48562276" },
+        { "chainId": "42161", "block": "139445749" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -1504,7 +1521,12 @@
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
       "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
-      "deployments": [{ "chainId": "5", "block": "9597388" }],
+      "deployments": [
+        { "chainId": "5", "block": "9597388" },
+        { "chainId": "10", "block": "110683218" },
+        { "chainId": "137", "block": "48562046" },
+        { "chainId": "42161", "block": "139443958" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
@@ -2216,7 +2238,12 @@
       ],
       "type": { "eligibility": true, "toggle": true, "hatter": false },
       "implementationAddress": "0x050079a8fbFCE76818C62481BA015b89567D2d35",
-      "deployments": [{ "chainId": "5", "block": "9838324" }],
+      "deployments": [
+        { "chainId": "5", "block": "9838324" },
+        { "chainId": "10", "block": "110683684" },
+        { "chainId": "137", "block": "48562453" },
+        { "chainId": "42161", "block": "139447326" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
@@ -2365,7 +2392,12 @@
       ],
       "type": { "eligibility": false, "toggle": true, "hatter": false },
       "implementationAddress": "0xFb6bD2e96B123d0854064823f6cb59420A285C00",
-      "deployments": [{ "chainId": "5", "block": "9597342" }],
+      "deployments": [
+        { "chainId": "5", "block": "9597342" },
+        { "chainId": "10", "block": "110683928" },
+        { "chainId": "137", "block": "48562673" },
+        { "chainId": "42161", "block": "139448916" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [],
@@ -2620,7 +2652,12 @@
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
       "implementationAddress": "0x9E01030aF633Be5a439DF122F2eEf750b44B8aC7",
-      "deployments": [{ "chainId": "5", "block": "9597271" }],
+      "deployments": [
+        { "chainId": "5", "block": "9597271" },
+        { "chainId": "10", "block": "110684134" },
+        { "chainId": "137", "block": "48562856" },
+        { "chainId": "42161", "block": "139450291" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
