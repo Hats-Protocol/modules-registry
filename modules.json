@@ -470,7 +470,9 @@
       "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
       "deployments": [
         { "chainId": "5", "block": "9647259" },
-        { "chainId": "10", "block": "109815832" }
+        { "chainId": "10", "block": "109815832" },
+        { "chainId": "137", "block": "48560643" },
+        { "chainId": "42161", "block": "139432841" }
       ],
       "creationArgs": {
         "useHatId": true,
