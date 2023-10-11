@@ -13,12 +13,12 @@
     {
       "label": "Staking Token",
       "functionName": "TOKEN",
-      "displayType": "default"
+      "displayType": "token"
     },
     {
       "label": "Minimum Stake",
       "functionName": "minStake",
-      "displayType": "default"
+      "displayType": "amountWithDecimals"
     },
     {
       "label": "Judge Hat (Can Slash Wearers)",
