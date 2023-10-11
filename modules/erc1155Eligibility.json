@@ -48,6 +48,10 @@
     {
       "chainId": "42161",
       "block": "139454273"
+    },
+    {
+      "chainId": "100",
+      "block": "30405871"
     }
   ],
   "creationArgs": {
