@@ -1028,7 +1028,7 @@
     {
       "name": "ERC20 Eligibility",
       "details": [
-        "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC20 token to determine eligbility"
+        "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC20 token to determine eligibility"
       ],
       "links": [
         {
@@ -1190,7 +1190,7 @@
     {
       "name": "ERC721 Eligibility",
       "details": [
-        "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligbility"
+        "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligibility"
       ],
       "links": [
         {
@@ -1511,7 +1511,7 @@
         {
           "label": "Contest Address",
           "functionName": "underlyingContest",
-          "displayType": "default"
+          "displayType": "jokerace"
         },
         {
           "label": "Term End",
@@ -2377,7 +2377,7 @@
       "name": "Season Toggle",
       "details": [
         "A Hats Protocol toggle module that allows an organization to configure certain hats to be automatically toggled off after a given interval, i.e. a 'season'.",
-        "In Hats Protocol, hats can be configured with Toggle modules that programmatically control whether and when the hat is active or inactive. SeasonToggle adds an automatic expiry for a group of hats within a given branch of an organization's hat tree, unless an admin of that branch explicitly extends it to a new season."
+        "In Hats Protocol, hats can be configured with Toggle modules that programmatically control whether and when the hat is active or inactive. Season Toggle adds an automatic expiry for a group of hats within a given branch of an organization's hat tree, unless an admin of that branch explicitly extends it to a new season."
       ],
       "links": [
         {
@@ -2640,12 +2640,12 @@
         {
           "label": "Staking Token",
           "functionName": "TOKEN",
-          "displayType": "default"
+          "displayType": "token"
         },
         {
           "label": "Minimum Stake",
           "functionName": "minStake",
-          "displayType": "default"
+          "displayType": "amountWithDecimals"
         },
         {
           "label": "Judge Hat (Can Slash Wearers)",

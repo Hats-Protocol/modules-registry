@@ -1,7 +1,7 @@
 {
   "name": "ERC721 Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligbility"
+    "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligibility"
   ],
   "links": [
     {
