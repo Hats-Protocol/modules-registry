@@ -2,7 +2,7 @@
   "name": "Season Toggle",
   "details": [
     "A Hats Protocol toggle module that allows an organization to configure certain hats to be automatically toggled off after a given interval, i.e. a 'season'.",
-    "In Hats Protocol, hats can be configured with Toggle modules that programmatically control whether and when the hat is active or inactive. SeasonToggle adds an automatic expiry for a group of hats within a given branch of an organization's hat tree, unless an admin of that branch explicitly extends it to a new season."
+    "In Hats Protocol, hats can be configured with Toggle modules that programmatically control whether and when the hat is active or inactive. Season Toggle adds an automatic expiry for a group of hats within a given branch of an organization's hat tree, unless an admin of that branch explicitly extends it to a new season."
   ],
   "links": [
     {
