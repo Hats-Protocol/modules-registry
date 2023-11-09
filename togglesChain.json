@@ -12,11 +12,11 @@
     "toggle": true,
     "hatter": false
   },
-  "implementationAddress": "0x694f7fBB438228D696CFa202B94B96C47bCBc152",
+  "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9635710"
+      "block": "10009649"
     }
   ],
   "abi": [
@@ -42,7 +42,7 @@
     },
     {
       "inputs": [],
-      "name": "CONJUCTION_CLAUSE_LENGTHS",
+      "name": "CONJUNCTION_CLAUSE_LENGTHS",
       "outputs": [
         { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
       ],
@@ -76,7 +76,7 @@
     },
     {
       "inputs": [],
-      "name": "NUM_CONJUCTION_CLAUSES",
+      "name": "NUM_CONJUNCTION_CLAUSES",
       "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "pure",
       "type": "function"
