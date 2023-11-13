@@ -1,0 +1,483 @@
+{
+  "name": "Hats Election Eligibility",
+  "details": [
+    "This module enables organizations to elect wearers of a given hat. More specifically, this modules makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
+    "Election results are valid within a given term, after which the elected wearers become ineligible unless and until new election results are submitted.",
+    "This module works with any election mechanism that can output a list of winning addresses, such as onchain DAO proposals or an oSnap proposal."
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/Hats-Protocol/hats-elections-eligibility"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Admin Hat ID",
+      "functionName": "ADMIN_HAT",
+      "displayType": "hat"
+    },
+    {
+      "label": "Ballot Box Hat ID",
+      "functionName": "BALLOT_BOX_HAT",
+      "displayType": "hat"
+    },
+    {
+      "label": "Current Term End",
+      "functionName": "currentTermEnd",
+      "displayType": "timestamp"
+    },
+    {
+      "label": "Next Term End",
+      "functionName": "nextTermEnd",
+      "displayType": "timestamp"
+    }
+  ],
+  "type": {
+    "eligibility": true,
+    "toggle": false,
+    "hatter": false
+  },
+  "implementationAddress": "0x99081d45920818557203CCD62eD36dC2FaD9a43E",
+  "deployments": [
+    {
+      "chainId": "5",
+      "block": "10038318"
+    }
+  ],
+  "creationArgs": {
+    "useHatId": true,
+    "immutable": [
+      {
+        "name": "Admin Hat",
+        "description": "Optional admin hat, granted authority to set up a new term. If not provided (equals zero), then this permission is granted to the admins of the hat.",
+        "type": "uint256",
+        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+        "displayType": "hat"
+      },
+      {
+        "name": "Ballot Box Hat",
+        "description": "This hat has the authority to submit election and recall results.",
+        "type": "uint256",
+        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+        "displayType": "hat"
+      }
+    ],
+    "mutable": [
+      {
+        "name": "Current Term End",
+        "description": "Timestamp of the second following the end of the current term",
+        "type": "uint256",
+        "example": "1723155807",
+        "displayType": "timestamp"
+      },
+      {
+        "name": "Next Term End",
+        "description": "Timestamp of the second following the end of the next term",
+        "type": "uint256",
+        "example": "1723155808",
+        "displayType": "timestamp"
+      },
+      {
+        "name": "Top K",
+        "description": "First K winners of the election will be eligible",
+        "type": "uint256",
+        "example": "3",
+        "displayType": "default"
+      }
+    ]
+  },
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_version",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint128",
+          "name": "termEnd",
+          "type": "uint128"
+        }
+      ],
+      "name": "ElectionClosed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidTermEnd",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NextTermNotReady",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotBallotBox",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotElected",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TermEnded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TermNotEnded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TooManyWinners",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint128",
+          "name": "termEnd",
+          "type": "uint128"
+        },
+        {
+          "indexed": false,
+          "internalType": "address[]",
+          "name": "winners",
+          "type": "address[]"
+        }
+      ],
+      "name": "ElectionCompleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint128",
+          "name": "nextTermEnd",
+          "type": "uint128"
+        }
+      ],
+      "name": "ElectionOpened",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "version",
+          "type": "uint8"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint128",
+          "name": "termEnd",
+          "type": "uint128"
+        }
+      ],
+      "name": "NewTermStarted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address[]",
+          "name": "accounts",
+          "type": "address[]"
+        }
+      ],
+      "name": "Recalled",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "BALLOT_BOX_HAT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "HATS",
+      "outputs": [
+        {
+          "internalType": "contract IHats",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "IMPLEMENTATION",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "OWNER_HAT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "currentTermEnd",
+      "outputs": [
+        {
+          "internalType": "uint128",
+          "name": "",
+          "type": "uint128"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint128",
+          "name": "_termEnd",
+          "type": "uint128"
+        },
+        {
+          "internalType": "address[]",
+          "name": "_winners",
+          "type": "address[]"
+        }
+      ],
+      "name": "elect",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint128",
+          "name": "termEnd",
+          "type": "uint128"
+        },
+        {
+          "internalType": "address",
+          "name": "candidates",
+          "type": "address"
+        }
+      ],
+      "name": "electionResults",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "elected",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint128",
+          "name": "termEnd",
+          "type": "uint128"
+        }
+      ],
+      "name": "electionStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "isElectionOpen",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "getWearerStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "eligible",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "standing",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hatId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "nextTermEnd",
+      "outputs": [
+        {
+          "internalType": "uint128",
+          "name": "",
+          "type": "uint128"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint128",
+          "name": "_termEnd",
+          "type": "uint128"
+        },
+        {
+          "internalType": "address[]",
+          "name": "_recallees",
+          "type": "address[]"
+        }
+      ],
+      "name": "recall",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint128",
+          "name": "_newTermEnd",
+          "type": "uint128"
+        }
+      ],
+      "name": "setNextTerm",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        }
+      ],
+      "name": "setUp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "startNextTerm",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version_",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}
