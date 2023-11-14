@@ -49,15 +49,15 @@
     "useHatId": true,
     "immutable": [
       {
-        "name": "Admin Hat",
-        "description": "Optional admin hat, granted authority to set up a new term. If not provided (equals zero), then this permission is granted to the admins of the hat.",
+        "name": "Ballot Box Hat",
+        "description": "This hat has the authority to submit election and recall results.",
         "type": "uint256",
         "example": "26959946667150639794667015087019630673637144422540572481103610249216",
         "displayType": "hat"
       },
       {
-        "name": "Ballot Box Hat",
-        "description": "This hat has the authority to submit election and recall results.",
+        "name": "Admin Hat",
+        "description": "Optional admin hat, granted authority to set up a new term. If not provided (equals zero), then this permission is granted to the admins of the hat.",
         "type": "uint256",
         "example": "26959946667150639794667015087019630673637144422540572481103610249216",
         "displayType": "hat"
@@ -67,23 +67,9 @@
       {
         "name": "Current Term End",
         "description": "Timestamp of the second following the end of the current term",
-        "type": "uint256",
+        "type": "uint128",
         "example": "1723155807",
         "displayType": "timestamp"
-      },
-      {
-        "name": "Next Term End",
-        "description": "Timestamp of the second following the end of the next term",
-        "type": "uint256",
-        "example": "1723155808",
-        "displayType": "timestamp"
-      },
-      {
-        "name": "Top K",
-        "description": "First K winners of the election will be eligible",
-        "type": "uint256",
-        "example": "3",
-        "displayType": "default"
       }
     ]
   },
