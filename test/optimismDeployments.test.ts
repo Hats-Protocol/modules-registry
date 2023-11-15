@@ -23,6 +23,7 @@ describe("Optimism deployments", () => {
   let hatsModulesClient: HatsModulesClient;
   let anvil: Anvil;
   let deployerAccount: PrivateKeyAccount;
+  let instances: Address[] = [];
 
   beforeAll(async () => {
     anvil = createAnvil({
@@ -131,6 +132,8 @@ describe("Optimism deployments", () => {
         mutableArgs: mutableArgs,
       });
 
+      instances.push(res.newInstance);
+
       // check correct hat Id in the new instance
       const hatIdResult = await publicClient.readContract({
         address: res.newInstance as Address,
@@ -139,6 +142,21 @@ describe("Optimism deployments", () => {
         args: [],
       });
       expect(hatIdResult).toBe(hatId);
+    }
+  }, 30000);
+
+  test("Test module parameters", async () => {
+    for (let i = 0; i < instances.length; i++) {
+      let instance = instances[i];
+
+      const module = await hatsModulesClient.getModuleByInstance(instance);
+      const res = await hatsModulesClient.getInstanceParameters(instance);
+
+      if (res === undefined || res.length !== module?.parameters.length) {
+        throw new Error(
+          "Error: could not read all the module's parameters from the instance",
+        );
+      }
     }
   }, 30000);
 });

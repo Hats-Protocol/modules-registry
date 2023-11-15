@@ -309,7 +309,7 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@hatsprotocol/modules-sdk@0.14.1":
+"@hatsprotocol/modules-sdk@^0.14.1":
   version "0.14.1"
   resolved "https://registry.yarnpkg.com/@hatsprotocol/modules-sdk/-/modules-sdk-0.14.1.tgz#eee072381a2b9469678520a5d8e170898bb018c5"
   integrity sha512-/eg2sCCv66hjDe+Y1lbjzlFso9XBdSWW8eSwoLP7aOyAwmvZN3hNhbAQsgCeptex7B4viBIwzvWdu+vJ2M8pkQ==
@@ -840,7 +840,7 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==
 
-axios@^1.5.0:
+axios@^1.5.0, axios@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.1.tgz#76550d644bf0a2d469a01f9244db6753208397d7"
   integrity sha512-vfBmhDpKafglh0EldBEbVuoe7DyAavGSLWhuSm5ZSEKQnHhBf0xAAwybbNH1IkrJNGnS/VG4I5yxig1pCEXE4g==
@@ -2550,7 +2550,7 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zod@^3.21.4:
+zod@^3.21.4, zod@^3.22.4:
   version "3.22.4"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.4.tgz#f31c3a9386f61b1f228af56faa9255e845cf3fff"
   integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==
