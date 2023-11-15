@@ -3160,7 +3160,7 @@
         },
         {
           "inputs": [
-            { "internalType": "bytes", "name": "_initdata", "type": "bytes" }
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
           ],
           "name": "setUp",
           "outputs": [],
