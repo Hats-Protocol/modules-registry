@@ -1580,9 +1580,9 @@
         },
         { "inputs": [], "name": "InvalidTermEnd", "type": "error" },
         { "inputs": [], "name": "NextTermNotReady", "type": "error" },
+        { "inputs": [], "name": "NotAdmin", "type": "error" },
         { "inputs": [], "name": "NotBallotBox", "type": "error" },
         { "inputs": [], "name": "NotElected", "type": "error" },
-        { "inputs": [], "name": "NotOwner", "type": "error" },
         { "inputs": [], "name": "TermEnded", "type": "error" },
         { "inputs": [], "name": "TermNotEnded", "type": "error" },
         { "inputs": [], "name": "TooManyWinners", "type": "error" },
@@ -1659,6 +1659,15 @@
         },
         {
           "inputs": [],
+          "name": "ADMIN_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
           "name": "BALLOT_BOX_HAT",
           "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
@@ -1680,15 +1689,6 @@
           "name": "IMPLEMENTATION",
           "outputs": [
             { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "OWNER_HAT",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
           ],
           "stateMutability": "pure",
           "type": "function"
