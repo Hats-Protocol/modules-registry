@@ -831,6 +831,300 @@
       ]
     },
     {
+      "name": "Deprecated JokeRace Eligibility",
+      "details": [
+        "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
+        "The number of winners of an election, and thus the number of possible wearers made eligible through this integration, is configurable. Additionally, a term period can be set, after which the winners will no longer be eligible to wear the hat.",
+        "You must have already deployed a JokeRace contest before deploying this Eligibility Module."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/jokerace-eligibility"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Module Admin Hat ID",
+          "functionName": "ADMIN_HAT",
+          "displayType": "hat"
+        },
+        {
+          "label": "Contest Address",
+          "functionName": "underlyingContest",
+          "displayType": "jokerace"
+        },
+        {
+          "label": "Term End",
+          "functionName": "termEnd",
+          "displayType": "timestamp"
+        },
+        {
+          "label": "Number Of Elected Hat Wearers",
+          "functionName": "topK",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
+      "deployments": [
+        { "chainId": "5", "block": "9597388" },
+        { "chainId": "11155111", "block": "4655405" },
+        { "chainId": "10", "block": "110683218" },
+        { "chainId": "137", "block": "48562046" },
+        { "chainId": "42161", "block": "139443958" },
+        { "chainId": "100", "block": "30406089" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Admin Hat",
+            "description": "Optional admin hat, granted a permission to create a new term (reelection). If not provided (equals zero), then this permission is granted to the admins of the hat",
+            "type": "uint256",
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+            "displayType": "hat"
+          }
+        ],
+        "mutable": [
+          {
+            "name": "JokeRace Contest",
+            "description": "The JokeRace contest that facilitates the election",
+            "type": "address",
+            "example": "0xd00F6a711522a84C73aED9997Fcf207B41E97311",
+            "displayType": "jokerace"
+          },
+          {
+            "name": "Term End",
+            "description": "Timestamp of the term ending (in seconds)",
+            "type": "uint256",
+            "example": "1723155807",
+            "displayType": "timestamp"
+          },
+          {
+            "name": "Top K",
+            "description": "First K winners of the election will be eligible",
+            "type": "uint256",
+            "example": "3",
+            "displayType": "default"
+          }
+        ]
+      },
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "JokeraceEligibility_ContestNotCompleted",
+          "type": "error"
+        },
+        { "inputs": [], "name": "JokeraceEligibility_NoTies", "type": "error" },
+        {
+          "inputs": [],
+          "name": "JokeraceEligibility_NotAdmin",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "JokeraceEligibility_TermNotCompleted",
+          "type": "error"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "NewContest",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "newTopK",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "newTermEnd",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewTerm",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ADMIN_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "wearer", "type": "address" },
+            { "internalType": "address", "name": "contest", "type": "address" }
+          ],
+          "name": "eligibleWearersPerContest",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "pullElectionResults",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newUnderlyingContest",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "newTermEnd",
+              "type": "uint256"
+            },
+            { "internalType": "uint256", "name": "newTopK", "type": "uint256" }
+          ],
+          "name": "reelection",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "reelectionAllowed",
+          "outputs": [
+            { "internalType": "bool", "name": "allowed", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "termEnd",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "topK",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "underlyingContest",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
       "name": "ERC1155 Eligibility",
       "details": [
         "A Hats Protocol eligibility module that checks if an address holds at least one minimum balance of a set of ERC1155 token Ids to determine eligibility"
