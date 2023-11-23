@@ -1850,7 +1850,8 @@
       "details": [
         "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
         "The number of winners of an election, and thus the number of possible wearers made eligible through this integration, is configurable. Additionally, a term period can be set, after which the winners will no longer be eligible to wear the hat.",
-        "You must have already deployed a JokeRace contest before deploying this Eligibility Module."
+        "You must have already deployed a JokeRace contest before deploying this Eligibility Module.",
+        "NOTE: proposals ranking is currently only supported in Jokerace contests with down-voting disabled, and so this module only works with down-voting disabled contests."
       ],
       "links": [
         {
@@ -1881,14 +1882,14 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
+      "implementationAddress": "0xAE0e56A0c509dA713722c1aFFcF4B5f1C6CDc73a",
       "deployments": [
-        { "chainId": "5", "block": "9597388" },
-        { "chainId": "11155111", "block": "4655405" },
-        { "chainId": "10", "block": "110683218" },
-        { "chainId": "137", "block": "48562046" },
-        { "chainId": "42161", "block": "139443958" },
-        { "chainId": "100", "block": "30406089" }
+        { "chainId": "5", "block": "10092827" },
+        { "chainId": "11155111", "block": "4749517" },
+        { "chainId": "10", "block": "112566278" },
+        { "chainId": "137", "block": "50286793" },
+        { "chainId": "42161", "block": "153224468" },
+        { "chainId": "100", "block": "31089668" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -1906,7 +1907,7 @@
             "name": "JokeRace Contest",
             "description": "The JokeRace contest that facilitates the election",
             "type": "address",
-            "example": "0xd00F6a711522a84C73aED9997Fcf207B41E97311",
+            "example": "0x8E612AD3CD04981A69e8ad532b5c20466e3Af5E0",
             "displayType": "jokerace"
           },
           {
@@ -1938,7 +1939,16 @@
           "name": "JokeraceEligibility_ContestNotCompleted",
           "type": "error"
         },
-        { "inputs": [], "name": "JokeraceEligibility_NoTies", "type": "error" },
+        {
+          "inputs": [],
+          "name": "JokeraceEligibility_MustHaveDownvotingDisabled",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "JokeraceEligibility_MustHaveSortingEnabled",
+          "type": "error"
+        },
         {
           "inputs": [],
           "name": "JokeraceEligibility_NotAdmin",
@@ -2051,7 +2061,9 @@
         {
           "inputs": [],
           "name": "pullElectionResults",
-          "outputs": [],
+          "outputs": [
+            { "internalType": "bool", "name": "success", "type": "bool" }
+          ],
           "stateMutability": "nonpayable",
           "type": "function"
         },
