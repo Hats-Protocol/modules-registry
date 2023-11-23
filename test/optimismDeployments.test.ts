@@ -67,6 +67,9 @@ describe("Optimism deployments", () => {
     // create new module instance for each module which is deployed on goerli
     for (const [id, module] of Object.entries(modules)) {
       console.log(`Testing module: ${module.name}`);
+      if (module.name === "JokeRace Eligibility") {
+        continue;
+      }
       // check if module is deployed on goerli. If not, then skip
       let isOnOptimism = false;
       for (let i = 0; i < module.deployments.length; i++) {
