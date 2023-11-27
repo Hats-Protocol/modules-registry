@@ -7,10 +7,12 @@ Modules customize, automate and extend the behavior of Hats Protocol, and can al
 
 Hats Protocol is open and permission-less, and so anyone is free to use any compatible modules. But, only modules that are included in the registry are supported in the [Modules SDK](https://github.com/Hats-Protocol/modules-sdk) and get a native support in the [Hats App](https://app.hatsprotocol.xyz/).
 
-## Add New Module
-
 The registry is designed to support any existing module that inherits the [HatsModule contract](https://github.com/Hats-Protocol/hats-module/blob/main/src/HatsModule.sol).
 For full documentation on how to build new Hats Modules, click [here](https://docs.hatsprotocol.xyz/for-developers/building-hats-modules).
+
+## How To Add A New Module
+
+### Step 1 - Add your module's JSON file to the modules directory.
 
 For each module, the registry contains a JSON file with the following structure:
 
@@ -70,38 +72,48 @@ For each module, the registry contains a JSON file with the following structure:
 
 (Note that arrays in the object above contain one example entry).
 
-### Add your module's JSON file to the modules directory.
-
 Here are some notes on its expected structure:
 
 - The "name" property represents the name of the module.
 - The "details" property is structured as an array of strings. Each array entry represents a paragraph (which will be rendered in a UI).
 - The "links" property should have at least one link to the module's source code.
-- The "parameters" property is used in order to fetch and display data from module instances.
+- The "parameters" property is used in order to dynamically fetch and display data from module instances.
   - The "label" property is used to display the name/description of each parameter.
   - The "functionName" property represents the name of the function from which the parameter should be retrieved. The function should be a view/pure function with no input and one output (not a tuple, but can be an array).
-  - The "displayType" property is used in order to display a proper UI component for the parameter. For example, displaying a date for a parameter representing a timestamp. The supported types are currently: "default", "timestamp".
-- There should be at least one field on the "type" property which is set to "true". A module might also serve as more than one type, in which case there will be more than one field set to "true".
+  - The "displayType" property is used in order to display a proper UI component for the parameter. For example, displaying a date for a parameter representing a timestamp. The supported types are currently:
+    - "default" - Infers automatically the UI component for the value
+    - "timestamp" - Unix timestamp, will be presented as a Date component
+    - "hat" - hat component
+    - "token" - Token component
+    - "seconds" - Amount of time denominated in seconds 
+    - "amountWithDecimals" - For token amounts, takes into account the token's decimals
+- There should be at least one field on the "type" property which is set to "true". A module might serve as more than one type, in which case there will be more than one field set to "true".
 - For each chain provided in "deployments", there should be a deployed implementation contract with an address matching the provided "implementationAddress" property and with an ABI
   matching the "abi" property.
-- For both the immutable and mutable arguments, their order should match the order of the arguments as provided to the module. The supported types for the "displayType" property are currently: "default", "timestamp".
+- For both the immutable and mutable arguments, their order should match the order of the arguments as provided to the module.
 - The "example" fields will be used to automatically test the module's deployment.
 
-### Bundle
+### Step 2 - Bundle
 
 The modules in the registry are bundled into one file, which is then consumed by its users.
+
+Run:
 
 ```bash
 yarn bundle
 ```
 
-### Test
+### Step 3 - Test
+
+Run:
 
 ```bash
 yarn test
 ```
 
-### Format
+### Step 4 - Format
+
+Run:
 
 ```bash
 yarn prettier
