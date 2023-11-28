@@ -85,7 +85,7 @@ Here are some notes on its expected structure:
     - "timestamp" - Unix timestamp, will be presented as a Date component
     - "hat" - hat component
     - "token" - Token component
-    - "seconds" - Amount of time denominated in seconds 
+    - "seconds" - Amount of time denominated in seconds
     - "amountWithDecimals" - For token amounts, takes into account the token's decimals
 - There should be at least one field on the "type" property which is set to "true". A module might serve as more than one type, in which case there will be more than one field set to "true".
 - For each chain provided in "deployments", there should be a deployed implementation contract with an address matching the provided "implementationAddress" property and with an ABI
