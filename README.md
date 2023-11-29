@@ -10,6 +10,18 @@ Hats Protocol is open and permission-less, and so anyone is free to use any comp
 The registry is designed to support any existing module that inherits the [HatsModule contract](https://github.com/Hats-Protocol/hats-module/blob/main/src/HatsModule.sol).
 For full documentation on how to build new Hats Modules, click [here](https://docs.hatsprotocol.xyz/for-developers/building-hats-modules).
 
+## Module Registry Schema
+
+<!-- Placeholder for the schema definition to support the authority link from the Module Curation Manager hat -->
+
+## Module Curation Rubric
+
+<!-- Placeholder for the curation rubric to support the authority link from the Modules Registry Curation hat -->
+
+## Curation Cadence
+
+<!-- Placeholder for the curation cadence definition to support the authority link from the Modules Registry Curation hat -->
+
 ## How To Add A New Module
 
 ### Step 1 - Add your module's JSON file to the modules directory.
