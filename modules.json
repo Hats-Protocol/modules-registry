@@ -1019,7 +1019,8 @@
             "description": "Optional admin hat, granted a permission to create a new term (reelection). If not provided (equals zero), then this permission is granted to the admins of the hat",
             "type": "uint256",
             "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-            "displayType": "hat"
+            "displayType": "hat",
+            "optional": true
           }
         ],
         "mutable": [
@@ -1064,6 +1065,7 @@
         {
           "name": "JokeRace Admin",
           "criteria": "ADMIN_HAT",
+          "optional": true,
           "functions": [
             {
               "functionName": "reelection",
@@ -2032,7 +2034,8 @@
             "description": "Optional admin hat, granted authority to set up a new term. If not provided (equals zero), then this permission is granted to the admins of the hat.",
             "type": "uint256",
             "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-            "displayType": "hat"
+            "displayType": "hat",
+            "optional": true
           }
         ],
         "mutable": [
@@ -2108,6 +2111,7 @@
         {
           "name": "Elections Admin",
           "criteria": "ADMIN_HAT",
+          "optional": true,
           "functions": [
             {
               "functionName": "setNextTerm",
@@ -2462,7 +2466,8 @@
             "description": "Optional admin hat, granted a permission to create a new term (reelection). If not provided (equals zero), then this permission is granted to the admins of the hat",
             "type": "uint256",
             "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-            "displayType": "hat"
+            "displayType": "hat",
+            "optional": true
           }
         ],
         "mutable": [
@@ -2507,6 +2512,7 @@
         {
           "name": "JokeRace Admin",
           "criteria": "ADMIN_HAT",
+          "optional": true,
           "functions": [
             {
               "functionName": "reelection",
