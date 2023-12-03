@@ -512,6 +512,140 @@
           }
         ]
       },
+      "roles": [
+        { "name": "Public", "criteria": null, "functions": [] },
+        { "name": "Hat Admins", "criteria": null, "functions": [] },
+        {
+          "name": "Allow-List Owner",
+          "criteria": "OWNER_HAT",
+          "functions": [
+            {
+              "functionName": "addAccount",
+              "label": "Add Account",
+              "description": "Add an account to the allow-list",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Account",
+                  "description": "The account to add",
+                  "type": "address",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "addAccounts",
+              "label": "Add Accounts",
+              "description": "Add multiple accounts to the allow-list",
+              "args": [
+                {
+                  "name": "Accounts",
+                  "description": "The accounts to add",
+                  "type": "address[]",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "removeAccount",
+              "label": "Remove Account",
+              "description": "Remove an account from the allow-list",
+              "args": [
+                {
+                  "name": "Account",
+                  "description": "The account to remove",
+                  "type": "address",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "removeAccountAndBurnHat",
+              "label": "Remove and Burn",
+              "description": "Remove an account from the allow-list and burn their hat",
+              "args": [
+                {
+                  "name": "Account",
+                  "description": "The account to remove",
+                  "type": "address",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "removeAccounts",
+              "label": "Remove Accounts",
+              "description": "Remove multiple accounts from the allow-list",
+              "args": [
+                {
+                  "name": "Accounts",
+                  "description": "Accounts to remove",
+                  "type": "address[]",
+                  "displayType": "default"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Allow-List Arbitrator",
+          "criteria": "ARBITRATOR_HAT",
+          "functions": [
+            {
+              "functionName": "setStandingForAccount",
+              "label": "Set Standing",
+              "description": "Set the standing for an account",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Account",
+                  "description": "The account to set standing for",
+                  "type": "address",
+                  "displayType": "default"
+                },
+                {
+                  "name": "Standing",
+                  "description": "The standing to set",
+                  "type": "bool",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "setBadStandingAndBurnHat",
+              "label": "Set Bad Standing and Burn Hat",
+              "description": "Puts an account in bad standing and burns their hat",
+              "args": [
+                {
+                  "name": "Account",
+                  "description": "The account to set standing for",
+                  "type": "address",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "setStandingForAccounts",
+              "label": "Set Standings",
+              "description": "Set the standing for multiple accounts",
+              "args": [
+                {
+                  "name": "Accounts",
+                  "description": "Accounts accounts to set standing for",
+                  "type": "address[]",
+                  "displayType": "default"
+                },
+                {
+                  "name": "Standings",
+                  "description": "The standings to set for each account, corresponding to the accounts order",
+                  "type": "bool[]",
+                  "displayType": "default"
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "abi": [
         {
           "inputs": [
@@ -912,6 +1046,54 @@
           }
         ]
       },
+      "roles": [
+        {
+          "name": "Public",
+          "criteria": null,
+          "functions": [
+            {
+              "functionName": "pullElectionResults",
+              "label": "Pull Election Results",
+              "description": "Pulls the election's final results",
+              "primary": true,
+              "args": []
+            }
+          ]
+        },
+        { "name": "Hat Admins", "criteria": null, "functions": [] },
+        {
+          "name": "JokeRace Admin",
+          "criteria": "ADMIN_HAT",
+          "functions": [
+            {
+              "functionName": "reelection",
+              "label": "New Term",
+              "description": "Setup a new term, once the current term has ended",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Election",
+                  "description": "Address of the new JokeRace election",
+                  "type": "address",
+                  "displayType": "jokerace"
+                },
+                {
+                  "name": "Term End",
+                  "description": "Timestamp of the new term ending",
+                  "type": "uint256",
+                  "displayType": "timestamp"
+                },
+                {
+                  "name": "Top K",
+                  "description": "Amount of election winners",
+                  "type": "uint256",
+                  "displayType": "default"
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "abi": [
         {
           "inputs": [
@@ -1863,6 +2045,87 @@
           }
         ]
       },
+      "roles": [
+        {
+          "name": "Public",
+          "criteria": null,
+          "functions": [
+            {
+              "functionName": "startNextTerm",
+              "label": "Start Next Term",
+              "description": "If the current term has passed and the next term's election is over, then start the next term",
+              "primary": true,
+              "args": []
+            }
+          ]
+        },
+        { "name": "Hat Admins", "criteria": null, "functions": [] },
+        {
+          "name": "Elections Bollot Box",
+          "criteria": "BALLOT_BOX_HAT",
+          "functions": [
+            {
+              "functionName": "elect",
+              "label": "Submit Election Results",
+              "description": "Submit the results of an election for a specified term",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Election's Term End",
+                  "description": "Term end time of the election",
+                  "type": "uint128",
+                  "displayType": "timestamp"
+                },
+                {
+                  "name": "Winners",
+                  "description": "The addresses of the winners of the election",
+                  "type": "address[]",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "recall",
+              "label": "Submit Recall Election Results",
+              "description": "Submit the results of a recall election for a specified term",
+              "args": [
+                {
+                  "name": "Election's Term End",
+                  "description": "Term end time of the election",
+                  "type": "uint128",
+                  "displayType": "timestamp"
+                },
+                {
+                  "name": "Recallees",
+                  "description": "The addresses of the Recalled accounts",
+                  "type": "address[]",
+                  "displayType": "default"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Elections Admin",
+          "criteria": "ADMIN_HAT",
+          "functions": [
+            {
+              "functionName": "setNextTerm",
+              "label": "set Next Term",
+              "description": "Set the next term. This will open the election for the next term. If the next term has already been set and is still open, this function can be used to change it.",
+              "primary": true,
+              "args": [
+                {
+                  "name": "New Term End",
+                  "description": "The end time of the term that will be opened",
+                  "type": "uint128",
+                  "displayType": "timestamp"
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "abi": [
         {
           "inputs": [
@@ -2226,6 +2489,54 @@
           }
         ]
       },
+      "roles": [
+        {
+          "name": "Public",
+          "criteria": null,
+          "functions": [
+            {
+              "functionName": "pullElectionResults",
+              "label": "Pull Election Results",
+              "description": "Pulls the election's final results",
+              "primary": true,
+              "args": []
+            }
+          ]
+        },
+        { "name": "Hat Admins", "criteria": null, "functions": [] },
+        {
+          "name": "JokeRace Admin",
+          "criteria": "ADMIN_HAT",
+          "functions": [
+            {
+              "functionName": "reelection",
+              "label": "New Term",
+              "description": "Setup a new term, once the current term has ended",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Election",
+                  "description": "Address of the new JokeRace election",
+                  "type": "address",
+                  "displayType": "jokerace"
+                },
+                {
+                  "name": "Term End",
+                  "description": "Timestamp of the new term ending",
+                  "type": "uint256",
+                  "displayType": "timestamp"
+                },
+                {
+                  "name": "Top K",
+                  "description": "Amount of election winners",
+                  "type": "uint256",
+                  "displayType": "default"
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "abi": [
         {
           "inputs": [
@@ -2937,6 +3248,67 @@
         ],
         "mutable": []
       },
+      "roles": [
+        { "name": "Public", "criteria": null, "functions": [] },
+        { "name": "Hat Admins", "criteria": null, "functions": [] },
+        {
+          "name": "Eligibility/Toggle Passthrough",
+          "criteria": "CRITERION_HAT",
+          "functions": [
+            {
+              "functionName": "setHatWearerStatus",
+              "label": "Set Wearer's Status",
+              "description": "Set the eligibility and standing of a chosen hat wearer",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Hat",
+                  "description": "ID of the hat to set the eligibility status for",
+                  "type": "uint256",
+                  "displayType": "hat"
+                },
+                {
+                  "name": "Wearer",
+                  "description": "The address to set the eligibility status for",
+                  "type": "address",
+                  "displayType": "default"
+                },
+                {
+                  "name": "Eligibility",
+                  "description": "Is the wearer eligible for the hat",
+                  "type": "bool",
+                  "displayType": "default"
+                },
+                {
+                  "name": "Standing",
+                  "description": "Is the wearer in good standing for the hat",
+                  "type": "bool",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "setHatStatus",
+              "label": "Set Hat's Status",
+              "description": "Set the status of a chosen hat",
+              "args": [
+                {
+                  "name": "Hat",
+                  "description": "ID of the hat to set the status for",
+                  "type": "uint256",
+                  "displayType": "hat"
+                },
+                {
+                  "name": "Status",
+                  "description": "Is the hat active",
+                  "type": "bool",
+                  "displayType": "default"
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "abi": [
         {
           "inputs": [
@@ -3100,6 +3472,35 @@
           }
         ]
       },
+      "roles": [
+        { "name": "Public", "criteria": null, "functions": [] },
+        {
+          "name": "Hat Admins",
+          "criteria": null,
+          "functions": [
+            {
+              "functionName": "extend",
+              "label": "New Season",
+              "description": "Extend the branch for a new season, optionally with a new season duration",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Duration",
+                  "description": "Optional new custom season duration, in seconds",
+                  "type": "uint256",
+                  "displayType": "seconds"
+                },
+                {
+                  "name": "Extension Delay",
+                  "description": "Optional new proportion of the season that must elapse before the branch can be extended for another season, The value is treated as the numerator `x` in the expression `x / 10,000`",
+                  "type": "uint256",
+                  "displayType": "default"
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "abi": [
         {
           "inputs": [
@@ -3384,6 +3785,172 @@
           }
         ]
       },
+      "roles": [
+        {
+          "name": "Public",
+          "criteria": null,
+          "functions": [
+            {
+              "functionName": "stake",
+              "label": "Stake",
+              "description": "Stake tokens, whether for the first time or to increase an existing stake.",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Amount",
+                  "description": "The amount of tokens to stake",
+                  "type": "uint248",
+                  "displayType": "amountWithDecimals"
+                }
+              ]
+            },
+            {
+              "functionName": "beginUnstake",
+              "label": "Begin Unstake",
+              "description": "Begin the process of unstaking an amount tokens by initiating a cooldown period, after which the tokens can be unstaked if the skater is not slashed in the meantime.",
+              "args": [
+                {
+                  "name": "Amount",
+                  "description": "The amount of tokens to unstake",
+                  "type": "uint248",
+                  "displayType": "amountWithDecimals"
+                }
+              ]
+            },
+            {
+              "functionName": "completeUnstake",
+              "label": "Complete Unstake For Account",
+              "description": "Complete the process of unstaking for a staker after the cooldown period has elapsed.",
+              "args": [
+                {
+                  "name": "Staker",
+                  "description": "The staker for which to complete unstaking",
+                  "type": "address",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "completeUnstake",
+              "label": "Complete My Unstake",
+              "description": "Complete your unstaking process after the cooldown period has elapsed.",
+              "args": []
+            }
+          ]
+        },
+        {
+          "name": "Hat Admins",
+          "criteria": null,
+          "functions": [
+            {
+              "functionName": "changeMinStake",
+              "label": "Change Min Stake",
+              "description": "Change the minimum stake required to be eligible for the hat",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Min Stake",
+                  "description": "The new minimum stake",
+                  "type": "uint248",
+                  "displayType": "amountWithDecimals"
+                }
+              ]
+            },
+            {
+              "functionName": "changeJudgeHat",
+              "label": "Change Judge Hat",
+              "description": "Change the hat that can slash wearers",
+              "args": [
+                {
+                  "name": "Hat",
+                  "description": "The new judge hat",
+                  "type": "uint256",
+                  "displayType": "hat"
+                }
+              ]
+            },
+            {
+              "functionName": "changeRecipientHat",
+              "label": "Change Recipient Hat",
+              "description": "Change the hat whose wearer is the recipient of withdrawn slashed stakes",
+              "args": [
+                {
+                  "name": "Hat",
+                  "description": "The new recipient hat",
+                  "type": "uint256",
+                  "displayType": "hat"
+                }
+              ]
+            },
+            {
+              "functionName": "changeCooldownPeriod",
+              "label": "Change Cooldown Hat",
+              "description": "Change the number of seconds that must elapse between beginning an unstake and completing it. This period should be long enough that a wearer of the Judge Hat has enough time to slash a misbehaving staker before they can unstake.",
+              "args": [
+                {
+                  "name": "Cooldown Period",
+                  "description": "The new cooldown period",
+                  "type": "uint256",
+                  "displayType": "seconds"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Staking Judge",
+          "criteria": "judgeHat",
+          "functions": [
+            {
+              "functionName": "slash",
+              "label": "Slash",
+              "description": "Slash a staker's full stake and set bad standing",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Staker",
+                  "description": "The staker to slash",
+                  "type": "address",
+                  "displayType": "default"
+                }
+              ]
+            },
+            {
+              "functionName": "forgive",
+              "label": "Forgive",
+              "description": "Forgive a slashed address, placing them back in good standing and allowing them to stake again",
+              "args": [
+                {
+                  "name": "Staker",
+                  "description": "The staker to forgive",
+                  "type": "address",
+                  "displayType": "default"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Staking Recipient",
+          "criteria": "recipientHat",
+          "functions": [
+            {
+              "functionName": "withdraw",
+              "label": "Withdraw",
+              "description": "Withdraw all slashed stakes to a wearer of the recipient hat",
+              "primary": true,
+              "args": [
+                {
+                  "name": "Recipient",
+                  "description": "The recipient of the withdrawn tokens, must wear the recipient hat",
+                  "type": "address",
+                  "displayType": "default"
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "abi": [
         {
           "inputs": [

@@ -101,6 +101,58 @@
       }
     ]
   },
+  "roles": [
+    {
+      "name": "Public",
+      "criteria": null,
+      "functions": [
+        {
+          "functionName": "pullElectionResults",
+          "label": "Pull Election Results",
+          "description": "Pulls the election's final results",
+          "primary": true,
+          "args": []
+        }
+      ]
+    },
+    {
+      "name": "Hat Admins",
+      "criteria": null,
+      "functions": []
+    },
+    {
+      "name": "JokeRace Admin",
+      "criteria": "ADMIN_HAT",
+      "functions": [
+        {
+          "functionName": "reelection",
+          "label": "New Term",
+          "description": "Setup a new term, once the current term has ended",
+          "primary": true,
+          "args": [
+            {
+              "name": "Election",
+              "description": "Address of the new JokeRace election",
+              "type": "address",
+              "displayType": "jokerace"
+            },
+            {
+              "name": "Term End",
+              "description": "Timestamp of the new term ending",
+              "type": "uint256",
+              "displayType": "timestamp"
+            },
+            {
+              "name": "Top K",
+              "description": "Amount of election winners",
+              "type": "uint256",
+              "displayType": "default"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "abi": [
     {
       "inputs": [

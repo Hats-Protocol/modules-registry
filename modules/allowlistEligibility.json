@@ -85,6 +85,148 @@
       }
     ]
   },
+  "roles": [
+    {
+      "name": "Public",
+      "criteria": null,
+      "functions": []
+    },
+    {
+      "name": "Hat Admins",
+      "criteria": null,
+      "functions": []
+    },
+    {
+      "name": "Allow-List Owner",
+      "criteria": "OWNER_HAT",
+      "functions": [
+        {
+          "functionName": "addAccount",
+          "label": "Add Account",
+          "description": "Add an account to the allow-list",
+          "primary": true,
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to add",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "functionName": "addAccounts",
+          "label": "Add Accounts",
+          "description": "Add multiple accounts to the allow-list",
+          "args": [
+            {
+              "name": "Accounts",
+              "description": "The accounts to add",
+              "type": "address[]",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "functionName": "removeAccount",
+          "label": "Remove Account",
+          "description": "Remove an account from the allow-list",
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to remove",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "functionName": "removeAccountAndBurnHat",
+          "label": "Remove and Burn",
+          "description": "Remove an account from the allow-list and burn their hat",
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to remove",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "functionName": "removeAccounts",
+          "label": "Remove Accounts",
+          "description": "Remove multiple accounts from the allow-list",
+          "args": [
+            {
+              "name": "Accounts",
+              "description": "Accounts to remove",
+              "type": "address[]",
+              "displayType": "default"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Allow-List Arbitrator",
+      "criteria": "ARBITRATOR_HAT",
+      "functions": [
+        {
+          "functionName": "setStandingForAccount",
+          "label": "Set Standing",
+          "description": "Set the standing for an account",
+          "primary": true,
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to set standing for",
+              "type": "address",
+              "displayType": "default"
+            },
+            {
+              "name": "Standing",
+              "description": "The standing to set",
+              "type": "bool",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "functionName": "setBadStandingAndBurnHat",
+          "label": "Set Bad Standing and Burn Hat",
+          "description": "Puts an account in bad standing and burns their hat",
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to set standing for",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "functionName": "setStandingForAccounts",
+          "label": "Set Standings",
+          "description": "Set the standing for multiple accounts",
+          "args": [
+            {
+              "name": "Accounts",
+              "description": "Accounts accounts to set standing for",
+              "type": "address[]",
+              "displayType": "default"
+            },
+            {
+              "name": "Standings",
+              "description": "The standings to set for each account, corresponding to the accounts order",
+              "type": "bool[]",
+              "displayType": "default"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "abi": [
     {
       "inputs": [
