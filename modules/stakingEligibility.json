@@ -107,166 +107,175 @@
   },
   "roles": [
     {
+      "id": "public",
       "name": "Public",
-      "criteria": null,
-      "functions": [
-        {
-          "functionName": "stake",
-          "label": "Stake",
-          "description": "Stake tokens, whether for the first time or to increase an existing stake.",
-          "primary": true,
-          "args": [
-            {
-              "name": "Amount",
-              "description": "The amount of tokens to stake",
-              "type": "uint248",
-              "displayType": "amountWithDecimals"
-            }
-          ]
-        },
-        {
-          "functionName": "beginUnstake",
-          "label": "Begin Unstake",
-          "description": "Begin the process of unstaking an amount tokens by initiating a cooldown period, after which the tokens can be unstaked if the skater is not slashed in the meantime.",
-          "args": [
-            {
-              "name": "Amount",
-              "description": "The amount of tokens to unstake",
-              "type": "uint248",
-              "displayType": "amountWithDecimals"
-            }
-          ]
-        },
-        {
-          "functionName": "completeUnstake",
-          "label": "Complete Unstake For Account",
-          "description": "Complete the process of unstaking for a staker after the cooldown period has elapsed.",
-          "args": [
-            {
-              "name": "Staker",
-              "description": "The staker for which to complete unstaking",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "functionName": "completeUnstake",
-          "label": "Complete My Unstake",
-          "description": "Complete your unstaking process after the cooldown period has elapsed.",
-          "args": []
-        }
-      ]
+      "criteria": null
     },
     {
+      "id": "hat-admins",
       "name": "Hat Admins",
-      "criteria": null,
-      "functions": [
-        {
-          "functionName": "changeMinStake",
-          "label": "Change Min Stake",
-          "description": "Change the minimum stake required to be eligible for the hat",
-          "primary": true,
-          "args": [
-            {
-              "name": "Min Stake",
-              "description": "The new minimum stake",
-              "type": "uint248",
-              "displayType": "amountWithDecimals"
-            }
-          ]
-        },
-        {
-          "functionName": "changeJudgeHat",
-          "label": "Change Judge Hat",
-          "description": "Change the hat that can slash wearers",
-          "args": [
-            {
-              "name": "Hat",
-              "description": "The new judge hat",
-              "type": "uint256",
-              "displayType": "hat"
-            }
-          ]
-        },
-        {
-          "functionName": "changeRecipientHat",
-          "label": "Change Recipient Hat",
-          "description": "Change the hat whose wearer is the recipient of withdrawn slashed stakes",
-          "args": [
-            {
-              "name": "Hat",
-              "description": "The new recipient hat",
-              "type": "uint256",
-              "displayType": "hat"
-            }
-          ]
-        },
-        {
-          "functionName": "changeCooldownPeriod",
-          "label": "Change Cooldown Hat",
-          "description": "Change the number of seconds that must elapse between beginning an unstake and completing it. This period should be long enough that a wearer of the Judge Hat has enough time to slash a misbehaving staker before they can unstake.",
-          "args": [
-            {
-              "name": "Cooldown Period",
-              "description": "The new cooldown period",
-              "type": "uint256",
-              "displayType": "seconds"
-            }
-          ]
-        }
-      ]
+      "criteria": null
     },
     {
+      "id": "staking-judge",
       "name": "Staking Judge",
-      "criteria": "judgeHat",
-      "functions": [
+      "criteria": "judgeHat"
+    },
+    {
+      "id": "staking-recipient",
+      "name": "Staking Recipient",
+      "criteria": "recipientHat"
+    }
+  ],
+  "writeFunctions": [
+    {
+      "roles": ["public"],
+      "functionName": "stake",
+      "label": "Stake",
+      "description": "Stake tokens, whether for the first time or to increase an existing stake.",
+      "primary": true,
+      "args": [
         {
-          "functionName": "slash",
-          "label": "Slash",
-          "description": "Slash a staker's full stake and set bad standing",
-          "primary": true,
-          "args": [
-            {
-              "name": "Staker",
-              "description": "The staker to slash",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "functionName": "forgive",
-          "label": "Forgive",
-          "description": "Forgive a slashed address, placing them back in good standing and allowing them to stake again",
-          "args": [
-            {
-              "name": "Staker",
-              "description": "The staker to forgive",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
+          "name": "Amount",
+          "description": "The amount of tokens to stake",
+          "type": "uint248",
+          "displayType": "amountWithDecimals"
         }
       ]
     },
     {
-      "name": "Staking Recipient",
-      "criteria": "recipientHat",
-      "functions": [
+      "roles": ["public"],
+      "functionName": "beginUnstake",
+      "label": "Begin Unstake",
+      "description": "Begin the process of unstaking an amount tokens by initiating a cooldown period, after which the tokens can be unstaked if the skater is not slashed in the meantime.",
+      "args": [
         {
-          "functionName": "withdraw",
-          "label": "Withdraw",
-          "description": "Withdraw all slashed stakes to a wearer of the recipient hat",
-          "primary": true,
-          "args": [
-            {
-              "name": "Recipient",
-              "description": "The recipient of the withdrawn tokens, must wear the recipient hat",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
+          "name": "Amount",
+          "description": "The amount of tokens to unstake",
+          "type": "uint248",
+          "displayType": "amountWithDecimals"
+        }
+      ]
+    },
+    {
+      "roles": ["public"],
+      "functionName": "completeUnstake",
+      "label": "Complete Unstake For Account",
+      "description": "Complete the process of unstaking for a staker after the cooldown period has elapsed.",
+      "args": [
+        {
+          "name": "Staker",
+          "description": "The staker for which to complete unstaking",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["public"],
+      "functionName": "completeUnstake",
+      "label": "Complete My Unstake",
+      "description": "Complete your unstaking process after the cooldown period has elapsed.",
+      "args": []
+    },
+    {
+      "roles": ["hat-admins"],
+      "functionName": "changeMinStake",
+      "label": "Change Min Stake",
+      "description": "Change the minimum stake required to be eligible for the hat",
+      "primary": true,
+      "args": [
+        {
+          "name": "Min Stake",
+          "description": "The new minimum stake",
+          "type": "uint248",
+          "displayType": "amountWithDecimals"
+        }
+      ]
+    },
+    {
+      "roles": ["hat-admins"],
+      "functionName": "changeJudgeHat",
+      "label": "Change Judge Hat",
+      "description": "Change the hat that can slash wearers",
+      "args": [
+        {
+          "name": "Hat",
+          "description": "The new judge hat",
+          "type": "uint256",
+          "displayType": "hat"
+        }
+      ]
+    },
+    {
+      "roles": ["hat-admins"],
+      "functionName": "changeRecipientHat",
+      "label": "Change Recipient Hat",
+      "description": "Change the hat whose wearer is the recipient of withdrawn slashed stakes",
+      "args": [
+        {
+          "name": "Hat",
+          "description": "The new recipient hat",
+          "type": "uint256",
+          "displayType": "hat"
+        }
+      ]
+    },
+    {
+      "roles": ["hat-admins"],
+      "functionName": "changeCooldownPeriod",
+      "label": "Change Cooldown Hat",
+      "description": "Change the number of seconds that must elapse between beginning an unstake and completing it. This period should be long enough that a wearer of the Judge Hat has enough time to slash a misbehaving staker before they can unstake.",
+      "args": [
+        {
+          "name": "Cooldown Period",
+          "description": "The new cooldown period",
+          "type": "uint256",
+          "displayType": "seconds"
+        }
+      ]
+    },
+    {
+      "roles": ["staking-judge"],
+      "functionName": "slash",
+      "label": "Slash",
+      "description": "Slash a staker's full stake and set bad standing",
+      "primary": true,
+      "args": [
+        {
+          "name": "Staker",
+          "description": "The staker to slash",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["staking-judge"],
+      "functionName": "forgive",
+      "label": "Forgive",
+      "description": "Forgive a slashed address, placing them back in good standing and allowing them to stake again",
+      "args": [
+        {
+          "name": "Staker",
+          "description": "The staker to forgive",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["staking-recipient"],
+      "functionName": "withdraw",
+      "label": "Withdraw",
+      "description": "Withdraw all slashed stakes to a wearer of the recipient hat",
+      "primary": true,
+      "args": [
+        {
+          "name": "Recipient",
+          "description": "The recipient of the withdrawn tokens, must wear the recipient hat",
+          "type": "address",
+          "displayType": "default"
         }
       ]
     }

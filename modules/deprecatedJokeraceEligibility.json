@@ -1,5 +1,6 @@
 {
-  "name": "Deprecated JokeRace Eligibility",
+  "deprecated": true,
+  "name": "JokeRace Eligibility",
   "details": [
     "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
     "The number of winners of an election, and thus the number of possible wearers made eligible through this integration, is configurable. Additionally, a term period can be set, after which the winners will no longer be eligible to wear the hat.",
@@ -103,53 +104,50 @@
   },
   "roles": [
     {
+      "id": "public",
       "name": "Public",
-      "criteria": null,
-      "functions": [
-        {
-          "functionName": "pullElectionResults",
-          "label": "Pull Election Results",
-          "description": "Pulls the election's final results",
-          "primary": true,
-          "args": []
-        }
-      ]
+      "criteria": null
     },
     {
-      "name": "Hat Admins",
-      "criteria": null,
-      "functions": []
-    },
-    {
+      "id": "jokerace-admin",
       "name": "JokeRace Admin",
       "criteria": "ADMIN_HAT",
-      "optional": true,
-      "functions": [
+      "hatAdminsFallback": true
+    }
+  ],
+  "writeFunctions": [
+    {
+      "roles": ["public"],
+      "functionName": "pullElectionResults",
+      "label": "Pull Election Results",
+      "description": "Pulls the election's final results",
+      "primary": true,
+      "args": []
+    },
+    {
+      "roles": ["jokerace-admin"],
+      "functionName": "reelection",
+      "label": "New Term",
+      "description": "Setup a new term, once the current term has ended",
+      "primary": true,
+      "args": [
         {
-          "functionName": "reelection",
-          "label": "New Term",
-          "description": "Setup a new term, once the current term has ended",
-          "primary": true,
-          "args": [
-            {
-              "name": "Election",
-              "description": "Address of the new JokeRace election",
-              "type": "address",
-              "displayType": "jokerace"
-            },
-            {
-              "name": "Term End",
-              "description": "Timestamp of the new term ending",
-              "type": "uint256",
-              "displayType": "timestamp"
-            },
-            {
-              "name": "Top K",
-              "description": "Amount of election winners",
-              "type": "uint256",
-              "displayType": "default"
-            }
-          ]
+          "name": "Election",
+          "description": "Address of the new JokeRace election",
+          "type": "address",
+          "displayType": "jokerace"
+        },
+        {
+          "name": "Term End",
+          "description": "Timestamp of the new term ending",
+          "type": "uint256",
+          "displayType": "timestamp"
+        },
+        {
+          "name": "Top K",
+          "description": "Amount of election winners",
+          "type": "uint256",
+          "displayType": "default"
         }
       ]
     }

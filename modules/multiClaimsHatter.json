@@ -72,6 +72,8 @@
       }
     ]
   },
+  "roles": [],
+  "writeFunctions": [],
   "abi": [
     {
       "inputs": [

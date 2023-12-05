@@ -11,8 +11,42 @@ import { z } from "zod";
 import "dotenv/config";
 import type { Module } from "@hatsprotocol/modules-sdk";
 
+const moduleCreationArgSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  type: z.string(),
+  example: z.any(),
+  displayType: z.string(),
+  optional: z.boolean().optional(),
+});
+
+const moduleWriteFunctionArgSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  type: z.string(),
+  displayType: z.string(),
+  optional: z.boolean().optional(),
+});
+
+const moduleRoleSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  criteria: z.string().nullable(),
+  hatAdminsFallback: z.boolean().optional(),
+});
+
+const moduleWriteFunctionSchema = z.object({
+  roles: z.array(z.string()),
+  functionName: z.string(),
+  label: z.string(),
+  description: z.string(),
+  primary: z.boolean().optional(),
+  args: z.array(moduleWriteFunctionArgSchema),
+});
+
 const moduleSchema = z
   .object({
+    deprecated: z.boolean().optional(),
     name: z.string(),
     details: z.array(z.string()),
     links: z.array(z.object({ label: z.string(), link: z.string() })),
@@ -32,25 +66,11 @@ const moduleSchema = z
     deployments: z.array(z.object({ chainId: z.string(), block: z.string() })),
     creationArgs: z.object({
       useHatId: z.boolean(),
-      immutable: z.array(
-        z.object({
-          name: z.string(),
-          description: z.string(),
-          type: z.string(),
-          example: z.any(),
-          displayType: z.string(),
-        }),
-      ),
-      mutable: z.array(
-        z.object({
-          name: z.string(),
-          description: z.string(),
-          type: z.string(),
-          example: z.any(),
-          displayType: z.string(),
-        }),
-      ),
+      immutable: z.array(moduleCreationArgSchema),
+      mutable: z.array(moduleCreationArgSchema),
     }),
+    roles: z.array(moduleRoleSchema),
+    writeFunctions: z.array(moduleWriteFunctionSchema),
     abi: z.any(),
   })
   .strict();

@@ -76,86 +76,84 @@
   },
   "roles": [
     {
+      "id": "public",
       "name": "Public",
-      "criteria": null,
-      "functions": [
-        {
-          "functionName": "startNextTerm",
-          "label": "Start Next Term",
-          "description": "If the current term has passed and the next term's election is over, then start the next term",
-          "primary": true,
-          "args": []
-        }
-      ]
+      "criteria": null
     },
     {
-      "name": "Hat Admins",
-      "criteria": null,
-      "functions": []
-    },
-    {
+      "id": "elections-ballot-box",
       "name": "Elections Bollot Box",
-      "criteria": "BALLOT_BOX_HAT",
-      "functions": [
-        {
-          "functionName": "elect",
-          "label": "Submit Election Results",
-          "description": "Submit the results of an election for a specified term",
-          "primary": true,
-          "args": [
-            {
-              "name": "Election's Term End",
-              "description": "Term end time of the election",
-              "type": "uint128",
-              "displayType": "timestamp"
-            },
-            {
-              "name": "Winners",
-              "description": "The addresses of the winners of the election",
-              "type": "address[]",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "functionName": "recall",
-          "label": "Submit Recall Election Results",
-          "description": "Submit the results of a recall election for a specified term",
-          "args": [
-            {
-              "name": "Election's Term End",
-              "description": "Term end time of the election",
-              "type": "uint128",
-              "displayType": "timestamp"
-            },
-            {
-              "name": "Recallees",
-              "description": "The addresses of the Recalled accounts",
-              "type": "address[]",
-              "displayType": "default"
-            }
-          ]
-        }
-      ]
+      "criteria": "BALLOT_BOX_HAT"
     },
     {
+      "id": "elections-admin",
       "name": "Elections Admin",
       "criteria": "ADMIN_HAT",
-      "optional": true,
-      "functions": [
+      "hatAdminsFallback": true
+    }
+  ],
+  "writeFunctions": [
+    {
+      "roles": ["public"],
+      "functionName": "startNextTerm",
+      "label": "Start Next Term",
+      "description": "If the current term has passed and the next term's election is over, then start the next term",
+      "primary": true,
+      "args": []
+    },
+    {
+      "roles": ["elections-ballot-box"],
+      "functionName": "elect",
+      "label": "Submit Election Results",
+      "description": "Submit the results of an election for a specified term",
+      "primary": true,
+      "args": [
         {
-          "functionName": "setNextTerm",
-          "label": "set Next Term",
-          "description": "Set the next term. This will open the election for the next term. If the next term has already been set and is still open, this function can be used to change it.",
-          "primary": true,
-          "args": [
-            {
-              "name": "New Term End",
-              "description": "The end time of the term that will be opened",
-              "type": "uint128",
-              "displayType": "timestamp"
-            }
-          ]
+          "name": "Election's Term End",
+          "description": "Term end time of the election",
+          "type": "uint128",
+          "displayType": "timestamp"
+        },
+        {
+          "name": "Winners",
+          "description": "The addresses of the winners of the election",
+          "type": "address[]",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["elections-ballot-box"],
+      "functionName": "recall",
+      "label": "Submit Recall Election Results",
+      "description": "Submit the results of a recall election for a specified term",
+      "args": [
+        {
+          "name": "Election's Term End",
+          "description": "Term end time of the election",
+          "type": "uint128",
+          "displayType": "timestamp"
+        },
+        {
+          "name": "Recallees",
+          "description": "The addresses of the Recalled accounts",
+          "type": "address[]",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["elections-admin"],
+      "functionName": "setNextTerm",
+      "label": "set Next Term",
+      "description": "Set the next term. This will open the election for the next term. If the next term has already been set and is still open, this function can be used to change it.",
+      "primary": true,
+      "args": [
+        {
+          "name": "New Term End",
+          "description": "The end time of the term that will be opened",
+          "type": "uint128",
+          "displayType": "timestamp"
         }
       ]
     }
