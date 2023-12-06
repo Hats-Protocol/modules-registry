@@ -76,12 +76,12 @@
   },
   "roles": [
     {
-      "id": "elections-ballot-box",
+      "id": "electionsBallotBox",
       "name": "Elections Bollot Box",
       "criteria": "BALLOT_BOX_HAT"
     },
     {
-      "id": "elections-admin",
+      "id": "electionsAdmin",
       "name": "Elections Admin",
       "criteria": "ADMIN_HAT",
       "hatAdminsFallback": true
@@ -97,7 +97,7 @@
       "args": []
     },
     {
-      "roles": ["elections-ballot-box"],
+      "roles": ["electionsBallotBox"],
       "functionName": "elect",
       "label": "Submit Election Results",
       "description": "Submit the results of an election for a specified term",
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "roles": ["elections-ballot-box"],
+      "roles": ["electionsBallotBox"],
       "functionName": "recall",
       "label": "Submit Recall Election Results",
       "description": "Submit the results of a recall election for a specified term",
@@ -138,7 +138,7 @@
       ]
     },
     {
-      "roles": ["elections-admin"],
+      "roles": ["electionsAdmin"],
       "functionName": "setNextTerm",
       "label": "set Next Term",
       "description": "Set the next term. This will open the election for the next term. If the next term has already been set and is still open, this function can be used to change it.",

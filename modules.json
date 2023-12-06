@@ -514,19 +514,19 @@
       },
       "roles": [
         {
-          "id": "allow-list-owner",
+          "id": "allowListOwner",
           "name": "Allow-List Owner",
           "criteria": "OWNER_HAT"
         },
         {
-          "id": "allow-list-arbitrator",
+          "id": "allowListArbitrator",
           "name": "Allow-List Arbitrator",
           "criteria": "ARBITRATOR_HAT"
         }
       ],
       "writeFunctions": [
         {
-          "roles": ["allow-list-owner"],
+          "roles": ["allowListOwner"],
           "functionName": "addAccount",
           "label": "Add Account",
           "description": "Add an account to the allow-list",
@@ -541,7 +541,7 @@
           ]
         },
         {
-          "roles": ["allow-list-owner"],
+          "roles": ["allowListOwner"],
           "functionName": "addAccounts",
           "label": "Add Accounts",
           "description": "Add multiple accounts to the allow-list",
@@ -555,7 +555,7 @@
           ]
         },
         {
-          "roles": ["allow-list-owner"],
+          "roles": ["allowListOwner"],
           "functionName": "removeAccount",
           "label": "Remove Account",
           "description": "Remove an account from the allow-list",
@@ -569,7 +569,7 @@
           ]
         },
         {
-          "roles": ["allow-list-owner"],
+          "roles": ["allowListOwner"],
           "functionName": "removeAccountAndBurnHat",
           "label": "Remove and Burn",
           "description": "Remove an account from the allow-list and burn their hat",
@@ -583,7 +583,7 @@
           ]
         },
         {
-          "roles": ["allow-list-owner"],
+          "roles": ["allowListOwner"],
           "functionName": "removeAccounts",
           "label": "Remove Accounts",
           "description": "Remove multiple accounts from the allow-list",
@@ -597,7 +597,7 @@
           ]
         },
         {
-          "roles": ["allow-list-arbitrator"],
+          "roles": ["allowListArbitrator"],
           "functionName": "setStandingForAccount",
           "label": "Set Standing",
           "description": "Set the standing for an account",
@@ -618,7 +618,7 @@
           ]
         },
         {
-          "roles": ["allow-list-arbitrator"],
+          "roles": ["allowListArbitrator"],
           "functionName": "setBadStandingAndBurnHat",
           "label": "Set Bad Standing and Burn Hat",
           "description": "Puts an account in bad standing and burns their hat",
@@ -632,7 +632,7 @@
           ]
         },
         {
-          "roles": ["allow-list-arbitrator"],
+          "roles": ["allowListArbitrator"],
           "functionName": "setStandingForAccounts",
           "label": "Set Standings",
           "description": "Set the standing for multiple accounts",
@@ -1056,7 +1056,7 @@
       },
       "roles": [
         {
-          "id": "jokerace-admin",
+          "id": "jokeraceAdmin",
           "name": "JokeRace Admin",
           "criteria": "ADMIN_HAT",
           "hatAdminsFallback": true
@@ -1072,7 +1072,7 @@
           "args": []
         },
         {
-          "roles": ["jokerace-admin"],
+          "roles": ["jokeraceAdmin"],
           "functionName": "reelection",
           "label": "New Term",
           "description": "Setup a new term, once the current term has ended",
@@ -2061,12 +2061,12 @@
       },
       "roles": [
         {
-          "id": "elections-ballot-box",
+          "id": "electionsBallotBox",
           "name": "Elections Bollot Box",
           "criteria": "BALLOT_BOX_HAT"
         },
         {
-          "id": "elections-admin",
+          "id": "electionsAdmin",
           "name": "Elections Admin",
           "criteria": "ADMIN_HAT",
           "hatAdminsFallback": true
@@ -2082,7 +2082,7 @@
           "args": []
         },
         {
-          "roles": ["elections-ballot-box"],
+          "roles": ["electionsBallotBox"],
           "functionName": "elect",
           "label": "Submit Election Results",
           "description": "Submit the results of an election for a specified term",
@@ -2103,7 +2103,7 @@
           ]
         },
         {
-          "roles": ["elections-ballot-box"],
+          "roles": ["electionsBallotBox"],
           "functionName": "recall",
           "label": "Submit Recall Election Results",
           "description": "Submit the results of a recall election for a specified term",
@@ -2123,7 +2123,7 @@
           ]
         },
         {
-          "roles": ["elections-admin"],
+          "roles": ["electionsAdmin"],
           "functionName": "setNextTerm",
           "label": "set Next Term",
           "description": "Set the next term. This will open the election for the next term. If the next term has already been set and is still open, this function can be used to change it.",
@@ -2504,7 +2504,7 @@
       },
       "roles": [
         {
-          "id": "jokerace-admin",
+          "id": "jokeraceAdmin",
           "name": "JokeRace Admin",
           "criteria": "ADMIN_HAT",
           "hatAdminsFallback": true
@@ -2520,7 +2520,7 @@
           "args": []
         },
         {
-          "roles": ["jokerace-admin"],
+          "roles": ["jokeraceAdmin"],
           "functionName": "reelection",
           "label": "New Term",
           "description": "Setup a new term, once the current term has ended",
@@ -3262,14 +3262,14 @@
       },
       "roles": [
         {
-          "id": "eligibility-toggle-passthrough",
+          "id": "eligibilityTogglePassthrough",
           "name": "Eligibility/Toggle Passthrough",
           "criteria": "CRITERION_HAT"
         }
       ],
       "writeFunctions": [
         {
-          "roles": ["eligibility-toggle-passthrough"],
+          "roles": ["eligibilityTogglePassthrough"],
           "functionName": "setHatWearerStatus",
           "label": "Set Wearer's Status",
           "description": "Set the eligibility and standing of a chosen hat wearer",
@@ -3302,7 +3302,7 @@
           ]
         },
         {
-          "roles": ["eligibility-toggle-passthrough"],
+          "roles": ["eligibilityTogglePassthrough"],
           "functionName": "setHatStatus",
           "label": "Set Hat's Status",
           "description": "Set the status of a chosen hat",
@@ -3488,7 +3488,7 @@
       "roles": [],
       "writeFunctions": [
         {
-          "roles": ["hat-admins"],
+          "roles": ["hatAdmins"],
           "functionName": "extend",
           "label": "New Season",
           "description": "Extend the branch for a new season, optionally with a new season duration",
@@ -3795,12 +3795,12 @@
       },
       "roles": [
         {
-          "id": "staking-judge",
+          "id": "stakingJudge",
           "name": "Staking Judge",
           "criteria": "judgeHat"
         },
         {
-          "id": "staking-recipient",
+          "id": "stakingRecipient",
           "name": "Staking Recipient",
           "criteria": "recipientHat"
         }
@@ -3857,7 +3857,7 @@
           "args": []
         },
         {
-          "roles": ["hat-admins"],
+          "roles": ["hatAdmins"],
           "functionName": "changeMinStake",
           "label": "Change Min Stake",
           "description": "Change the minimum stake required to be eligible for the hat",
@@ -3872,7 +3872,7 @@
           ]
         },
         {
-          "roles": ["hat-admins"],
+          "roles": ["hatAdmins"],
           "functionName": "changeJudgeHat",
           "label": "Change Judge Hat",
           "description": "Change the hat that can slash wearers",
@@ -3886,7 +3886,7 @@
           ]
         },
         {
-          "roles": ["hat-admins"],
+          "roles": ["hatAdmins"],
           "functionName": "changeRecipientHat",
           "label": "Change Recipient Hat",
           "description": "Change the hat whose wearer is the recipient of withdrawn slashed stakes",
@@ -3900,7 +3900,7 @@
           ]
         },
         {
-          "roles": ["hat-admins"],
+          "roles": ["hatAdmins"],
           "functionName": "changeCooldownPeriod",
           "label": "Change Cooldown Hat",
           "description": "Change the number of seconds that must elapse between beginning an unstake and completing it. This period should be long enough that a wearer of the Judge Hat has enough time to slash a misbehaving staker before they can unstake.",
@@ -3914,7 +3914,7 @@
           ]
         },
         {
-          "roles": ["staking-judge"],
+          "roles": ["stakingJudge"],
           "functionName": "slash",
           "label": "Slash",
           "description": "Slash a staker's full stake and set bad standing",
@@ -3929,7 +3929,7 @@
           ]
         },
         {
-          "roles": ["staking-judge"],
+          "roles": ["stakingJudge"],
           "functionName": "forgive",
           "label": "Forgive",
           "description": "Forgive a slashed address, placing them back in good standing and allowing them to stake again",
@@ -3943,7 +3943,7 @@
           ]
         },
         {
-          "roles": ["staking-recipient"],
+          "roles": ["stakingRecipient"],
           "functionName": "withdraw",
           "label": "Withdraw",
           "description": "Withdraw all slashed stakes to a wearer of the recipient hat",

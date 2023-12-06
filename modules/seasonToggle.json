@@ -77,7 +77,7 @@
   "roles": [],
   "writeFunctions": [
     {
-      "roles": ["hat-admins"],
+      "roles": ["hatAdmins"],
       "functionName": "extend",
       "label": "New Season",
       "description": "Extend the branch for a new season, optionally with a new season duration",

@@ -68,14 +68,14 @@
   },
   "roles": [
     {
-      "id": "eligibility-toggle-passthrough",
+      "id": "eligibilityTogglePassthrough",
       "name": "Eligibility/Toggle Passthrough",
       "criteria": "CRITERION_HAT"
     }
   ],
   "writeFunctions": [
     {
-      "roles": ["eligibility-toggle-passthrough"],
+      "roles": ["eligibilityTogglePassthrough"],
       "functionName": "setHatWearerStatus",
       "label": "Set Wearer's Status",
       "description": "Set the eligibility and standing of a chosen hat wearer",
@@ -108,7 +108,7 @@
       ]
     },
     {
-      "roles": ["eligibility-toggle-passthrough"],
+      "roles": ["eligibilityTogglePassthrough"],
       "functionName": "setHatStatus",
       "label": "Set Hat's Status",
       "description": "Set the status of a chosen hat",

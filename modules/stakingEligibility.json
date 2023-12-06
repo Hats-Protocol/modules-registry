@@ -107,12 +107,12 @@
   },
   "roles": [
     {
-      "id": "staking-judge",
+      "id": "stakingJudge",
       "name": "Staking Judge",
       "criteria": "judgeHat"
     },
     {
-      "id": "staking-recipient",
+      "id": "stakingRecipient",
       "name": "Staking Recipient",
       "criteria": "recipientHat"
     }
@@ -169,7 +169,7 @@
       "args": []
     },
     {
-      "roles": ["hat-admins"],
+      "roles": ["hatAdmins"],
       "functionName": "changeMinStake",
       "label": "Change Min Stake",
       "description": "Change the minimum stake required to be eligible for the hat",
@@ -184,7 +184,7 @@
       ]
     },
     {
-      "roles": ["hat-admins"],
+      "roles": ["hatAdmins"],
       "functionName": "changeJudgeHat",
       "label": "Change Judge Hat",
       "description": "Change the hat that can slash wearers",
@@ -198,7 +198,7 @@
       ]
     },
     {
-      "roles": ["hat-admins"],
+      "roles": ["hatAdmins"],
       "functionName": "changeRecipientHat",
       "label": "Change Recipient Hat",
       "description": "Change the hat whose wearer is the recipient of withdrawn slashed stakes",
@@ -212,7 +212,7 @@
       ]
     },
     {
-      "roles": ["hat-admins"],
+      "roles": ["hatAdmins"],
       "functionName": "changeCooldownPeriod",
       "label": "Change Cooldown Hat",
       "description": "Change the number of seconds that must elapse between beginning an unstake and completing it. This period should be long enough that a wearer of the Judge Hat has enough time to slash a misbehaving staker before they can unstake.",
@@ -226,7 +226,7 @@
       ]
     },
     {
-      "roles": ["staking-judge"],
+      "roles": ["stakingJudge"],
       "functionName": "slash",
       "label": "Slash",
       "description": "Slash a staker's full stake and set bad standing",
@@ -241,7 +241,7 @@
       ]
     },
     {
-      "roles": ["staking-judge"],
+      "roles": ["stakingJudge"],
       "functionName": "forgive",
       "label": "Forgive",
       "description": "Forgive a slashed address, placing them back in good standing and allowing them to stake again",
@@ -255,7 +255,7 @@
       ]
     },
     {
-      "roles": ["staking-recipient"],
+      "roles": ["stakingRecipient"],
       "functionName": "withdraw",
       "label": "Withdraw",
       "description": "Withdraw all slashed stakes to a wearer of the recipient hat",
