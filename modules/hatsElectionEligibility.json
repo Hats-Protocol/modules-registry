@@ -76,11 +76,6 @@
   },
   "roles": [
     {
-      "id": "public",
-      "name": "Public",
-      "criteria": null
-    },
-    {
       "id": "elections-ballot-box",
       "name": "Elections Bollot Box",
       "criteria": "BALLOT_BOX_HAT"

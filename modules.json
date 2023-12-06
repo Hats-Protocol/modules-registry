@@ -1055,7 +1055,6 @@
         ]
       },
       "roles": [
-        { "id": "public", "name": "Public", "criteria": null },
         {
           "id": "jokerace-admin",
           "name": "JokeRace Admin",
@@ -2061,7 +2060,6 @@
         ]
       },
       "roles": [
-        { "id": "public", "name": "Public", "criteria": null },
         {
           "id": "elections-ballot-box",
           "name": "Elections Bollot Box",
@@ -2505,7 +2503,6 @@
         ]
       },
       "roles": [
-        { "id": "public", "name": "Public", "criteria": null },
         {
           "id": "jokerace-admin",
           "name": "JokeRace Admin",
@@ -3488,7 +3485,7 @@
           }
         ]
       },
-      "roles": [{ "id": "hat-admins", "name": "Hat Admins", "criteria": null }],
+      "roles": [],
       "writeFunctions": [
         {
           "roles": ["hat-admins"],
@@ -3797,8 +3794,6 @@
         ]
       },
       "roles": [
-        { "id": "public", "name": "Public", "criteria": null },
-        { "id": "hat-admins", "name": "Hat Admins", "criteria": null },
         {
           "id": "staking-judge",
           "name": "Staking Judge",

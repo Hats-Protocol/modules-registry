@@ -104,11 +104,6 @@
   },
   "roles": [
     {
-      "id": "public",
-      "name": "Public",
-      "criteria": null
-    },
-    {
       "id": "jokerace-admin",
       "name": "JokeRace Admin",
       "criteria": "ADMIN_HAT",

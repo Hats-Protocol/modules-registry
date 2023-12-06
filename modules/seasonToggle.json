@@ -74,13 +74,7 @@
       }
     ]
   },
-  "roles": [
-    {
-      "id": "hat-admins",
-      "name": "Hat Admins",
-      "criteria": null
-    }
-  ],
+  "roles": [],
   "writeFunctions": [
     {
       "roles": ["hat-admins"],

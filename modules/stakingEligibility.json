@@ -107,16 +107,6 @@
   },
   "roles": [
     {
-      "id": "public",
-      "name": "Public",
-      "criteria": null
-    },
-    {
-      "id": "hat-admins",
-      "name": "Hat Admins",
-      "criteria": null
-    },
-    {
       "id": "staking-judge",
       "name": "Staking Judge",
       "criteria": "judgeHat"
