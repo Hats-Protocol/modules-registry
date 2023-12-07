@@ -1163,7 +1163,9 @@
         { "chainId": "137", "block": "48563371" },
         { "chainId": "42161", "block": "139454273" },
         { "chainId": "100", "block": "30405871" },
-        { "chainId": "424", "block": "6051886" }
+        { "chainId": "424", "block": "6051886" },
+        { "chainId": "8453", "block": "7556151" },
+        { "chainId": "42220", "block": "22842397" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -1359,7 +1361,9 @@
         { "chainId": "137", "block": "48563085" },
         { "chainId": "42161", "block": "139452101" },
         { "chainId": "100", "block": "30405925" },
-        { "chainId": "424", "block": "6052075" }
+        { "chainId": "424", "block": "6052075" },
+        { "chainId": "8453", "block": "7577516" },
+        { "chainId": "42220", "block": "22842287" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -1523,7 +1527,9 @@
         { "chainId": "137", "block": "48563224" },
         { "chainId": "42161", "block": "139452888" },
         { "chainId": "100", "block": "30405902" },
-        { "chainId": "424", "block": "6052014" }
+        { "chainId": "424", "block": "6052014" },
+        { "chainId": "8453", "block": "7556195" },
+        { "chainId": "42220", "block": "22842339" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -1683,7 +1689,9 @@
         { "chainId": "137", "block": "48562276" },
         { "chainId": "42161", "block": "139445749" },
         { "chainId": "100", "block": "30406067" },
-        { "chainId": "424", "block": "6051557" }
+        { "chainId": "424", "block": "6051557" },
+        { "chainId": "8453", "block": "7577549" },
+        { "chainId": "42220", "block": "22842434" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -2473,7 +2481,9 @@
         { "chainId": "137", "block": "48249349" },
         { "chainId": "42161", "block": "136869560" },
         { "chainId": "100", "block": "30266574" },
-        { "chainId": "424", "block": "5531500" }
+        { "chainId": "424", "block": "5531500" },
+        { "chainId": "8453", "block": "7577706" },
+        { "chainId": "42220", "block": "22586368" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -2922,7 +2932,9 @@
         { "chainId": "137", "block": "48562453" },
         { "chainId": "42161", "block": "139447326" },
         { "chainId": "100", "block": "30406116" },
-        { "chainId": "424", "block": "6051770" }
+        { "chainId": "424", "block": "6051770" },
+        { "chainId": "8453", "block": "7577577" },
+        { "chainId": "42220", "block": "22842477" }
       ],
       "creationArgs": {
         "useHatId": true,
