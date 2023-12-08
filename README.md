@@ -16,11 +16,35 @@ For full documentation on how to build new Hats Modules, click [here](https://do
 
 ## Module Curation Rubric
 
-<!-- Placeholder for the curation rubric to support the authority link from the Modules Registry Curation hat -->
+[Curators](https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.4) should evaluate submissions to this registry according to the following criteria. Only modules that meet all criteria should be approved for the registry. Any module on the registry that no longer meets these criteria—eg due to a dependency change that breaks the module's functionality—is a candidate for removal.
+
+> Version [0.1](https://forum.hatsprotocol.xyz/t/proposal-modules-registry-curation-v0-1/67)
+
+| Category                             | Judgement Type | Criterion                                      |
+|-------------------------------------|---|-----------------------------------------------|
+| **Safety**                          | Objective | The module works as described; no bugs      |
+|                                     |           | Is not malicious                            |
+| **Schema Adherence** |                Objective | Metadata is complete |
+|                                     | | Implementation contract is deployed to at least one chain |
+| **Quality**                         | Objective  | Automated tests pass                        |
+|                                     |  | Metadata (including name, descriptions, other documentation) is accurate |
+| **User-Friendliness**                    | Subjective       | Metadata is legible and affords clarity to end users      |
 
 ## Curation Cadence
 
-<!-- Placeholder for the curation cadence definition to support the authority link from the Modules Registry Curation hat -->
+> Version [0.1](https://forum.hatsprotocol.xyz/t/proposal-modules-registry-curation-v0-1/67)
+
+[Curators](https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.4) must review modules within the following cadence:
+
+### Standard Cadence
+* Monthly
+* All newly approved modules and changes to registered modules are to be announced at the end of each month
+* To be included in a given month, new submissions or changes must be submitted no later than one week before the end of the month
+* Within this constraint, [Curators](https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.4) may review asynchronously or devise their own process and timing
+
+### Expedited Cadence
+* On an ad hoc basis, module developers may request review outside of the standard cadence. The most common method for such a request is to include it in the submission pull request.
+* It is up to [Curator](https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.4) discretion for when and how quickly they honor requests for expedited review.
 
 ## How To Add A New Module
 
