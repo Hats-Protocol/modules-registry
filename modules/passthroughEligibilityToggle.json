@@ -74,7 +74,7 @@
     ],
     "mutable": []
   },
-  "roles": [
+  "customRoles": [
     {
       "id": "eligibilityTogglePassthrough",
       "name": "Eligibility/Toggle Passthrough",

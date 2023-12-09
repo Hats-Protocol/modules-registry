@@ -80,7 +80,7 @@
       }
     ]
   },
-  "roles": [],
+  "customRoles": [],
   "writeFunctions": [],
   "abi": [
     {

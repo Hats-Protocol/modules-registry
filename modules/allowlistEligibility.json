@@ -85,7 +85,7 @@
       }
     ]
   },
-  "roles": [
+  "customRoles": [
     {
       "id": "allowListOwner",
       "name": "Allow-List Owner",

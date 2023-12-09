@@ -82,7 +82,7 @@ For each module, the registry contains a JSON file with the following structure:
         "functionName": "<the function's name in the contract (string)>",
         "label": "<Human readable name for the function, for display purpose (string)>",
         "description": "<function's descruption (string)>",
-        "primary": "<optional field, indicates that this is the role's primary fucntion, for display purpose (boolean)>"
+        "primary": "<optional field, indicates that this is the role's primary function, for display purpose (boolean)>"
         "args": [
           {
             "name": "<argument's human readable name, for display purpose (string)>",
