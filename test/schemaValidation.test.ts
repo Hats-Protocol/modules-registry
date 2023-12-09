@@ -11,38 +11,46 @@ import { z } from "zod";
 import "dotenv/config";
 import type { Module } from "@hatsprotocol/modules-sdk";
 
-const moduleCreationArgSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  type: z.string(),
-  example: z.any(),
-  displayType: z.string(),
-  optional: z.boolean().optional(),
-});
+const moduleCreationArgSchema = z
+  .object({
+    name: z.string(),
+    description: z.string(),
+    type: z.string(),
+    example: z.any(),
+    displayType: z.string(),
+    optional: z.boolean().optional(),
+  })
+  .strict();
 
-const moduleWriteFunctionArgSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  type: z.string(),
-  displayType: z.string(),
-  optional: z.boolean().optional(),
-});
+const moduleWriteFunctionArgSchema = z
+  .object({
+    name: z.string(),
+    description: z.string(),
+    type: z.string(),
+    displayType: z.string(),
+    optional: z.boolean().optional(),
+  })
+  .strict();
 
-const moduleRoleSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  criteria: z.string().nullable(),
-  hatAdminsFallback: z.boolean().optional(),
-});
+const moduleRoleSchema = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    criteria: z.string().nullable(),
+    hatAdminsFallback: z.boolean().optional(),
+  })
+  .strict();
 
-const moduleWriteFunctionSchema = z.object({
-  roles: z.array(z.string()),
-  functionName: z.string(),
-  label: z.string(),
-  description: z.string(),
-  primary: z.boolean().optional(),
-  args: z.array(moduleWriteFunctionArgSchema),
-});
+const moduleWriteFunctionSchema = z
+  .object({
+    roles: z.array(z.string()),
+    functionName: z.string(),
+    label: z.string(),
+    description: z.string(),
+    primary: z.boolean().optional(),
+    args: z.array(moduleWriteFunctionArgSchema),
+  })
+  .strict();
 
 const moduleSchema = z
   .object({
