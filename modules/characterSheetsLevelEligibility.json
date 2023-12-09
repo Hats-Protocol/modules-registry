@@ -76,7 +76,30 @@
       }
     ]
   },
-
+  "roles": [],
+  "writeFunctions": [
+    {
+      "roles": ["hatAdmins"],
+      "functionName": "addClasses",
+      "label": "Add Classes",
+      "description": "Add classes and their minimum levels",
+      "primary": true,
+      "args": [
+        {
+          "name": "Class IDs",
+          "description": "Classes to add",
+          "type": "uint256[]",
+          "displayType": "default"
+        },
+        {
+          "name": "Min Levels",
+          "description": "The min levels corrsponding to each new class, in the same order",
+          "type": "uint256[]",
+          "displayType": "default"
+        }
+      ]
+    }
+  ],
   "abi": [
     {
       "inputs": [
