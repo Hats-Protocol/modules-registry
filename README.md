@@ -22,15 +22,15 @@ For each module, the registry contains a JSON file with the following structure:
   "details": ["<first paragraph describing the module (string)>", "<second paragraph describing the module (string)>"],
   "links": [
   {
-    "label": "<link's name/description>",
-    "link": "<link's URL>"
+    "label": "<link's name/description (string)>",
+    "link": "<link's URL (string)>"
   }
   ],
   "parameters": [
   {
-    "label": "<parameter's name/description>",
-    "functionName": "<parameter's function name to retrieve the parameter from its instance>",
-    "displayType": "<parameter's type of content, for display purpose>"
+    "label": "<parameter's name/description (string)>",
+    "functionName": "<name of the function that will be used to retrieve the parameter from the module instance, should have no inputs and only one output (string)>",
+    "displayType": "<parameter's type of content, for display purpose (string)>"
   },
   ]
   "type": {
@@ -46,14 +46,15 @@ For each module, the registry contains a JSON file with the following structure:
     }
   ],
   "creationArgs": {
-    "useHatId": "<True if the hatId property should be set with the ID of the hat for which the module is deployed, otherwise false>"
+    "useHatId": "<Whether the modules's hatId property (provide to the factory's creation function) should be set with the ID of the hat for which the module is deployed (boolean)>"
     "immutable": [
       {
         "name": "<argument's name (string)>",
         "description": "<short description (string)>",
         "type": "<argument's solidity type, e.g. 'uint256' (string)>",
         "example": "<example argument which will be used for automatic testing>",
-        "displayType": "<parameter's type of content, for display purpose>"
+        "displayType": "<parameter's type of content, for display purpose>",
+        "optional": "<optional field, setting to 'true' indicates that this input is optional>"
       }
     ],
     "mutable": [
@@ -61,37 +62,76 @@ For each module, the registry contains a JSON file with the following structure:
         "name": "<argument's name (string)>",
         "description": "<short description (string)>",
         "type": "<argument's solidity type, e.g. 'uint256' (string)>",
-        "example": "<example argument which will be used for automatic testing>",
-        "displayType": "<parameter's type of content, for display purpose>"
+        "example": "<example argument, will be used for automated deployment tests>",
+        "displayType": "<parameter's type of content, for display purpose>",
+        "optional": "<optional field, setting to 'true' indicates that this input is optional>"
       }
     ]
   },
+  "roles": [
+     {
+        "id": "<role's ID (string)>",
+        "name": "<role's name (string)>",
+        "criteria": "<name of the module function that is used to retrieve the role's owner (string)>",
+        "hatAdminsFallback": "<optional field, if 'true' then indicates that the role has a fallback to Hat's admin roles in case the criteria function returns a zero value>"
+     }
+  ],
+  "writeFunctions": [
+     {
+        "roles": ["<ID of a role which has the authority to call this function (string)>"],
+        "functionName": "<the function's name in the contract (string)>",
+        "label": "<Human readable name for the function, for display purpose (string)>",
+        "description": "<function's descruption (string)>",
+        "primary": "<optional field, indicates that this is the role's primary fucntion, for display purpose (boolean)>"
+        "args": [
+          {
+            "name": "<argument's human readable name, for display purpose (string)>",
+            "description": "<argument's description (string)>",
+            "type": "<argument's solidity type>",
+            "displayType": "<arguments's type of content, for display purpose>",
+            "optional": "<optional field, setting to 'true' indicates that this input is optional>"
+          }
+        ]
+     }
+  ]
   "abi": "<module's contract ABI>"
 }
 ```
 
-(Note that arrays in the object above contain one example entry).
+*Note that arrays in the object above contain one example entry.*
 
-Here are some notes on its expected structure:
+**Here are some useful notes on its expected structure:**
 
-- The "name" property represents the name of the module.
-- The "details" property is structured as an array of strings. Each array entry represents a paragraph (which will be rendered in a UI).
-- The "links" property should have at least one link to the module's source code.
-- The "parameters" property is used in order to dynamically fetch and display data from module instances.
-  - The "label" property is used to display the name/description of each parameter.
-  - The "functionName" property represents the name of the function from which the parameter should be retrieved. The function should be a view/pure function with no input and one output (not a tuple, but can be an array).
-  - The "displayType" property is used in order to display a proper UI component for the parameter. For example, displaying a date for a parameter representing a timestamp. The supported types are currently:
-    - "default" - Infers automatically the UI component for the value
-    - "timestamp" - Unix timestamp, will be presented as a Date component
-    - "hat" - hat component
-    - "token" - Token component
-    - "seconds" - Amount of time denominated in seconds
-    - "amountWithDecimals" - For token amounts, takes into account the token's decimals
-- There should be at least one field on the "type" property which is set to "true". A module might serve as more than one type, in which case there will be more than one field set to "true".
-- For each chain provided in "deployments", there should be a deployed implementation contract with an address matching the provided "implementationAddress" property and with an ABI
-  matching the "abi" property.
-- For both the immutable and mutable arguments, their order should match the order of the arguments as provided to the module.
-- The "example" fields will be used to automatically test the module's deployment.
+- `details` - Structured as an array of strings, each array entry represents a paragraph. The property's purpose is to conatain the module's description.
+- `links` - Property's purpose is to include any relevant links about this module and should have at least one link to the module's source code.
+- `parameters` Property is used in order to dynamically fetch and display data from module instances. Using this property, the module creator can choose which module fields are relevant for display.
+  - `label` - Used to display the name/description of each parameter.
+  - `functionName` - Name of the function from which the parameter should be retrieved. The function should be a view/pure function with no inputs and only one output (an array is also considered as one output).
+  - `displayType` - Used in order to display a proper UI component for the parameter. For example, displaying a date for a parameter representing a timestamp. The known supported types are currently:
+    - `default` - Infers automatically the UI component for the value.
+    - `timestamp` - a value which represnts a Unix timestamp.
+    - `hat` - A `uint256` value which represents a hat ID.
+    - `token` - An `address` value of a token contract.
+    - `seconds` -A value which represents time denominated in seconds.
+    - `amountWithDecimals` - A value which represnts a token amount, allows for taking into account the token's decimals.
+- `type` - There should be at least one field which is set to `true`. A module might serve as more than one type.
+- `deployments` - For each chain provided, there should be a deployed implementation contract with an address matching the provided `implementationAddress` property.
+- `creationArgs` -
+  - `useHatId` - By default, new instances are supposed to be created with their `hatId` value set with the target hat's ID. Setting this field to `false` indicates that the module should be created with the zero value in this field.
+  - In both the `immutable` and `mutable` array properties, the aruments order should match the order expected by the contract.
+  - The `example` fields will be used in automated tests to create a new instance of the module.
+- `roles` - The module's native roles. Each module role is associated with a hat and permits its wearers certain authorities in a module instance (calling certain functions). There are two special roles roles with a reserved ID. First is the `public` role, with which public write functions are associated. Second is the `hatAdmins` role. Functions that are permitted by the hat's admins are associated with this role.
+  - `id` - Role's ID, as a camel case string.
+  - `name` - Role's name, for display purpose
+  - `criteria` - Name of the contract function which can be used to read the role's hat.
+  - `hatAdminsFallback` - An optional field. If set to `true`, indicates that when the `criteria` function of the role returns zero, then the role is granted to the hat's admins.
+- `writeFunctions` -
+  - `roles` - IDs of the roles that have the authority to call the function.
+  - `functionName` - Function's name in the contract.
+  - `label` - Function's name for display purpose.
+  - `description` - Function's description.
+  - `primary` - Optional field. If set to true, indicates that of all its role's functions, it is the primary one. Used for display purpose.
+  - `args` - Function's arguments, similar to the module creation arguments.
 
 ### Step 2 - Bundle
 
