@@ -98,7 +98,7 @@ For each module, the registry contains a JSON file with the following structure:
 }
 ```
 
-*Note that arrays in the object above contain one example entry.*
+_Note that arrays in the object above contain one example entry._
 
 **Here are some useful notes on its expected structure:**
 

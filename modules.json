@@ -17,7 +17,9 @@
       { "chainId": "137", "block": "48249962" },
       { "chainId": "42161", "block": "136870116" },
       { "chainId": "424", "block": "5490406" },
-      { "chainId": "11155111", "block": "4655267" }
+      { "chainId": "11155111", "block": "4655267" },
+      { "chainId": "42220", "block": "22586287" },
+      { "chainId": "8453", "block": "7526983" }
     ],
     "abi": [
       {
@@ -973,6 +975,269 @@
       ]
     },
     {
+      "name": "CharacterSheets Level",
+      "details": [
+        "A Hats Protocol eligibility module that checks players for CharacterSheets characters with a minimum level for specific classes."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/raid-guild/character-sheets-contracts"
+        },
+        { "label": "CharacterSheets", "link": "https://charactersheets.io" },
+        { "label": "RaidGuild", "link": "https://raidguild.org" }
+      ],
+      "deployments": [{ "chainId": "100", "block": "31196970" }],
+      "parameters": [
+        {
+          "label": "CharacterSheet",
+          "functionName": "SHEETS_ADDRESS",
+          "displayType": "address"
+        },
+        {
+          "label": "Classes Token",
+          "functionName": "CLASSES_ADDRESS",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "implementationAddress": "0xB2Ad134eB41695Ca87a62C7529259dC271d810Ce",
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "CharacterSheets Address",
+            "description": "The address for the CharacterSheets game where players have characters.",
+            "type": "address",
+            "example": "0x083c4e685f64411747548a5ea090630ab0bf17bf",
+            "displayType": "default"
+          },
+          {
+            "name": "Classes Address",
+            "description": "The address for the Classes token used in the character sheets game",
+            "type": "address",
+            "example": "0x7e029eFCbD96804B7284a9eEb74f2F5aB5F79a7e",
+            "displayType": "token"
+          }
+        ],
+        "mutable": [
+          {
+            "name": "Class IDs",
+            "description": "Initial classes to be included for eligibility",
+            "type": "uint256[]",
+            "example": [1],
+            "displayType": "default"
+          },
+          {
+            "name": "Minimum Levels",
+            "description": "Initial levels needed for each class to be included for eligibility",
+            "type": "uint256[]",
+            "example": [2],
+            "displayType": "default"
+          }
+        ]
+      },
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "ElderEligibility_HatImmutable",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "ElderEligibility_NotHatAdmin",
+          "type": "error"
+        },
+        { "inputs": [], "name": "LengthMismatch", "type": "error" },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+            }
+          ],
+          "name": "ClassesAdded",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "ElderEligibilityDeployed",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ARRAY_LENGTH",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "CLASSES_ADDRESS",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "SHEETS_ADDRESS",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "_classIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "_minLevels",
+              "type": "uint256[]"
+            }
+          ],
+          "name": "addClasses",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "classIds",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "minLevels",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
       "deprecated": true,
       "name": "JokeRace Eligibility",
       "details": [
@@ -1350,7 +1615,9 @@
         { "chainId": "137", "block": "48563371" },
         { "chainId": "42161", "block": "139454273" },
         { "chainId": "100", "block": "30405871" },
-        { "chainId": "424", "block": "6051886" }
+        { "chainId": "424", "block": "6051886" },
+        { "chainId": "8453", "block": "7556151" },
+        { "chainId": "42220", "block": "22842397" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -1548,7 +1815,9 @@
         { "chainId": "137", "block": "48563085" },
         { "chainId": "42161", "block": "139452101" },
         { "chainId": "100", "block": "30405925" },
-        { "chainId": "424", "block": "6052075" }
+        { "chainId": "424", "block": "6052075" },
+        { "chainId": "8453", "block": "7577516" },
+        { "chainId": "42220", "block": "22842287" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -1714,7 +1983,9 @@
         { "chainId": "137", "block": "48563224" },
         { "chainId": "42161", "block": "139452888" },
         { "chainId": "100", "block": "30405902" },
-        { "chainId": "424", "block": "6052014" }
+        { "chainId": "424", "block": "6052014" },
+        { "chainId": "8453", "block": "7556195" },
+        { "chainId": "42220", "block": "22842339" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -1876,7 +2147,9 @@
         { "chainId": "137", "block": "48562276" },
         { "chainId": "42161", "block": "139445749" },
         { "chainId": "100", "block": "30406067" },
-        { "chainId": "424", "block": "6051557" }
+        { "chainId": "424", "block": "6051557" },
+        { "chainId": "8453", "block": "7577549" },
+        { "chainId": "42220", "block": "22842434" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -2794,7 +3067,9 @@
         { "chainId": "137", "block": "48249349" },
         { "chainId": "42161", "block": "136869560" },
         { "chainId": "100", "block": "30266574" },
-        { "chainId": "424", "block": "5531500" }
+        { "chainId": "424", "block": "5531500" },
+        { "chainId": "8453", "block": "7577706" },
+        { "chainId": "42220", "block": "22586368" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -3245,7 +3520,9 @@
         { "chainId": "137", "block": "48562453" },
         { "chainId": "42161", "block": "139447326" },
         { "chainId": "100", "block": "30406116" },
-        { "chainId": "424", "block": "6051770" }
+        { "chainId": "424", "block": "6051770" },
+        { "chainId": "8453", "block": "7577577" },
+        { "chainId": "42220", "block": "22842477" }
       ],
       "creationArgs": {
         "useHatId": true,
