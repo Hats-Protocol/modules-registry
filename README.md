@@ -103,11 +103,17 @@ _Note that arrays in the object above contain one example entry._
 **Here are some useful notes about the expected module properties:**
 
 #### `details`
+
 Structured as an array of strings, each array entry represents a paragraph. The property's purpose is to conatain the module's description.
+
 #### `links`
+
 Property's purpose is to include any relevant links about this module and should have at least one link to the module's source code.
+
 #### `parameters`
+
 Used in order to dynamically fetch and display data from module instances. Using this property, the module creator can choose which module fields are relevant for display.
+
 - `label` - Used to display the name/description of each parameter.
 - `functionName` - Name of the function from which the parameter should be retrieved. The function should be a view/pure function with no inputs and only one output (an array is also considered as one output).
 - `displayType` - A free-text field, used by frontends as an extra context in order to display a proper UI component for each parameter. For example, displaying a date for a parameter representing a timestamp. The known supported types are currently:
@@ -117,21 +123,32 @@ Used in order to dynamically fetch and display data from module instances. Using
   - `token` - An `address` value of a token contract.
   - `seconds` -A value which represents time denominated in seconds.
   - `amountWithDecimals` - A value which represnts a token amount, allows for taking into account the token's decimals.
+
 #### `type`
+
 There should be at least one field which is set to `true`. A module might serve as more than one type.
-#### `deployments` 
+
+#### `deployments`
+
 For each chain provided, there should be a deployed implementation contract with an address matching the provided `implementationAddress` property.
+
 #### `creationArgs`
+
 - `useHatId` - By default, new instances are supposed to be created with their `hatId` value set with the target hat's ID. Setting this field to `false` indicates that the module should be created with the zero value in this field.
 - In both the `immutable` and `mutable` array properties, the arguments order should match the order expected by the contract.
 - The `example` fields will be used in automated tests to create a new instance of the module.
-#### `customRoles` 
+
+#### `customRoles`
+
 The module's custom roles. Each module role is associated with a hat and permits its wearers certain authorities in a module instance (calling certain functions). There are two special roles with a reserved ID. First is the `public` role, which public write functions are associated with. Second is the `hatAdmins` role. Functions that are permitted to the target hat's admins are associated with this role.
+
 - `id` - Role's ID, as a camel-case formatted string.
 - `name` - Role's name, for display purpose.
 - `criteria` - Name of the contract function which can be used to read the role's hat.
 - `hatAdminsFallback` - An optional field. If set to `true`, indicates that when the `criteria` function of the role returns zero, then the role is granted to the target hat's admins.
+
 #### `writeFunctions`
+
 - `roles` - IDs of the roles that have the authority to call the function.
 - `functionName` - Function's name in the contract.
 - `label` - Function's name for display purpose.

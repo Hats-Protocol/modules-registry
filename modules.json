@@ -4,7 +4,7 @@
     "details": "Deploys instances of hats modules.",
     "links": [
       {
-        "lable": "GitHub",
+        "label": "GitHub",
         "link": "https://github.com/Hats-Protocol/hats-module"
       }
     ],
@@ -204,11 +204,10 @@
     "details": "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
     "links": [
       {
-        "lable": "GitHub",
+        "label": "GitHub",
         "link": "https://github.com/Hats-Protocol/hats-module"
       }
     ],
-    "type": { "eligibility": true, "toggle": false, "hatter": false },
     "implementationAddress": "0x83200f1633cDb6C8f28F202CEA1B6a9105862D83",
     "deployments": [
       { "chainId": "5", "block": "10009615" },
@@ -332,11 +331,10 @@
     "details": "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
     "links": [
       {
-        "lable": "GitHub",
+        "label": "GitHub",
         "link": "https://github.com/Hats-Protocol/hats-module"
       }
     ],
-    "type": { "eligibility": false, "toggle": true, "hatter": false },
     "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
     "deployments": [{ "chainId": "5", "block": "10009649" }],
     "abi": [
