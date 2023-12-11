@@ -80,6 +80,8 @@
       }
     ]
   },
+  "customRoles": [],
+  "writeFunctions": [],
   "abi": [
     {
       "inputs": [

@@ -85,6 +85,8 @@
     ],
     "mutable": []
   },
+  "customRoles": [],
+  "writeFunctions": [],
   "abi": [
     {
       "inputs": [

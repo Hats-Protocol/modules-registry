@@ -3,15 +3,10 @@
   "details": "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
   "links": [
     {
-      "lable": "GitHub",
+      "label": "GitHub",
       "link": "https://github.com/Hats-Protocol/hats-module"
     }
   ],
-  "type": {
-    "eligibility": false,
-    "toggle": true,
-    "hatter": false
-  },
   "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
   "deployments": [
     {
