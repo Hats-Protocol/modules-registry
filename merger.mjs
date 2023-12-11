@@ -9,15 +9,17 @@ export function mergeJson() {
     modules: [],
   };
 
-  const factoryBuffer = fs.readFileSync("./factory.json");
+  const factoryBuffer = fs.readFileSync("./infra/factory.json");
   const factory = JSON.parse(factoryBuffer);
   final.factory = factory;
 
-  const eligibilitiesChainBuffer = fs.readFileSync("./eligibilitiesChain.json");
+  const eligibilitiesChainBuffer = fs.readFileSync(
+    "./infra/eligibilitiesChain.json",
+  );
   const eligibilitiesChain = JSON.parse(eligibilitiesChainBuffer);
   final.eligibilitiesChain = eligibilitiesChain;
 
-  const togglesChainBuffer = fs.readFileSync("./togglesChain.json");
+  const togglesChainBuffer = fs.readFileSync("./infra/togglesChain.json");
   const togglesChain = JSON.parse(togglesChainBuffer);
   final.togglesChain = togglesChain;
 
@@ -27,10 +29,6 @@ export function mergeJson() {
     const moduleBuffer = fs.readFileSync(`./modules/${moduleFile}`);
     const module = JSON.parse(moduleBuffer);
     final.modules.push(module);
-
-    //console.log(
-    //  `${module.name}: ${keccak256(stringToBytes(JSON.stringify(module)))}`,
-    //);
   }
 
   fs.writeFileSync("modules.json", JSON.stringify(final));

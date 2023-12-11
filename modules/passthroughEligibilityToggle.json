@@ -51,6 +51,14 @@
     {
       "chainId": "424",
       "block": "6051770"
+    },
+    {
+      "chainId": "8453",
+      "block": "7577577"
+    },
+    {
+      "chainId": "42220",
+      "block": "22842477"
     }
   ],
   "creationArgs": {
@@ -66,6 +74,68 @@
     ],
     "mutable": []
   },
+  "customRoles": [
+    {
+      "id": "eligibilityTogglePassthrough",
+      "name": "Eligibility/Toggle Passthrough",
+      "criteria": "CRITERION_HAT"
+    }
+  ],
+  "writeFunctions": [
+    {
+      "roles": ["eligibilityTogglePassthrough"],
+      "functionName": "setHatWearerStatus",
+      "label": "Set Wearer's Status",
+      "description": "Set the eligibility and standing of a chosen hat wearer",
+      "primary": true,
+      "args": [
+        {
+          "name": "Hat",
+          "description": "ID of the hat to set the eligibility status for",
+          "type": "uint256",
+          "displayType": "hat"
+        },
+        {
+          "name": "Wearer",
+          "description": "The address to set the eligibility status for",
+          "type": "address",
+          "displayType": "default"
+        },
+        {
+          "name": "Eligibility",
+          "description": "Is the wearer eligible for the hat",
+          "type": "bool",
+          "displayType": "default"
+        },
+        {
+          "name": "Standing",
+          "description": "Is the wearer in good standing for the hat",
+          "type": "bool",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["eligibilityTogglePassthrough"],
+      "functionName": "setHatStatus",
+      "label": "Set Hat's Status",
+      "description": "Set the status of a chosen hat",
+      "args": [
+        {
+          "name": "Hat",
+          "description": "ID of the hat to set the status for",
+          "type": "uint256",
+          "displayType": "hat"
+        },
+        {
+          "name": "Status",
+          "description": "Is the hat active",
+          "type": "bool",
+          "displayType": "default"
+        }
+      ]
+    }
+  ],
   "abi": [
     {
       "inputs": [

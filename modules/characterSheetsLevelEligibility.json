@@ -1,0 +1,378 @@
+{
+  "name": "CharacterSheets Level",
+  "details": [
+    "A Hats Protocol eligibility module that checks players for CharacterSheets characters with a minimum level for specific classes."
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/raid-guild/character-sheets-contracts"
+    },
+    {
+      "label": "CharacterSheets",
+      "link": "https://charactersheets.io"
+    },
+    {
+      "label": "RaidGuild",
+      "link": "https://raidguild.org"
+    }
+  ],
+  "deployments": [
+    {
+      "chainId": "100",
+      "block": "31196970"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "CharacterSheet",
+      "functionName": "SHEETS_ADDRESS",
+      "displayType": "address"
+    },
+    {
+      "label": "Classes Token",
+      "functionName": "CLASSES_ADDRESS",
+      "displayType": "default"
+    }
+  ],
+  "type": {
+    "eligibility": true,
+    "toggle": false,
+    "hatter": false
+  },
+  "implementationAddress": "0xB2Ad134eB41695Ca87a62C7529259dC271d810Ce",
+  "creationArgs": {
+    "useHatId": true,
+    "immutable": [
+      {
+        "name": "CharacterSheets Address",
+        "description": "The address for the CharacterSheets game where players have characters.",
+        "type": "address",
+        "example": "0x083c4e685f64411747548a5ea090630ab0bf17bf",
+        "displayType": "default"
+      },
+      {
+        "name": "Classes Address",
+        "description": "The address for the Classes token used in the character sheets game",
+        "type": "address",
+        "example": "0x7e029eFCbD96804B7284a9eEb74f2F5aB5F79a7e",
+        "displayType": "token"
+      }
+    ],
+    "mutable": [
+      {
+        "name": "Class IDs",
+        "description": "Initial classes to be included for eligibility",
+        "type": "uint256[]",
+        "example": [1],
+        "displayType": "default"
+      },
+      {
+        "name": "Minimum Levels",
+        "description": "Initial levels needed for each class to be included for eligibility",
+        "type": "uint256[]",
+        "example": [2],
+        "displayType": "default"
+      }
+    ]
+  },
+  "customRoles": [],
+  "writeFunctions": [
+    {
+      "roles": ["hatAdmins"],
+      "functionName": "addClasses",
+      "label": "Add Classes",
+      "description": "Add classes and their minimum levels",
+      "primary": true,
+      "args": [
+        {
+          "name": "Class IDs",
+          "description": "Classes to add",
+          "type": "uint256[]",
+          "displayType": "default"
+        },
+        {
+          "name": "Min Levels",
+          "description": "The min levels corrsponding to each new class, in the same order",
+          "type": "uint256[]",
+          "displayType": "default"
+        }
+      ]
+    }
+  ],
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_version",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "ElderEligibility_HatImmutable",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ElderEligibility_NotHatAdmin",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "LengthMismatch",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "ClassesAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "ElderEligibilityDeployed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "version",
+          "type": "uint8"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "ARRAY_LENGTH",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "CLASSES_ADDRESS",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "HATS",
+      "outputs": [
+        {
+          "internalType": "contract IHats",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "IMPLEMENTATION",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "SHEETS_ADDRESS",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "_classIds",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "_minLevels",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "addClasses",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "classIds",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "getWearerStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "eligible",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "standing",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hatId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "minLevels",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        }
+      ],
+      "name": "setUp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version_",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

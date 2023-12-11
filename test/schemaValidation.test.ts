@@ -10,50 +10,7 @@ import type { Anvil } from "@viem/anvil";
 import { z } from "zod";
 import "dotenv/config";
 import type { Module } from "@hatsprotocol/modules-sdk";
-
-const moduleSchema = z
-  .object({
-    name: z.string(),
-    details: z.array(z.string()),
-    links: z.array(z.object({ label: z.string(), link: z.string() })),
-    parameters: z.array(
-      z.object({
-        label: z.string(),
-        functionName: z.string(),
-        displayType: z.string(),
-      }),
-    ),
-    type: z.object({
-      eligibility: z.boolean(),
-      toggle: z.boolean(),
-      hatter: z.boolean(),
-    }),
-    implementationAddress: z.string().regex(/^0x[a-fA-F0-9]{40}$/),
-    deployments: z.array(z.object({ chainId: z.string(), block: z.string() })),
-    creationArgs: z.object({
-      useHatId: z.boolean(),
-      immutable: z.array(
-        z.object({
-          name: z.string(),
-          description: z.string(),
-          type: z.string(),
-          example: z.any(),
-          displayType: z.string(),
-        }),
-      ),
-      mutable: z.array(
-        z.object({
-          name: z.string(),
-          description: z.string(),
-          type: z.string(),
-          example: z.any(),
-          displayType: z.string(),
-        }),
-      ),
-    }),
-    abi: z.any(),
-  })
-  .strict();
+import { moduleSchema } from "../schema";
 
 describe("Schema Validation Tests", () => {
   let publicClient: PublicClient;

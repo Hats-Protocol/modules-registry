@@ -1,5 +1,6 @@
 {
-  "name": "Deprecated JokeRace Eligibility",
+  "deprecated": true,
+  "name": "JokeRace Eligibility",
   "details": [
     "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
     "The number of winners of an election, and thus the number of possible wearers made eligible through this integration, is configurable. Additionally, a term period can be set, after which the winners will no longer be eligible to wear the hat.",
@@ -73,7 +74,8 @@
         "description": "Optional admin hat, granted a permission to create a new term (reelection). If not provided (equals zero), then this permission is granted to the admins of the hat",
         "type": "uint256",
         "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-        "displayType": "hat"
+        "displayType": "hat",
+        "optional": true
       }
     ],
     "mutable": [
@@ -100,6 +102,51 @@
       }
     ]
   },
+  "customRoles": [
+    {
+      "id": "jokeraceAdmin",
+      "name": "JokeRace Admin",
+      "criteria": "ADMIN_HAT",
+      "hatAdminsFallback": true
+    }
+  ],
+  "writeFunctions": [
+    {
+      "roles": ["public"],
+      "functionName": "pullElectionResults",
+      "label": "Pull Election Results",
+      "description": "Pulls the election's final results",
+      "primary": true,
+      "args": []
+    },
+    {
+      "roles": ["jokeraceAdmin"],
+      "functionName": "reelection",
+      "label": "New Term",
+      "description": "Setup a new term, once the current term has ended",
+      "primary": true,
+      "args": [
+        {
+          "name": "Election",
+          "description": "Address of the new JokeRace election",
+          "type": "address",
+          "displayType": "jokerace"
+        },
+        {
+          "name": "Term End",
+          "description": "Timestamp of the new term ending",
+          "type": "uint256",
+          "displayType": "timestamp"
+        },
+        {
+          "name": "Top K",
+          "description": "Amount of election winners",
+          "type": "uint256",
+          "displayType": "default"
+        }
+      ]
+    }
+  ],
   "abi": [
     {
       "inputs": [

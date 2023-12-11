@@ -51,6 +51,14 @@
     {
       "chainId": "424",
       "block": "6051557"
+    },
+    {
+      "chainId": "8453",
+      "block": "7577549"
+    },
+    {
+      "chainId": "42220",
+      "block": "22842434"
     }
   ],
   "creationArgs": {
@@ -66,6 +74,8 @@
     ],
     "mutable": []
   },
+  "customRoles": [],
+  "writeFunctions": [],
   "abi": [
     {
       "inputs": [
