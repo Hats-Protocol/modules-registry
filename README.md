@@ -1,18 +1,26 @@
 # Hats Modules Registry
 
+- [Overview](#overview)
+- [Module Registry Schema](#module-registry-schema)
+- [Module Curation Rubric](#module-curation-rubric)
+- [Curation Cadence](#curation-cadence)
+- [How to Add a Module to the Registry](#how-to-add-a-new-module)
+
 ## Overview
 
 A Hats Module is any contract that serves as an [Eligibility](https://docs.hatsprotocol.xyz/for-developers/hats-protocol-overview/eligibility-modules), [Toggle](https://docs.hatsprotocol.xyz/for-developers/hats-protocol-overview/toggle-modules) and/or a [Hatter](https://docs.hatsprotocol.xyz/for-developers/hats-protocol-overview/hat-admins-and-hatter-contracts#hatter-contracts) module.
 Modules customize, automate and extend the behavior of Hats Protocol, and can also serve as adapters or integration points with other protocols and applications.
 
-Hats Protocol is open and permission-less, and so anyone is free to use any compatible modules. But, only modules that are included in the registry are supported in the [Modules SDK](https://github.com/Hats-Protocol/modules-sdk) and get a native support in the [Hats App](https://app.hatsprotocol.xyz/).
+This registry is designed to make it easier for module developers to publish modules and for end users to discover and use modules. It is the primary data source for the [Modules SDK](https://github.com/Hats-Protocol/modules-sdk), which apps — such as the [Hats App](https://app.hatsprotocol.xyz/) — use to enable end users to deploy and interact with modules in a no-code way. Modules on the registry include metadata that is used by the SDK and apps to auto-generate UIs for module deployment and interaction.
 
 The registry is designed to support any existing module that inherits the [HatsModule contract](https://github.com/Hats-Protocol/hats-module/blob/main/src/HatsModule.sol).
 For full documentation on how to build new Hats Modules, click [here](https://docs.hatsprotocol.xyz/for-developers/building-hats-modules).
 
+Note that Hats Protocol is open and permissionless. Modules do not need to be on this registry to be used with Hats Protocol. Inclusion in this registry is only necessary for modules wanting to be including natively in apps that have chosen to use the Modules SDK, such as the [Hats App](https://app.hatsprotocol.xyz/).
+
 ## Module Registry Schema
 
-For each module, the registry contains a JSON file with the following structure:
+Each module in the registry is represented by JSON file with the a number of details and metadata properties. The JSON schema takes the following structure:
 
 ```json
 {
@@ -99,7 +107,78 @@ For each module, the registry contains a JSON file with the following structure:
 _Note that arrays in the object above contain one example entry._
 
 The exact schema is declared using the [ZOD](https://zod.dev/) library, which is also used for performing validation on each module in the registry. 
-Check out the schema declaration [here](./schema.ts).
+The source of truth for the full schema — specified in ZOD — can be found [here](./schema.ts).
+
+### Schema Notes
+
+#### `details`
+
+An array of strings representing paragraphs that describe the module to end users.
+
+#### `links`
+
+Relevant links about this module go here. There should be at least one link to the module's source code — make sure the link is to the specific version of the module that is deployed to the registry, and to the correct branch in its repository. Other links can be added as well, such as to the module's documentation, or to other applications relevant to the module.
+
+#### `parameters`
+
+An array of parameters that represent the module's criteria and/or determine the behavior of its instances. Each parameter represents the function that can be called to dynamically fetch data from a module instance and display it to end users. Module creators can choose which parameters are relevant for display by including them in this array.
+
+- `label` - The name of each parameter.
+- `functionName` - The name of the view or pure function that gets the parameter value. The function should have no arguments and a single return value (an array is considered a single return value).
+- `displayType` - A free-text field that tells front ends how to generate a proper UI component for the parameter. For example, displaying a date for a parameter representing a timestamp. 
+
+Applications can define their own set of supported display types. The following are the display types known to be currently supported by applications:
+
+  | Display Type         | Description                                                  |
+  |----------------------|--------------------------------------------------------------|
+  | `default`            | The basic solidity data type of the value         |
+  | `timestamp`          | A value which represents a Unix timestamp.                    |
+  | `hat`                | A `uint256` value which represents a hat ID.                  |
+  | `token`              | The `address` of a token contract.                       |
+  | `seconds`            | A value which represents time denominated in seconds.         |
+  | `amountWithDecimals` | A value which represents a token amount, accounting for decimals. |
+
+
+#### `type`
+
+Flags for the type of module. At least one flag must be set to true. A module can serve as multiple types.
+
+#### `deployments`
+
+For each chain provided, an implementation contract of the module must be deployed to the address matching the provided `implementationAddress` property.
+
+#### `creationArgs`
+
+The arguments that are passed to the module factory's creation function. The arguments are divided into two arrays: `immutable` and `mutable`. The `immutable` array contains arguments that are set once when the module instance is created and cannot be changed. The `mutable` array contains arguments that can be changed after the module instance is created.
+
+- `useHatId` - By default, new instances should be created with the `hatId` value set to the target hat's ID. A `false` value here indicates that the module's `hatId` value should be set to zero.
+- In both the `immutable` and `mutable` array properties, the order of the arguments must match the order expected by the contract.
+- The `example` values will be used in automated tests to ensure that a new instance of the module can be correctly deployed. These values do not necessarily need to be realistic, but they must enable the module to be deployed successfully by tests.
+
+#### `customRoles`
+
+The module's custom roles. Each module role is associated with a hat and grants permissions to the hat's wearer(s) to call certain functions on the module contract. 
+
+There are two special roles with a reserved ID that are automatically added to each module:
+1. `public` role, associated with functions that are permitted to any caller
+2. `hatAdmins` role, associated with functions that are permitted to the target hat's admins
+
+Each custom, non-reserved role must be in with the following properties:
+- `id` - The role's ID, as a camel-case formatted string.
+- `name` - The role's name, for display purpose.
+- `criteria` - The name of the contract function which can be used to retrieve the role's hat.
+- `hatAdminsFallback` - Optional. `true` indicates that the role is granted to the target hat's admin(s) if when the role's `criteria` function returns zero.
+
+#### `writeFunctions`
+
+The module's write functions. Each write function is associated with a role and grants permissions to the role's wearer(s) to call the function on the module contract.
+
+- `roles` - IDs of the roles that have the authority to call the function.
+- `functionName` - The name of the function in the contract.
+- `label` - The name to be displayed to end users.
+- `description` - A description of the function to be displayed to end users.
+- `primary` - Optional. `true` indicates that this function is the primary function of the `roles` it is associated with. Front ends can use this information to display the function more prominently for each role.
+- `args` - The arguments of the function, similar to the module creation arguments.
 
 ## Module Curation Rubric
 
@@ -137,67 +216,21 @@ Check out the schema declaration [here](./schema.ts).
 
 ### Step 1 - Add your module's JSON file to the modules directory.
 
-**Here are some useful notes about the expected module properties:**
+Following the [example JSON](#module-registry-schema) and existing modules, fill out the relevant details and metadata for your module and add the file to the [modules](./modules) directory. The name of the file should be the module's name in camelCase, with the `.json` extension.
 
-#### `details`
-
-Structured as an array of strings, each array entry represents a paragraph. The property's purpose is to conatain the module's description.
-
-#### `links`
-
-Property's purpose is to include any relevant links about this module and should have at least one link to the module's source code.
-
-#### `parameters`
-
-Used in order to dynamically fetch and display data from module instances. Using this property, the module creator can choose which module fields are relevant for display.
-
-- `label` - Used to display the name/description of each parameter.
-- `functionName` - Name of the function from which the parameter should be retrieved. The function should be a view/pure function with no inputs and only one output (an array is also considered as one output).
-- `displayType` - A free-text field, used by frontends as an extra context in order to display a proper UI component for each parameter. For example, displaying a date for a parameter representing a timestamp. The known supported types are currently:
-  - `default` - Infers automatically the UI component for the value.
-  - `timestamp` - a value which represnts a Unix timestamp.
-  - `hat` - A `uint256` value which represents a hat ID.
-  - `token` - An `address` value of a token contract.
-  - `seconds` -A value which represents time denominated in seconds.
-  - `amountWithDecimals` - A value which represnts a token amount, allows for taking into account the token's decimals.
-
-#### `type`
-
-There should be at least one field which is set to `true`. A module might serve as more than one type.
-
-#### `deployments`
-
-For each chain provided, there should be a deployed implementation contract with an address matching the provided `implementationAddress` property.
-
-#### `creationArgs`
-
-- `useHatId` - By default, new instances are supposed to be created with their `hatId` value set with the target hat's ID. Setting this field to `false` indicates that the module should be created with the zero value in this field.
-- In both the `immutable` and `mutable` array properties, the arguments order should match the order expected by the contract.
-- The `example` fields will be used in automated tests to create a new instance of the module.
-
-#### `customRoles`
-
-The module's custom roles. Each module role is associated with a hat and permits its wearers certain authorities in a module instance (calling certain functions). There are two special roles with a reserved ID. First is the `public` role, which public write functions are associated with. Second is the `hatAdmins` role. Functions that are permitted to the target hat's admins are associated with this role.
-
-- `id` - Role's ID, as a camel-case formatted string.
-- `name` - Role's name, for display purpose.
-- `criteria` - Name of the contract function which can be used to read the role's hat.
-- `hatAdminsFallback` - An optional field. If set to `true`, indicates that when the `criteria` function of the role returns zero, then the role is granted to the target hat's admins.
-
-#### `writeFunctions`
-
-- `roles` - IDs of the roles that have the authority to call the function.
-- `functionName` - Function's name in the contract.
-- `label` - Function's name for display purpose.
-- `description` - Function's description.
-- `primary` - Optional field. If set to true, indicates that of all its role's functions, it is the primary one. Used for display purpose.
-- `args` - Function's arguments, similar to the module creation arguments.
+Keep in mind that much of the metadata will be seen by end users in apps that use the registry, so make sure to be clear and concise.
 
 ### Step 2 - Bundle
 
-The modules in the registry are bundled into one file, which is then consumed by its users.
+Consumers of the modules registry do so from a single bundle, so new modules — or changes to existing modules — need to be added to the bundle.
 
-Run:
+Install dependencies:
+
+```bash
+yarn install
+```
+
+Then run:
 
 ```bash
 yarn bundle
@@ -218,5 +251,4 @@ Run:
 ```bash
 yarn prettier
 ```
-
 י
