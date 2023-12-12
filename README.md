@@ -87,7 +87,7 @@ Each module in the registry is represented by JSON file with the a number of det
         "roles": ["<ID of a role which has the authority to call this function (string)>"],
         "functionName": "<the function's name in the contract (string)>",
         "label": "<Human readable name for the function, for display purpose (string)>",
-        "description": "<function's descruption (string)>",
+        "description": "<function's description (string)>",
         "primary": "<optional field, indicates that this is the role's primary function, for display purpose (boolean)>"
         "args": [
           {
