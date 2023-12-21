@@ -1,8 +1,8 @@
 {
-  "name": "Passthrough Eligibility and/or Toggle",
+  "name": "Passthrough Module",
   "details": [
     "A Hats Protocol module that enables an authorized hat to serve as the eligibility and/or toggle module for other hat(s).",
-    "Passthrough Module is a contract that can be set as the eligibility and/or toggle module for a target hat, and allows the wearer(s) of another hat to call the eligibility and/or toggle functions of the target hat. This allows hats themselves to be used as eligibility and toggle modules."
+    "Passthrough Module is a contract that can be set as the eligibility and/or toggle module for a target hat, and allows the wearer(s) of another hat to call the eligibility and/or toggle functions of this hat. This allows hats themselves to be used as eligibility and toggle modules."
   ],
   "links": [
     {
@@ -12,7 +12,7 @@
   ],
   "parameters": [
     {
-      "label": "Eligibilit/Toggle Hat",
+      "label": "Eligibility/Toggle Hat",
       "functionName": "CRITERION_HAT",
       "displayType": "hat"
     }
