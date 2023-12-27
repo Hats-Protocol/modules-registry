@@ -1,0 +1,216 @@
+{
+  "name": "CoLinks Eligibility",
+  "details": [
+    "Determines eligibility based on an account's CoLinks link supply.",
+    "An account (i.e. potential hat wearer) is eligible if the current supply of their links meets a configurable threshold., "
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/Hats-Protocol/colinks-eligibility"
+    },
+    {
+      "label": "CoLinks",
+      "link": "https://colinks.coordinape.com/"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Link Supply Threshold",
+      "functionName": "THRESHOLD",
+      "displayType": "uint256"
+    },
+    {
+      "label": "CoLinks Contract",
+      "functionName": "COLINKS",
+      "displayType": "address"
+    }
+  ],
+  "type": {
+    "eligibility": true,
+    "toggle": false,
+    "hatter": false
+  },
+  "implementationAddress": "0x64DB769cBC4de73a09BCA715604B27FA8704d3Eb",
+  "deployments": [
+    {
+      "chainId": "10",
+      "block": "114023601"
+    }
+  ],
+  "creationArgs": {
+    "useHatId": true,
+    "immutable": [
+      {
+        "name": "Link Supply Threshold",
+        "description": "The minimum supply of an account's links that must for the account to be eligible.",
+        "type": "uint256",
+        "example": "10",
+        "displayType": "default",
+        "optional": false
+      }
+    ],
+    "mutable": []
+  },
+  "customRoles": [],
+  "writeFunctions": [],
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_version",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "version",
+          "type": "uint8"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "COLINKS",
+      "outputs": [
+        {
+          "internalType": "contract CoLinksLike",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "HATS",
+      "outputs": [
+        {
+          "internalType": "contract IHats",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "IMPLEMENTATION",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "THRESHOLD",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "getWearerStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "eligible",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "standing",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hatId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        }
+      ],
+      "name": "setUp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version_",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}
