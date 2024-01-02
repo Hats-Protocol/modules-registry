@@ -88,12 +88,12 @@
   "customRoles": [
     {
       "id": "allowListOwner",
-      "name": "Allow-List Owner",
+      "name": "Allowlist Owner",
       "criteria": "OWNER_HAT"
     },
     {
       "id": "allowListArbitrator",
-      "name": "Allow-List Arbitrator",
+      "name": "Allowlist Arbitrator",
       "criteria": "ARBITRATOR_HAT"
     }
   ],
@@ -102,7 +102,7 @@
       "roles": ["allowListOwner"],
       "functionName": "addAccount",
       "label": "Add Account",
-      "description": "Add an account to the allow-list",
+      "description": "Add an account to the allowlist",
       "primary": true,
       "args": [
         {
@@ -117,7 +117,7 @@
       "roles": ["allowListOwner"],
       "functionName": "addAccounts",
       "label": "Add Accounts",
-      "description": "Add multiple accounts to the allow-list",
+      "description": "Add multiple accounts to the allowlist",
       "args": [
         {
           "name": "Accounts",
@@ -131,7 +131,7 @@
       "roles": ["allowListOwner"],
       "functionName": "removeAccount",
       "label": "Remove Account",
-      "description": "Remove an account from the allow-list",
+      "description": "Remove an account from the allowlist",
       "args": [
         {
           "name": "Account",
@@ -145,7 +145,7 @@
       "roles": ["allowListOwner"],
       "functionName": "removeAccountAndBurnHat",
       "label": "Remove and Burn",
-      "description": "Remove an account from the allow-list and burn their hat",
+      "description": "Remove an account from the allowlist and burn their hat",
       "args": [
         {
           "name": "Account",
@@ -159,7 +159,7 @@
       "roles": ["allowListOwner"],
       "functionName": "removeAccounts",
       "label": "Remove Accounts",
-      "description": "Remove multiple accounts from the allow-list",
+      "description": "Remove multiple accounts from the allowlist",
       "args": [
         {
           "name": "Accounts",

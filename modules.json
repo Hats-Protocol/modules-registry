@@ -515,12 +515,12 @@
       "customRoles": [
         {
           "id": "allowListOwner",
-          "name": "Allow-List Owner",
+          "name": "Allowlist Owner",
           "criteria": "OWNER_HAT"
         },
         {
           "id": "allowListArbitrator",
-          "name": "Allow-List Arbitrator",
+          "name": "Allowlist Arbitrator",
           "criteria": "ARBITRATOR_HAT"
         }
       ],
@@ -529,7 +529,7 @@
           "roles": ["allowListOwner"],
           "functionName": "addAccount",
           "label": "Add Account",
-          "description": "Add an account to the allow-list",
+          "description": "Add an account to the allowlist",
           "primary": true,
           "args": [
             {
@@ -544,7 +544,7 @@
           "roles": ["allowListOwner"],
           "functionName": "addAccounts",
           "label": "Add Accounts",
-          "description": "Add multiple accounts to the allow-list",
+          "description": "Add multiple accounts to the allowlist",
           "args": [
             {
               "name": "Accounts",
@@ -558,7 +558,7 @@
           "roles": ["allowListOwner"],
           "functionName": "removeAccount",
           "label": "Remove Account",
-          "description": "Remove an account from the allow-list",
+          "description": "Remove an account from the allowlist",
           "args": [
             {
               "name": "Account",
@@ -572,7 +572,7 @@
           "roles": ["allowListOwner"],
           "functionName": "removeAccountAndBurnHat",
           "label": "Remove and Burn",
-          "description": "Remove an account from the allow-list and burn their hat",
+          "description": "Remove an account from the allowlist and burn their hat",
           "args": [
             {
               "name": "Account",
@@ -586,7 +586,7 @@
           "roles": ["allowListOwner"],
           "functionName": "removeAccounts",
           "label": "Remove Accounts",
-          "description": "Remove multiple accounts from the allow-list",
+          "description": "Remove multiple accounts from the allowlist",
           "args": [
             {
               "name": "Accounts",
@@ -2290,7 +2290,7 @@
     {
       "name": "Hats Election Eligibility",
       "details": [
-        "This module enables organizations to elect wearers of a given hat. More specifically, this modules makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
+        "This module enables organizations to elect wearers of a given hat. More specifically, it makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
         "Election results are valid within a given term, after which the elected wearers become ineligible unless and until new election results are submitted.",
         "This module works with any election mechanism that can output a list of winning addresses, such as onchain DAO proposals or an oSnap proposal."
       ],
@@ -3515,10 +3515,10 @@
       ]
     },
     {
-      "name": "Passthrough Eligibility and/or Toggle",
+      "name": "Passthrough Module",
       "details": [
         "A Hats Protocol module that enables an authorized hat to serve as the eligibility and/or toggle module for other hat(s).",
-        "Passthrough Module is a contract that can be set as the eligibility and/or toggle module for a target hat, and allows the wearer(s) of another hat to call the eligibility and/or toggle functions of the target hat. This allows hats themselves to be used as eligibility and toggle modules."
+        "Passthrough Module is a contract that can be set as the eligibility and/or toggle module for a target hat, and allows the wearer(s) of another hat to call the eligibility and/or toggle functions of this hat. This allows hats themselves to be used as eligibility and toggle modules."
       ],
       "links": [
         {
@@ -3528,7 +3528,7 @@
       ],
       "parameters": [
         {
-          "label": "Eligibilit/Toggle Hat",
+          "label": "Eligibility/Toggle Hat",
           "functionName": "CRITERION_HAT",
           "displayType": "hat"
         }

@@ -106,7 +106,7 @@ Each module in the registry is represented by JSON file with the a number of det
 
 _Note that arrays in the object above contain one example entry._
 
-The exact schema is declared using the [ZOD](https://zod.dev/) library, which is also used for performing validation on each module in the registry. 
+The exact schema is declared using the [ZOD](https://zod.dev/) library, which is also used for performing validation on each module in the registry.
 The source of truth for the full schema — specified in ZOD — can be found [here](./schema.ts).
 
 ### Schema Notes
@@ -125,19 +125,18 @@ An array of parameters that represent the module's criteria and/or determine the
 
 - `label` - The name of each parameter.
 - `functionName` - The name of the view or pure function that gets the parameter value. The function should have no arguments and a single return value (an array is considered a single return value).
-- `displayType` - A free-text field that tells front ends how to generate a proper UI component for the parameter. For example, displaying a date for a parameter representing a timestamp. 
+- `displayType` - A free-text field that tells front ends how to generate a proper UI component for the parameter. For example, displaying a date for a parameter representing a timestamp.
 
 Applications can define their own set of supported display types. The following are the display types known to be currently supported by applications:
 
-  | Display Type         | Description                                                  |
-  |----------------------|--------------------------------------------------------------|
-  | `default`            | The basic solidity data type of the value         |
-  | `timestamp`          | A value which represents a Unix timestamp.                    |
-  | `hat`                | A `uint256` value which represents a hat ID.                  |
-  | `token`              | The `address` of a token contract.                       |
-  | `seconds`            | A value which represents time denominated in seconds.         |
-  | `amountWithDecimals` | A value which represents a token amount, accounting for decimals. |
-
+| Display Type         | Description                                                       |
+| -------------------- | ----------------------------------------------------------------- |
+| `default`            | The basic solidity data type of the value                         |
+| `timestamp`          | A value which represents a Unix timestamp.                        |
+| `hat`                | A `uint256` value which represents a hat ID.                      |
+| `token`              | The `address` of a token contract.                                |
+| `seconds`            | A value which represents time denominated in seconds.             |
+| `amountWithDecimals` | A value which represents a token amount, accounting for decimals. |
 
 #### `type`
 
@@ -157,13 +156,15 @@ The arguments that are passed to the module factory's creation function. The arg
 
 #### `customRoles`
 
-The module's custom roles. Each module role is associated with a hat and grants permissions to the hat's wearer(s) to call certain functions on the module contract. 
+The module's custom roles. Each module role is associated with a hat and grants permissions to the hat's wearer(s) to call certain functions on the module contract.
 
 There are two special roles with a reserved ID that are automatically added to each module:
+
 1. `public` role, associated with functions that are permitted to any caller
 2. `hatAdmins` role, associated with functions that are permitted to the target hat's admins
 
 Each custom, non-reserved role must be in with the following properties:
+
 - `id` - The role's ID, as a camel-case formatted string.
 - `name` - The role's name, for display purpose.
 - `criteria` - The name of the contract function which can be used to retrieve the role's hat.
@@ -186,15 +187,15 @@ The module's write functions. Each write function is associated with a role and 
 
 > Version [0.1](https://forum.hatsprotocol.xyz/t/proposal-modules-registry-curation-v0-1/67)
 
-| Category                             | Judgement Type | Criterion                                      |
-|-------------------------------------|---|-----------------------------------------------|
-| **Safety**                          | Objective | The module works as described; no bugs      |
-|                                     |           | Is not malicious                            |
-| **Schema Adherence** |                Objective | Metadata is complete |
-|                                     | | Implementation contract is deployed to at least one chain |
-| **Quality**                         | Objective  | Automated tests pass                        |
-|                                     |  | Metadata (including name, descriptions, other documentation) is accurate |
-| **User-Friendliness**                    | Subjective       | Metadata is legible and affords clarity to end users      |
+| Category              | Judgement Type | Criterion                                                                |
+| --------------------- | -------------- | ------------------------------------------------------------------------ |
+| **Safety**            | Objective      | The module works as described; no bugs                                   |
+|                       |                | Is not malicious                                                         |
+| **Schema Adherence**  | Objective      | Metadata is complete                                                     |
+|                       |                | Implementation contract is deployed to at least one chain                |
+| **Quality**           | Objective      | Automated tests pass                                                     |
+|                       |                | Metadata (including name, descriptions, other documentation) is accurate |
+| **User-Friendliness** | Subjective     | Metadata is legible and affords clarity to end users                     |
 
 ## Curation Cadence
 
@@ -203,14 +204,16 @@ The module's write functions. Each write function is associated with a role and 
 [Curators](https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.4) must review modules within the following cadence:
 
 ### Standard Cadence
-* Monthly
-* All newly approved modules and changes to registered modules are to be announced at the end of each month
-* To be included in a given month, new submissions or changes must be submitted no later than one week before the end of the month
-* Within this constraint, [Curators](https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.4) may review asynchronously or devise their own process and timing
+
+- Monthly
+- All newly approved modules and changes to registered modules are to be announced at the end of each month
+- To be included in a given month, new submissions or changes must be submitted no later than one week before the end of the month
+- Within this constraint, [Curators](https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.4) may review asynchronously or devise their own process and timing
 
 ### Expedited Cadence
-* On an ad hoc basis, module developers may request review outside of the standard cadence. The most common method for such a request is to include it in the submission pull request.
-* It is up to [Curator](https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.4) discretion for when and how quickly they honor requests for expedited review.
+
+- On an ad hoc basis, module developers may request review outside of the standard cadence. The most common method for such a request is to include it in the submission pull request.
+- It is up to [Curator](https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.4) discretion for when and how quickly they honor requests for expedited review.
 
 ## How To Add A New Module
 
@@ -251,4 +254,5 @@ Run:
 ```bash
 yarn prettier
 ```
+
 י
