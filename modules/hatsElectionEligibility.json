@@ -1,7 +1,7 @@
 {
   "name": "Hats Election Eligibility",
   "details": [
-    "This module enables organizations to elect wearers of a given hat. More specifically, this modules makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
+    "This module enables organizations to elect wearers of a given hat. More specifically, it makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
     "Election results are valid within a given term, after which the elected wearers become ineligible unless and until new election results are submitted.",
     "This module works with any election mechanism that can output a list of winning addresses, such as onchain DAO proposals or an oSnap proposal."
   ],
