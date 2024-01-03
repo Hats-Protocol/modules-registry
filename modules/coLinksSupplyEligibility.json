@@ -43,7 +43,7 @@
     "immutable": [
       {
         "name": "Link Supply Threshold",
-        "description": "The minimum supply of an account's links that must for the account to be eligible.",
+        "description": "The minimum supply of an account's links that must exist for the account to be eligible.",
         "type": "uint256",
         "example": "10",
         "displayType": "default",
