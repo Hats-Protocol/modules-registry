@@ -742,10 +742,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@viem/anvil@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@viem/anvil/-/anvil-0.0.6.tgz#0f6378d2e6a6f2cee1b09570eae994551a6835b4"
-  integrity sha512-OjKR/+FVwzuygXYFqP8MBal1SXG8bT2gbZwqqB0XuLw81LNBBvmE/Repm6+5kkBh4IUj0PhYdrqOsnayS14Gtg==
+"@viem/anvil@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@viem/anvil/-/anvil-0.0.5.tgz#9f65358e6b601e2c925f4bd7c1ffc2d4df1a5be9"
+  integrity sha512-aGgbwBNmCcxp08WcYwyL+n01HLLFYuhIczQLy6BPcomQ2CG4ngfTed8K73EOpsBTmvCxAcek0APcVS7UUWNALw==
   dependencies:
     execa "^7.1.1"
     get-port "^6.1.2"
