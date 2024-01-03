@@ -92,7 +92,7 @@ describe("PGN deployments", () => {
 
   afterAll(async () => {
     await anvil.stop();
-  }, 30000);
+  }, 50000);
 
   test("Test create all modules", async () => {
     const modules = hatsModulesClient.getAllModules();
