@@ -64,7 +64,7 @@ describe("PGN deployments", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.PGN_RPC,
-      startTimeout: 25000,
+      startTimeout: 50000,
     });
     await anvil.start();
 
@@ -92,7 +92,7 @@ describe("PGN deployments", () => {
     });
 
     await hatsModulesClient.prepare(registryModules);
-  }, 30000);
+  }, 70000);
 
   afterAll(async () => {
     await anvil.stop();
