@@ -18,6 +18,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.16.1
+      - name: Set up foundry
+        uses: foundry-rs/foundry-toolchain@v1
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
