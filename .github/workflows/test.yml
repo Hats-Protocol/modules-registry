@@ -19,6 +19,6 @@ jobs:
         with:
           node-version: 18.16.x
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install
       - name: Test
         run: yarn test ./test/pgnDeployments.test.ts
