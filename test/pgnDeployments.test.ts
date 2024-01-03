@@ -61,7 +61,6 @@ describe("PGN deployments", () => {
     expect(1).toBe(1);
   });
 
-  /*
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.PGN_RPC,
@@ -200,5 +199,4 @@ describe("PGN deployments", () => {
       }
     }
   }, 30000);
-  */
 });
