@@ -60,6 +60,7 @@ describe("PGN deployments", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.PGN_RPC,
+      port: 8546,
       startTimeout: 25000,
     });
     await anvil.start();
