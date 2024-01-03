@@ -21,4 +21,4 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
-        run: yarn test ./test/schemaValidation.test.ts
+        run: yarn test ./test/pgnDeployments.test.ts
