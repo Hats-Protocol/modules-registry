@@ -69,25 +69,25 @@ describe("PGN deployments", () => {
     );
 
     // init Viem clients
-    publicClient = createPublicClient({
-      chain: pgn,
-      transport: http("http://127.0.0.1:8545"),
-    }) as PublicClient;
-    walletClient = createWalletClient({
-      chain: pgn,
-      transport: http("http://127.0.0.1:8545"),
-    });
-
-    const modulesFile = new URL("../modules.json", import.meta.url);
-    const data = fs.readFileSync(modulesFile, "utf-8");
-    const registryModules: Registry = JSON.parse(data);
-
-    hatsModulesClient = new HatsModulesClient({
-      publicClient,
-      walletClient,
-    });
-
-    await hatsModulesClient.prepare(registryModules);
+    //publicClient = createPublicClient({
+    //  chain: pgn,
+    //  transport: http("http://127.0.0.1:8545"),
+    //}) as PublicClient;
+    //walletClient = createWalletClient({
+    //  chain: pgn,
+    //  transport: http("http://127.0.0.1:8545"),
+    //});
+    //
+    //const modulesFile = new URL("../modules.json", import.meta.url);
+    //const data = fs.readFileSync(modulesFile, "utf-8");
+    //const registryModules: Registry = JSON.parse(data);
+    //
+    //hatsModulesClient = new HatsModulesClient({
+    //  publicClient,
+    //  walletClient,
+    //});
+    //
+    //await hatsModulesClient.prepare(registryModules);
   }, 30000);
 
   afterAll(async () => {
