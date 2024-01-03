@@ -28,6 +28,7 @@ describe("Gnosis deployments", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.GNOSIS_RPC,
+      startTimeout: 20000,
     });
     await anvil.start();
 
