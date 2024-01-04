@@ -1789,6 +1789,7 @@
       "deployments": [
         { "chainId": "5", "block": "9608205" },
         { "chainId": "11155111", "block": "4655335" },
+        { "chainId": "1", "block": "18936373" },
         { "chainId": "10", "block": "110684714" },
         { "chainId": "137", "block": "48563371" },
         { "chainId": "42161", "block": "139454273" },
@@ -1989,6 +1990,7 @@
       "deployments": [
         { "chainId": "5", "block": "9611056" },
         { "chainId": "11155111", "block": "4655367" },
+        { "chainId": "1", "block": "18936346" },
         { "chainId": "10", "block": "110684393" },
         { "chainId": "137", "block": "48563085" },
         { "chainId": "42161", "block": "139452101" },
@@ -2157,6 +2159,7 @@
       "deployments": [
         { "chainId": "5", "block": "9611065" },
         { "chainId": "11155111", "block": "4655346" },
+        { "chainId": "1", "block": "18936352" },
         { "chainId": "10", "block": "110684542" },
         { "chainId": "137", "block": "48563224" },
         { "chainId": "42161", "block": "139452888" },
@@ -2321,6 +2324,7 @@
       "deployments": [
         { "chainId": "5", "block": "9719807" },
         { "chainId": "11155111", "block": "4655381" },
+        { "chainId": "1", "block": "18936188" },
         { "chainId": "10", "block": "109769331" },
         { "chainId": "137", "block": "48562276" },
         { "chainId": "42161", "block": "139445749" },
@@ -3694,6 +3698,7 @@
       "deployments": [
         { "chainId": "5", "block": "9838324" },
         { "chainId": "11155111", "block": "4655455" },
+        { "chainId": "1", "block": "18936176" },
         { "chainId": "10", "block": "110683684" },
         { "chainId": "137", "block": "48562453" },
         { "chainId": "42161", "block": "139447326" },
