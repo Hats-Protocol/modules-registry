@@ -1,7 +1,7 @@
 # Module Curation Managers have authority to review changes to the curation system, 
 # but not the items in the registry. See https://app.hatsprotocol.xyz/trees/10/1?hatId=1.2.4.5
 # Note that the last matching pattern takes the most precedence, so ownership of 
-# lines 8 and 9 falls exclusively to the Module Registry Curators
+# lines 9 and 10 falls exclusively to the Module Registry Curators
 *             @module-curation-managers
 
 # Module Registry Curators have authority to review submissions and changes to items 
