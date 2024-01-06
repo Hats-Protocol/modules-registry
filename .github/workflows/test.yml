@@ -4,6 +4,7 @@ on: [pull_request]
 
 env:
   GOERLI_RPC: https://goerli.infura.io/v3/${{ secrets.INFURA_KEY }}
+  SEPOLIA_RPC: https://sepolia.infura.io/v3/${{ secrets.INFURA_KEY }}
   MAINNET_RPC: https://mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
   POLYGON_RPC: https://polygon-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
   OPTIMISM_RPC: https://optimism-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
