@@ -6,7 +6,7 @@ import { createPublicClient, createWalletClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { goerli } from "viem/chains";
 import { createAnvil } from "@viem/anvil";
-import * as fs from "fs";
+import { bundleModules } from "../bundler";
 import type {
   PublicClient,
   WalletClient,
@@ -28,6 +28,7 @@ describe("Goerli deployments", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.GOERLI_RPC,
+      startTimeout: 20000,
     });
     await anvil.start();
 
@@ -45,9 +46,7 @@ describe("Goerli deployments", () => {
       transport: http("http://127.0.0.1:8545"),
     });
 
-    const modulesFile = new URL("../modules.json", import.meta.url);
-    const data = fs.readFileSync(modulesFile, "utf-8");
-    const registryModules: Registry = JSON.parse(data);
+    const registryModules: Registry = bundleModules() as unknown as Registry;
 
     hatsModulesClient = new HatsModulesClient({
       publicClient,
