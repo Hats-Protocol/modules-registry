@@ -8,8 +8,8 @@ env:
   MAINNET_RPC: https://mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
   POLYGON_RPC: https://polygon-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
   OPTIMISM_RPC: https://optimism-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
-  GNOSIS_RPC: https://gnosis.publicnode.com
   ARBITRUM_RPC: https://arbitrum-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+  GNOSIS_RPC: https://gnosis.publicnode.com
   BASE_RPC: https://base.publicnode.com
   PGN_RPC: https://rpc.publicgoods.network
   CELO_RPC: https://forno.celo.org
