@@ -1,0 +1,32 @@
+name: "Bundle"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "modules/*.json"
+      - "infra/*.json"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.1
+      - name: Set up foundry
+        uses: foundry-rs/foundry-toolchain@v1
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Bundle
+        run: |
+          yarn bundle
+          yarn format-bundle
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "automated bundle"
+          git push

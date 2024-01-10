@@ -7,7 +7,8 @@
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules yarn exec jest -- -i",
     "bundle": "tsx ./publish.ts",
-    "prettier": "prettier --write ."
+    "format-all": "prettier --write .",
+    "format-bundle": "prettier --write modules.json"
   },
   "devDependencies": {
     "@hatsprotocol/modules-sdk": "^0.14.1",
