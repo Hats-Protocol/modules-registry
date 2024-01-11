@@ -30,4 +30,4 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
       - name: Test
-        run: yarn test test/polygonDeployments.test.ts
+        run: yarn test
