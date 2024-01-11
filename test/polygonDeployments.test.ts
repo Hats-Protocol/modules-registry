@@ -1,4 +1,4 @@
-/*import {
+import {
   HatsModulesClient,
   solidityToTypescriptType,
 } from "@hatsprotocol/modules-sdk";
@@ -161,4 +161,3 @@ describe("Polygon deployments", () => {
     }
   }, 30000);
 });
-*/
