@@ -57,10 +57,6 @@ describe("PGN deployments", () => {
   let deployerAccount: PrivateKeyAccount;
   let instances: Address[] = [];
 
-  test("Test", () => {
-    expect(1).toBe(1);
-  });
-
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.PGN_RPC,
