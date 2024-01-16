@@ -1,29 +1,29 @@
 {
-  "name": "ERC1155 Eligibility",
+  "name": "CoLinks Supply Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that checks if an address holds at least one minimum balance of a set of ERC1155 token Ids to determine eligibility"
+    "Determines eligibility based on the supply of CoLinks links targeting a given account.",
+    "An account (i.e. potential hat wearer) is eligible if the current supply of their links meets a configurable threshold., "
   ],
   "links": [
     {
       "label": "GitHub",
-      "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
+      "link": "https://github.com/Hats-Protocol/colinks-eligibility"
+    },
+    {
+      "label": "CoLinks",
+      "link": "https://colinks.coordinape.com/"
     }
   ],
   "parameters": [
     {
-      "label": "Token Address",
-      "functionName": "TOKEN_ADDRESS",
-      "displayType": "default"
+      "label": "Link Supply Threshold",
+      "functionName": "THRESHOLD",
+      "displayType": "uint256"
     },
     {
-      "label": "Token IDs",
-      "functionName": "TOKEN_IDS",
-      "displayType": "default"
-    },
-    {
-      "label": "Minimum Balances",
-      "functionName": "MIN_BALANCES",
-      "displayType": "default"
+      "label": "CoLinks Contract",
+      "functionName": "COLINKS",
+      "displayType": "address"
     }
   ],
   "type": {
@@ -31,79 +31,23 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
+  "implementationAddress": "0x64DB769cBC4de73a09BCA715604B27FA8704d3Eb",
   "deployments": [
     {
-      "chainId": "5",
-      "block": "9608205"
-    },
-    {
-      "chainId": "11155111",
-      "block": "4655335"
-    },
-    {
-      "chainId": "1",
-      "block": "18936373"
-    },
-    {
       "chainId": "10",
-      "block": "110684714"
-    },
-    {
-      "chainId": "137",
-      "block": "48563371"
-    },
-    {
-      "chainId": "42161",
-      "block": "139454273"
-    },
-    {
-      "chainId": "100",
-      "block": "30405871"
-    },
-    {
-      "chainId": "424",
-      "block": "6051886"
-    },
-    {
-      "chainId": "8453",
-      "block": "7556151"
-    },
-    {
-      "chainId": "42220",
-      "block": "22842397"
+      "block": "114023601"
     }
   ],
   "creationArgs": {
     "useHatId": true,
     "immutable": [
       {
-        "name": "ERC1155 Contract Address",
-        "description": "ERC1155 contract address",
-        "type": "address",
-        "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-        "displayType": "token"
-      },
-      {
-        "name": "Number Of Tokens",
-        "description": "Number of token IDs in the set of tokens that allow eligiblity",
+        "name": "Link Supply Threshold",
+        "description": "The minimum supply of an account's links that must exist for the account to be eligible.",
         "type": "uint256",
-        "example": "2",
-        "displayType": "default"
-      },
-      {
-        "name": "Token IDs",
-        "description": "The token IDs within the ERC1155 contract that allow eligibilty",
-        "type": "uint256[]",
-        "example": ["1", "2"],
-        "displayType": "default"
-      },
-      {
-        "name": "Minimum Balances",
-        "description": "The minimum balances required (for token ID in the corresponding index) for eligibility",
-        "type": "uint256[]",
-        "example": ["100", "500"],
-        "displayType": "default"
+        "example": "10",
+        "displayType": "default",
+        "optional": false
       }
     ],
     "mutable": []
@@ -123,16 +67,6 @@
       "type": "constructor"
     },
     {
-      "inputs": [],
-      "name": "AlreadyInitialized",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "NotInitializing",
-      "type": "error"
-    },
-    {
       "anonymous": false,
       "inputs": [
         {
@@ -147,15 +81,15 @@
     },
     {
       "inputs": [],
-      "name": "ARRAY_LENGTH",
+      "name": "COLINKS",
       "outputs": [
         {
-          "internalType": "uint256",
+          "internalType": "contract CoLinksLike",
           "name": "",
-          "type": "uint256"
+          "type": "address"
         }
       ],
-      "stateMutability": "pure",
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -186,38 +120,12 @@
     },
     {
       "inputs": [],
-      "name": "MIN_BALANCES",
+      "name": "THRESHOLD",
       "outputs": [
         {
-          "internalType": "uint256[]",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint256[]"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "TOKEN_ADDRESS",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "TOKEN_IDS",
-      "outputs": [
-        {
-          "internalType": "uint256[]",
-          "name": "",
-          "type": "uint256[]"
+          "type": "uint256"
         }
       ],
       "stateMutability": "pure",
