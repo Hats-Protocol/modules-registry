@@ -223,9 +223,7 @@ Following the [example JSON](#module-registry-schema) and existing modules, fill
 
 Keep in mind that much of the metadata will be seen by end users in apps that use the registry, so make sure to be clear and concise.
 
-### Step 2 - Bundle
-
-Consumers of the modules registry do so from a single bundle, so new modules — or changes to existing modules — need to be added to the bundle.
+### Step 2 - Test
 
 Install dependencies:
 
@@ -236,23 +234,15 @@ yarn install
 Then run:
 
 ```bash
-yarn bundle
-```
-
-### Step 3 - Test
-
-Run:
-
-```bash
 yarn test
 ```
 
-### Step 4 - Format
+### Step 3 - Format
 
 Run:
 
 ```bash
-yarn prettier
+yarn format-all
 ```
 
 י

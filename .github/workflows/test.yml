@@ -1,0 +1,39 @@
+name: "Test"
+
+on: [pull_request]
+
+env:
+  GOERLI_RPC: https://goerli.infura.io/v3/${{ secrets.INFURA_KEY }}
+  SEPOLIA_RPC: https://sepolia.infura.io/v3/${{ secrets.INFURA_KEY }}
+  MAINNET_RPC: https://mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+  POLYGON_RPC: https://polygon-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+  OPTIMISM_RPC: https://optimism-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+  ARBITRUM_RPC: https://arbitrum-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+  GNOSIS_RPC: https://gnosis.publicnode.com
+  BASE_RPC: https://base.publicnode.com
+  PGN_RPC: https://rpc.publicgoods.network
+  CELO_RPC: https://forno.celo.org
+  ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.1
+      - name: Set up foundry
+        uses: foundry-rs/foundry-toolchain@v1
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Check Format
+        run: yarn prettier . --check
+      - name: Test
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: yarn test

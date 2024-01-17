@@ -10,7 +10,7 @@ import {
 } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { createAnvil } from "@viem/anvil";
-import * as fs from "fs";
+import { bundleModules } from "../bundler";
 import type {
   PublicClient,
   WalletClient,
@@ -60,6 +60,7 @@ describe("PGN deployments", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.PGN_RPC,
+      startTimeout: 20000,
     });
     await anvil.start();
 
@@ -77,9 +78,7 @@ describe("PGN deployments", () => {
       transport: http("http://127.0.0.1:8545"),
     });
 
-    const modulesFile = new URL("../modules.json", import.meta.url);
-    const data = fs.readFileSync(modulesFile, "utf-8");
-    const registryModules: Registry = JSON.parse(data);
+    const registryModules: Registry = bundleModules() as unknown as Registry;
 
     hatsModulesClient = new HatsModulesClient({
       publicClient,
@@ -91,7 +90,7 @@ describe("PGN deployments", () => {
 
   afterAll(async () => {
     await anvil.stop();
-  }, 30000);
+  }, 50000);
 
   test("Test create all modules", async () => {
     const modules = hatsModulesClient.getAllModules();

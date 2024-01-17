@@ -2,15 +2,14 @@ import axios from "axios";
 import { HatsModulesClient } from "@hatsprotocol/modules-sdk";
 import { createPublicClient, createWalletClient, http } from "viem";
 import { goerli } from "viem/chains";
-import * as fs from "fs";
-import type { PublicClient, WalletClient } from "viem";
-import type { Registry } from "@hatsprotocol/modules-sdk";
+import { bundleModules } from "../bundler";
 import { createAnvil } from "@viem/anvil";
-import type { Anvil } from "@viem/anvil";
-import { z } from "zod";
 import "dotenv/config";
-import type { Module } from "@hatsprotocol/modules-sdk";
 import { moduleSchema } from "../schema";
+import { RateLimit } from "async-sema";
+import type { PublicClient, WalletClient } from "viem";
+import type { Registry, Module } from "@hatsprotocol/modules-sdk";
+import type { Anvil } from "@viem/anvil";
 
 describe("Schema Validation Tests", () => {
   let publicClient: PublicClient;
@@ -35,9 +34,7 @@ describe("Schema Validation Tests", () => {
       transport: http("http://127.0.0.1:8545"),
     });
 
-    const modulesFile = new URL("../modules.json", import.meta.url);
-    const data = fs.readFileSync(modulesFile, "utf-8");
-    const registryModules: Registry = JSON.parse(data);
+    const registryModules: Registry = bundleModules() as unknown as Registry;
 
     hatsModulesClient = new HatsModulesClient({
       publicClient,
@@ -53,13 +50,15 @@ describe("Schema Validation Tests", () => {
   }, 30000);
 
   test("Test modules ABI", async () => {
+    const lim = RateLimit(3);
     for (const [id, module] of Object.entries(modules)) {
+      await lim();
       console.log(`module: ${module.name}`);
       const { data: etherscanAbi } = await axios.get(
         `https://api-goerli.etherscan.io/api?module=contract&action=getabi&address=${module.implementationAddress}&apikey=${process.env.ETHERSCAN_KEY}`,
       );
 
-      if (etherscanAbi.res === 0) {
+      if (etherscanAbi.status === "0") {
         console.log(etherscanAbi.message);
         throw new Error(`Module ${module.name} implementation is not verified`);
       }
