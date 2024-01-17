@@ -18,7 +18,7 @@
     {
       "label": "Minimum Balance",
       "functionName": "MIN_BALANCE",
-      "displayType": "default"
+      "displayType": "amountWithDecimals"
     }
   ],
   "type": {
