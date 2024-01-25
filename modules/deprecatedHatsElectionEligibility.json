@@ -1,4 +1,5 @@
 {
+  "deprecated": true,
   "name": "Hats Election Eligibility",
   "details": [
     "This module enables organizations to elect wearers of a given hat. More specifically, it makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
@@ -38,15 +39,11 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0xd3b916a8F0C4f9D1d5B6Af29c3C012dbd4f3149E",
+  "implementationAddress": "0x99081d45920818557203CCD62eD36dC2FaD9a43E",
   "deployments": [
     {
       "chainId": "5",
-      "block": "10430387"
-    },
-    {
-      "chainId": "11155111",
-      "block": "5150097"
+      "block": "10038318"
     }
   ],
   "creationArgs": {
@@ -241,12 +238,6 @@
     {
       "anonymous": false,
       "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint128",
-          "name": "termEnd",
-          "type": "uint128"
-        },
         {
           "indexed": false,
           "internalType": "address[]",
