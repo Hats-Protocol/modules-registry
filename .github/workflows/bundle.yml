@@ -29,8 +29,8 @@ jobs:
         run: |
           yarn bundle
           yarn format-bundle
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name modules-registry-bot
+          git config user.email infra@hatsprotocol.xyz
           git add .
           git commit -m "automated bundle"
           git push
