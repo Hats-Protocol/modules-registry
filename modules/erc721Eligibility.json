@@ -13,7 +13,7 @@
     {
       "label": "Token Address",
       "functionName": "ERC721_TOKEN_ADDRESS",
-      "displayType": "default"
+      "displayType": "erc721"
     },
     {
       "label": "Minimum Balance",
