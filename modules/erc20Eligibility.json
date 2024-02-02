@@ -13,12 +13,12 @@
     {
       "label": "Token Address",
       "functionName": "ERC20_TOKEN_ADDRESS",
-      "displayType": "default"
+      "displayType": "erc20"
     },
     {
       "label": "Minimum Balance",
       "functionName": "MIN_BALANCE",
-      "displayType": "default"
+      "displayType": "amountWithDecimals"
     }
   ],
   "type": {
@@ -77,7 +77,7 @@
         "description": "ERC20 token address",
         "type": "address",
         "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
-        "displayType": "token"
+        "displayType": "erc20"
       },
       {
         "name": "Minimum Balance",

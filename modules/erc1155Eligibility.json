@@ -13,7 +13,7 @@
     {
       "label": "Token Address",
       "functionName": "TOKEN_ADDRESS",
-      "displayType": "default"
+      "displayType": "erc1155"
     },
     {
       "label": "Token IDs",
