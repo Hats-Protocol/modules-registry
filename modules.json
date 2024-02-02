@@ -2200,7 +2200,7 @@
         {
           "label": "Token Address",
           "functionName": "TOKEN_ADDRESS",
-          "displayType": "default"
+          "displayType": "erc1155"
         },
         {
           "label": "Token IDs",
@@ -2406,12 +2406,12 @@
         {
           "label": "Token Address",
           "functionName": "ERC20_TOKEN_ADDRESS",
-          "displayType": "default"
+          "displayType": "erc20"
         },
         {
           "label": "Minimum Balance",
           "functionName": "MIN_BALANCE",
-          "displayType": "default"
+          "displayType": "amountWithDecimals"
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
@@ -2436,7 +2436,7 @@
             "description": "ERC20 token address",
             "type": "address",
             "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
-            "displayType": "token"
+            "displayType": "erc20"
           },
           {
             "name": "Minimum Balance",
@@ -2575,7 +2575,7 @@
         {
           "label": "Token Address",
           "functionName": "ERC721_TOKEN_ADDRESS",
-          "displayType": "default"
+          "displayType": "erc721"
         },
         {
           "label": "Minimum Balance",
@@ -4622,7 +4622,7 @@
         {
           "label": "Staking Token",
           "functionName": "TOKEN",
-          "displayType": "token"
+          "displayType": "erc20"
         },
         {
           "label": "Minimum Stake",
