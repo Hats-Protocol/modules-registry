@@ -13,7 +13,8 @@
   "type": {
     "eligibility": false,
     "toggle": false,
-    "hatter": true
+    "hatter": true,
+    "meta": false
   },
   "implementationAddress": "0xB985eA1be961f7c4A4C45504444C02c88c4fdEF9",
   "deployments": [
