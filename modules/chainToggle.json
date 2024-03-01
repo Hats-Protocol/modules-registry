@@ -30,9 +30,15 @@
   "type": {
     "eligibility": false,
     "toggle": true,
-    "hatter": false,
-    "meta": true
+    "hatter": false
   },
+  "tags": [
+    {
+      "description": "Indicates that the module is extending the behavior of existing module instances",
+      "label": "Meta Module",
+      "value": "meta"
+    }
+  ],
   "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
   "deployments": [
     {

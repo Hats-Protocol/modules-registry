@@ -38,9 +38,9 @@
   "type": {
     "eligibility": true,
     "toggle": false,
-    "hatter": false,
-    "meta": false
+    "hatter": false
   },
+  "tags": [],
   "implementationAddress": "0xB2Ad134eB41695Ca87a62C7529259dC271d810Ce",
   "creationArgs": {
     "useHatId": true,

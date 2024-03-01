@@ -20,9 +20,9 @@
   "type": {
     "eligibility": true,
     "toggle": true,
-    "hatter": false,
-    "meta": false
+    "hatter": false
   },
+  "tags": [],
   "implementationAddress": "0x050079a8fbFCE76818C62481BA015b89567D2d35",
   "deployments": [
     {

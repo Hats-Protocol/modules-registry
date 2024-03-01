@@ -58,8 +58,14 @@ export const moduleSchema = z
       eligibility: z.boolean(),
       toggle: z.boolean(),
       hatter: z.boolean(),
-      meta: z.boolean(),
     }),
+    tags: z.array(
+      z.object({
+        label: z.string(),
+        description: z.string(),
+        value: z.string(),
+      }),
+    ),
     implementationAddress: z.string().regex(/^0x[a-fA-F0-9]{40}$/),
     deployments: z.array(z.object({ chainId: z.string(), block: z.string() })),
     creationArgs: z.object({

@@ -24,9 +24,9 @@
   "type": {
     "eligibility": true,
     "toggle": false,
-    "hatter": false,
-    "meta": false
+    "hatter": false
   },
+  "tags": [],
   "implementationAddress": "0xF6bc6Dd30403e6ff5b3Bebead32B8fce1b753aA1",
   "deployments": [
     {

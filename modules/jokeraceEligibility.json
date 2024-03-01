@@ -37,9 +37,9 @@
   "type": {
     "eligibility": true,
     "toggle": false,
-    "hatter": false,
-    "meta": false
+    "hatter": false
   },
+  "tags": [],
   "implementationAddress": "0xAE0e56A0c509dA713722c1aFFcF4B5f1C6CDc73a",
   "deployments": [
     {
