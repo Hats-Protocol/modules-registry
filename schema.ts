@@ -43,7 +43,6 @@ const moduleWriteFunctionSchema = z
 
 export const moduleSchema = z
   .object({
-    deprecated: z.boolean().optional(),
     name: z.string(),
     details: z.array(z.string()),
     links: z.array(z.object({ label: z.string(), link: z.string() })),

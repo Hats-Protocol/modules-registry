@@ -1,5 +1,4 @@
 {
-  "deprecated": true,
   "name": "Hats Election Eligibility",
   "details": [
     "This module enables organizations to elect wearers of a given hat. More specifically, it makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
@@ -39,7 +38,13 @@
     "toggle": false,
     "hatter": false
   },
-  "tags": [],
+  "tags": [
+    {
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
+    }
+  ],
   "implementationAddress": "0x99081d45920818557203CCD62eD36dC2FaD9a43E",
   "deployments": [
     {
