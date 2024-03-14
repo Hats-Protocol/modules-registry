@@ -60,7 +60,7 @@ describe("Sepolia deployments", () => {
   }, 30000);
 
   test("Test create all modules", async () => {
-    const modules = hatsModulesClient.getAllModules();
+    const modules = hatsModulesClient.getModules();
 
     // create new module instance for each module which is deployed on goerli
     for (const [id, module] of Object.entries(modules)) {
