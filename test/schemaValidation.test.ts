@@ -21,6 +21,7 @@ describe("Schema Validation Tests", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.GOERLI_RPC,
+      startTimeout: 20000,
     });
     await anvil.start();
 
