@@ -28,6 +28,7 @@ describe("Polygon deployments", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.POLYGON_RPC,
+      startTimeout: 20000,
     });
     await anvil.start();
 

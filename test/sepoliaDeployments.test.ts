@@ -28,6 +28,7 @@ describe("Sepolia deployments", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.SEPOLIA_RPC,
+      startTimeout: 20000,
     });
     await anvil.start();
 
