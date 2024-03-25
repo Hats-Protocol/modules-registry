@@ -75,7 +75,7 @@
     "mutable": [
       {
         "name": "Accounts",
-        "description": "Initial acoount for the allowlist.",
+        "description": "Initial accounts for the allowlist.",
         "type": "address[]",
         "example": [
           "0x0000000000000000000000000000000000000001",
