@@ -19,6 +19,16 @@
       "label": "Grace Period Ending",
       "functionName": "graceEndsAt",
       "displayType": "timestamp"
+    },
+    {
+      "label": "Owner Hat",
+      "functionName": "OWNER_HAT",
+      "displayType": "hat"
+    },
+    {
+      "label": "Arbitrator Hat",
+      "functionName": "ARBITRATOR_HAT",
+      "displayType": "hat"
     }
   ],
   "type": {
@@ -32,6 +42,10 @@
     {
       "chainId": "11155111",
       "block": "5279344"
+    },
+    {
+      "chainId": "10",
+      "block": "116516227"
     }
   ],
   "creationArgs": {

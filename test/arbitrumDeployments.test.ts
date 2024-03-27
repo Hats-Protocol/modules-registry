@@ -28,6 +28,7 @@ describe("Arbitrum deployments", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.ARBITRUM_RPC,
+      startTimeout: 20000,
     });
     await anvil.start();
 

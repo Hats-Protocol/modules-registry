@@ -21,12 +21,25 @@
           "label": "Grace Period Ending",
           "functionName": "graceEndsAt",
           "displayType": "timestamp"
+        },
+        {
+          "label": "Owner Hat",
+          "functionName": "OWNER_HAT",
+          "displayType": "hat"
+        },
+        {
+          "label": "Arbitrator Hat",
+          "functionName": "ARBITRATOR_HAT",
+          "displayType": "hat"
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
       "tags": [],
       "implementationAddress": "0xF6bc6Dd30403e6ff5b3Bebead32B8fce1b753aA1",
-      "deployments": [{ "chainId": "11155111", "block": "5279344" }],
+      "deployments": [
+        { "chainId": "11155111", "block": "5279344" },
+        { "chainId": "10", "block": "116516227" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
@@ -479,7 +492,7 @@
         "mutable": [
           {
             "name": "Accounts",
-            "description": "Initial acoount for the allowlist.",
+            "description": "Initial accounts for the allowlist.",
             "type": "address[]",
             "example": [
               "0x0000000000000000000000000000000000000001",
