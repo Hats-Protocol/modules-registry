@@ -21,11 +21,25 @@
           "label": "Grace Period Ending",
           "functionName": "graceEndsAt",
           "displayType": "timestamp"
+        },
+        {
+          "label": "Owner Hat",
+          "functionName": "OWNER_HAT",
+          "displayType": "hat"
+        },
+        {
+          "label": "Arbitrator Hat",
+          "functionName": "ARBITRATOR_HAT",
+          "displayType": "hat"
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0xF6bc6Dd30403e6ff5b3Bebead32B8fce1b753aA1",
-      "deployments": [{ "chainId": "11155111", "block": "5279344" }],
+      "deployments": [
+        { "chainId": "11155111", "block": "5279344" },
+        { "chainId": "10", "block": "116516227" }
+      ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
@@ -447,6 +461,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
       "deployments": [
         { "chainId": "5", "block": "9647259" },
@@ -477,7 +492,7 @@
         "mutable": [
           {
             "name": "Accounts",
-            "description": "Initial acoount for the allowlist.",
+            "description": "Initial accounts for the allowlist.",
             "type": "address[]",
             "example": [
               "0x0000000000000000000000000000000000000001",
@@ -948,6 +963,386 @@
       ]
     },
     {
+      "name": "Eligibilities Chain",
+      "details": [
+        "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
+        "Modules are chained in a format of a disjunction of conjunction clauses."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/hats-module"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Number Of Conjunction Clauses",
+          "functionName": "NUM_CONJUNCTION_CLAUSES",
+          "displayType": "default"
+        },
+        {
+          "label": "Length Of Each Clause",
+          "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
+          "displayType": "default"
+        },
+        {
+          "label": "Module Addresses",
+          "functionName": "MODULES",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is extending the behavior of existing module instances",
+          "label": "Meta Module",
+          "value": "meta"
+        }
+      ],
+      "implementationAddress": "0x83200f1633cDb6C8f28F202CEA1B6a9105862D83",
+      "deployments": [
+        { "chainId": "5", "block": "10009615" },
+        { "chainId": "10", "block": "111939238" },
+        { "chainId": "11155111", "block": "5313413" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Number Of Conjunction Clauses",
+            "description": "The number of conjunction clauses",
+            "type": "uint256",
+            "example": "2",
+            "displayType": "default"
+          },
+          {
+            "name": "Clause Lengths",
+            "description": "Length of each clause, provided as a list",
+            "type": "uint256[]",
+            "example": [1, 2],
+            "displayType": "default"
+          },
+          {
+            "name": "Modules",
+            "description": "The list of module instances to chain together",
+            "type": "address[]",
+            "example": [
+              "0x8a1f28732c984e5a80111bc06115b1302189859d",
+              "0x3232a9ab82800ff2ee966d6db5c6152d863bfc66",
+              "0xd700dcc4949dfc8fcb3b4246e7137bf759795ca0"
+            ],
+            "displayType": "default"
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [],
+      "writeFunctions": [],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "CONJUNCTION_CLAUSE_LENGTHS",
+          "outputs": [
+            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MODULES",
+          "outputs": [
+            { "internalType": "address[]", "name": "", "type": "address[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "NUM_CONJUNCTION_CLAUSES",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "Toggles Chain",
+      "details": [
+        "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
+        "Modules are chained in a format of a disjunction of conjunction clauses."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/hats-module"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Number Of Conjunction Clauses",
+          "functionName": "NUM_CONJUNCTION_CLAUSES",
+          "displayType": "default"
+        },
+        {
+          "label": "Length Of Each Clause",
+          "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
+          "displayType": "default"
+        },
+        {
+          "label": "Module Addresses",
+          "functionName": "MODULES",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": false, "toggle": true, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is extending the behavior of existing module instances",
+          "label": "Meta Module",
+          "value": "meta"
+        }
+      ],
+      "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
+      "deployments": [
+        { "chainId": "5", "block": "10009649" },
+        { "chainId": "11155111", "block": "5313437" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Number Of Conjunction Clauses",
+            "description": "The number of conjunction clauses",
+            "type": "uint256",
+            "example": "1",
+            "displayType": "default"
+          },
+          {
+            "name": "Clause Lengths",
+            "description": "Length of each clause, provided as a list",
+            "type": "uint256[]",
+            "example": [2],
+            "displayType": "default"
+          },
+          {
+            "name": "Modules",
+            "description": "The list of module instances to chain together",
+            "type": "address[]",
+            "example": [
+              "0xe1f50cd1078b4f7920c7d6657dc3d8d2e5155ae0",
+              "0x4f28253ece7b52dd800160e7fecdb1c531a3fe1f"
+            ],
+            "displayType": "default"
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [],
+      "writeFunctions": [],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "CONJUNCTION_CLAUSE_LENGTHS",
+          "outputs": [
+            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MODULES",
+          "outputs": [
+            { "internalType": "address[]", "name": "", "type": "address[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "NUM_CONJUNCTION_CLAUSES",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+          ],
+          "name": "getHatStatus",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
       "name": "CharacterSheets Level",
       "details": [
         "A Hats Protocol eligibility module that checks players for CharacterSheets characters with a minimum level for specific classes."
@@ -974,6 +1369,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0xB2Ad134eB41695Ca87a62C7529259dC271d810Ce",
       "creationArgs": {
         "useHatId": true,
@@ -1260,6 +1656,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0x64DB769cBC4de73a09BCA715604B27FA8704d3Eb",
       "deployments": [{ "chainId": "10", "block": "114023601" }],
       "creationArgs": {
@@ -1391,7 +1788,6 @@
       ]
     },
     {
-      "deprecated": true,
       "name": "Hats Election Eligibility",
       "details": [
         "This module enables organizations to elect wearers of a given hat. More specifically, it makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
@@ -1427,6 +1823,13 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is now deprecated",
+          "label": "Deprecated",
+          "value": "deprecated"
+        }
+      ],
       "implementationAddress": "0x99081d45920818557203CCD62eD36dC2FaD9a43E",
       "deployments": [{ "chainId": "5", "block": "10038318" }],
       "creationArgs": {
@@ -1820,7 +2223,6 @@
       ]
     },
     {
-      "deprecated": true,
       "name": "JokeRace Eligibility",
       "details": [
         "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
@@ -1856,6 +2258,13 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is now deprecated",
+          "label": "Deprecated",
+          "value": "deprecated"
+        }
+      ],
       "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
       "deployments": [
         { "chainId": "5", "block": "9597388" },
@@ -2189,6 +2598,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
       "deployments": [
         { "chainId": "5", "block": "9608205" },
@@ -2390,6 +2800,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0xbA5b218e6685D0607139c06f81442681a32a0EC3",
       "deployments": [
         { "chainId": "5", "block": "9611056" },
@@ -2559,6 +2970,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0xF37cf12fB4493D29270806e826fDDf50dd722bab",
       "deployments": [
         { "chainId": "5", "block": "9611065" },
@@ -2724,6 +3136,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
       "deployments": [
         { "chainId": "5", "block": "9719807" },
@@ -2887,6 +3300,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0xd3b916a8F0C4f9D1d5B6Af29c3C012dbd4f3149E",
       "deployments": [
         { "chainId": "5", "block": "10430387" },
@@ -3326,6 +3740,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0xAE0e56A0c509dA713722c1aFFcF4B5f1C6CDc73a",
       "deployments": [
         { "chainId": "5", "block": "10092827" },
@@ -3654,6 +4069,7 @@
       ],
       "parameters": [],
       "type": { "eligibility": false, "toggle": false, "hatter": true },
+      "tags": [],
       "implementationAddress": "0xB985eA1be961f7c4A4C45504444C02c88c4fdEF9",
       "deployments": [
         { "chainId": "5", "block": "9797988" },
@@ -4108,6 +4524,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": true, "hatter": false },
+      "tags": [],
       "implementationAddress": "0x050079a8fbFCE76818C62481BA015b89567D2d35",
       "deployments": [
         { "chainId": "5", "block": "9838324" },
@@ -4330,6 +4747,7 @@
         }
       ],
       "type": { "eligibility": false, "toggle": true, "hatter": false },
+      "tags": [],
       "implementationAddress": "0xFb6bD2e96B123d0854064823f6cb59420A285C00",
       "deployments": [
         { "chainId": "5", "block": "9597342" },
@@ -4616,6 +5034,7 @@
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
       "implementationAddress": "0x9E01030aF633Be5a439DF122F2eEf750b44B8aC7",
       "deployments": [
         { "chainId": "5", "block": "9597271" },

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { HatsModulesClient } from "@hatsprotocol/modules-sdk";
 import { createPublicClient, createWalletClient, http } from "viem";
-import { goerli } from "viem/chains";
+import { sepolia } from "viem/chains";
 import { bundleModules } from "../bundler";
 import { createAnvil } from "@viem/anvil";
 import "dotenv/config";
@@ -21,16 +21,17 @@ describe("Schema Validation Tests", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.GOERLI_RPC,
+      startTimeout: 20000,
     });
     await anvil.start();
 
     // init Viem clients
     publicClient = createPublicClient({
-      chain: goerli,
+      chain: sepolia,
       transport: http("http://127.0.0.1:8545"),
     });
     walletClient = createWalletClient({
-      chain: goerli,
+      chain: sepolia,
       transport: http("http://127.0.0.1:8545"),
     });
 
@@ -55,7 +56,7 @@ describe("Schema Validation Tests", () => {
       await lim();
       console.log(`module: ${module.name}`);
       const { data: etherscanAbi } = await axios.get(
-        `https://api-goerli.etherscan.io/api?module=contract&action=getabi&address=${module.implementationAddress}&apikey=${process.env.ETHERSCAN_KEY}`,
+        `https://api-sepolia.etherscan.io/api?module=contract&action=getabi&address=${module.implementationAddress}&apikey=${process.env.ETHERSCAN_KEY}`,
       );
 
       if (etherscanAbi.status === "0") {

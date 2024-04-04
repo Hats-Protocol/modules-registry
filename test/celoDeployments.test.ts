@@ -28,6 +28,7 @@ describe("Celo deployments", () => {
   beforeAll(async () => {
     anvil = createAnvil({
       forkUrl: process.env.CELO_RPC,
+      startTimeout: 20000,
     });
     await anvil.start();
 
