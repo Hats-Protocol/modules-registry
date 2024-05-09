@@ -30,7 +30,7 @@
     "hatter": false
   },
   "tags": [],
-  "implementationAddress": "0x32f1210eDC44eab9b395CFb3996Ec8727cDd6fE0",
+  "implementationAddress": "0x33303ba4E702f25F2790c44785287Ed7f16334d3",
   "deployments": [
     {
       "chainId": "10",
@@ -38,7 +38,11 @@
     },
     {
       "chainId": "11155420",
-      "block": "TBA"
+      "block": "11734099"
+    },
+    {
+      "chainId": "11155111",
+      "block": "5868541"
     }
   ],
   "creationArgs": {
