@@ -13,12 +13,15 @@
     {
       "label": "Gitcoin Passport Decoder",
       "functionName": "GITCOIN_PASSPORT_DECODER",
-      "displayType": "address"
+      "displayType": "default",
+      "REQUESTING_INSIGHT^^^^^^^": "This is represented as an address in the module smart contract. Is this correct or should I use `token`?"
+
     },
     {
       "label": "Score Criterion",
       "functionName": "SCORE_CRITERION",
-      "displayType": "amount"
+      "displayType": "default",
+      "REQUESTING_INSIGHT^^^^^^^": "This is represented as a uint256 in the module smart contract. Is this correct or should I use `amountWithDecimals` or `hat`?"
     }
   ],
   "type": {
@@ -31,11 +34,11 @@
   "deployments": [
     {
       "chainId": "10",
-      "block": "STILL NEED TO FILL OUT"
+      "block": "TBA"
     },
     {
       "chainId": "11155420",
-      "block": "STILL NEED TO FILL OUT"
+      "block": "TBA"
     }
   ],
   "creationArgs": {
@@ -46,14 +49,18 @@
         "description": "Decoder address",
         "type": "address",
         "example": "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56",
-        "displayType": "address"
+        "displayType": "address",
+      "REQUESTING_INSIGHT^^^^^^^": "This is represented as an address in the module smart contract. Is this correct or should I use `token`?"
+
       },
       {
         "name": "Score Criterion",
         "description": "Minimum threshold of passport to be considered eligible.",
         "type": "uint256",
         "example": "10",
-        "displayType": "amount"
+        "displayType": "amount",
+      "REQUESTING_INSIGHT^^^^^^^": "This is represented as a uint256 in the module smart contract. Is this correct or should I use `amount`, `amountWithDecimals` or `hat`? I do not see `amount` in the modules-registry README anywhere."
+
       }
     ],
     "mutable": []
