@@ -1,0 +1,241 @@
+{
+  "name": "Gitcoin Passport Eligibility",
+  "details": [
+    "A Hats Protocol eligibility module that checks if an address has a minimum score that passes the GitcoinPassportDecoder or custom threshold."
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/daocoa/gitcoin-passport-eligibility/"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Gitcoin Passport Decoder",
+      "functionName": "GITCOIN_PASSPORT_DECODER",
+      "displayType": "address"
+    },
+    {
+      "label": "Score Criterion",
+      "functionName": "SCORE_CRITERION",
+      "displayType": "amount"
+    }
+  ],
+  "type": {
+    "eligibility": true,
+    "toggle": false,
+    "hatter": false
+  },
+  "tags": [],
+  "implementationAddress": "0x32f1210eDC44eab9b395CFb3996Ec8727cDd6fE0",
+  "deployments": [
+    {
+      "chainId": "10",
+      "block": "STILL NEED TO FILL OUT"
+    },
+    {
+      "chainId": "11155420",
+      "block": "STILL NEED TO FILL OUT"
+    }
+  ],
+  "creationArgs": {
+    "useHatId": true,
+    "immutable": [
+      {
+        "name": "Gitcoin Passport Decoder",
+        "description": "Decoder address",
+        "type": "address",
+        "example": "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56",
+        "displayType": "address"
+      },
+      {
+        "name": "Score Criterion",
+        "description": "Minimum threshold of passport to be considered eligible.",
+        "type": "uint256",
+        "example": "10",
+        "displayType": "amount"
+      }
+    ],
+    "mutable": []
+  },
+  "customRoles": [],
+  "writeFunctions": [],
+  "abi": [
+    {
+      "type": "constructor",
+      "inputs": [
+        {
+          "name": "_version",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "GITCOIN_PASSPORT_DECODER",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "contract IGitcoinPassportDecoder"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "HATS",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "contract IHats"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "IMPLEMENTATION",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "SCORE_CRITERION",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "getWearerStatus",
+      "inputs": [
+        {
+          "name": "_wearer",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "eligible",
+          "type": "bool",
+          "internalType": "bool"
+        },
+        {
+          "name": "standing",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "hatId",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "isHuman",
+      "inputs": [
+        {
+          "name": "_wearer",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "setUp",
+      "inputs": [
+        {
+          "name": "_initData",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "version",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "version_",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "event",
+      "name": "Initialized",
+      "inputs": [
+        {
+          "name": "version",
+          "type": "uint8",
+          "indexed": false,
+          "internalType": "uint8"
+        }
+      ],
+      "anonymous": false
+    }
+  ]
+}
