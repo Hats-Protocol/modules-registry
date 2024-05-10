@@ -13,15 +13,13 @@
     {
       "label": "Gitcoin Passport Decoder",
       "functionName": "gitcoinPassportDecoder",
-      "displayType": "default",
-      "REQUESTING_INSIGHT^^^^^^^": "This is represented as an address in the module smart contract. Is this correct or should I use `token`?"
+      "displayType": "default"
 
     },
     {
       "label": "Score Criterion",
       "functionName": "scoreCriterion",
-      "displayType": "default",
-      "REQUESTING_INSIGHT^^^^^^^": "This is represented as a uint256 in the module smart contract. Is this correct or should I use `amountWithDecimals` or `hat`?"
+      "displayType": "default"
     }
   ],
   "type": {
@@ -53,9 +51,7 @@
         "description": "Decoder address",
         "type": "address",
         "example": "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56",
-        "displayType": "address",
-      "REQUESTING_INSIGHT^^^^^^^": "This is represented as an address in the module smart contract. Is this correct or should I use `token`?"
-
+        "displayType": "default"
       },
       {
         "name": "Score Criterion",
