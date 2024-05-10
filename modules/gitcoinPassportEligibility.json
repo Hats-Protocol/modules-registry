@@ -40,7 +40,7 @@
     "immutable": [
       {
         "name": "Gitcoin Passport Decoder",
-        "description": "Decoder address",
+        "description": "The address of the Gitcoin Passport Decoder contract, from which Passport scores are retrieved. You can find the latest deployment here: https://github.com/gitcoinco/passport/blob/main/deployments/onchainInfo.json",
         "type": "address",
         "example": "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56",
         "displayType": "default"
