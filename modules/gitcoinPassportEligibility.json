@@ -12,14 +12,14 @@
   "parameters": [
     {
       "label": "Gitcoin Passport Decoder",
-      "functionName": "GITCOIN_PASSPORT_DECODER",
+      "functionName": "gitcoinPassportDecoder",
       "displayType": "default",
       "REQUESTING_INSIGHT^^^^^^^": "This is represented as an address in the module smart contract. Is this correct or should I use `token`?"
 
     },
     {
       "label": "Score Criterion",
-      "functionName": "SCORE_CRITERION",
+      "functionName": "scoreCriterion",
       "displayType": "default",
       "REQUESTING_INSIGHT^^^^^^^": "This is represented as a uint256 in the module smart contract. Is this correct or should I use `amountWithDecimals` or `hat`?"
     }
@@ -85,7 +85,7 @@
     },
     {
       "type": "function",
-      "name": "GITCOIN_PASSPORT_DECODER",
+      "name": "gitcoinPassportDecoder",
       "inputs": [],
       "outputs": [
         {
@@ -124,7 +124,7 @@
     },
     {
       "type": "function",
-      "name": "SCORE_CRITERION",
+      "name": "scoreCriterion",
       "inputs": [],
       "outputs": [
         {
