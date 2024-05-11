@@ -2,7 +2,7 @@
   "name": "Allowlist Eligibility",
   "details": [
     "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",
-    "This module sets up a simple allowlist to determine eligibility for a hat. For a given account (i.e., potential hat wearer), the allowlist stores values for that account's eligibility and standing for the hat. The wearer(s) of the Owner Hat can add or remove accounts from the allowlist. The wearer(s) of the Arbitrator Hat can set the standing of accounts."
+    "This module sets up a simple allowlist to determine eligibility for a hat. For a given account (i.e., potential hat wearer), the allowlist stores that account's eligibility and standing for the hat. The wearer(s) of the Owner Hat can add or remove accounts from the allowlist. The wearer(s) of the Arbitrator Hat can set the standing of accounts."
   ],
   "links": [
     {
@@ -13,12 +13,12 @@
   "parameters": [
     {
       "label": "Owner Hat",
-      "functionName": "OWNER_HAT",
+      "functionName": "ownerHat",
       "displayType": "hat"
     },
     {
       "label": "Arbitrator Hat",
-      "functionName": "ARBITRATOR_HAT",
+      "functionName": "arbitratorHat",
       "displayType": "hat"
     }
   ],
@@ -27,44 +27,45 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
+  "implementationAddress": "TBD",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9647259"
+      "block": "TBD"
     },
     {
       "chainId": "11155111",
-      "block": "4655298"
+      "block": "TBD"
     },
     {
       "chainId": "10",
-      "block": "109815832"
+      "block": "TBD"
     },
     {
       "chainId": "137",
-      "block": "48560643"
+      "block": "TBD"
     },
     {
       "chainId": "42161",
-      "block": "139432841"
+      "block": "TBD"
     },
     {
       "chainId": "100",
-      "block": "30405602"
+      "block": "TBD"
     },
     {
       "chainId": "42220",
-      "block": "24755507"
+      "block": "TBD"
     },
     {
       "chainId": "8453",
-      "block": "12329333"
+      "block": "TBD"
     }
   ],
   "creationArgs": {
     "useHatId": true,
-    "immutable": [
+    "immutable": [],
+    "mutable": [
       {
         "name": "Owner Hat",
         "description": "The hat ID for the owner hat. The wearer(s) of this hat are authorized to add and remove accounts from the allowlist.",
@@ -78,9 +79,7 @@
         "type": "uint256",
         "example": "26959946667150639794667015087019630673637144422540572481103610249216",
         "displayType": "hat"
-      }
-    ],
-    "mutable": [
+      },
       {
         "name": "Accounts",
         "description": "Initial accounts for the allowlist.",
@@ -107,7 +106,9 @@
   ],
   "writeFunctions": [
     {
-      "roles": ["allowListOwner"],
+      "roles": [
+        "allowListOwner"
+      ],
       "functionName": "addAccount",
       "label": "Add Account",
       "description": "Add an account to the allowlist",
@@ -122,7 +123,9 @@
       ]
     },
     {
-      "roles": ["allowListOwner"],
+      "roles": [
+        "allowListOwner"
+      ],
       "functionName": "addAccounts",
       "label": "Add Accounts",
       "description": "Add multiple accounts to the allowlist",
@@ -136,7 +139,9 @@
       ]
     },
     {
-      "roles": ["allowListOwner"],
+      "roles": [
+        "allowListOwner"
+      ],
       "functionName": "removeAccount",
       "label": "Remove Account",
       "description": "Remove an account from the allowlist",
@@ -150,7 +155,9 @@
       ]
     },
     {
-      "roles": ["allowListOwner"],
+      "roles": [
+        "allowListOwner"
+      ],
       "functionName": "removeAccountAndBurnHat",
       "label": "Remove and Burn",
       "description": "Remove an account from the allowlist and burn their hat",
@@ -164,7 +171,9 @@
       ]
     },
     {
-      "roles": ["allowListOwner"],
+      "roles": [
+        "allowListOwner"
+      ],
       "functionName": "removeAccounts",
       "label": "Remove Accounts",
       "description": "Remove multiple accounts from the allowlist",
@@ -178,7 +187,9 @@
       ]
     },
     {
-      "roles": ["allowListArbitrator"],
+      "roles": [
+        "allowListArbitrator"
+      ],
       "functionName": "setStandingForAccount",
       "label": "Set Standing",
       "description": "Set the standing for an account",
@@ -199,7 +210,9 @@
       ]
     },
     {
-      "roles": ["allowListArbitrator"],
+      "roles": [
+        "allowListArbitrator"
+      ],
       "functionName": "setBadStandingAndBurnHat",
       "label": "Set Bad Standing and Burn Hat",
       "description": "Puts an account in bad standing and burns their hat",
@@ -213,7 +226,9 @@
       ]
     },
     {
-      "roles": ["allowListArbitrator"],
+      "roles": [
+        "allowListArbitrator"
+      ],
       "functionName": "setStandingForAccounts",
       "label": "Set Standings",
       "description": "Set the standing for multiple accounts",
@@ -231,301 +246,528 @@
           "displayType": "default"
         }
       ]
+    },
+    {
+      "roles": [
+        "allowListOwner"
+      ],
+      "functionName": "setOwnerHat",
+      "label": "Set Allowlist Owner Hat",
+      "description": "Set the id of the allowlist owner hat",
+      "args": [
+        {
+          "name": "New Allowlist Owner Hat",
+          "description": "The id of the new allowlist owner hat",
+          "type": "uint256",
+          "displayType": "hat"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "allowListOwner"
+      ],
+      "functionName": "setArbitratorHat",
+      "label": "Set Allowlist Arbitrator Hat",
+      "description": "Set the id of the allowlist arbitrator hat",
+      "args": [
+        {
+          "name": "New Allowlist Arbitrator Hat",
+          "description": "The id of the new allowlist arbitrator hat",
+          "type": "uint256",
+          "displayType": "hat"
+        }
+      ]
     }
   ],
   "abi": [
     {
-      "inputs": [
-        { "internalType": "string", "name": "_version", "type": "string" }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "inputs": [],
-      "name": "AllowlistEligibility_ArrayLengthMismatch",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "AllowlistEligibility_NotArbitrator",
-      "type": "error"
-    },
-    { "inputs": [], "name": "AllowlistEligibility_NotOwner", "type": "error" },
-    { "inputs": [], "name": "AllowlistEligibility_NotWearer", "type": "error" },
-    {
-      "anonymous": false,
+      "type": "constructor",
       "inputs": [
         {
-          "indexed": false,
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
+          "name": "_version",
+          "type": "string",
+          "internalType": "string"
         }
       ],
-      "name": "AccountAdded",
-      "type": "event"
+      "stateMutability": "nonpayable"
     },
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        }
-      ],
-      "name": "AccountRemoved",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "bool",
-          "name": "standing",
-          "type": "bool"
-        }
-      ],
-      "name": "AccountStandingChanged",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address[]",
-          "name": "accounts",
-          "type": "address[]"
-        }
-      ],
-      "name": "AccountsAdded",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address[]",
-          "name": "accounts",
-          "type": "address[]"
-        }
-      ],
-      "name": "AccountsRemoved",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address[]",
-          "name": "accounts",
-          "type": "address[]"
-        },
-        {
-          "indexed": false,
-          "internalType": "bool[]",
-          "name": "standing",
-          "type": "bool[]"
-        }
-      ],
-      "name": "AccountsStandingChanged",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint8",
-          "name": "version",
-          "type": "uint8"
-        }
-      ],
-      "name": "Initialized",
-      "type": "event"
-    },
-    {
-      "inputs": [],
-      "name": "ARBITRATOR_HAT",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
+      "type": "function",
       "name": "HATS",
+      "inputs": [],
       "outputs": [
-        { "internalType": "contract IHats", "name": "", "type": "address" }
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "contract IHats"
+        }
       ],
-      "stateMutability": "pure",
-      "type": "function"
+      "stateMutability": "pure"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "IMPLEMENTATION",
-      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
       "inputs": [],
-      "name": "OWNER_HAT",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "pure",
-      "type": "function"
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "pure"
     },
     {
+      "type": "function",
+      "name": "_setArbitratorHat",
       "inputs": [
-        { "internalType": "address", "name": "_account", "type": "address" }
+        {
+          "name": "_newArbitratorHat",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
       ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "_setOwnerHat",
+      "inputs": [
+        {
+          "name": "_newOwnerHat",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
       "name": "addAccount",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
-          "internalType": "address[]",
-          "name": "_accounts",
-          "type": "address[]"
+          "name": "_account",
+          "type": "address",
+          "internalType": "address"
         }
       ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
       "name": "addAccounts",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "account", "type": "address" }
-      ],
-      "name": "allowlist",
-      "outputs": [
-        { "internalType": "bool", "name": "eligible", "type": "bool" },
-        { "internalType": "bool", "name": "badStanding", "type": "bool" }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" },
-        { "internalType": "uint256", "name": "", "type": "uint256" }
-      ],
-      "name": "getWearerStatus",
-      "outputs": [
-        { "internalType": "bool", "name": "_eligible", "type": "bool" },
-        { "internalType": "bool", "name": "_standing", "type": "bool" }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "hatId",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "_account", "type": "address" }
-      ],
-      "name": "removeAccount",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "_account", "type": "address" }
-      ],
-      "name": "removeAccountAndBurnHat",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
-          "internalType": "address[]",
           "name": "_accounts",
-          "type": "address[]"
+          "type": "address[]",
+          "internalType": "address[]"
         }
       ],
-      "name": "removeAccounts",
       "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      "stateMutability": "nonpayable"
     },
     {
-      "inputs": [
-        { "internalType": "address", "name": "_account", "type": "address" }
-      ],
-      "name": "setBadStandingAndBurnHat",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "_account", "type": "address" },
-        { "internalType": "bool", "name": "_standing", "type": "bool" }
-      ],
-      "name": "setStandingForAccount",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
+      "type": "function",
+      "name": "allowlist",
       "inputs": [
         {
-          "internalType": "address[]",
-          "name": "_accounts",
-          "type": "address[]"
+          "name": "account",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "eligible",
+          "type": "bool",
+          "internalType": "bool"
         },
-        { "internalType": "bool[]", "name": "_standing", "type": "bool[]" }
+        {
+          "name": "badStanding",
+          "type": "bool",
+          "internalType": "bool"
+        }
       ],
-      "name": "setStandingForAccounts",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
+      "type": "function",
+      "name": "arbitratorHat",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "getWearerStatus",
       "inputs": [
-        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+        {
+          "name": "_wearer",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
       ],
-      "name": "setUp",
+      "outputs": [
+        {
+          "name": "_eligible",
+          "type": "bool",
+          "internalType": "bool"
+        },
+        {
+          "name": "_standing",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "hatId",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "ownerHat",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "removeAccount",
+      "inputs": [
+        {
+          "name": "_account",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
       "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      "stateMutability": "nonpayable"
     },
     {
-      "inputs": [],
+      "type": "function",
+      "name": "removeAccountAndBurnHat",
+      "inputs": [
+        {
+          "name": "_account",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "removeAccounts",
+      "inputs": [
+        {
+          "name": "_accounts",
+          "type": "address[]",
+          "internalType": "address[]"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setArbitratorHat",
+      "inputs": [
+        {
+          "name": "_newArbitratorHat",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setBadStandingAndBurnHat",
+      "inputs": [
+        {
+          "name": "_account",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setOwnerHat",
+      "inputs": [
+        {
+          "name": "_newOwnerHat",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setStandingForAccount",
+      "inputs": [
+        {
+          "name": "_account",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "_standing",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setStandingForAccounts",
+      "inputs": [
+        {
+          "name": "_accounts",
+          "type": "address[]",
+          "internalType": "address[]"
+        },
+        {
+          "name": "_standing",
+          "type": "bool[]",
+          "internalType": "bool[]"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setUp",
+      "inputs": [
+        {
+          "name": "_initData",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
       "name": "version",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-      "stateMutability": "view",
-      "type": "function"
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "version_",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-      "stateMutability": "view",
-      "type": "function"
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "event",
+      "name": "AccountAdded",
+      "inputs": [
+        {
+          "name": "account",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AccountRemoved",
+      "inputs": [
+        {
+          "name": "account",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AccountStandingChanged",
+      "inputs": [
+        {
+          "name": "account",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        },
+        {
+          "name": "standing",
+          "type": "bool",
+          "indexed": false,
+          "internalType": "bool"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AccountsAdded",
+      "inputs": [
+        {
+          "name": "accounts",
+          "type": "address[]",
+          "indexed": false,
+          "internalType": "address[]"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AccountsRemoved",
+      "inputs": [
+        {
+          "name": "accounts",
+          "type": "address[]",
+          "indexed": false,
+          "internalType": "address[]"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AccountsStandingChanged",
+      "inputs": [
+        {
+          "name": "accounts",
+          "type": "address[]",
+          "indexed": false,
+          "internalType": "address[]"
+        },
+        {
+          "name": "standing",
+          "type": "bool[]",
+          "indexed": false,
+          "internalType": "bool[]"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "ArbitratorHatSet",
+      "inputs": [
+        {
+          "name": "newArbitratorHat",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "Initialized",
+      "inputs": [
+        {
+          "name": "version",
+          "type": "uint8",
+          "indexed": false,
+          "internalType": "uint8"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "OwnerHatSet",
+      "inputs": [
+        {
+          "name": "newOwnerHat",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "error",
+      "name": "AllowlistEligibility_ArrayLengthMismatch",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "AllowlistEligibility_HatNotMutable",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "AllowlistEligibility_NotArbitrator",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "AllowlistEligibility_NotOwner",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "AllowlistEligibility_NotWearer",
+      "inputs": []
     }
   ]
 }
