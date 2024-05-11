@@ -32,7 +32,7 @@
   "deployments": [
     {
       "chainId": "10",
-      "block": "TBA"
+      "block": "119896172"
     }
   ],
   "creationArgs": {
