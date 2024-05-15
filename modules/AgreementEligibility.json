@@ -22,12 +22,12 @@
     },
     {
       "label": "Owner Hat",
-      "functionName": "OWNER_HAT",
+      "functionName": "ownerHat",
       "displayType": "hat"
     },
     {
       "label": "Arbitrator Hat",
-      "functionName": "ARBITRATOR_HAT",
+      "functionName": "arbitratorHat",
       "displayType": "hat"
     }
   ],
@@ -36,40 +36,41 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0xF6bc6Dd30403e6ff5b3Bebead32B8fce1b753aA1",
+  "implementationAddress": "0x8126d02F4EcDE43eca4543a0D90B755C3E225F09",
   "deployments": [
     {
       "chainId": "11155111",
-      "block": "5279344"
+      "block": "5906105"
     },
     {
       "chainId": "10",
-      "block": "116516227"
+      "block": "120018528"
     },
     {
       "chainId": "42161",
-      "block": "194358596"
+      "block": "210962674"
     },
     {
       "chainId": "100",
-      "block": "33122123"
+      "block": "33952979"
     },
     {
       "chainId": "42220",
-      "block": "24754861"
+      "block": "25593018"
     },
     {
       "chainId": "8453",
-      "block": "12327703"
+      "block": "14482815"
     },
     {
       "chainId": "137",
-      "block": "55094822"
+      "block": "56934657"
     }
   ],
   "creationArgs": {
     "useHatId": true,
-    "immutable": [
+    "immutable": [],
+    "mutable": [
       {
         "name": "Owner Hat",
         "description": "The hat ID for the owner hat. The wearer(s) of this hat are authorized to update the agreement.",
@@ -83,9 +84,7 @@
         "type": "uint256",
         "example": "26959946667150639794667015087019630673637144422540572481103610249216",
         "displayType": "hat"
-      }
-    ],
-    "mutable": [
+      },
       {
         "name": "Agreement",
         "description": "Initial agreement",
@@ -179,259 +178,464 @@
           "displayType": "default"
         }
       ]
+    },
+    {
+      "roles": ["agreementOwner"],
+      "functionName": "setOwnerHat",
+      "label": "Set Agreement Owner Hat",
+      "description": "Set the id of the agreement owner hat",
+      "args": [
+        {
+          "name": "New Agreement Owner Hat",
+          "description": "The id of the new agreement owner hat",
+          "type": "uint256",
+          "displayType": "hat"
+        }
+      ]
+    },
+    {
+      "roles": ["agreementOwner"],
+      "functionName": "setArbitratorHat",
+      "label": "Set Agreement Arbitrator Hat",
+      "description": "Set the id of the agreement arbitrator hat",
+      "args": [
+        {
+          "name": "New Agreement Arbitrator Hat",
+          "description": "The id of the new agreement arbitrator hat",
+          "type": "uint256",
+          "displayType": "hat"
+        }
+      ]
     }
   ],
   "abi": [
     {
-      "inputs": [
-        { "internalType": "string", "name": "_version", "type": "string" }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "inputs": [],
-      "name": "AgreementEligibility_NotArbitrator",
-      "type": "error"
-    },
-    { "inputs": [], "name": "AgreementEligibility_NotOwner", "type": "error" },
-    {
-      "anonymous": false,
+      "type": "constructor",
       "inputs": [
         {
-          "indexed": false,
-          "internalType": "string",
-          "name": "agreement",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "grace",
-          "type": "uint256"
+          "name": "_version",
+          "type": "string",
+          "internalType": "string"
         }
       ],
-      "name": "AgreementEligibility_AgreementSet",
-      "type": "event"
+      "stateMutability": "nonpayable"
     },
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "signer",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "agreement",
-          "type": "string"
-        }
-      ],
-      "name": "AgreementEligibility_AgreementSigned",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "claimer",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "hatId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "agreement",
-          "type": "string"
-        }
-      ],
-      "name": "AgreementEligibility_HatClaimedWithAgreement",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint8",
-          "name": "version",
-          "type": "uint8"
-        }
-      ],
-      "name": "Initialized",
-      "type": "event"
-    },
-    {
-      "inputs": [],
-      "name": "ARBITRATOR_HAT",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
+      "type": "function",
       "name": "HATS",
+      "inputs": [],
       "outputs": [
-        { "internalType": "contract IHats", "name": "", "type": "address" }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "IMPLEMENTATION",
-      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "OWNER_HAT",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "claimer", "type": "address" }
-      ],
-      "name": "claimerAgreements",
-      "outputs": [
-        { "internalType": "uint256", "name": "agreementId", "type": "uint256" }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "currentAgreement",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "currentAgreementId",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" }
-      ],
-      "name": "forgive",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" },
-        { "internalType": "uint256", "name": "", "type": "uint256" }
-      ],
-      "name": "getWearerStatus",
-      "outputs": [
-        { "internalType": "bool", "name": "eligible", "type": "bool" },
-        { "internalType": "bool", "name": "standing", "type": "bool" }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "graceEndsAt",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "hatId",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" }
-      ],
-      "name": "revoke",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "string", "name": "_agreement", "type": "string" },
-        { "internalType": "uint256", "name": "_grace", "type": "uint256" }
-      ],
-      "name": "setAgreement",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-      ],
-      "name": "setUp",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "signAgreement",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
         {
-          "internalType": "address",
-          "name": "_claimsHatter",
-          "type": "address"
+          "name": "",
+          "type": "address",
+          "internalType": "contract IHats"
         }
       ],
-      "name": "signAgreementAndClaimHat",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      "stateMutability": "pure"
     },
     {
+      "type": "function",
+      "name": "IMPLEMENTATION",
       "inputs": [],
-      "name": "version",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "version_",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" }
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
       ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "arbitratorHat",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "claimerAgreements",
+      "inputs": [
+        {
+          "name": "claimer",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "agreementId",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "currentAgreement",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "currentAgreementId",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "forgive",
+      "inputs": [
+        {
+          "name": "_wearer",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "getWearerStatus",
+      "inputs": [
+        {
+          "name": "_wearer",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "eligible",
+          "type": "bool",
+          "internalType": "bool"
+        },
+        {
+          "name": "standing",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "graceEndsAt",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "hatId",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "ownerHat",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "revoke",
+      "inputs": [
+        {
+          "name": "_wearer",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setAgreement",
+      "inputs": [
+        {
+          "name": "_agreement",
+          "type": "string",
+          "internalType": "string"
+        },
+        {
+          "name": "_grace",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setArbitratorHat",
+      "inputs": [
+        {
+          "name": "_newArbitratorHat",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setOwnerHat",
+      "inputs": [
+        {
+          "name": "_newOwnerHat",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setUp",
+      "inputs": [
+        {
+          "name": "_initData",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "signAgreement",
+      "inputs": [],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "signAgreementAndClaimHat",
+      "inputs": [
+        {
+          "name": "_claimsHatter",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "version",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "version_",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
       "name": "wearerStanding",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-      "stateMutability": "view",
-      "type": "function"
+      "inputs": [
+        {
+          "name": "_wearer",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "event",
+      "name": "AgreementEligibility_AgreementSet",
+      "inputs": [
+        {
+          "name": "agreement",
+          "type": "string",
+          "indexed": false,
+          "internalType": "string"
+        },
+        {
+          "name": "grace",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AgreementEligibility_AgreementSigned",
+      "inputs": [
+        {
+          "name": "signer",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        },
+        {
+          "name": "agreement",
+          "type": "string",
+          "indexed": false,
+          "internalType": "string"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AgreementEligibility_ArbitratorHatSet",
+      "inputs": [
+        {
+          "name": "newArbitratorHat",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AgreementEligibility_HatClaimedWithAgreement",
+      "inputs": [
+        {
+          "name": "claimer",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        },
+        {
+          "name": "hatId",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        },
+        {
+          "name": "agreement",
+          "type": "string",
+          "indexed": false,
+          "internalType": "string"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "AgreementEligibility_OwnerHatSet",
+      "inputs": [
+        {
+          "name": "newOwnerHat",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "Initialized",
+      "inputs": [
+        {
+          "name": "version",
+          "type": "uint8",
+          "indexed": false,
+          "internalType": "uint8"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "error",
+      "name": "AgreementEligibility_HatNotMutable",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "AgreementEligibility_NotArbitrator",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "AgreementEligibility_NotOwner",
+      "inputs": []
     }
   ]
 }
