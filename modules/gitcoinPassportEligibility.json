@@ -53,7 +53,7 @@
         "displayType": {
           "type": "amountWithDecimals",
           "decimals": "4"
-        },
+        }
       }
     ],
     "mutable": []
