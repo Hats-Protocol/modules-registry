@@ -50,9 +50,10 @@
         "description": "Minimum threshold of passport to be considered eligible.",
         "type": "uint256",
         "example": "10",
-        "displayType": "amount",
-      "REQUESTING_INSIGHT^^^^^^^": "This is represented as a uint256 in the module smart contract. Is this correct or should I use `amount`, `amountWithDecimals` or `hat`? I do not see `amount` in the modules-registry README anywhere."
-
+        "displayType": {
+          "type": "amountWithDecimals",
+          "decimals": "4"
+        },
       }
     ],
     "mutable": []
