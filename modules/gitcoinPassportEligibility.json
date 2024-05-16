@@ -14,7 +14,6 @@
       "label": "Gitcoin Passport Decoder",
       "functionName": "gitcoinPassportDecoder",
       "displayType": "default"
-
     },
     {
       "label": "Score Criterion",
