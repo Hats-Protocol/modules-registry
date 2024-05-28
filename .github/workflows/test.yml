@@ -1,14 +1,15 @@
 name: "Test"
 
-on: [pull_request]
+on:
+  pull_request:
+  workflow_dispatch:
 
 env:
-  GOERLI_RPC: https://goerli.infura.io/v3/${{ secrets.INFURA_KEY }}
-  SEPOLIA_RPC: https://sepolia.infura.io/v3/${{ secrets.INFURA_KEY }}
-  MAINNET_RPC: https://mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
-  POLYGON_RPC: https://polygon-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
-  OPTIMISM_RPC: https://optimism-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
-  ARBITRUM_RPC: https://arbitrum-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+  SEPOLIA_RPC: https://sepolia.drpc.org
+  MAINNET_RPC: https://cloudflare-eth.com
+  POLYGON_RPC: https://polygon-rpc.com
+  OPTIMISM_RPC: https://mainnet.optimism.io
+  ARBITRUM_RPC: https://arb1.arbitrum.io/rpc
   GNOSIS_RPC: https://gnosis.publicnode.com
   BASE_RPC: https://base.publicnode.com
   PGN_RPC: https://rpc.publicgoods.network
