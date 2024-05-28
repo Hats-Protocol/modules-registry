@@ -44,6 +44,13 @@ Each module in the registry is represented by JSON file with the a number of det
     "toggle": "<whether the module is a toggle module (boolean)>",
     "hatter": "<whether the module is a hatter module (boolean)>"
   },
+  "tags": [
+    {
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
+    }
+  ],
   "implementationAddress": "<module's deployed implemenataion address (string)>",
   "deployments": [
     {
@@ -141,6 +148,10 @@ Applications can define their own set of supported display types. The following 
 #### `type`
 
 Flags for the type of module. At least one flag must be set to true. A module can serve as multiple types.
+
+#### `tags`
+
+Module creators can use this property to tag modules with any useful information. Each tag is an object, containing the tag's label, description and value. One example for how these are being used, is allowing consumers of the registry to filter modules based on their tags.
 
 #### `deployments`
 

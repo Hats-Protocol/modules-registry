@@ -43,7 +43,6 @@ const moduleWriteFunctionSchema = z
 
 export const moduleSchema = z
   .object({
-    deprecated: z.boolean().optional(),
     name: z.string(),
     details: z.array(z.string()),
     links: z.array(z.object({ label: z.string(), link: z.string() })),
@@ -59,6 +58,13 @@ export const moduleSchema = z
       toggle: z.boolean(),
       hatter: z.boolean(),
     }),
+    tags: z.array(
+      z.object({
+        label: z.string(),
+        description: z.string(),
+        value: z.string(),
+      }),
+    ),
     implementationAddress: z.string().regex(/^0x[a-fA-F0-9]{40}$/),
     deployments: z.array(z.object({ chainId: z.string(), block: z.string() })),
     creationArgs: z.object({

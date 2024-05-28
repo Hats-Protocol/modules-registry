@@ -27,6 +27,7 @@
     "toggle": false,
     "hatter": false
   },
+  "tags": [],
   "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
   "deployments": [
     {

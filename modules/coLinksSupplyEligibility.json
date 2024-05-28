@@ -31,6 +31,7 @@
     "toggle": false,
     "hatter": false
   },
+  "tags": [],
   "implementationAddress": "0x64DB769cBC4de73a09BCA715604B27FA8704d3Eb",
   "deployments": [
     {
