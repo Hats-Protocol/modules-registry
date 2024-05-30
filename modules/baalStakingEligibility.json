@@ -1,0 +1,926 @@
+{
+  "name": "Baal Staking Eligibility",
+  "details": [
+    "An eligibility module which requires wearers of a given hat to stake a minimum amount of Baal voting shares in order to be eligible, and enables others in the Hat tree's organization to slash the stake of a wearer who is behaving badly."
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/Hats-Protocol/hats-baal-shamans/blob/v0.1.0-staking/src/HatsStakingShaman.sol"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Baal Contract",
+      "functionName": "BAAL",
+      "displayType": "address"
+    },
+    {
+      "label": "Staking Token",
+      "functionName": "SHARES_TOKEN",
+      "displayType": "erc20"
+    },
+    {
+      "label": "Minimum Stake",
+      "functionName": "minStake",
+      "displayType": "amountWithDecimals"
+    },
+    {
+      "label": "Cooldown Period",
+      "functionName": "cooldownPeriod",
+      "displayType": "seconds"
+    },
+    {
+      "label": "Judge Hat (Can Set Wearer Standing)",
+      "functionName": "judge",
+      "displayType": "hat"
+    }
+  ],
+  "type": {
+    "eligibility": true,
+    "toggle": false,
+    "hatter": false
+  },
+  "tags": [],
+  "implementationAddress": "0xa1E79f78630F77436C001Af44893A2720180E19F",
+  "deployments": [
+    {
+      "chainId": "11155111",
+      "block": "6007514"
+    },
+    {
+      "chainId": "10",
+      "block": "120717655"
+    }
+  ],
+  "creationArgs": {
+    "useHatId": true,
+    "immutable": [
+      {
+        "name": "Baal",
+        "description": "The Baal contract whose voting shares will be used for staking",
+        "type": "address",
+        "example": "0xcf4b2e60273da3718fd16ee0d4cb176247ecc28a",
+        "displayType": "address"
+      },
+      {
+        "name": "Staking Proxy Implementation",
+        "description": "The address of the staking proxy implementation. This enables staked votes to be delegated back to the staker or a delegate of their choice.",
+        "type": "address",
+        "example": "0x23da8C14c1F40049A5A26Fa41610003b181A4377",
+        "displayType": "address"
+      }
+    ],
+    "mutable": [
+      {
+        "name": "Minimum Stake",
+        "description": "The minimum stake required to be eligible for the hat",
+        "type": "uint112",
+        "example": "100",
+        "displayType": "amountWithDecimals"
+      },
+      {
+        "name": "Judge Hat",
+        "description": "The hat that can slash wearers",
+        "type": "uint256",
+        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+        "displayType": "hat"
+      },
+      {
+        "name": "Cooldown Buffer",
+        "description": "The number of seconds that must elapse between beginning an unstake and completing it, in addition to the Baal's voting period and grace period",
+        "type": "uint256",
+        "example": "86400",
+        "displayType": "seconds"
+      }
+    ]
+  },
+  "customRoles": [
+    {
+      "id": "stakingJudge",
+      "name": "Staking Judge",
+      "criteria": "judge"
+    }
+  ],
+  "writeFunctions": [
+    {
+      "roles": [
+        "public"
+      ],
+      "functionName": "stakeAndClaim",
+      "label": "Stake and Claim",
+      "description": "Stake tokens for the first time and claim the hat",
+      "primary": true,
+      "args": [
+        {
+          "name": "Amount",
+          "description": "The amount of tokens to stake",
+          "type": "uint112",
+          "displayType": "amountWithDecimals"
+        },
+        {
+          "name": "Delegate",
+          "description": "The address to delegate staked votes to",
+          "type": "address",
+          "displayType": "default"
+        },
+        {
+          "name": "Claims Hatter",
+          "description": "A Multi Claims Hatter instance with which to perform claiming",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "public"
+      ],
+      "functionName": "stake",
+      "label": "Stake",
+      "description": "Stake tokens, whether for the first time or to increase an existing stake.",
+      "primary": false,
+      "args": [
+        {
+          "name": "Amount",
+          "description": "The amount of tokens to stake",
+          "type": "uint112",
+          "displayType": "amountWithDecimals"
+        },
+        {
+          "name": "Delegate",
+          "description": "The address to delegate staked votes to",
+          "type": "address",
+          "displayType": "default"
+        },
+        {
+          "name": "Claims Hatter",
+          "description": "A Multi Claims Hatter instance with which to perform claiming",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "public"
+      ],
+      "functionName": "beginUnstake",
+      "label": "Begin Unstake",
+      "description": "Begin the process of unstaking an amount tokens by initiating a cooldown period, after which the tokens can be unstaked if the skater is not slashed in the meantime.",
+      "args": [
+        {
+          "name": "Amount",
+          "description": "The amount of tokens to unstake",
+          "type": "uint112",
+          "displayType": "amountWithDecimals"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "public"
+      ],
+      "functionName": "resetUnstake",
+      "label": "Reset Unstake",
+      "description": "Reset the unstake process with a new amount to unstake.",
+      "args": [
+        {
+          "name": "New Unstaking Amount",
+          "description": "The new amount of tokens to unstake",
+          "type": "uint112",
+          "displayType": "amountWithDecimals"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "public"
+      ],
+      "functionName": "completeUnstake",
+      "label": "Complete Unstake For Account",
+      "description": "Complete the process of unstaking for a staker after the cooldown period has elapsed.",
+      "args": [
+        {
+          "name": "Staker",
+          "description": "The staker for which to complete unstaking",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "public"
+      ],
+      "functionName": "completeUnstake",
+      "label": "Complete My Unstake",
+      "description": "Complete your unstaking process after the cooldown period has elapsed.",
+      "args": []
+    },
+    {
+      "roles": [
+        "public"
+      ],
+      "functionName": "unstakeFromDeregisteredRole",
+      "label": "Unstake From Deregistered Hat",
+      "description": "Unstake tokens from a hat that no longer requires staking",
+      "primary": false,
+      "args": []
+    },
+    {
+      "roles": [
+        "public"
+      ],
+      "functionName": "delegate",
+      "label": "Delegate Votes",
+      "description": "Delegate staked votes to a new delegate",
+      "primary": false,
+      "args": [
+        {
+          "name": "New Delegate",
+          "description": "The address to delegate staked votes to",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "hatAdmins"
+      ],
+      "functionName": "changeMinStake",
+      "label": "Change Min Stake",
+      "description": "Change the minimum stake required to be eligible for the hat",
+      "primary": true,
+      "args": [
+        {
+          "name": "Min Stake",
+          "description": "The new minimum stake",
+          "type": "uint112",
+          "displayType": "amountWithDecimals"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "hatAdmins"
+      ],
+      "functionName": "setJudge",
+      "label": "Change Judge Hat",
+      "description": "Change the hat that can slash wearers",
+      "args": [
+        {
+          "name": "Hat",
+          "description": "The new judge hat",
+          "type": "uint256",
+          "displayType": "hat"
+        }
+      ]
+    },
+    {
+      "roles": [
+        "stakingJudge"
+      ],
+      "functionName": "setStanding",
+      "label": "Set Wearer Standing",
+      "description": "Set a wearer's standing",
+      "primary": true,
+      "args": [
+        {
+          "name": "Wearer",
+          "description": "The wearer to set the standing of",
+          "type": "address",
+          "displayType": "default"
+        },
+        {
+          "name": "Standing",
+          "description": "The new standing of the wearer",
+          "type": "bool",
+          "displayType": "default"
+        }
+      ]
+    }
+  ],
+  "abi": [
+    {
+      "type": "constructor",
+      "inputs": [
+        {
+          "name": "_version",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "BAAL",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "contract IBaal"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "HATS",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "contract IHats"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "IMPLEMENTATION",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "SHARES_TOKEN",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "contract IBaalToken"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "STAKING_PROXY_IMPL",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "beginUnstake",
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint112",
+          "internalType": "uint112"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "claim",
+      "inputs": [
+        {
+          "name": "_claimsHatter",
+          "type": "address",
+          "internalType": "contract MultiClaimsHatter"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "completeUnstake",
+      "inputs": [
+        {
+          "name": "_member",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "cooldownBuffer",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint32",
+          "internalType": "uint32"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "cooldownPeriod",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint32",
+          "internalType": "uint32"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "delegate",
+      "inputs": [
+        {
+          "name": "_newDelegate",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "getStakedSharesAndProxy",
+      "inputs": [
+        {
+          "name": "_member",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "amount",
+          "type": "uint112",
+          "internalType": "uint112"
+        },
+        {
+          "name": "stakingProxy",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "getWearerStatus",
+      "inputs": [
+        {
+          "name": "_member",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "eligible",
+          "type": "bool",
+          "internalType": "bool"
+        },
+        {
+          "name": "standing",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "hatId",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "pure"
+    },
+    {
+      "type": "function",
+      "name": "isManagerShaman",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "judge",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "memberStakes",
+      "inputs": [
+        {
+          "name": "_member",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "totalStaked",
+          "type": "uint112",
+          "internalType": "uint112"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "minStake",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint112",
+          "internalType": "uint112"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "resetUnstake",
+      "inputs": [
+        {
+          "name": "_newUnstakingAmount",
+          "type": "uint112",
+          "internalType": "uint112"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setJudge",
+      "inputs": [
+        {
+          "name": "_judge",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setMinStake",
+      "inputs": [
+        {
+          "name": "_minStake",
+          "type": "uint112",
+          "internalType": "uint112"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setStanding",
+      "inputs": [
+        {
+          "name": "_member",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "_standing",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setUp",
+      "inputs": [
+        {
+          "name": "_initData",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "slash",
+      "inputs": [
+        {
+          "name": "_member",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "stake",
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint112",
+          "internalType": "uint112"
+        },
+        {
+          "name": "_delegate",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "stakeAndClaim",
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint112",
+          "internalType": "uint112"
+        },
+        {
+          "name": "_delegate",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "_claimsHatter",
+          "type": "address",
+          "internalType": "contract MultiClaimsHatter"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "stakes",
+      "inputs": [
+        {
+          "name": "member",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "stakedAmount",
+          "type": "uint112",
+          "internalType": "uint112"
+        },
+        {
+          "name": "unstakingAmount",
+          "type": "uint112",
+          "internalType": "uint112"
+        },
+        {
+          "name": "canUnstakeAfter",
+          "type": "uint32",
+          "internalType": "uint32"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "unstakeFromDeregisteredRole",
+      "inputs": [],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "version",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "version_",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "string",
+          "internalType": "string"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "event",
+      "name": "Initialized",
+      "inputs": [
+        {
+          "name": "version",
+          "type": "uint8",
+          "indexed": false,
+          "internalType": "uint8"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "JudgeSet",
+      "inputs": [
+        {
+          "name": "judge",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "MinStakeSet",
+      "inputs": [
+        {
+          "name": "minStake",
+          "type": "uint112",
+          "indexed": false,
+          "internalType": "uint112"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "Slashed",
+      "inputs": [
+        {
+          "name": "member",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint112",
+          "indexed": false,
+          "internalType": "uint112"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "Staked",
+      "inputs": [
+        {
+          "name": "member",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint112",
+          "indexed": false,
+          "internalType": "uint112"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "UnstakeBegun",
+      "inputs": [
+        {
+          "name": "member",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint112",
+          "indexed": false,
+          "internalType": "uint112"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "UnstakeCompleted",
+      "inputs": [
+        {
+          "name": "member",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        },
+        {
+          "name": "amount",
+          "type": "uint112",
+          "indexed": false,
+          "internalType": "uint112"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "error",
+      "name": "CooldownNotEnded",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "HatImmutable",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "InsufficientStake",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotAdmin",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotInBadStanding",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotJudge",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotShaman",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "RoleStillRegistered",
+      "inputs": []
+    }
+  ]
+}
