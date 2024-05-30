@@ -282,623 +282,423 @@
   ],
   "abi": [
     {
-      "type": "constructor",
+      "inputs": [
+        { "internalType": "string", "name": "_version", "type": "string" }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    { "inputs": [], "name": "CooldownNotEnded", "type": "error" },
+    { "inputs": [], "name": "HatImmutable", "type": "error" },
+    { "inputs": [], "name": "InsufficientStake", "type": "error" },
+    { "inputs": [], "name": "NotAdmin", "type": "error" },
+    { "inputs": [], "name": "NotInBadStanding", "type": "error" },
+    { "inputs": [], "name": "NotJudge", "type": "error" },
+    { "inputs": [], "name": "NotShaman", "type": "error" },
+    { "inputs": [], "name": "RoleStillRegistered", "type": "error" },
+    {
+      "anonymous": false,
       "inputs": [
         {
-          "name": "_version",
-          "type": "string",
-          "internalType": "string"
-        }
-      ],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "BAAL",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "address",
-          "internalType": "contract IBaal"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "HATS",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "address",
-          "internalType": "contract IHats"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "IMPLEMENTATION",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "SHARES_TOKEN",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "address",
-          "internalType": "contract IBaalToken"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "STAKING_PROXY_IMPL",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "beginUnstake",
-      "inputs": [
-        {
-          "name": "_amount",
-          "type": "uint112",
-          "internalType": "uint112"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "claim",
-      "inputs": [
-        {
-          "name": "_claimsHatter",
-          "type": "address",
-          "internalType": "contract MultiClaimsHatter"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "completeUnstake",
-      "inputs": [
-        {
-          "name": "_member",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "cooldownBuffer",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint32",
-          "internalType": "uint32"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "cooldownPeriod",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint32",
-          "internalType": "uint32"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "delegate",
-      "inputs": [
-        {
-          "name": "_newDelegate",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "getStakedSharesAndProxy",
-      "inputs": [
-        {
-          "name": "_member",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "amount",
-          "type": "uint112",
-          "internalType": "uint112"
-        },
-        {
-          "name": "stakingProxy",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "getWearerStatus",
-      "inputs": [
-        {
-          "name": "_member",
-          "type": "address",
-          "internalType": "address"
-        },
-        {
-          "name": "",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "eligible",
-          "type": "bool",
-          "internalType": "bool"
-        },
-        {
-          "name": "standing",
-          "type": "bool",
-          "internalType": "bool"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "hatId",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "isManagerShaman",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool",
-          "internalType": "bool"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "judge",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "memberStakes",
-      "inputs": [
-        {
-          "name": "_member",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "totalStaked",
-          "type": "uint112",
-          "internalType": "uint112"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "minStake",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint112",
-          "internalType": "uint112"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "resetUnstake",
-      "inputs": [
-        {
-          "name": "_newUnstakingAmount",
-          "type": "uint112",
-          "internalType": "uint112"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "setJudge",
-      "inputs": [
-        {
-          "name": "_judge",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "setMinStake",
-      "inputs": [
-        {
-          "name": "_minStake",
-          "type": "uint112",
-          "internalType": "uint112"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "setStanding",
-      "inputs": [
-        {
-          "name": "_member",
-          "type": "address",
-          "internalType": "address"
-        },
-        {
-          "name": "_standing",
-          "type": "bool",
-          "internalType": "bool"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "setUp",
-      "inputs": [
-        {
-          "name": "_initData",
-          "type": "bytes",
-          "internalType": "bytes"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "slash",
-      "inputs": [
-        {
-          "name": "_member",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "stake",
-      "inputs": [
-        {
-          "name": "_amount",
-          "type": "uint112",
-          "internalType": "uint112"
-        },
-        {
-          "name": "_delegate",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "stakeAndClaim",
-      "inputs": [
-        {
-          "name": "_amount",
-          "type": "uint112",
-          "internalType": "uint112"
-        },
-        {
-          "name": "_delegate",
-          "type": "address",
-          "internalType": "address"
-        },
-        {
-          "name": "_claimsHatter",
-          "type": "address",
-          "internalType": "contract MultiClaimsHatter"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "stakes",
-      "inputs": [
-        {
-          "name": "member",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "stakedAmount",
-          "type": "uint112",
-          "internalType": "uint112"
-        },
-        {
-          "name": "unstakingAmount",
-          "type": "uint112",
-          "internalType": "uint112"
-        },
-        {
-          "name": "canUnstakeAfter",
-          "type": "uint32",
-          "internalType": "uint32"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "unstakeFromDeregisteredRole",
-      "inputs": [],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "version",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "string",
-          "internalType": "string"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "version_",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "string",
-          "internalType": "string"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "event",
-      "name": "Initialized",
-      "inputs": [
-        {
+          "indexed": false,
+          "internalType": "uint8",
           "name": "version",
-          "type": "uint8",
-          "indexed": false,
-          "internalType": "uint8"
+          "type": "uint8"
         }
       ],
-      "anonymous": false
+      "name": "Initialized",
+      "type": "event"
     },
     {
-      "type": "event",
-      "name": "JudgeSet",
+      "anonymous": false,
       "inputs": [
         {
+          "indexed": false,
+          "internalType": "uint256",
           "name": "judge",
-          "type": "uint256",
-          "indexed": false,
-          "internalType": "uint256"
+          "type": "uint256"
         }
       ],
-      "anonymous": false
+      "name": "JudgeSet",
+      "type": "event"
     },
     {
-      "type": "event",
-      "name": "MinStakeSet",
+      "anonymous": false,
       "inputs": [
         {
+          "indexed": false,
+          "internalType": "uint112",
           "name": "minStake",
-          "type": "uint112",
-          "indexed": false,
-          "internalType": "uint112"
+          "type": "uint112"
         }
       ],
-      "anonymous": false
+      "name": "MinStakeSet",
+      "type": "event"
     },
     {
-      "type": "event",
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "member",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint112",
+          "name": "amount",
+          "type": "uint112"
+        }
+      ],
       "name": "Slashed",
-      "inputs": [
-        {
-          "name": "member",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        },
-        {
-          "name": "amount",
-          "type": "uint112",
-          "indexed": false,
-          "internalType": "uint112"
-        }
-      ],
-      "anonymous": false
+      "type": "event"
     },
     {
-      "type": "event",
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "member",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint112",
+          "name": "amount",
+          "type": "uint112"
+        }
+      ],
       "name": "Staked",
-      "inputs": [
-        {
-          "name": "member",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        },
-        {
-          "name": "amount",
-          "type": "uint112",
-          "indexed": false,
-          "internalType": "uint112"
-        }
-      ],
-      "anonymous": false
+      "type": "event"
     },
     {
-      "type": "event",
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "member",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint112",
+          "name": "amount",
+          "type": "uint112"
+        }
+      ],
       "name": "UnstakeBegun",
-      "inputs": [
-        {
-          "name": "member",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        },
-        {
-          "name": "amount",
-          "type": "uint112",
-          "indexed": false,
-          "internalType": "uint112"
-        }
-      ],
-      "anonymous": false
+      "type": "event"
     },
     {
-      "type": "event",
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "member",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint112",
+          "name": "amount",
+          "type": "uint112"
+        }
+      ],
       "name": "UnstakeCompleted",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "BAAL",
+      "outputs": [
+        { "internalType": "contract IBaal", "name": "", "type": "address" }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "HATS",
+      "outputs": [
+        { "internalType": "contract IHats", "name": "", "type": "address" }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "IMPLEMENTATION",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "SHARES_TOKEN",
+      "outputs": [
+        { "internalType": "contract IBaalToken", "name": "", "type": "address" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "STAKING_PROXY_IMPL",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint112", "name": "_amount", "type": "uint112" }
+      ],
+      "name": "beginUnstake",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
-          "name": "member",
-          "type": "address",
-          "indexed": false,
-          "internalType": "address"
-        },
-        {
-          "name": "amount",
-          "type": "uint112",
-          "indexed": false,
-          "internalType": "uint112"
+          "internalType": "contract MultiClaimsHatter",
+          "name": "_claimsHatter",
+          "type": "address"
         }
       ],
-      "anonymous": false
+      "name": "claim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      "type": "error",
-      "name": "CooldownNotEnded",
-      "inputs": []
+      "inputs": [
+        { "internalType": "address", "name": "_member", "type": "address" }
+      ],
+      "name": "completeUnstake",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      "type": "error",
-      "name": "HatImmutable",
-      "inputs": []
+      "inputs": [],
+      "name": "cooldownBuffer",
+      "outputs": [{ "internalType": "uint32", "name": "", "type": "uint32" }],
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-      "type": "error",
-      "name": "InsufficientStake",
-      "inputs": []
+      "inputs": [],
+      "name": "cooldownPeriod",
+      "outputs": [{ "internalType": "uint32", "name": "", "type": "uint32" }],
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-      "type": "error",
-      "name": "NotAdmin",
-      "inputs": []
+      "inputs": [
+        { "internalType": "address", "name": "_newDelegate", "type": "address" }
+      ],
+      "name": "delegate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     },
     {
-      "type": "error",
-      "name": "NotInBadStanding",
-      "inputs": []
+      "inputs": [
+        { "internalType": "address", "name": "_member", "type": "address" }
+      ],
+      "name": "getStakedSharesAndProxy",
+      "outputs": [
+        { "internalType": "uint112", "name": "amount", "type": "uint112" },
+        { "internalType": "address", "name": "stakingProxy", "type": "address" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-      "type": "error",
-      "name": "NotJudge",
-      "inputs": []
+      "inputs": [
+        { "internalType": "address", "name": "_member", "type": "address" },
+        { "internalType": "uint256", "name": "", "type": "uint256" }
+      ],
+      "name": "getWearerStatus",
+      "outputs": [
+        { "internalType": "bool", "name": "eligible", "type": "bool" },
+        { "internalType": "bool", "name": "standing", "type": "bool" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     },
     {
-      "type": "error",
-      "name": "NotShaman",
-      "inputs": []
+      "inputs": [],
+      "name": "hatId",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "pure",
+      "type": "function"
     },
     {
-      "type": "error",
-      "name": "RoleStillRegistered",
-      "inputs": []
+      "inputs": [],
+      "name": "isManagerShaman",
+      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "judge",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "_member", "type": "address" }
+      ],
+      "name": "memberStakes",
+      "outputs": [
+        { "internalType": "uint112", "name": "totalStaked", "type": "uint112" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "minStake",
+      "outputs": [{ "internalType": "uint112", "name": "", "type": "uint112" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint112",
+          "name": "_newUnstakingAmount",
+          "type": "uint112"
+        }
+      ],
+      "name": "resetUnstake",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint256", "name": "_judge", "type": "uint256" }
+      ],
+      "name": "setJudge",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint112", "name": "_minStake", "type": "uint112" }
+      ],
+      "name": "setMinStake",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "_member", "type": "address" },
+        { "internalType": "bool", "name": "_standing", "type": "bool" }
+      ],
+      "name": "setStanding",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+      ],
+      "name": "setUp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "_member", "type": "address" }
+      ],
+      "name": "slash",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint112", "name": "_amount", "type": "uint112" },
+        { "internalType": "address", "name": "_delegate", "type": "address" }
+      ],
+      "name": "stake",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "uint112", "name": "_amount", "type": "uint112" },
+        { "internalType": "address", "name": "_delegate", "type": "address" },
+        {
+          "internalType": "contract MultiClaimsHatter",
+          "name": "_claimsHatter",
+          "type": "address"
+        }
+      ],
+      "name": "stakeAndClaim",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "member", "type": "address" }
+      ],
+      "name": "stakes",
+      "outputs": [
+        {
+          "internalType": "uint112",
+          "name": "stakedAmount",
+          "type": "uint112"
+        },
+        {
+          "internalType": "uint112",
+          "name": "unstakingAmount",
+          "type": "uint112"
+        },
+        {
+          "internalType": "uint32",
+          "name": "canUnstakeAfter",
+          "type": "uint32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "unstakeFromDeregisteredRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version_",
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "stateMutability": "view",
+      "type": "function"
     }
   ]
 }
