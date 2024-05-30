@@ -104,9 +104,7 @@
   ],
   "writeFunctions": [
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "stakeAndClaim",
       "label": "Stake and Claim",
       "description": "Stake tokens for the first time and claim the hat",
@@ -133,9 +131,7 @@
       ]
     },
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "stake",
       "label": "Stake",
       "description": "Stake tokens, whether for the first time or to increase an existing stake.",
@@ -162,9 +158,7 @@
       ]
     },
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "beginUnstake",
       "label": "Begin Unstake",
       "description": "Begin the process of unstaking an amount tokens by initiating a cooldown period, after which the tokens can be unstaked if the skater is not slashed in the meantime.",
@@ -178,9 +172,7 @@
       ]
     },
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "resetUnstake",
       "label": "Reset Unstake",
       "description": "Reset the unstake process with a new amount to unstake.",
@@ -194,9 +186,7 @@
       ]
     },
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "completeUnstake",
       "label": "Complete Unstake For Account",
       "description": "Complete the process of unstaking for a staker after the cooldown period has elapsed.",
@@ -210,18 +200,14 @@
       ]
     },
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "completeUnstake",
       "label": "Complete My Unstake",
       "description": "Complete your unstaking process after the cooldown period has elapsed.",
       "args": []
     },
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "unstakeFromDeregisteredRole",
       "label": "Unstake From Deregistered Hat",
       "description": "Unstake tokens from a hat that no longer requires staking",
@@ -229,9 +215,7 @@
       "args": []
     },
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "delegate",
       "label": "Delegate Votes",
       "description": "Delegate staked votes to a new delegate",
@@ -246,9 +230,7 @@
       ]
     },
     {
-      "roles": [
-        "hatAdmins"
-      ],
+      "roles": ["hatAdmins"],
       "functionName": "changeMinStake",
       "label": "Change Min Stake",
       "description": "Change the minimum stake required to be eligible for the hat",
@@ -263,9 +245,7 @@
       ]
     },
     {
-      "roles": [
-        "hatAdmins"
-      ],
+      "roles": ["hatAdmins"],
       "functionName": "setJudge",
       "label": "Change Judge Hat",
       "description": "Change the hat that can slash wearers",
@@ -279,9 +259,7 @@
       ]
     },
     {
-      "roles": [
-        "stakingJudge"
-      ],
+      "roles": ["stakingJudge"],
       "functionName": "setStanding",
       "label": "Set Wearer Standing",
       "description": "Set a wearer's standing",
