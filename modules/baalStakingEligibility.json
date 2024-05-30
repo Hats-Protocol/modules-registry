@@ -161,7 +161,7 @@
       "roles": ["public"],
       "functionName": "beginUnstake",
       "label": "Begin Unstake",
-      "description": "Begin the process of unstaking an amount tokens by initiating a cooldown period, after which the tokens can be unstaked if the skater is not slashed in the meantime.",
+      "description": "Begin the process of unstaking an amount tokens by initiating a cooldown period, after which the tokens can be unstaked if the staker is not slashed in the meantime.",
       "args": [
         {
           "name": "Amount",
