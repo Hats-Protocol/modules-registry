@@ -23,7 +23,7 @@
     {
       "label": "Minimum Stake",
       "functionName": "minStake",
-      "displayType": "amountWithDecimals"
+      "displayType": "default"
     },
     {
       "label": "Cooldown Period",
