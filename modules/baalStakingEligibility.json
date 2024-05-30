@@ -76,7 +76,7 @@
         "name": "Cooldown Buffer",
         "description": "The number of seconds that must elapse between beginning an unstake and completing it, in addition to the Baal's voting period and grace period",
         "type": "uint32",
-        "example": "86400",
+        "example": 86400,
         "displayType": "seconds"
       },
       {
