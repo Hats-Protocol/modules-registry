@@ -148,12 +148,6 @@
           "description": "The address to delegate staked votes to",
           "type": "address",
           "displayType": "default"
-        },
-        {
-          "name": "Claims Hatter",
-          "description": "A Multi Claims Hatter instance with which to perform claiming",
-          "type": "address",
-          "displayType": "default"
         }
       ]
     },
@@ -193,21 +187,16 @@
       "args": [
         {
           "name": "Staker",
-          "description": "The staker for which to complete unstaking",
+          "description": "The staker for whom to complete unstaking",
           "type": "address",
           "displayType": "default"
         }
       ]
     },
     {
-      "roles": ["public"],
-      "functionName": "completeUnstake",
-      "label": "Complete My Unstake",
-      "description": "Complete your unstaking process after the cooldown period has elapsed.",
-      "args": []
-    },
-    {
-      "roles": ["public"],
+      "roles": [
+        "public"
+      ],
       "functionName": "unstakeFromDeregisteredRole",
       "label": "Unstake From Deregistered Hat",
       "description": "Unstake tokens from a hat that no longer requires staking",
@@ -231,7 +220,7 @@
     },
     {
       "roles": ["hatAdmins"],
-      "functionName": "changeMinStake",
+      "functionName": "setMinStake",
       "label": "Change Min Stake",
       "description": "Change the minimum stake required to be eligible for the hat",
       "primary": true,
