@@ -194,9 +194,7 @@
       ]
     },
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "unstakeFromDeregisteredRole",
       "label": "Unstake From Deregistered Hat",
       "description": "Unstake tokens from a hat that no longer requires staking",
