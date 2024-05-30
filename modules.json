@@ -113,6 +113,7 @@
           "functionName": "setAgreement",
           "label": "Set Agreement",
           "description": "Set a new agreement, with a grace period",
+          "primary": true,
           "args": [
             {
               "name": "Agreement",
@@ -133,6 +134,7 @@
           "functionName": "revoke",
           "label": "Revoke",
           "description": "Revoke the wearer's hat and place them in bad standing",
+          "primary": true,
           "args": [
             {
               "name": "Wearer",
