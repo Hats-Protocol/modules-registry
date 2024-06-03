@@ -6,7 +6,7 @@ const moduleCreationArgSchema = z
     description: z.string(),
     type: z.string(),
     example: z.any(),
-    displayType: z.string(),
+    displayType: z.union([z.string(), z.object({ type: z.string() })]),
     optional: z.boolean().optional(),
   })
   .strict();
@@ -16,7 +16,7 @@ const moduleWriteFunctionArgSchema = z
     name: z.string(),
     description: z.string(),
     type: z.string(),
-    displayType: z.string(),
+    displayType: z.union([z.string(), z.object({ type: z.string() })]),
     optional: z.boolean().optional(),
   })
   .strict();
@@ -50,7 +50,7 @@ export const moduleSchema = z
       z.object({
         label: z.string(),
         functionName: z.string(),
-        displayType: z.string(),
+        displayType: z.union([z.string(), z.object({ type: z.string() })]),
       }),
     ),
     type: z.object({
