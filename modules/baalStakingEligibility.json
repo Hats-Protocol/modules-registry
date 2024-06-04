@@ -97,7 +97,7 @@
   },
   "customRoles": [
     {
-      "id": "stakingJudge",
+      "id": "baalStakingJudge",
       "name": "Staking Judge",
       "criteria": "judge"
     }
@@ -246,7 +246,7 @@
       ]
     },
     {
-      "roles": ["stakingJudge"],
+      "roles": ["baalStakingJudge"],
       "functionName": "setStanding",
       "label": "Set Wearer Standing",
       "description": "Set a wearer's standing",
