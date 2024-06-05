@@ -61,180 +61,180 @@
   "writeFunctions": [],
   "abi": [
     {
-      "type": "constructor",
       "inputs": [
         {
+          "internalType": "string",
           "name": "_version",
-          "type": "string",
-          "internalType": "string"
+          "type": "string"
         }
       ],
-      "stateMutability": "nonpayable"
+      "stateMutability": "nonpayable",
+      "type": "constructor"
     },
     {
-      "type": "function",
-      "name": "gitcoinPassportDecoder",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "address",
-          "internalType": "contract IGitcoinPassportDecoder"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "HATS",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "address",
-          "internalType": "contract IHats"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "IMPLEMENTATION",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "scoreCriterion",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "getWearerStatus",
+      "anonymous": false,
       "inputs": [
         {
-          "name": "_wearer",
-          "type": "address",
-          "internalType": "address"
-        },
-        {
-          "name": "",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "eligible",
-          "type": "bool",
-          "internalType": "bool"
-        },
-        {
-          "name": "standing",
-          "type": "bool",
-          "internalType": "bool"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "hatId",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256",
-          "internalType": "uint256"
-        }
-      ],
-      "stateMutability": "pure"
-    },
-    {
-      "type": "function",
-      "name": "isHuman",
-      "inputs": [
-        {
-          "name": "_wearer",
-          "type": "address",
-          "internalType": "address"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool",
-          "internalType": "bool"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "setUp",
-      "inputs": [
-        {
-          "name": "_initData",
-          "type": "bytes",
-          "internalType": "bytes"
-        }
-      ],
-      "outputs": [],
-      "stateMutability": "nonpayable"
-    },
-    {
-      "type": "function",
-      "name": "version",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "string",
-          "internalType": "string"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "function",
-      "name": "version_",
-      "inputs": [],
-      "outputs": [
-        {
-          "name": "",
-          "type": "string",
-          "internalType": "string"
-        }
-      ],
-      "stateMutability": "view"
-    },
-    {
-      "type": "event",
-      "name": "Initialized",
-      "inputs": [
-        {
-          "name": "version",
-          "type": "uint8",
           "indexed": false,
-          "internalType": "uint8"
+          "internalType": "uint8",
+          "name": "version",
+          "type": "uint8"
         }
       ],
-      "anonymous": false
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "HATS",
+      "outputs": [
+        {
+          "internalType": "contract IHats",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "IMPLEMENTATION",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "getWearerStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "eligible",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "standing",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "gitcoinPassportDecoder",
+      "outputs": [
+        {
+          "internalType": "contract IGitcoinPassportDecoder",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hatId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "wearer",
+          "type": "address"
+        }
+      ],
+      "name": "isHuman",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "scoreCriterion",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        }
+      ],
+      "name": "setUp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version_",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     }
   ]
 }
