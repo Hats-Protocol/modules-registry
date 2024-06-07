@@ -996,7 +996,7 @@
         {
           "label": "Minimum Stake",
           "functionName": "minStake",
-          "displayType": "amountWithDecimals"
+          "displayType": "default"
         },
         {
           "label": "Cooldown Period",
@@ -1044,7 +1044,7 @@
           },
           {
             "name": "Judge Hat",
-            "description": "The hat that can slash wearers",
+            "description": "The hat that can set wearers' standing, enabling them to be slashed",
             "type": "uint256",
             "example": "26959946667150639794667015087019630673637144422540572481103610249216",
             "displayType": "hat"
@@ -1059,7 +1059,11 @@
         ]
       },
       "customRoles": [
-        { "id": "stakingJudge", "name": "Staking Judge", "criteria": "judge" }
+        {
+          "id": "baalStakingJudge",
+          "name": "Staking Judge",
+          "criteria": "judge"
+        }
       ],
       "writeFunctions": [
         {
@@ -1205,7 +1209,7 @@
           ]
         },
         {
-          "roles": ["stakingJudge"],
+          "roles": ["baalStakingJudge"],
           "functionName": "setStanding",
           "label": "Set Wearer Standing",
           "description": "Set a wearer's standing",
