@@ -14,7 +14,7 @@ env:
   BASE_RPC: https://base.publicnode.com
   PGN_RPC: https://rpc.publicgoods.network
   CELO_RPC: https://forno.celo.org
-  ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}
+  ETHERSCAN_KEY: HDMPWG86NYEF1Y5KWZU1XI4HZX4SNHFW3B
 
 jobs:
   test:
