@@ -35,6 +35,16 @@
       "label": "Token",
       "functionName": "keyPurchaseToken",
       "displayType": "token"
+    },
+    {
+      "label": "Renewal Period",
+      "functionName": "expirationDuration",
+      "displayType": "seconds"
+    },
+    {
+      "label": "Max Purchasers",
+      "functionName": "maxNumberOfKeys",
+      "displayType": "default"
     }
   ],
   "type": {
