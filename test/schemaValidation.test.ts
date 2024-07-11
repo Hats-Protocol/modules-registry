@@ -110,9 +110,6 @@ describe("Schema Validation Tests", () => {
 
   test("Test module write functions", () => {
     for (const [id, module] of Object.entries(modules)) {
-      if (module.type.hatter) {
-        continue;
-      }
       const moduleWriteFucntions = module.writeFunctions;
       const abi = module.abi;
 

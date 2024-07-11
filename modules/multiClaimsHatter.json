@@ -82,7 +82,217 @@
     ]
   },
   "customRoles": [],
-  "writeFunctions": [],
+  "writeFunctions": [
+    {
+      "roles": ["hatAdmins"],
+      "functionName": "setHatClaimability",
+      "label": "Set Claimability",
+      "description": "Change the claimability status of a hat",
+      "primary": true,
+      "args": [
+        {
+          "name": "Hat",
+          "description": "The ID of the hat to set claimability for",
+          "type": "uint256",
+          "displayType": "hat"
+        },
+        {
+          "name": "Claimability Type",
+          "description": "New claimability type for the hat (0 - not claimable, 1 - claimable by wearer, 2 - claimable by wearer and on behalf of)",
+          "type": "uint8",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["hatAdmins"],
+      "functionName": "setHatsClaimability",
+      "label": "Set Claimabilities",
+      "description": "Change the claimability status of multiple hats",
+      "args": [
+        {
+          "name": "Hats",
+          "description": "The IDs of the hats to set claimability for",
+          "type": "uint256[]",
+          "displayType": "default"
+        },
+        {
+          "name": "Claimability Types",
+          "description": "New claimability types for the hats (0 - not claimable, 1 - claimable by wearer, 2 - claimable by wearer and on behalf of)",
+          "type": "uint8[]",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["hatAdmins"],
+      "functionName": "setHatClaimabilityAndCreateModule",
+      "label": "Set Claimability and Create Module",
+      "description": "Wrapper around a HatsModuleFactory. Deploys a new HatsModule instance and sets a hat's claimability type",
+      "args": [
+        {
+          "name": "Factory",
+          "description": "The HatsModuleFactory instance that will deploy the module",
+          "type": "address",
+          "displayType": "default"
+        },
+        {
+          "name": "Implementation",
+          "description": "The address of the implementation contract of which to deploy a clone",
+          "type": "address",
+          "displayType": "default"
+        },
+        {
+          "name": "Target Hat",
+          "description": "The hat for which to deploy a module",
+          "type": "uint256",
+          "displayType": "hat"
+        },
+        {
+          "name": "Immutable Args",
+          "description": "the immutable args to pass to the clone as immutable storage",
+          "type": "bytes",
+          "displayType": "default"
+        },
+        {
+          "name": "Init Data",
+          "description": "The encoded data to pass to the `setUp` function of the new HatsModule instance",
+          "type": "bytes",
+          "displayType": "default"
+        },
+        {
+          "name": "Hat",
+          "description": "The ID of the hat to set claimability for",
+          "type": "uint256",
+          "displayType": "hat"
+        },
+        {
+          "name": "Claimability Type",
+          "description": "New claimability type for the hat (0 - not claimable, 1 - claimable by wearer, 2 - claimable by wearer and on behalf of)",
+          "type": "uint8",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["hatAdmins"],
+      "functionName": "setHatsClaimabilityAndCreateModules",
+      "label": "Set Claimability and Create Module for Multiple Hats",
+      "description": "Wrapper around a HatsModuleFactory. Deploys new HatsModule instancse and sets the claimability type of multiple hats",
+      "args": [
+        {
+          "name": "Factory",
+          "description": "The HatsModuleFactory instance that will deploy the module",
+          "type": "address",
+          "displayType": "default"
+        },
+        {
+          "name": "Implementations",
+          "description": "The addresses of the implementation contracts of which to deploy a clone",
+          "type": "address[]",
+          "displayType": "default"
+        },
+        {
+          "name": "Target Hats",
+          "description": "The hats for which to deploy a module",
+          "type": "uint256[]",
+          "displayType": "default"
+        },
+        {
+          "name": "Immutable Args",
+          "description": "the immutable args to pass to the clones as immutable storage",
+          "type": "bytes[]",
+          "displayType": "default"
+        },
+        {
+          "name": "Init Datas",
+          "description": "The encoded data to pass to the `setUp` functions of the new HatsModule instances",
+          "type": "bytes[]",
+          "displayType": "default"
+        },
+        {
+          "name": "Hats",
+          "description": "The IDs of the hats to set claimability for",
+          "type": "uint256[]",
+          "displayType": "default"
+        },
+        {
+          "name": "Claimability Types",
+          "description": "New claimability types for the hats (0 - not claimable, 1 - claimable by wearer, 2 - claimable by wearer and on behalf of)",
+          "type": "uint8[]",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["public"],
+      "functionName": "claimHat",
+      "label": "Claim Hat",
+      "description": "Claim a hat",
+      "args": [
+        {
+          "name": "Hat",
+          "description": "The ID of the hat to claim",
+          "type": "uint256",
+          "displayType": "hat"
+        }
+      ]
+    },
+    {
+      "roles": ["public"],
+      "functionName": "claimHats",
+      "label": "Claim Multiple Hats",
+      "description": "Claim Multiple Hats",
+      "args": [
+        {
+          "name": "Hats",
+          "description": "The IDs of the hats to claim",
+          "type": "uint256[]",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["public"],
+      "functionName": "claimHatFor",
+      "label": "Claim Hat For",
+      "description": "Claim a hat on behalf of an account",
+      "args": [
+        {
+          "name": "Hat",
+          "description": "The ID of the hat to claim for",
+          "type": "uint256",
+          "displayType": "hat"
+        },
+        {
+          "name": "Account",
+          "description": "The account for which to claim for",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["public"],
+      "functionName": "claimHatsFor",
+      "label": "Claim Hats For",
+      "description": "Claim hats on behalf of accounts",
+      "args": [
+        {
+          "name": "Hats",
+          "description": "The IDs of the hats to claim for",
+          "type": "uint256[]",
+          "displayType": "default"
+        },
+        {
+          "name": "Accounts",
+          "description": "The accounts for which to claim for",
+          "type": "address[]",
+          "displayType": "default"
+        }
+      ]
+    }
+  ],
   "abi": [
     {
       "inputs": [
