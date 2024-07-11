@@ -105,6 +105,34 @@
   "writeFunctions": [
     {
       "roles": ["public"],
+      "functionName": "claim",
+      "label": "Claim",
+      "description": "Claim the hat",
+      "args": [
+        {
+          "name": "Claims Hatter",
+          "description": "A Multi Claims Hatter instance with which to perform claiming",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["public"],
+      "functionName": "slash",
+      "label": "Slash",
+      "description": "Slashes a member's stake for a role, if they are in bad standing",
+      "args": [
+        {
+          "name": "Member",
+          "description": "The member to slash",
+          "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["public"],
       "functionName": "stakeAndClaim",
       "label": "Stake and Claim",
       "description": "Stake tokens for the first time and claim the hat",
