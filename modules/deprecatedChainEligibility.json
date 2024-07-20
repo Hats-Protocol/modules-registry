@@ -1,5 +1,5 @@
 {
-  "name": "Eligibilities Chain",
+  "name": "Deprecated Eligibilities Chain",
   "details": [
     "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
     "Modules are chained in a format of a disjunction of conjunction clauses."
@@ -37,41 +37,26 @@
       "description": "Indicates that the module is extending the behavior of existing module instances",
       "label": "Meta Module",
       "value": "meta"
-    }
-  ],
-  "implementationAddress": "0x8AdED513a191e3FeE91Bb192Aba20FcC9c16aF2e",
-  "deployments": [
-    {
-      "chainId": "1",
-      "block": "19574101"
     },
     {
-      "chainId": "11155111",
-      "block": "5619276"
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
+    }
+  ],
+  "implementationAddress": "0x83200f1633cDb6C8f28F202CEA1B6a9105862D83",
+  "deployments": [
+    {
+      "chainId": "5",
+      "block": "10009615"
     },
     {
       "chainId": "10",
-      "block": "118266826"
+      "block": "111939238"
     },
     {
-      "chainId": "42161",
-      "block": "197106608"
-    },
-    {
-      "chainId": "8453",
-      "block": "12672147"
-    },
-    {
-      "chainId": "100",
-      "block": "33253671"
-    },
-    {
-      "chainId": "42220",
-      "block": "24892601"
-    },
-    {
-      "chainId": "137",
-      "block": "55391825"
+      "chainId": "11155111",
+      "block": "5313413"
     }
   ],
   "creationArgs": {

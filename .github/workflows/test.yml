@@ -7,7 +7,7 @@ on:
 env:
   SEPOLIA_RPC: https://sepolia.drpc.org
   MAINNET_RPC: https://cloudflare-eth.com
-  POLYGON_RPC: https://polygon-rpc.com
+  POLYGON_RPC: https://polygon.drpc.org
   OPTIMISM_RPC: https://mainnet.optimism.io
   ARBITRUM_RPC: https://arb1.arbitrum.io/rpc
   GNOSIS_RPC: https://gnosis.publicnode.com

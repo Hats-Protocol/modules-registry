@@ -39,15 +39,39 @@
       "value": "meta"
     }
   ],
-  "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
+  "implementationAddress": "0x841Bc396ad88A9C6b78F05b7754a9d22E3fB264b",
   "deployments": [
     {
-      "chainId": "5",
-      "block": "10009649"
+      "chainId": "1",
+      "block": "19574207"
     },
     {
       "chainId": "11155111",
-      "block": "5313437"
+      "block": "5619421"
+    },
+    {
+      "chainId": "10",
+      "block": "118267698"
+    },
+    {
+      "chainId": "42161",
+      "block": "197106268"
+    },
+    {
+      "chainId": "8453",
+      "block": "12672610"
+    },
+    {
+      "chainId": "100",
+      "block": "33253854"
+    },
+    {
+      "chainId": "42220",
+      "block": "24892768"
+    },
+    {
+      "chainId": "137",
+      "block": "55392404"
     }
   ],
   "creationArgs": {
