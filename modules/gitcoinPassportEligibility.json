@@ -1,20 +1,24 @@
 {
-  "name": "Hat Wearing Eligibility",
+  "name": "Gitcoin Passport Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that conditions eligibility for one hat based on wearing another hat.",
-    "One use of a hat is to serve as an encapsulation of a set of logic and conditions that serve as baseline eligibility criteria for other hats. This eligibility module builds on that idea by allowing a hat to be used as an eligibility criterion for another hat."
+    "An eligibility module requiring that hat wearers have a Gitcoin Passport score over a configurable threshold"
   ],
   "links": [
     {
       "label": "GitHub",
-      "link": "https://github.com/Hats-Protocol/hat-wearing-eligibility"
+      "link": "https://github.com/daocoa/gitcoin-passport-eligibility/"
     }
   ],
   "parameters": [
     {
-      "label": "Hat To Wear",
-      "functionName": "CRITERION_HAT",
-      "displayType": "hat"
+      "label": "Gitcoin Passport Decoder",
+      "functionName": "gitcoinPassportDecoder",
+      "displayType": "default"
+    },
+    {
+      "label": "Score Criterion",
+      "functionName": "scoreCriterion",
+      "displayType": "default"
     }
   ],
   "type": {
@@ -23,58 +27,32 @@
     "hatter": false
   },
   "tags": [],
-  "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
+  "implementationAddress": "0xD9FB39d25E714908ACDA64164a3488d83B6FD3a3",
   "deployments": [
     {
-      "chainId": "5",
-      "block": "9719807"
-    },
-    {
-      "chainId": "11155111",
-      "block": "4655381"
-    },
-    {
-      "chainId": "1",
-      "block": "18936188"
-    },
-    {
       "chainId": "10",
-      "block": "109769331"
-    },
-    {
-      "chainId": "137",
-      "block": "48562276"
-    },
-    {
-      "chainId": "42161",
-      "block": "139445749"
-    },
-    {
-      "chainId": "100",
-      "block": "30406067"
-    },
-    {
-      "chainId": "424",
-      "block": "6051557"
-    },
-    {
-      "chainId": "8453",
-      "block": "7577549"
-    },
-    {
-      "chainId": "42220",
-      "block": "22842434"
+      "block": "119896172"
     }
   ],
   "creationArgs": {
     "useHatId": true,
     "immutable": [
       {
-        "name": "Criterion Hat",
-        "description": "The ID of the hat which users will be required to wear in order to be eligible.",
+        "name": "Gitcoin Passport Decoder",
+        "description": "The address of the Gitcoin Passport Decoder contract, from which Passport scores are retrieved. You can find the latest deployment here: https://github.com/gitcoinco/passport/blob/main/deployments/onchainInfo.json",
+        "type": "address",
+        "example": "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56",
+        "displayType": "default"
+      },
+      {
+        "name": "Score Criterion",
+        "description": "Minimum threshold of passport to be considered eligible.",
         "type": "uint256",
-        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-        "displayType": "hat"
+        "example": "10",
+        "displayType": {
+          "type": "amountWithDecimals",
+          "decimals": "4"
+        }
       }
     ],
     "mutable": []
@@ -108,19 +86,6 @@
     },
     {
       "inputs": [],
-      "name": "CRITERION_HAT",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
       "name": "HATS",
       "outputs": [
         {
@@ -149,7 +114,7 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_wearer",
+          "name": "wearer",
           "type": "address"
         },
         {
@@ -176,7 +141,52 @@
     },
     {
       "inputs": [],
+      "name": "gitcoinPassportDecoder",
+      "outputs": [
+        {
+          "internalType": "contract IGitcoinPassportDecoder",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "hatId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "wearer",
+          "type": "address"
+        }
+      ],
+      "name": "isHuman",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "scoreCriterion",
       "outputs": [
         {
           "internalType": "uint256",

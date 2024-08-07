@@ -28,6 +28,7 @@
     "hatter": false
   },
   "implementationAddress": "0x5302757E4CEAD88d52D014113FCC8cb51dd36255",
+  "tags": [],
   "deployments": [
     {
       "chainId": "11155111",

@@ -1,0 +1,201 @@
+{
+  "name": "Deprecated Eligibilities Chain",
+  "details": [
+    "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
+    "Modules are chained in a format of a disjunction of conjunction clauses."
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/Hats-Protocol/hats-module"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Number Of Conjunction Clauses",
+      "functionName": "NUM_CONJUNCTION_CLAUSES",
+      "displayType": "default"
+    },
+    {
+      "label": "Length Of Each Clause",
+      "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
+      "displayType": "default"
+    },
+    {
+      "label": "Module Addresses",
+      "functionName": "MODULES",
+      "displayType": "default"
+    }
+  ],
+  "type": {
+    "eligibility": true,
+    "toggle": false,
+    "hatter": false
+  },
+  "tags": [
+    {
+      "description": "Indicates that the module is extending the behavior of existing module instances",
+      "label": "Meta Module",
+      "value": "meta"
+    },
+    {
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
+    }
+  ],
+  "implementationAddress": "0x83200f1633cDb6C8f28F202CEA1B6a9105862D83",
+  "deployments": [
+    {
+      "chainId": "5",
+      "block": "10009615"
+    },
+    {
+      "chainId": "10",
+      "block": "111939238"
+    },
+    {
+      "chainId": "11155111",
+      "block": "5313413"
+    }
+  ],
+  "creationArgs": {
+    "useHatId": true,
+    "immutable": [
+      {
+        "name": "Number Of Conjunction Clauses",
+        "description": "The number of conjunction clauses",
+        "type": "uint256",
+        "example": "2",
+        "displayType": "default"
+      },
+      {
+        "name": "Clause Lengths",
+        "description": "Length of each clause, provided as a list",
+        "type": "uint256[]",
+        "example": [1, 2],
+        "displayType": "default"
+      },
+      {
+        "name": "Modules",
+        "description": "The list of module instances to chain together",
+        "type": "address[]",
+        "example": [
+          "0x8a1f28732c984e5a80111bc06115b1302189859d",
+          "0x3232a9ab82800ff2ee966d6db5c6152d863bfc66",
+          "0xd700dcc4949dfc8fcb3b4246e7137bf759795ca0"
+        ],
+        "displayType": "default"
+      }
+    ],
+    "mutable": []
+  },
+  "customRoles": [],
+  "writeFunctions": [],
+  "abi": [
+    {
+      "inputs": [
+        { "internalType": "string", "name": "_version", "type": "string" }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "version",
+          "type": "uint8"
+        }
+      ],
+      "name": "Initialized",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "CONJUNCTION_CLAUSE_LENGTHS",
+      "outputs": [
+        { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "HATS",
+      "outputs": [
+        { "internalType": "contract IHats", "name": "", "type": "address" }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "IMPLEMENTATION",
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MODULES",
+      "outputs": [
+        { "internalType": "address[]", "name": "", "type": "address[]" }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "NUM_CONJUNCTION_CLAUSES",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "_wearer", "type": "address" },
+        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+      ],
+      "name": "getWearerStatus",
+      "outputs": [
+        { "internalType": "bool", "name": "eligible", "type": "bool" },
+        { "internalType": "bool", "name": "standing", "type": "bool" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hatId",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+      ],
+      "name": "setUp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version_",
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

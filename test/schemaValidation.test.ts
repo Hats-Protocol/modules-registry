@@ -43,7 +43,7 @@ describe("Schema Validation Tests", () => {
     });
 
     await hatsModulesClient.prepare(registryModules);
-    modules = await hatsModulesClient.getAllModules();
+    modules = await hatsModulesClient.getModules();
   }, 30000);
 
   afterAll(async () => {

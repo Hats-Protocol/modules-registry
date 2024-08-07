@@ -1,10 +1,47 @@
 {
-  "name": "Hats Toggles Chain",
-  "details": "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
+  "name": "Deprecated Toggles Chain",
+  "details": [
+    "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
+    "Modules are chained in a format of a disjunction of conjunction clauses."
+  ],
   "links": [
     {
       "label": "GitHub",
       "link": "https://github.com/Hats-Protocol/hats-module"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Number Of Conjunction Clauses",
+      "functionName": "NUM_CONJUNCTION_CLAUSES",
+      "displayType": "default"
+    },
+    {
+      "label": "Length Of Each Clause",
+      "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
+      "displayType": "default"
+    },
+    {
+      "label": "Module Addresses",
+      "functionName": "MODULES",
+      "displayType": "default"
+    }
+  ],
+  "type": {
+    "eligibility": false,
+    "toggle": true,
+    "hatter": false
+  },
+  "tags": [
+    {
+      "description": "Indicates that the module is extending the behavior of existing module instances",
+      "label": "Meta Module",
+      "value": "meta"
+    },
+    {
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
     }
   ],
   "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
@@ -12,8 +49,44 @@
     {
       "chainId": "5",
       "block": "10009649"
+    },
+    {
+      "chainId": "11155111",
+      "block": "5313437"
     }
   ],
+  "creationArgs": {
+    "useHatId": true,
+    "immutable": [
+      {
+        "name": "Number Of Conjunction Clauses",
+        "description": "The number of conjunction clauses",
+        "type": "uint256",
+        "example": "1",
+        "displayType": "default"
+      },
+      {
+        "name": "Clause Lengths",
+        "description": "Length of each clause, provided as a list",
+        "type": "uint256[]",
+        "example": [2],
+        "displayType": "default"
+      },
+      {
+        "name": "Modules",
+        "description": "The list of module instances to chain together",
+        "type": "address[]",
+        "example": [
+          "0xe1f50cd1078b4f7920c7d6657dc3d8d2e5155ae0",
+          "0x4f28253ece7b52dd800160e7fecdb1c531a3fe1f"
+        ],
+        "displayType": "default"
+      }
+    ],
+    "mutable": []
+  },
+  "customRoles": [],
+  "writeFunctions": [],
   "abi": [
     {
       "inputs": [

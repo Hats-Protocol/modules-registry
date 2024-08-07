@@ -1,0 +1,25 @@
+name: "Merge"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - submissions
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.MODULES_REGISTRY_BOT_TOKEN }}
+      - name: Merge
+        run: |
+          git config user.name modules-registry-bot
+          git config user.email infra@hatsprotocol.xyz
+          git fetch --unshallow
+          git checkout v1
+          git pull
+          git merge --no-ff submissions -m "Auto-merge"
+          git push

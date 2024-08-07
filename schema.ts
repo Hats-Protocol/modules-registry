@@ -6,7 +6,7 @@ const moduleCreationArgSchema = z
     description: z.string(),
     type: z.string(),
     example: z.any(),
-    displayType: z.string(),
+    displayType: z.union([z.string(), z.object({ type: z.string() })]),
     optional: z.boolean().optional(),
   })
   .strict();
@@ -16,7 +16,7 @@ const moduleWriteFunctionArgSchema = z
     name: z.string(),
     description: z.string(),
     type: z.string(),
-    displayType: z.string(),
+    displayType: z.union([z.string(), z.object({ type: z.string() })]),
     optional: z.boolean().optional(),
   })
   .strict();
@@ -43,7 +43,6 @@ const moduleWriteFunctionSchema = z
 
 export const moduleSchema = z
   .object({
-    deprecated: z.boolean().optional(),
     name: z.string(),
     details: z.array(z.string()),
     links: z.array(z.object({ label: z.string(), link: z.string() })),
@@ -51,7 +50,7 @@ export const moduleSchema = z
       z.object({
         label: z.string(),
         functionName: z.string(),
-        displayType: z.string(),
+        displayType: z.union([z.string(), z.object({ type: z.string() })]),
       }),
     ),
     type: z.object({
@@ -59,6 +58,13 @@ export const moduleSchema = z
       toggle: z.boolean(),
       hatter: z.boolean(),
     }),
+    tags: z.array(
+      z.object({
+        label: z.string(),
+        description: z.string(),
+        value: z.string(),
+      }),
+    ),
     implementationAddress: z.string().regex(/^0x[a-fA-F0-9]{40}$/),
     deployments: z.array(z.object({ chainId: z.string(), block: z.string() })),
     creationArgs: z.object({

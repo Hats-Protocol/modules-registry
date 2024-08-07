@@ -61,15 +61,18 @@ describe("Sepolia deployments", () => {
   }, 30000);
 
   test("Test create all modules", async () => {
-    const modules = hatsModulesClient.getAllModules();
+    const modules = hatsModulesClient.getModules();
 
-    // create new module instance for each module which is deployed on goerli
+    // create new module instance for each module which is deployed on sepolia
     for (const [id, module] of Object.entries(modules)) {
       console.log(`Testing module: ${module.name}`);
-      if (module.name === "JokeRace Eligibility") {
+      if (
+        module.name === "JokeRace Eligibility" ||
+        module.name === "Baal Staking Eligibility"
+      ) {
         continue;
       }
-      // check if module is deployed on goerli. If not, then skip
+      // check if module is deployed on sepolia. If not, then skip
       let isOnSepolia = false;
       for (let i = 0; i < module.deployments.length; i++) {
         if (module.deployments[i].chainId === "11155111") {

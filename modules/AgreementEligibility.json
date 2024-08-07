@@ -37,6 +37,7 @@
     "hatter": false
   },
   "implementationAddress": "0x8126d02F4EcDE43eca4543a0D90B755C3E225F09",
+  "tags": [],
   "deployments": [
     {
       "chainId": "11155111",
