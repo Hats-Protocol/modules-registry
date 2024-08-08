@@ -38,7 +38,12 @@
       "implementationAddress": "0xF6bc6Dd30403e6ff5b3Bebead32B8fce1b753aA1",
       "deployments": [
         { "chainId": "11155111", "block": "5279344" },
-        { "chainId": "10", "block": "116516227" }
+        { "chainId": "10", "block": "116516227" },
+        { "chainId": "42161", "block": "194358596" },
+        { "chainId": "100", "block": "33122123" },
+        { "chainId": "42220", "block": "24754861" },
+        { "chainId": "8453", "block": "12327703" },
+        { "chainId": "137", "block": "55094822" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -108,6 +113,7 @@
           "functionName": "setAgreement",
           "label": "Set Agreement",
           "description": "Set a new agreement, with a grace period",
+          "primary": true,
           "args": [
             {
               "name": "Agreement",
@@ -128,6 +134,7 @@
           "functionName": "revoke",
           "label": "Revoke",
           "description": "Revoke the wearer's hat and place them in bad standing",
+          "primary": true,
           "args": [
             {
               "name": "Wearer",
@@ -469,7 +476,9 @@
         { "chainId": "10", "block": "109815832" },
         { "chainId": "137", "block": "48560643" },
         { "chainId": "42161", "block": "139432841" },
-        { "chainId": "100", "block": "30405602" }
+        { "chainId": "100", "block": "30405602" },
+        { "chainId": "42220", "block": "24755507" },
+        { "chainId": "8453", "block": "12329333" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -3305,7 +3314,13 @@
       "deployments": [
         { "chainId": "5", "block": "10430387" },
         { "chainId": "11155111", "block": "5150097" },
-        { "chainId": "1", "block": "19086145" }
+        { "chainId": "1", "block": "19086145" },
+        { "chainId": "10", "block": "117924894" },
+        { "chainId": "137", "block": "55096864" },
+        { "chainId": "42161", "block": "194372056" },
+        { "chainId": "100", "block": "33122902" },
+        { "chainId": "8453", "block": "12329679" },
+        { "chainId": "42220", "block": "24755686" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -3748,7 +3763,9 @@
         { "chainId": "10", "block": "112566278" },
         { "chainId": "137", "block": "50286793" },
         { "chainId": "42161", "block": "153224468" },
-        { "chainId": "100", "block": "31089668" }
+        { "chainId": "100", "block": "31089668" },
+        { "chainId": "8453", "block": "12329992" },
+        { "chainId": "42220", "block": "24755770" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -4755,7 +4772,9 @@
         { "chainId": "10", "block": "110683928" },
         { "chainId": "137", "block": "48562673" },
         { "chainId": "42161", "block": "139448916" },
-        { "chainId": "100", "block": "30406143" }
+        { "chainId": "100", "block": "30406143" },
+        { "chainId": "8453", "block": "12330237" },
+        { "chainId": "42220", "block": "24755867" }
       ],
       "creationArgs": {
         "useHatId": true,
@@ -5042,7 +5061,9 @@
         { "chainId": "10", "block": "110684134" },
         { "chainId": "137", "block": "48562856" },
         { "chainId": "42161", "block": "139450291" },
-        { "chainId": "100", "block": "30406165" }
+        { "chainId": "100", "block": "30406165" },
+        { "chainId": "8453", "block": "12330400" },
+        { "chainId": "42220", "block": "24755933" }
       ],
       "creationArgs": {
         "useHatId": true,
