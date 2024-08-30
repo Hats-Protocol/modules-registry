@@ -1,8 +1,9 @@
 {
-  "name": "Unlock Protocol Eligibility (PublicLock V14)",
+  "name": "Subscription Eligibility (Unlock Protocol V14)",
   "details": [
-    "Use this module to make a hat only wearable by addresses that have purchased an Unlock Protocol key NFT.",
-    "Deploying this module will also create a new lock contract (Public Lock version 14), and will automatically mint a hat to the recipient of a newly purchased key."
+    "This module adds a subscription requirement to a hat. Wearers must make a recurring payment to keep the hat.",
+    "This module is powered by Unlock Protocol. Deploying this module will also create a new lock contract (Public Lock version 14), and will automatically mint a hat to the recipient of a newly purchased key. The wearer will remain eligible as long as their subscription is active.",
+    "To work properly, this module must be set as the eligibility module for the target hat and wear one of the target hat's admin hats."
   ],
   "links": [
     {
@@ -93,7 +94,7 @@
     "immutable": [],
     "mutable": [
       {
-        "name": "Renewal Period",
+        "name": "Subscription Period",
         "description": "How often a payment must be made to keep the hat",
         "type": "uint256",
         "example": "2592000",
@@ -107,14 +108,14 @@
         "displayType": "token"
       },
       {
-        "name": "Payment Price",
-        "description": "The price of a payment for a single renewal period",
+        "name": "Subscription Price",
+        "description": "The price of a payment for a single subscription period",
         "type": "uint256",
         "example": "5000000000000000000",
         "displayType": "amountWithDecimals"
       },
       {
-        "name": "Max Purchasers",
+        "name": "Max Subscribers",
         "description": "The maximum number of addresses that can pay for this hat. Suggested greater than or equal to the max wearers for this hat.",
         "type": "uint256",
         "example": "100",
