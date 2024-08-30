@@ -53,8 +53,10 @@
     "toggle": false,
     "hatter": true
   },
-  "tags": [],
-  "implementationAddress": "0",
+  "tags": [
+    "version: test3"
+  ],
+  "implementationAddress": "0x13d7ca8F08CDCb248df0792bcC5989509CE119E0",
   "deployments": [
     {
       "chainId": "5",
@@ -62,7 +64,7 @@
     },
     {
       "chainId": "11155111",
-      "block": "0"
+      "block": "6601907"
     },
     {
       "chainId": "10",
