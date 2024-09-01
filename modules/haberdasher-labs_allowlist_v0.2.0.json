@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_allowlist",
+  "version": "v0.2.0",
   "name": "Allowlist Eligibility",
   "details": [
     "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",

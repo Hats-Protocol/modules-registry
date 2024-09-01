@@ -1,7 +1,9 @@
 {
-  "name": "ERC721 Eligibility",
+  "id": "pumpedlunch_erc20",
+  "version": "v0.1.0",
+  "name": "ERC20 Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligibility"
+    "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC20 token to determine eligibility"
   ],
   "links": [
     {
@@ -12,13 +14,13 @@
   "parameters": [
     {
       "label": "Token Address",
-      "functionName": "ERC721_TOKEN_ADDRESS",
-      "displayType": "erc721"
+      "functionName": "ERC20_TOKEN_ADDRESS",
+      "displayType": "erc20"
     },
     {
       "label": "Minimum Balance",
       "functionName": "MIN_BALANCE",
-      "displayType": "default"
+      "displayType": "amountWithDecimals"
     }
   ],
   "type": {
@@ -27,47 +29,47 @@
     "hatter": false
   },
   "tags": [],
-  "implementationAddress": "0xF37cf12fB4493D29270806e826fDDf50dd722bab",
+  "implementationAddress": "0xbA5b218e6685D0607139c06f81442681a32a0EC3",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9611065"
+      "block": "9611056"
     },
     {
       "chainId": "11155111",
-      "block": "4655346"
+      "block": "4655367"
     },
     {
       "chainId": "1",
-      "block": "18936352"
+      "block": "18936346"
     },
     {
       "chainId": "10",
-      "block": "110684542"
+      "block": "110684393"
     },
     {
       "chainId": "137",
-      "block": "48563224"
+      "block": "48563085"
     },
     {
       "chainId": "42161",
-      "block": "139452888"
+      "block": "139452101"
     },
     {
       "chainId": "100",
-      "block": "30405902"
+      "block": "30405925"
     },
     {
       "chainId": "424",
-      "block": "6052014"
+      "block": "6052075"
     },
     {
       "chainId": "8453",
-      "block": "7556195"
+      "block": "7577516"
     },
     {
       "chainId": "42220",
-      "block": "22842339"
+      "block": "22842287"
     }
   ],
   "creationArgs": {
@@ -75,17 +77,17 @@
     "immutable": [
       {
         "name": "Token Address",
-        "description": "ERC721 token address",
+        "description": "ERC20 token address",
         "type": "address",
-        "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-        "displayType": "token"
+        "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
+        "displayType": "erc20"
       },
       {
         "name": "Minimum Balance",
         "description": "Minimum amount of tokens in order to be eligible",
         "type": "uint256",
         "example": "500",
-        "displayType": "default"
+        "displayType": "amountWithDecimals"
       }
     ],
     "mutable": []
@@ -129,7 +131,7 @@
     },
     {
       "inputs": [],
-      "name": "ERC721_TOKEN_ADDRESS",
+      "name": "ERC20_TOKEN_ADDRESS",
       "outputs": [
         {
           "internalType": "address",

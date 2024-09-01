@@ -1,5 +1,7 @@
 {
-  "name": "Deprecated Eligibilities Chain",
+  "id": "haberdasher-labs_eligibility-chain",
+  "version": "v0.1.0",
+  "name": "Eligibilities Chain",
   "details": [
     "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
     "Modules are chained in a format of a disjunction of conjunction clauses."
@@ -37,11 +39,6 @@
       "description": "Indicates that the module is extending the behavior of existing module instances",
       "label": "Meta Module",
       "value": "meta"
-    },
-    {
-      "description": "Indicates that the module is now deprecated",
-      "label": "Deprecated",
-      "value": "deprecated"
     }
   ],
   "implementationAddress": "0x83200f1633cDb6C8f28F202CEA1B6a9105862D83",

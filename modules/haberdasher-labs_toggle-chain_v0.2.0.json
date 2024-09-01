@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_toggle-chain",
+  "version": "v0.2.0",
   "name": "Toggles Chain",
   "details": [
     "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",

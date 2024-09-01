@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_allowlist",
+  "version": "v0.1.0",
   "name": "Allowlist Eligibility",
   "details": [
     "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",
@@ -27,13 +29,7 @@
     "toggle": false,
     "hatter": false
   },
-  "tags": [
-    {
-      "description": "Indicates that the module is now deprecated",
-      "label": "Deprecated",
-      "value": "deprecated"
-    }
-  ],
+  "tags": [],
   "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
   "deployments": [
     {

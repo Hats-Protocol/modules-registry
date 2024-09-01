@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_baal-staking",
+  "version": "v0.1.0",
   "name": "Baal Staking Eligibility",
   "details": [
     "An eligibility module which requires wearers of a given hat to stake a minimum amount of Baal voting shares in order to be eligible, and enables others in the Hat tree's organization to slash the stake of a wearer who is behaving badly."

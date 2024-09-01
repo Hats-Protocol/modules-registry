@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_jokerace",
+  "version": "v0.1.0",
   "name": "JokeRace Eligibility",
   "details": [
     "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
@@ -38,13 +40,7 @@
     "toggle": false,
     "hatter": false
   },
-  "tags": [
-    {
-      "description": "Indicates that the module is now deprecated",
-      "label": "Deprecated",
-      "value": "deprecated"
-    }
-  ],
+  "tags": [],
   "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
   "deployments": [
     {

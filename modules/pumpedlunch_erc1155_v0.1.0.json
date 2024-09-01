@@ -1,20 +1,31 @@
 {
-  "name": "Hat Wearing Eligibility",
+  "id": "pumpedlunch_erc1155",
+  "version": "v0.1.0",
+  "name": "ERC1155 Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that conditions eligibility for one hat based on wearing another hat.",
-    "One use of a hat is to serve as an encapsulation of a set of logic and conditions that serve as baseline eligibility criteria for other hats. This eligibility module builds on that idea by allowing a hat to be used as an eligibility criterion for another hat."
+    "A Hats Protocol eligibility module that checks if an address holds at least one minimum balance of a set of ERC1155 token Ids to determine eligibility"
   ],
   "links": [
     {
       "label": "GitHub",
-      "link": "https://github.com/Hats-Protocol/hat-wearing-eligibility"
+      "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
     }
   ],
   "parameters": [
     {
-      "label": "Hat To Wear",
-      "functionName": "CRITERION_HAT",
-      "displayType": "hat"
+      "label": "Token Address",
+      "functionName": "TOKEN_ADDRESS",
+      "displayType": "erc1155"
+    },
+    {
+      "label": "Token IDs",
+      "functionName": "TOKEN_IDS",
+      "displayType": "default"
+    },
+    {
+      "label": "Minimum Balances",
+      "functionName": "MIN_BALANCES",
+      "displayType": "default"
     }
   ],
   "type": {
@@ -23,58 +34,79 @@
     "hatter": false
   },
   "tags": [],
-  "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
+  "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9719807"
+      "block": "9608205"
     },
     {
       "chainId": "11155111",
-      "block": "4655381"
+      "block": "4655335"
     },
     {
       "chainId": "1",
-      "block": "18936188"
+      "block": "18936373"
     },
     {
       "chainId": "10",
-      "block": "109769331"
+      "block": "110684714"
     },
     {
       "chainId": "137",
-      "block": "48562276"
+      "block": "48563371"
     },
     {
       "chainId": "42161",
-      "block": "139445749"
+      "block": "139454273"
     },
     {
       "chainId": "100",
-      "block": "30406067"
+      "block": "30405871"
     },
     {
       "chainId": "424",
-      "block": "6051557"
+      "block": "6051886"
     },
     {
       "chainId": "8453",
-      "block": "7577549"
+      "block": "7556151"
     },
     {
       "chainId": "42220",
-      "block": "22842434"
+      "block": "22842397"
     }
   ],
   "creationArgs": {
     "useHatId": true,
     "immutable": [
       {
-        "name": "Criterion Hat",
-        "description": "The ID of the hat which users will be required to wear in order to be eligible.",
+        "name": "ERC1155 Contract Address",
+        "description": "ERC1155 contract address",
+        "type": "address",
+        "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
+        "displayType": "token"
+      },
+      {
+        "name": "Number Of Tokens",
+        "description": "Number of token IDs in the set of tokens that allow eligiblity",
         "type": "uint256",
-        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-        "displayType": "hat"
+        "example": "2",
+        "displayType": "default"
+      },
+      {
+        "name": "Token IDs",
+        "description": "The token IDs within the ERC1155 contract that allow eligibilty",
+        "type": "uint256[]",
+        "example": ["1", "2"],
+        "displayType": "default"
+      },
+      {
+        "name": "Minimum Balances",
+        "description": "The minimum balances required (for token ID in the corresponding index) for eligibility",
+        "type": "uint256[]",
+        "example": ["100", "500"],
+        "displayType": "default"
       }
     ],
     "mutable": []
@@ -94,6 +126,16 @@
       "type": "constructor"
     },
     {
+      "inputs": [],
+      "name": "AlreadyInitialized",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotInitializing",
+      "type": "error"
+    },
+    {
       "anonymous": false,
       "inputs": [
         {
@@ -108,7 +150,7 @@
     },
     {
       "inputs": [],
-      "name": "CRITERION_HAT",
+      "name": "ARRAY_LENGTH",
       "outputs": [
         {
           "internalType": "uint256",
@@ -140,6 +182,45 @@
           "internalType": "address",
           "name": "",
           "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MIN_BALANCES",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TOKEN_ADDRESS",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TOKEN_IDS",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
         }
       ],
       "stateMutability": "pure",

@@ -1,5 +1,7 @@
 {
-  "name": "Deprecated Toggles Chain",
+  "id": "haberdasher-labs_toggle-chain",
+  "version": "v0.1.0",
+  "name": "Toggles Chain",
   "details": [
     "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
     "Modules are chained in a format of a disjunction of conjunction clauses."
@@ -37,11 +39,6 @@
       "description": "Indicates that the module is extending the behavior of existing module instances",
       "label": "Meta Module",
       "value": "meta"
-    },
-    {
-      "description": "Indicates that the module is now deprecated",
-      "label": "Deprecated",
-      "value": "deprecated"
     }
   ],
   "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",

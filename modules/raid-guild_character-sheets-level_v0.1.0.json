@@ -1,4 +1,6 @@
 {
+  "id": "raid-guild_character-sheets-level",
+  "version": "v0.1.0",
   "name": "CharacterSheets Level",
   "details": [
     "A Hats Protocol eligibility module that checks players for CharacterSheets characters with a minimum level for specific classes."
