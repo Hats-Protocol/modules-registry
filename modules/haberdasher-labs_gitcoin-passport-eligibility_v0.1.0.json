@@ -1,30 +1,25 @@
 {
-  "id": "pumpedlunch_erc1155",
+  "id": "haberdasher-labs_gitcoin-passport-eligibility",
   "version": "v0.1.0",
-  "name": "ERC1155 Eligibility",
+  "name": "Gitcoin Passport Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that checks if an address holds at least one minimum balance of a set of ERC1155 token Ids to determine eligibility"
+    "An eligibility module requiring that hat wearers have a Gitcoin Passport score over a configurable threshold"
   ],
   "links": [
     {
       "label": "GitHub",
-      "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
+      "link": "https://github.com/daocoa/gitcoin-passport-eligibility/"
     }
   ],
   "parameters": [
     {
-      "label": "Token Address",
-      "functionName": "TOKEN_ADDRESS",
-      "displayType": "erc1155"
-    },
-    {
-      "label": "Token IDs",
-      "functionName": "TOKEN_IDS",
+      "label": "Gitcoin Passport Decoder",
+      "functionName": "gitcoinPassportDecoder",
       "displayType": "default"
     },
     {
-      "label": "Minimum Balances",
-      "functionName": "MIN_BALANCES",
+      "label": "Score Criterion",
+      "functionName": "scoreCriterion",
       "displayType": "default"
     }
   ],
@@ -34,79 +29,32 @@
     "hatter": false
   },
   "tags": [],
-  "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
+  "implementationAddress": "0xD9FB39d25E714908ACDA64164a3488d83B6FD3a3",
   "deployments": [
     {
-      "chainId": "5",
-      "block": "9608205"
-    },
-    {
-      "chainId": "11155111",
-      "block": "4655335"
-    },
-    {
-      "chainId": "1",
-      "block": "18936373"
-    },
-    {
       "chainId": "10",
-      "block": "110684714"
-    },
-    {
-      "chainId": "137",
-      "block": "48563371"
-    },
-    {
-      "chainId": "42161",
-      "block": "139454273"
-    },
-    {
-      "chainId": "100",
-      "block": "30405871"
-    },
-    {
-      "chainId": "424",
-      "block": "6051886"
-    },
-    {
-      "chainId": "8453",
-      "block": "7556151"
-    },
-    {
-      "chainId": "42220",
-      "block": "22842397"
+      "block": "119896172"
     }
   ],
   "creationArgs": {
     "useHatId": true,
     "immutable": [
       {
-        "name": "ERC1155 Contract Address",
-        "description": "ERC1155 contract address",
+        "name": "Gitcoin Passport Decoder",
+        "description": "The address of the Gitcoin Passport Decoder contract, from which Passport scores are retrieved. You can find the latest deployment here: https://github.com/gitcoinco/passport/blob/main/deployments/onchainInfo.json",
         "type": "address",
-        "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-        "displayType": "token"
+        "example": "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56",
+        "displayType": "default"
       },
       {
-        "name": "Number Of Tokens",
-        "description": "Number of token IDs in the set of tokens that allow eligiblity",
+        "name": "Score Criterion",
+        "description": "Minimum threshold of passport to be considered eligible.",
         "type": "uint256",
-        "example": "2",
-        "displayType": "default"
-      },
-      {
-        "name": "Token IDs",
-        "description": "The token IDs within the ERC1155 contract that allow eligibilty",
-        "type": "uint256[]",
-        "example": ["1", "2"],
-        "displayType": "default"
-      },
-      {
-        "name": "Minimum Balances",
-        "description": "The minimum balances required (for token ID in the corresponding index) for eligibility",
-        "type": "uint256[]",
-        "example": ["100", "500"],
-        "displayType": "default"
+        "example": "10",
+        "displayType": {
+          "type": "amountWithDecimals",
+          "decimals": "4"
+        }
       }
     ],
     "mutable": []
@@ -126,16 +74,6 @@
       "type": "constructor"
     },
     {
-      "inputs": [],
-      "name": "AlreadyInitialized",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "NotInitializing",
-      "type": "error"
-    },
-    {
       "anonymous": false,
       "inputs": [
         {
@@ -147,19 +85,6 @@
       ],
       "name": "Initialized",
       "type": "event"
-    },
-    {
-      "inputs": [],
-      "name": "ARRAY_LENGTH",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
     },
     {
       "inputs": [],
@@ -188,49 +113,10 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "MIN_BALANCES",
-      "outputs": [
-        {
-          "internalType": "uint256[]",
-          "name": "",
-          "type": "uint256[]"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "TOKEN_ADDRESS",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "TOKEN_IDS",
-      "outputs": [
-        {
-          "internalType": "uint256[]",
-          "name": "",
-          "type": "uint256[]"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "address",
-          "name": "_wearer",
+          "name": "wearer",
           "type": "address"
         },
         {
@@ -257,7 +143,52 @@
     },
     {
       "inputs": [],
+      "name": "gitcoinPassportDecoder",
+      "outputs": [
+        {
+          "internalType": "contract IGitcoinPassportDecoder",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "hatId",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "wearer",
+          "type": "address"
+        }
+      ],
+      "name": "isHuman",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "scoreCriterion",
       "outputs": [
         {
           "internalType": "uint256",
