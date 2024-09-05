@@ -36,6 +36,11 @@
   },
   "tags": [
     {
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
+    },
+    {
       "description": "Indicates that the module is extending the behavior of existing module instances",
       "label": "Meta Module",
       "value": "meta"

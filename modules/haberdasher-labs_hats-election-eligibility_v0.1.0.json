@@ -40,7 +40,13 @@
     "toggle": false,
     "hatter": false
   },
-  "tags": [],
+  "tags": [
+    {
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
+    }
+  ],
   "implementationAddress": "0x99081d45920818557203CCD62eD36dC2FaD9a43E",
   "deployments": [
     {
