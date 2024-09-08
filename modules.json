@@ -1,6 +1,459 @@
 {
   "modules": [
     {
+      "id": "haberdasher-labs_agreement-eligibility",
+      "version": "v0.1.0",
+      "name": "Agreement Eligibility",
+      "details": [
+        "A Hats Protocol eligibility module that a community or organization can use to enable individuals to join the community by signing an agreement."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/agreement-eligibility"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Current Agreement",
+          "functionName": "currentAgreement",
+          "displayType": "default"
+        },
+        {
+          "label": "Grace Period Ending",
+          "functionName": "graceEndsAt",
+          "displayType": "timestamp"
+        },
+        {
+          "label": "Owner Hat",
+          "functionName": "OWNER_HAT",
+          "displayType": "hat"
+        },
+        {
+          "label": "Arbitrator Hat",
+          "functionName": "ARBITRATOR_HAT",
+          "displayType": "hat"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is now deprecated",
+          "label": "Deprecated",
+          "value": "deprecated"
+        }
+      ],
+      "implementationAddress": "0xF6bc6Dd30403e6ff5b3Bebead32B8fce1b753aA1",
+      "deployments": [
+        { "chainId": "11155111", "block": "5279344" },
+        { "chainId": "10", "block": "116516227" },
+        { "chainId": "42161", "block": "194358596" },
+        { "chainId": "100", "block": "33122123" },
+        { "chainId": "42220", "block": "24754861" },
+        { "chainId": "8453", "block": "12327703" },
+        { "chainId": "137", "block": "55094822" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Owner Hat",
+            "description": "The hat ID for the owner hat. The wearer(s) of this hat are authorized to update the agreement.",
+            "type": "uint256",
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+            "displayType": "hat"
+          },
+          {
+            "name": "Arbitrator Hat",
+            "description": "The hat ID for the arbitrator hat. The wearer(s) of this hat are authorized to set the standing for accounts.",
+            "type": "uint256",
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+            "displayType": "hat"
+          }
+        ],
+        "mutable": [
+          {
+            "name": "Agreement",
+            "description": "Initial agreement",
+            "type": "string",
+            "example": "ipfs://bafybeih2a5ztsooqtx7hb32oayynxoeiplaqd5llcnezzj2srqgmc2k2da",
+            "displayType": "default"
+          }
+        ]
+      },
+      "customRoles": [
+        {
+          "id": "agreementOwner",
+          "name": "Agreement Owner",
+          "criteria": "OWNER_HAT"
+        },
+        {
+          "id": "agreementArbitrator",
+          "name": "Agreement Arbitrator",
+          "criteria": "ARBITRATOR_HAT"
+        }
+      ],
+      "writeFunctions": [
+        {
+          "roles": ["public"],
+          "functionName": "signAgreementAndClaimHat",
+          "label": "Sign Agreement and Claim",
+          "description": "Sign the current agreement and claim the hat",
+          "primary": true,
+          "args": [
+            {
+              "name": "Claims Hatter",
+              "description": "A Multi Claims Hatter instance with which to perform claiming",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["public"],
+          "functionName": "signAgreement",
+          "label": "Sign Agreement",
+          "description": "Sign the current agreement (without claiming the hat)",
+          "args": []
+        },
+        {
+          "roles": ["agreementOwner"],
+          "functionName": "setAgreement",
+          "label": "Set Agreement",
+          "description": "Set a new agreement, with a grace period",
+          "primary": true,
+          "args": [
+            {
+              "name": "Agreement",
+              "description": "The new agreement, as a hash of the agreement plaintext or a link",
+              "type": "string",
+              "displayType": "default"
+            },
+            {
+              "name": "Grace Period",
+              "description": "The new grace period - the time duration for which signers of the existing agreement are still eligible",
+              "type": "uint256",
+              "displayType": "seconds"
+            }
+          ]
+        },
+        {
+          "roles": ["agreementArbitrator"],
+          "functionName": "revoke",
+          "label": "Revoke",
+          "description": "Revoke the wearer's hat and place them in bad standing",
+          "primary": true,
+          "args": [
+            {
+              "name": "Wearer",
+              "description": "The address of the wearer from whom to revoke the hat",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["agreementArbitrator"],
+          "functionName": "forgive",
+          "label": "Forgive",
+          "description": "Forgive the wearer's bad standing, allowing them to claim the hat again",
+          "args": [
+            {
+              "name": "Wearer",
+              "description": "The address of the wearer to forgive",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        }
+      ],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "AgreementEligibility_NotArbitrator",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "AgreementEligibility_NotOwner",
+          "type": "error"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "agreement",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "grace",
+              "type": "uint256"
+            }
+          ],
+          "name": "AgreementEligibility_AgreementSet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "signer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "agreement",
+              "type": "string"
+            }
+          ],
+          "name": "AgreementEligibility_AgreementSigned",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "claimer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "hatId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "agreement",
+              "type": "string"
+            }
+          ],
+          "name": "AgreementEligibility_HatClaimedWithAgreement",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ARBITRATOR_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "OWNER_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "claimer", "type": "address" }
+          ],
+          "name": "claimerAgreements",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "agreementId",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "currentAgreement",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "currentAgreementId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" }
+          ],
+          "name": "forgive",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "graceEndsAt",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" }
+          ],
+          "name": "revoke",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "_agreement",
+              "type": "string"
+            },
+            { "internalType": "uint256", "name": "_grace", "type": "uint256" }
+          ],
+          "name": "setAgreement",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "signAgreement",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_claimsHatter",
+              "type": "address"
+            }
+          ],
+          "name": "signAgreementAndClaimHat",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" }
+          ],
+          "name": "wearerStanding",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "haberdasher-labs_agreement-eligibility",
+      "version": "v0.2.0",
       "name": "Agreement Eligibility",
       "details": [
         "A Hats Protocol eligibility module that a community or organization can use to enable individuals to join the community by signing an agreement."
@@ -528,6 +981,544 @@
       ]
     },
     {
+      "id": "haberdasher-labs_allowlist-eligibility",
+      "version": "v0.1.0",
+      "name": "Allowlist Eligibility",
+      "details": [
+        "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",
+        "This module sets up a simple allowlist to determine eligibility for a hat. For a given account (i.e., potential hat wearer), the allowlist stores values for that account's eligibility and standing for the hat. The wearer(s) of the Owner Hat can add or remove accounts from the allowlist. The wearer(s) of the Arbitrator Hat can set the standing of accounts."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/allowlist-eligibility"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Owner Hat",
+          "functionName": "OWNER_HAT",
+          "displayType": "hat"
+        },
+        {
+          "label": "Arbitrator Hat",
+          "functionName": "ARBITRATOR_HAT",
+          "displayType": "hat"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is now deprecated",
+          "label": "Deprecated",
+          "value": "deprecated"
+        }
+      ],
+      "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
+      "deployments": [
+        { "chainId": "5", "block": "9647259" },
+        { "chainId": "11155111", "block": "4655298" },
+        { "chainId": "10", "block": "109815832" },
+        { "chainId": "137", "block": "48560643" },
+        { "chainId": "42161", "block": "139432841" },
+        { "chainId": "100", "block": "30405602" },
+        { "chainId": "42220", "block": "24755507" },
+        { "chainId": "8453", "block": "12329333" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Owner Hat",
+            "description": "The hat ID for the owner hat. The wearer(s) of this hat are authorized to add and remove accounts from the allowlist.",
+            "type": "uint256",
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+            "displayType": "hat"
+          },
+          {
+            "name": "Arbitrator Hat",
+            "description": "The hat ID for the arbitrator hat. The wearer(s) of this hat are authorized to set the standing for accounts.",
+            "type": "uint256",
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+            "displayType": "hat"
+          }
+        ],
+        "mutable": [
+          {
+            "name": "Accounts",
+            "description": "Initial accounts for the allowlist.",
+            "type": "address[]",
+            "example": [
+              "0x0000000000000000000000000000000000000001",
+              "0x0000000000000000000000000000000000000002"
+            ],
+            "displayType": "default"
+          }
+        ]
+      },
+      "customRoles": [
+        {
+          "id": "allowListOwner",
+          "name": "Allowlist Owner",
+          "criteria": "OWNER_HAT"
+        },
+        {
+          "id": "allowListArbitrator",
+          "name": "Allowlist Arbitrator",
+          "criteria": "ARBITRATOR_HAT"
+        }
+      ],
+      "writeFunctions": [
+        {
+          "roles": ["allowListOwner"],
+          "functionName": "addAccount",
+          "label": "Add Account",
+          "description": "Add an account to the allowlist",
+          "primary": true,
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to add",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["allowListOwner"],
+          "functionName": "addAccounts",
+          "label": "Add Accounts",
+          "description": "Add multiple accounts to the allowlist",
+          "args": [
+            {
+              "name": "Accounts",
+              "description": "The accounts to add",
+              "type": "address[]",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["allowListOwner"],
+          "functionName": "removeAccount",
+          "label": "Remove Account",
+          "description": "Remove an account from the allowlist",
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to remove",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["allowListOwner"],
+          "functionName": "removeAccountAndBurnHat",
+          "label": "Remove and Burn",
+          "description": "Remove an account from the allowlist and burn their hat",
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to remove",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["allowListOwner"],
+          "functionName": "removeAccounts",
+          "label": "Remove Accounts",
+          "description": "Remove multiple accounts from the allowlist",
+          "args": [
+            {
+              "name": "Accounts",
+              "description": "Accounts to remove",
+              "type": "address[]",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["allowListArbitrator"],
+          "functionName": "setStandingForAccount",
+          "label": "Set Standing",
+          "description": "Set the standing for an account",
+          "primary": true,
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to set standing for",
+              "type": "address",
+              "displayType": "default"
+            },
+            {
+              "name": "Standing",
+              "description": "The standing to set",
+              "type": "bool",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["allowListArbitrator"],
+          "functionName": "setBadStandingAndBurnHat",
+          "label": "Set Bad Standing and Burn Hat",
+          "description": "Puts an account in bad standing and burns their hat",
+          "args": [
+            {
+              "name": "Account",
+              "description": "The account to set standing for",
+              "type": "address",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["allowListArbitrator"],
+          "functionName": "setStandingForAccounts",
+          "label": "Set Standings",
+          "description": "Set the standing for multiple accounts",
+          "args": [
+            {
+              "name": "Accounts",
+              "description": "Accounts accounts to set standing for",
+              "type": "address[]",
+              "displayType": "default"
+            },
+            {
+              "name": "Standings",
+              "description": "The standings to set for each account, corresponding to the accounts order",
+              "type": "bool[]",
+              "displayType": "default"
+            }
+          ]
+        }
+      ],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "AllowlistEligibility_ArrayLengthMismatch",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "AllowlistEligibility_NotArbitrator",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "AllowlistEligibility_NotOwner",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "AllowlistEligibility_NotWearer",
+          "type": "error"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "AccountAdded",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "AccountRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "standing",
+              "type": "bool"
+            }
+          ],
+          "name": "AccountStandingChanged",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address[]",
+              "name": "accounts",
+              "type": "address[]"
+            }
+          ],
+          "name": "AccountsAdded",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address[]",
+              "name": "accounts",
+              "type": "address[]"
+            }
+          ],
+          "name": "AccountsRemoved",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address[]",
+              "name": "accounts",
+              "type": "address[]"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool[]",
+              "name": "standing",
+              "type": "bool[]"
+            }
+          ],
+          "name": "AccountsStandingChanged",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ARBITRATOR_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "OWNER_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" }
+          ],
+          "name": "addAccount",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "_accounts",
+              "type": "address[]"
+            }
+          ],
+          "name": "addAccounts",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "account", "type": "address" }
+          ],
+          "name": "allowlist",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "badStanding", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "_eligible", "type": "bool" },
+            { "internalType": "bool", "name": "_standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" }
+          ],
+          "name": "removeAccount",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" }
+          ],
+          "name": "removeAccountAndBurnHat",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "_accounts",
+              "type": "address[]"
+            }
+          ],
+          "name": "removeAccounts",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_account", "type": "address" }
+          ],
+          "name": "setBadStandingAndBurnHat",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_account",
+              "type": "address"
+            },
+            { "internalType": "bool", "name": "_standing", "type": "bool" }
+          ],
+          "name": "setStandingForAccount",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "_accounts",
+              "type": "address[]"
+            },
+            { "internalType": "bool[]", "name": "_standing", "type": "bool[]" }
+          ],
+          "name": "setStandingForAccounts",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "haberdasher-labs_allowlist-eligibility",
+      "version": "v0.2.0",
       "name": "Allowlist Eligibility",
       "details": [
         "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",
@@ -1139,6 +2130,8 @@
       ]
     },
     {
+      "id": "haberdasher-labs_baal-staking-eligibility",
+      "version": "v0.1.0",
       "name": "Baal Staking Eligibility",
       "details": [
         "An eligibility module which requires wearers of a given hat to stake a minimum amount of Baal voting shares in order to be eligible, and enables others in the Hat tree's organization to slash the stake of a wearer who is behaving badly."
@@ -1866,6 +2859,367 @@
       ]
     },
     {
+      "id": "haberdasher-labs_colinks-supply-eligibility",
+      "version": "v0.1.0",
+      "name": "CoLinks Supply Eligibility",
+      "details": [
+        "Determines eligibility based on the supply of CoLinks links targeting a given account.",
+        "An account (i.e. potential hat wearer) is eligible if the current supply of their links meets a configurable threshold., "
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/colinks-eligibility"
+        },
+        { "label": "CoLinks", "link": "https://colinks.coordinape.com/" }
+      ],
+      "parameters": [
+        {
+          "label": "Link Supply Threshold",
+          "functionName": "THRESHOLD",
+          "displayType": "uint256"
+        },
+        {
+          "label": "CoLinks Contract",
+          "functionName": "COLINKS",
+          "displayType": "address"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
+      "implementationAddress": "0x64DB769cBC4de73a09BCA715604B27FA8704d3Eb",
+      "deployments": [{ "chainId": "10", "block": "114023601" }],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Link Supply Threshold",
+            "description": "The minimum supply of an account's links that must exist for the account to be eligible.",
+            "type": "uint256",
+            "example": "10",
+            "displayType": "default",
+            "optional": false
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [],
+      "writeFunctions": [],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "COLINKS",
+          "outputs": [
+            {
+              "internalType": "contract CoLinksLike",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "THRESHOLD",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "haberdasher-labs_eligibility-chain",
+      "version": "v0.1.0",
+      "name": "Eligibilities Chain",
+      "details": [
+        "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
+        "Modules are chained in a format of a disjunction of conjunction clauses."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/hats-module"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Number Of Conjunction Clauses",
+          "functionName": "NUM_CONJUNCTION_CLAUSES",
+          "displayType": "default"
+        },
+        {
+          "label": "Length Of Each Clause",
+          "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
+          "displayType": "default"
+        },
+        {
+          "label": "Module Addresses",
+          "functionName": "MODULES",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is now deprecated",
+          "label": "Deprecated",
+          "value": "deprecated"
+        },
+        {
+          "description": "Indicates that the module is extending the behavior of existing module instances",
+          "label": "Meta Module",
+          "value": "meta"
+        }
+      ],
+      "implementationAddress": "0x83200f1633cDb6C8f28F202CEA1B6a9105862D83",
+      "deployments": [
+        { "chainId": "5", "block": "10009615" },
+        { "chainId": "10", "block": "111939238" },
+        { "chainId": "11155111", "block": "5313413" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Number Of Conjunction Clauses",
+            "description": "The number of conjunction clauses",
+            "type": "uint256",
+            "example": "2",
+            "displayType": "default"
+          },
+          {
+            "name": "Clause Lengths",
+            "description": "Length of each clause, provided as a list",
+            "type": "uint256[]",
+            "example": [1, 2],
+            "displayType": "default"
+          },
+          {
+            "name": "Modules",
+            "description": "The list of module instances to chain together",
+            "type": "address[]",
+            "example": [
+              "0x8a1f28732c984e5a80111bc06115b1302189859d",
+              "0x3232a9ab82800ff2ee966d6db5c6152d863bfc66",
+              "0xd700dcc4949dfc8fcb3b4246e7137bf759795ca0"
+            ],
+            "displayType": "default"
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [],
+      "writeFunctions": [],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "CONJUNCTION_CLAUSE_LENGTHS",
+          "outputs": [
+            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MODULES",
+          "outputs": [
+            { "internalType": "address[]", "name": "", "type": "address[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "NUM_CONJUNCTION_CLAUSES",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "haberdasher-labs_eligibility-chain",
+      "version": "v0.2.0",
       "name": "Eligibilities Chain",
       "details": [
         "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
@@ -2064,525 +3418,50 @@
       ]
     },
     {
-      "name": "Toggles Chain",
+      "id": "haberdasher-labs_gitcoin-passport-eligibility",
+      "version": "v0.1.0",
+      "name": "Gitcoin Passport Eligibility",
       "details": [
-        "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
-        "Modules are chained in a format of a disjunction of conjunction clauses."
+        "An eligibility module requiring that hat wearers have a Gitcoin Passport score over a configurable threshold"
       ],
       "links": [
         {
           "label": "GitHub",
-          "link": "https://github.com/Hats-Protocol/hats-module"
+          "link": "https://github.com/daocoa/gitcoin-passport-eligibility/"
         }
       ],
       "parameters": [
         {
-          "label": "Number Of Conjunction Clauses",
-          "functionName": "NUM_CONJUNCTION_CLAUSES",
+          "label": "Gitcoin Passport Decoder",
+          "functionName": "gitcoinPassportDecoder",
           "displayType": "default"
         },
         {
-          "label": "Length Of Each Clause",
-          "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
-          "displayType": "default"
-        },
-        {
-          "label": "Module Addresses",
-          "functionName": "MODULES",
-          "displayType": "default"
-        }
-      ],
-      "type": { "eligibility": false, "toggle": true, "hatter": false },
-      "tags": [
-        {
-          "description": "Indicates that the module is extending the behavior of existing module instances",
-          "label": "Meta Module",
-          "value": "meta"
-        }
-      ],
-      "implementationAddress": "0x841Bc396ad88A9C6b78F05b7754a9d22E3fB264b",
-      "deployments": [
-        { "chainId": "1", "block": "19574207" },
-        { "chainId": "11155111", "block": "5619421" },
-        { "chainId": "10", "block": "118267698" },
-        { "chainId": "42161", "block": "197106268" },
-        { "chainId": "8453", "block": "12672610" },
-        { "chainId": "100", "block": "33253854" },
-        { "chainId": "42220", "block": "24892768" },
-        { "chainId": "137", "block": "55392404" }
-      ],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Number Of Conjunction Clauses",
-            "description": "The number of conjunction clauses",
-            "type": "uint256",
-            "example": "1",
-            "displayType": "default"
-          },
-          {
-            "name": "Clause Lengths",
-            "description": "Length of each clause, provided as a list",
-            "type": "uint256[]",
-            "example": [2],
-            "displayType": "default"
-          },
-          {
-            "name": "Modules",
-            "description": "The list of module instances to chain together",
-            "type": "address[]",
-            "example": [
-              "0xe1f50cd1078b4f7920c7d6657dc3d8d2e5155ae0",
-              "0x4f28253ece7b52dd800160e7fecdb1c531a3fe1f"
-            ],
-            "displayType": "default"
-          }
-        ],
-        "mutable": []
-      },
-      "customRoles": [],
-      "writeFunctions": [],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "CONJUNCTION_CLAUSE_LENGTHS",
-          "outputs": [
-            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "MODULES",
-          "outputs": [
-            { "internalType": "address[]", "name": "", "type": "address[]" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "NUM_CONJUNCTION_CLAUSES",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
-          ],
-          "name": "getHatStatus",
-          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
-      "name": "CharacterSheets Level",
-      "details": [
-        "A Hats Protocol eligibility module that checks players for CharacterSheets characters with a minimum level for specific classes."
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/raid-guild/character-sheets-contracts"
-        },
-        { "label": "CharacterSheets", "link": "https://charactersheets.io" },
-        { "label": "RaidGuild", "link": "https://raidguild.org" }
-      ],
-      "deployments": [{ "chainId": "100", "block": "31196970" }],
-      "parameters": [
-        {
-          "label": "CharacterSheet",
-          "functionName": "SHEETS_ADDRESS",
-          "displayType": "address"
-        },
-        {
-          "label": "Classes Token",
-          "functionName": "CLASSES_ADDRESS",
+          "label": "Score Criterion",
+          "functionName": "scoreCriterion",
           "displayType": "default"
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
       "tags": [],
-      "implementationAddress": "0xB2Ad134eB41695Ca87a62C7529259dC271d810Ce",
+      "implementationAddress": "0xD9FB39d25E714908ACDA64164a3488d83B6FD3a3",
+      "deployments": [{ "chainId": "10", "block": "119896172" }],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
           {
-            "name": "CharacterSheets Address",
-            "description": "The address for the CharacterSheets game where players have characters.",
+            "name": "Gitcoin Passport Decoder",
+            "description": "The address of the Gitcoin Passport Decoder contract, from which Passport scores are retrieved. You can find the latest deployment here: https://github.com/gitcoinco/passport/blob/main/deployments/onchainInfo.json",
             "type": "address",
-            "example": "0x083c4e685f64411747548a5ea090630ab0bf17bf",
+            "example": "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56",
             "displayType": "default"
           },
           {
-            "name": "Classes Address",
-            "description": "The address for the Classes token used in the character sheets game",
-            "type": "address",
-            "example": "0x7e029eFCbD96804B7284a9eEb74f2F5aB5F79a7e",
-            "displayType": "token"
-          }
-        ],
-        "mutable": [
-          {
-            "name": "Class IDs",
-            "description": "Initial classes to be included for eligibility",
-            "type": "uint256[]",
-            "example": [1],
-            "displayType": "default"
-          },
-          {
-            "name": "Minimum Levels",
-            "description": "Initial levels needed for each class to be included for eligibility",
-            "type": "uint256[]",
-            "example": [2],
-            "displayType": "default"
-          }
-        ]
-      },
-      "customRoles": [],
-      "writeFunctions": [
-        {
-          "roles": ["hatAdmins"],
-          "functionName": "addClasses",
-          "label": "Add Classes",
-          "description": "Add classes and their minimum levels",
-          "primary": true,
-          "args": [
-            {
-              "name": "Class IDs",
-              "description": "Classes to add",
-              "type": "uint256[]",
-              "displayType": "default"
-            },
-            {
-              "name": "Min Levels",
-              "description": "The min levels corrsponding to each new class, in the same order",
-              "type": "uint256[]",
-              "displayType": "default"
-            }
-          ]
-        }
-      ],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "ElderEligibility_HatImmutable",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "ElderEligibility_NotHatAdmin",
-          "type": "error"
-        },
-        { "inputs": [], "name": "LengthMismatch", "type": "error" },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint256[]",
-              "name": "",
-              "type": "uint256[]"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256[]",
-              "name": "",
-              "type": "uint256[]"
-            }
-          ],
-          "name": "ClassesAdded",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "name": "ElderEligibilityDeployed",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "ARRAY_LENGTH",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "CLASSES_ADDRESS",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "SHEETS_ADDRESS",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256[]",
-              "name": "_classIds",
-              "type": "uint256[]"
-            },
-            {
-              "internalType": "uint256[]",
-              "name": "_minLevels",
-              "type": "uint256[]"
-            }
-          ],
-          "name": "addClasses",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "classIds",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "minLevels",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
-      "name": "CoLinks Supply Eligibility",
-      "details": [
-        "Determines eligibility based on the supply of CoLinks links targeting a given account.",
-        "An account (i.e. potential hat wearer) is eligible if the current supply of their links meets a configurable threshold., "
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/Hats-Protocol/colinks-eligibility"
-        },
-        { "label": "CoLinks", "link": "https://colinks.coordinape.com/" }
-      ],
-      "parameters": [
-        {
-          "label": "Link Supply Threshold",
-          "functionName": "THRESHOLD",
-          "displayType": "uint256"
-        },
-        {
-          "label": "CoLinks Contract",
-          "functionName": "COLINKS",
-          "displayType": "address"
-        }
-      ],
-      "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [],
-      "implementationAddress": "0x64DB769cBC4de73a09BCA715604B27FA8704d3Eb",
-      "deployments": [{ "chainId": "10", "block": "114023601" }],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Link Supply Threshold",
-            "description": "The minimum supply of an account's links that must exist for the account to be eligible.",
+            "name": "Score Criterion",
+            "description": "Minimum threshold of passport to be considered eligible.",
             "type": "uint256",
             "example": "10",
-            "displayType": "default",
-            "optional": false
+            "displayType": { "type": "amountWithDecimals", "decimals": "4" }
           }
         ],
         "mutable": []
@@ -2612,55 +3491,46 @@
         },
         {
           "inputs": [],
-          "name": "COLINKS",
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "gitcoinPassportDecoder",
           "outputs": [
             {
-              "internalType": "contract CoLinksLike",
+              "internalType": "contract IGitcoinPassportDecoder",
               "name": "",
               "type": "address"
             }
           ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
           "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "THRESHOLD",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
           "type": "function"
         },
         {
@@ -2674,985 +3544,20 @@
         },
         {
           "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+            { "internalType": "address", "name": "wearer", "type": "address" }
           ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
-      "name": "Agreement Eligibility",
-      "details": [
-        "A Hats Protocol eligibility module that a community or organization can use to enable individuals to join the community by signing an agreement."
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/Hats-Protocol/agreement-eligibility"
-        }
-      ],
-      "parameters": [
-        {
-          "label": "Current Agreement",
-          "functionName": "currentAgreement",
-          "displayType": "default"
-        },
-        {
-          "label": "Grace Period Ending",
-          "functionName": "graceEndsAt",
-          "displayType": "timestamp"
-        },
-        {
-          "label": "Owner Hat",
-          "functionName": "OWNER_HAT",
-          "displayType": "hat"
-        },
-        {
-          "label": "Arbitrator Hat",
-          "functionName": "ARBITRATOR_HAT",
-          "displayType": "hat"
-        }
-      ],
-      "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [
-        {
-          "description": "Indicates that the module is now deprecated",
-          "label": "Deprecated",
-          "value": "deprecated"
-        }
-      ],
-      "implementationAddress": "0xF6bc6Dd30403e6ff5b3Bebead32B8fce1b753aA1",
-      "deployments": [
-        { "chainId": "11155111", "block": "5279344" },
-        { "chainId": "10", "block": "116516227" },
-        { "chainId": "42161", "block": "194358596" },
-        { "chainId": "100", "block": "33122123" },
-        { "chainId": "42220", "block": "24754861" },
-        { "chainId": "8453", "block": "12327703" },
-        { "chainId": "137", "block": "55094822" }
-      ],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Owner Hat",
-            "description": "The hat ID for the owner hat. The wearer(s) of this hat are authorized to update the agreement.",
-            "type": "uint256",
-            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-            "displayType": "hat"
-          },
-          {
-            "name": "Arbitrator Hat",
-            "description": "The hat ID for the arbitrator hat. The wearer(s) of this hat are authorized to set the standing for accounts.",
-            "type": "uint256",
-            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-            "displayType": "hat"
-          }
-        ],
-        "mutable": [
-          {
-            "name": "Agreement",
-            "description": "Initial agreement",
-            "type": "string",
-            "example": "ipfs://bafybeih2a5ztsooqtx7hb32oayynxoeiplaqd5llcnezzj2srqgmc2k2da",
-            "displayType": "default"
-          }
-        ]
-      },
-      "customRoles": [
-        {
-          "id": "agreementOwner",
-          "name": "Agreement Owner",
-          "criteria": "OWNER_HAT"
-        },
-        {
-          "id": "agreementArbitrator",
-          "name": "Agreement Arbitrator",
-          "criteria": "ARBITRATOR_HAT"
-        }
-      ],
-      "writeFunctions": [
-        {
-          "roles": ["public"],
-          "functionName": "signAgreementAndClaimHat",
-          "label": "Sign Agreement and Claim",
-          "description": "Sign the current agreement and claim the hat",
-          "primary": true,
-          "args": [
-            {
-              "name": "Claims Hatter",
-              "description": "A Multi Claims Hatter instance with which to perform claiming",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "roles": ["public"],
-          "functionName": "signAgreement",
-          "label": "Sign Agreement",
-          "description": "Sign the current agreement (without claiming the hat)",
-          "args": []
-        },
-        {
-          "roles": ["agreementOwner"],
-          "functionName": "setAgreement",
-          "label": "Set Agreement",
-          "description": "Set a new agreement, with a grace period",
-          "primary": true,
-          "args": [
-            {
-              "name": "Agreement",
-              "description": "The new agreement, as a hash of the agreement plaintext or a link",
-              "type": "string",
-              "displayType": "default"
-            },
-            {
-              "name": "Grace Period",
-              "description": "The new grace period - the time duration for which signers of the existing agreement are still eligible",
-              "type": "uint256",
-              "displayType": "seconds"
-            }
-          ]
-        },
-        {
-          "roles": ["agreementArbitrator"],
-          "functionName": "revoke",
-          "label": "Revoke",
-          "description": "Revoke the wearer's hat and place them in bad standing",
-          "primary": true,
-          "args": [
-            {
-              "name": "Wearer",
-              "description": "The address of the wearer from whom to revoke the hat",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "roles": ["agreementArbitrator"],
-          "functionName": "forgive",
-          "label": "Forgive",
-          "description": "Forgive the wearer's bad standing, allowing them to claim the hat again",
-          "args": [
-            {
-              "name": "Wearer",
-              "description": "The address of the wearer to forgive",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
-        }
-      ],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "AgreementEligibility_NotArbitrator",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "AgreementEligibility_NotOwner",
-          "type": "error"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "agreement",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "grace",
-              "type": "uint256"
-            }
-          ],
-          "name": "AgreementEligibility_AgreementSet",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "signer",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "agreement",
-              "type": "string"
-            }
-          ],
-          "name": "AgreementEligibility_AgreementSigned",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "claimer",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "hatId",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "agreement",
-              "type": "string"
-            }
-          ],
-          "name": "AgreementEligibility_HatClaimedWithAgreement",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "ARBITRATOR_HAT",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "OWNER_HAT",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "claimer", "type": "address" }
-          ],
-          "name": "claimerAgreements",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "agreementId",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "currentAgreement",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "currentAgreementId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" }
-          ],
-          "name": "forgive",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "graceEndsAt",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" }
-          ],
-          "name": "revoke",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "_agreement",
-              "type": "string"
-            },
-            { "internalType": "uint256", "name": "_grace", "type": "uint256" }
-          ],
-          "name": "setAgreement",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "signAgreement",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_claimsHatter",
-              "type": "address"
-            }
-          ],
-          "name": "signAgreementAndClaimHat",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" }
-          ],
-          "name": "wearerStanding",
+          "name": "isHuman",
           "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
           "stateMutability": "view",
           "type": "function"
-        }
-      ]
-    },
-    {
-      "name": "Allowlist Eligibility",
-      "details": [
-        "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",
-        "This module sets up a simple allowlist to determine eligibility for a hat. For a given account (i.e., potential hat wearer), the allowlist stores values for that account's eligibility and standing for the hat. The wearer(s) of the Owner Hat can add or remove accounts from the allowlist. The wearer(s) of the Arbitrator Hat can set the standing of accounts."
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/Hats-Protocol/allowlist-eligibility"
-        }
-      ],
-      "parameters": [
-        {
-          "label": "Owner Hat",
-          "functionName": "OWNER_HAT",
-          "displayType": "hat"
-        },
-        {
-          "label": "Arbitrator Hat",
-          "functionName": "ARBITRATOR_HAT",
-          "displayType": "hat"
-        }
-      ],
-      "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [
-        {
-          "description": "Indicates that the module is now deprecated",
-          "label": "Deprecated",
-          "value": "deprecated"
-        }
-      ],
-      "implementationAddress": "0xaC208e6668DE569C6ea1db76DeCea70430335Ed5",
-      "deployments": [
-        { "chainId": "5", "block": "9647259" },
-        { "chainId": "11155111", "block": "4655298" },
-        { "chainId": "10", "block": "109815832" },
-        { "chainId": "137", "block": "48560643" },
-        { "chainId": "42161", "block": "139432841" },
-        { "chainId": "100", "block": "30405602" },
-        { "chainId": "42220", "block": "24755507" },
-        { "chainId": "8453", "block": "12329333" }
-      ],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Owner Hat",
-            "description": "The hat ID for the owner hat. The wearer(s) of this hat are authorized to add and remove accounts from the allowlist.",
-            "type": "uint256",
-            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-            "displayType": "hat"
-          },
-          {
-            "name": "Arbitrator Hat",
-            "description": "The hat ID for the arbitrator hat. The wearer(s) of this hat are authorized to set the standing for accounts.",
-            "type": "uint256",
-            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-            "displayType": "hat"
-          }
-        ],
-        "mutable": [
-          {
-            "name": "Accounts",
-            "description": "Initial accounts for the allowlist.",
-            "type": "address[]",
-            "example": [
-              "0x0000000000000000000000000000000000000001",
-              "0x0000000000000000000000000000000000000002"
-            ],
-            "displayType": "default"
-          }
-        ]
-      },
-      "customRoles": [
-        {
-          "id": "allowListOwner",
-          "name": "Allowlist Owner",
-          "criteria": "OWNER_HAT"
-        },
-        {
-          "id": "allowListArbitrator",
-          "name": "Allowlist Arbitrator",
-          "criteria": "ARBITRATOR_HAT"
-        }
-      ],
-      "writeFunctions": [
-        {
-          "roles": ["allowListOwner"],
-          "functionName": "addAccount",
-          "label": "Add Account",
-          "description": "Add an account to the allowlist",
-          "primary": true,
-          "args": [
-            {
-              "name": "Account",
-              "description": "The account to add",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "roles": ["allowListOwner"],
-          "functionName": "addAccounts",
-          "label": "Add Accounts",
-          "description": "Add multiple accounts to the allowlist",
-          "args": [
-            {
-              "name": "Accounts",
-              "description": "The accounts to add",
-              "type": "address[]",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "roles": ["allowListOwner"],
-          "functionName": "removeAccount",
-          "label": "Remove Account",
-          "description": "Remove an account from the allowlist",
-          "args": [
-            {
-              "name": "Account",
-              "description": "The account to remove",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "roles": ["allowListOwner"],
-          "functionName": "removeAccountAndBurnHat",
-          "label": "Remove and Burn",
-          "description": "Remove an account from the allowlist and burn their hat",
-          "args": [
-            {
-              "name": "Account",
-              "description": "The account to remove",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "roles": ["allowListOwner"],
-          "functionName": "removeAccounts",
-          "label": "Remove Accounts",
-          "description": "Remove multiple accounts from the allowlist",
-          "args": [
-            {
-              "name": "Accounts",
-              "description": "Accounts to remove",
-              "type": "address[]",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "roles": ["allowListArbitrator"],
-          "functionName": "setStandingForAccount",
-          "label": "Set Standing",
-          "description": "Set the standing for an account",
-          "primary": true,
-          "args": [
-            {
-              "name": "Account",
-              "description": "The account to set standing for",
-              "type": "address",
-              "displayType": "default"
-            },
-            {
-              "name": "Standing",
-              "description": "The standing to set",
-              "type": "bool",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "roles": ["allowListArbitrator"],
-          "functionName": "setBadStandingAndBurnHat",
-          "label": "Set Bad Standing and Burn Hat",
-          "description": "Puts an account in bad standing and burns their hat",
-          "args": [
-            {
-              "name": "Account",
-              "description": "The account to set standing for",
-              "type": "address",
-              "displayType": "default"
-            }
-          ]
-        },
-        {
-          "roles": ["allowListArbitrator"],
-          "functionName": "setStandingForAccounts",
-          "label": "Set Standings",
-          "description": "Set the standing for multiple accounts",
-          "args": [
-            {
-              "name": "Accounts",
-              "description": "Accounts accounts to set standing for",
-              "type": "address[]",
-              "displayType": "default"
-            },
-            {
-              "name": "Standings",
-              "description": "The standings to set for each account, corresponding to the accounts order",
-              "type": "bool[]",
-              "displayType": "default"
-            }
-          ]
-        }
-      ],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
         },
         {
           "inputs": [],
-          "name": "AllowlistEligibility_ArrayLengthMismatch",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "AllowlistEligibility_NotArbitrator",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "AllowlistEligibility_NotOwner",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "AllowlistEligibility_NotWearer",
-          "type": "error"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "account",
-              "type": "address"
-            }
-          ],
-          "name": "AccountAdded",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "account",
-              "type": "address"
-            }
-          ],
-          "name": "AccountRemoved",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "account",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "bool",
-              "name": "standing",
-              "type": "bool"
-            }
-          ],
-          "name": "AccountStandingChanged",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address[]",
-              "name": "accounts",
-              "type": "address[]"
-            }
-          ],
-          "name": "AccountsAdded",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address[]",
-              "name": "accounts",
-              "type": "address[]"
-            }
-          ],
-          "name": "AccountsRemoved",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address[]",
-              "name": "accounts",
-              "type": "address[]"
-            },
-            {
-              "indexed": false,
-              "internalType": "bool[]",
-              "name": "standing",
-              "type": "bool[]"
-            }
-          ],
-          "name": "AccountsStandingChanged",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "ARBITRATOR_HAT",
+          "name": "scoreCriterion",
           "outputs": [
             { "internalType": "uint256", "name": "", "type": "uint256" }
           ],
           "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "OWNER_HAT",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_account", "type": "address" }
-          ],
-          "name": "addAccount",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address[]",
-              "name": "_accounts",
-              "type": "address[]"
-            }
-          ],
-          "name": "addAccounts",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "account", "type": "address" }
-          ],
-          "name": "allowlist",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "badStanding", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "_eligible", "type": "bool" },
-            { "internalType": "bool", "name": "_standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_account", "type": "address" }
-          ],
-          "name": "removeAccount",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_account", "type": "address" }
-          ],
-          "name": "removeAccountAndBurnHat",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address[]",
-              "name": "_accounts",
-              "type": "address[]"
-            }
-          ],
-          "name": "removeAccounts",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_account", "type": "address" }
-          ],
-          "name": "setBadStandingAndBurnHat",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "_account",
-              "type": "address"
-            },
-            { "internalType": "bool", "name": "_standing", "type": "bool" }
-          ],
-          "name": "setStandingForAccount",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address[]",
-              "name": "_accounts",
-              "type": "address[]"
-            },
-            { "internalType": "bool[]", "name": "_standing", "type": "bool[]" }
-          ],
-          "name": "setStandingForAccounts",
-          "outputs": [],
-          "stateMutability": "nonpayable",
           "type": "function"
         },
         {
@@ -3685,80 +3590,50 @@
       ]
     },
     {
-      "name": "Deprecated Eligibilities Chain",
+      "id": "haberdasher-labs_hat-wearing-eligibility",
+      "version": "v0.1.0",
+      "name": "Hat Wearing Eligibility",
       "details": [
-        "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
-        "Modules are chained in a format of a disjunction of conjunction clauses."
+        "A Hats Protocol eligibility module that conditions eligibility for one hat based on wearing another hat.",
+        "One use of a hat is to serve as an encapsulation of a set of logic and conditions that serve as baseline eligibility criteria for other hats. This eligibility module builds on that idea by allowing a hat to be used as an eligibility criterion for another hat."
       ],
       "links": [
         {
           "label": "GitHub",
-          "link": "https://github.com/Hats-Protocol/hats-module"
+          "link": "https://github.com/Hats-Protocol/hat-wearing-eligibility"
         }
       ],
       "parameters": [
         {
-          "label": "Number Of Conjunction Clauses",
-          "functionName": "NUM_CONJUNCTION_CLAUSES",
-          "displayType": "default"
-        },
-        {
-          "label": "Length Of Each Clause",
-          "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
-          "displayType": "default"
-        },
-        {
-          "label": "Module Addresses",
-          "functionName": "MODULES",
-          "displayType": "default"
+          "label": "Hat To Wear",
+          "functionName": "CRITERION_HAT",
+          "displayType": "hat"
         }
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [
-        {
-          "description": "Indicates that the module is extending the behavior of existing module instances",
-          "label": "Meta Module",
-          "value": "meta"
-        },
-        {
-          "description": "Indicates that the module is now deprecated",
-          "label": "Deprecated",
-          "value": "deprecated"
-        }
-      ],
-      "implementationAddress": "0x83200f1633cDb6C8f28F202CEA1B6a9105862D83",
+      "tags": [],
+      "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
       "deployments": [
-        { "chainId": "5", "block": "10009615" },
-        { "chainId": "10", "block": "111939238" },
-        { "chainId": "11155111", "block": "5313413" }
+        { "chainId": "5", "block": "9719807" },
+        { "chainId": "11155111", "block": "4655381" },
+        { "chainId": "1", "block": "18936188" },
+        { "chainId": "10", "block": "109769331" },
+        { "chainId": "137", "block": "48562276" },
+        { "chainId": "42161", "block": "139445749" },
+        { "chainId": "100", "block": "30406067" },
+        { "chainId": "424", "block": "6051557" },
+        { "chainId": "8453", "block": "7577549" },
+        { "chainId": "42220", "block": "22842434" }
       ],
       "creationArgs": {
         "useHatId": true,
         "immutable": [
           {
-            "name": "Number Of Conjunction Clauses",
-            "description": "The number of conjunction clauses",
+            "name": "Criterion Hat",
+            "description": "The ID of the hat which users will be required to wear in order to be eligible.",
             "type": "uint256",
-            "example": "2",
-            "displayType": "default"
-          },
-          {
-            "name": "Clause Lengths",
-            "description": "Length of each clause, provided as a list",
-            "type": "uint256[]",
-            "example": [1, 2],
-            "displayType": "default"
-          },
-          {
-            "name": "Modules",
-            "description": "The list of module instances to chain together",
-            "type": "address[]",
-            "example": [
-              "0x8a1f28732c984e5a80111bc06115b1302189859d",
-              "0x3232a9ab82800ff2ee966d6db5c6152d863bfc66",
-              "0xd700dcc4949dfc8fcb3b4246e7137bf759795ca0"
-            ],
-            "displayType": "default"
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+            "displayType": "hat"
           }
         ],
         "mutable": []
@@ -3788,9 +3663,9 @@
         },
         {
           "inputs": [],
-          "name": "CONJUNCTION_CLAUSE_LENGTHS",
+          "name": "CRITERION_HAT",
           "outputs": [
-            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+            { "internalType": "uint256", "name": "", "type": "uint256" }
           ],
           "stateMutability": "pure",
           "type": "function"
@@ -3814,27 +3689,9 @@
           "type": "function"
         },
         {
-          "inputs": [],
-          "name": "MODULES",
-          "outputs": [
-            { "internalType": "address[]", "name": "", "type": "address[]" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "NUM_CONJUNCTION_CLAUSES",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
           "inputs": [
             { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+            { "internalType": "uint256", "name": "", "type": "uint256" }
           ],
           "name": "getWearerStatus",
           "outputs": [
@@ -3883,198 +3740,8 @@
       ]
     },
     {
-      "name": "Deprecated Toggles Chain",
-      "details": [
-        "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
-        "Modules are chained in a format of a disjunction of conjunction clauses."
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/Hats-Protocol/hats-module"
-        }
-      ],
-      "parameters": [
-        {
-          "label": "Number Of Conjunction Clauses",
-          "functionName": "NUM_CONJUNCTION_CLAUSES",
-          "displayType": "default"
-        },
-        {
-          "label": "Length Of Each Clause",
-          "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
-          "displayType": "default"
-        },
-        {
-          "label": "Module Addresses",
-          "functionName": "MODULES",
-          "displayType": "default"
-        }
-      ],
-      "type": { "eligibility": false, "toggle": true, "hatter": false },
-      "tags": [
-        {
-          "description": "Indicates that the module is extending the behavior of existing module instances",
-          "label": "Meta Module",
-          "value": "meta"
-        },
-        {
-          "description": "Indicates that the module is now deprecated",
-          "label": "Deprecated",
-          "value": "deprecated"
-        }
-      ],
-      "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
-      "deployments": [
-        { "chainId": "5", "block": "10009649" },
-        { "chainId": "11155111", "block": "5313437" }
-      ],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Number Of Conjunction Clauses",
-            "description": "The number of conjunction clauses",
-            "type": "uint256",
-            "example": "1",
-            "displayType": "default"
-          },
-          {
-            "name": "Clause Lengths",
-            "description": "Length of each clause, provided as a list",
-            "type": "uint256[]",
-            "example": [2],
-            "displayType": "default"
-          },
-          {
-            "name": "Modules",
-            "description": "The list of module instances to chain together",
-            "type": "address[]",
-            "example": [
-              "0xe1f50cd1078b4f7920c7d6657dc3d8d2e5155ae0",
-              "0x4f28253ece7b52dd800160e7fecdb1c531a3fe1f"
-            ],
-            "displayType": "default"
-          }
-        ],
-        "mutable": []
-      },
-      "customRoles": [],
-      "writeFunctions": [],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "CONJUNCTION_CLAUSE_LENGTHS",
-          "outputs": [
-            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "MODULES",
-          "outputs": [
-            { "internalType": "address[]", "name": "", "type": "address[]" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "NUM_CONJUNCTION_CLAUSES",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
-          ],
-          "name": "getHatStatus",
-          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
+      "id": "haberdasher-labs_hats-election-eligibility",
+      "version": "v0.1.0",
       "name": "Hats Election Eligibility",
       "details": [
         "This module enables organizations to elect wearers of a given hat. More specifically, it makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
@@ -4510,1218 +4177,8 @@
       ]
     },
     {
-      "name": "JokeRace Eligibility",
-      "details": [
-        "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
-        "The number of winners of an election, and thus the number of possible wearers made eligible through this integration, is configurable. Additionally, a term period can be set, after which the winners will no longer be eligible to wear the hat.",
-        "You must have already deployed a JokeRace contest before deploying this Eligibility Module."
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/Hats-Protocol/jokerace-eligibility"
-        }
-      ],
-      "parameters": [
-        {
-          "label": "Module Admin Hat ID",
-          "functionName": "ADMIN_HAT",
-          "displayType": "hat"
-        },
-        {
-          "label": "Contest Address",
-          "functionName": "underlyingContest",
-          "displayType": "jokerace"
-        },
-        {
-          "label": "Term End",
-          "functionName": "termEnd",
-          "displayType": "timestamp"
-        },
-        {
-          "label": "Number Of Elected Hat Wearers",
-          "functionName": "topK",
-          "displayType": "default"
-        }
-      ],
-      "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [
-        {
-          "description": "Indicates that the module is now deprecated",
-          "label": "Deprecated",
-          "value": "deprecated"
-        }
-      ],
-      "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
-      "deployments": [
-        { "chainId": "5", "block": "9597388" },
-        { "chainId": "11155111", "block": "4655405" },
-        { "chainId": "10", "block": "110683218" },
-        { "chainId": "137", "block": "48562046" },
-        { "chainId": "42161", "block": "139443958" },
-        { "chainId": "100", "block": "30406089" }
-      ],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Admin Hat",
-            "description": "Optional admin hat, granted a permission to create a new term (reelection). If not provided (equals zero), then this permission is granted to the admins of the hat",
-            "type": "uint256",
-            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-            "displayType": "hat",
-            "optional": true
-          }
-        ],
-        "mutable": [
-          {
-            "name": "JokeRace Contest",
-            "description": "The JokeRace contest that facilitates the election",
-            "type": "address",
-            "example": "0xd00F6a711522a84C73aED9997Fcf207B41E97311",
-            "displayType": "jokerace"
-          },
-          {
-            "name": "Term End",
-            "description": "Timestamp of the term ending (in seconds)",
-            "type": "uint256",
-            "example": "1723155807",
-            "displayType": "timestamp"
-          },
-          {
-            "name": "Top K",
-            "description": "First K winners of the election will be eligible",
-            "type": "uint256",
-            "example": "3",
-            "displayType": "default"
-          }
-        ]
-      },
-      "customRoles": [
-        {
-          "id": "jokeraceAdmin",
-          "name": "JokeRace Admin",
-          "criteria": "ADMIN_HAT",
-          "hatAdminsFallback": true
-        }
-      ],
-      "writeFunctions": [
-        {
-          "roles": ["public"],
-          "functionName": "pullElectionResults",
-          "label": "Pull Election Results",
-          "description": "Pulls the election's final results",
-          "primary": true,
-          "args": []
-        },
-        {
-          "roles": ["jokeraceAdmin"],
-          "functionName": "reelection",
-          "label": "New Term",
-          "description": "Setup a new term, once the current term has ended",
-          "primary": true,
-          "args": [
-            {
-              "name": "Election",
-              "description": "Address of the new JokeRace election",
-              "type": "address",
-              "displayType": "jokerace"
-            },
-            {
-              "name": "Term End",
-              "description": "Timestamp of the new term ending",
-              "type": "uint256",
-              "displayType": "timestamp"
-            },
-            {
-              "name": "Top K",
-              "description": "Amount of election winners",
-              "type": "uint256",
-              "displayType": "default"
-            }
-          ]
-        }
-      ],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "inputs": [],
-          "name": "JokeraceEligibility_ContestNotCompleted",
-          "type": "error"
-        },
-        { "inputs": [], "name": "JokeraceEligibility_NoTies", "type": "error" },
-        {
-          "inputs": [],
-          "name": "JokeraceEligibility_NotAdmin",
-          "type": "error"
-        },
-        {
-          "inputs": [],
-          "name": "JokeraceEligibility_TermNotCompleted",
-          "type": "error"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "NewContest",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "newTopK",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "newTermEnd",
-              "type": "uint256"
-            }
-          ],
-          "name": "NewTerm",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "ADMIN_HAT",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "wearer", "type": "address" },
-            { "internalType": "address", "name": "contest", "type": "address" }
-          ],
-          "name": "eligibleWearersPerContest",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "pullElectionResults",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "newUnderlyingContest",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "newTermEnd",
-              "type": "uint256"
-            },
-            { "internalType": "uint256", "name": "newTopK", "type": "uint256" }
-          ],
-          "name": "reelection",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "reelectionAllowed",
-          "outputs": [
-            { "internalType": "bool", "name": "allowed", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "termEnd",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "topK",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "underlyingContest",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
-      "name": "ERC1155 Eligibility",
-      "details": [
-        "A Hats Protocol eligibility module that checks if an address holds at least one minimum balance of a set of ERC1155 token Ids to determine eligibility"
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
-        }
-      ],
-      "parameters": [
-        {
-          "label": "Token Address",
-          "functionName": "TOKEN_ADDRESS",
-          "displayType": "erc1155"
-        },
-        {
-          "label": "Token IDs",
-          "functionName": "TOKEN_IDS",
-          "displayType": "default"
-        },
-        {
-          "label": "Minimum Balances",
-          "functionName": "MIN_BALANCES",
-          "displayType": "default"
-        }
-      ],
-      "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [],
-      "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
-      "deployments": [
-        { "chainId": "5", "block": "9608205" },
-        { "chainId": "11155111", "block": "4655335" },
-        { "chainId": "1", "block": "18936373" },
-        { "chainId": "10", "block": "110684714" },
-        { "chainId": "137", "block": "48563371" },
-        { "chainId": "42161", "block": "139454273" },
-        { "chainId": "100", "block": "30405871" },
-        { "chainId": "424", "block": "6051886" },
-        { "chainId": "8453", "block": "7556151" },
-        { "chainId": "42220", "block": "22842397" }
-      ],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "ERC1155 Contract Address",
-            "description": "ERC1155 contract address",
-            "type": "address",
-            "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-            "displayType": "token"
-          },
-          {
-            "name": "Number Of Tokens",
-            "description": "Number of token IDs in the set of tokens that allow eligiblity",
-            "type": "uint256",
-            "example": "2",
-            "displayType": "default"
-          },
-          {
-            "name": "Token IDs",
-            "description": "The token IDs within the ERC1155 contract that allow eligibilty",
-            "type": "uint256[]",
-            "example": ["1", "2"],
-            "displayType": "default"
-          },
-          {
-            "name": "Minimum Balances",
-            "description": "The minimum balances required (for token ID in the corresponding index) for eligibility",
-            "type": "uint256[]",
-            "example": ["100", "500"],
-            "displayType": "default"
-          }
-        ],
-        "mutable": []
-      },
-      "customRoles": [],
-      "writeFunctions": [],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        { "inputs": [], "name": "AlreadyInitialized", "type": "error" },
-        { "inputs": [], "name": "NotInitializing", "type": "error" },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "ARRAY_LENGTH",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "MIN_BALANCES",
-          "outputs": [
-            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "TOKEN_ADDRESS",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "TOKEN_IDS",
-          "outputs": [
-            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
-      "name": "ERC20 Eligibility",
-      "details": [
-        "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC20 token to determine eligibility"
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
-        }
-      ],
-      "parameters": [
-        {
-          "label": "Token Address",
-          "functionName": "ERC20_TOKEN_ADDRESS",
-          "displayType": "erc20"
-        },
-        {
-          "label": "Minimum Balance",
-          "functionName": "MIN_BALANCE",
-          "displayType": "amountWithDecimals"
-        }
-      ],
-      "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [],
-      "implementationAddress": "0xbA5b218e6685D0607139c06f81442681a32a0EC3",
-      "deployments": [
-        { "chainId": "5", "block": "9611056" },
-        { "chainId": "11155111", "block": "4655367" },
-        { "chainId": "1", "block": "18936346" },
-        { "chainId": "10", "block": "110684393" },
-        { "chainId": "137", "block": "48563085" },
-        { "chainId": "42161", "block": "139452101" },
-        { "chainId": "100", "block": "30405925" },
-        { "chainId": "424", "block": "6052075" },
-        { "chainId": "8453", "block": "7577516" },
-        { "chainId": "42220", "block": "22842287" }
-      ],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Token Address",
-            "description": "ERC20 token address",
-            "type": "address",
-            "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
-            "displayType": "erc20"
-          },
-          {
-            "name": "Minimum Balance",
-            "description": "Minimum amount of tokens in order to be eligible",
-            "type": "uint256",
-            "example": "500",
-            "displayType": "amountWithDecimals"
-          }
-        ],
-        "mutable": []
-      },
-      "customRoles": [],
-      "writeFunctions": [],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        { "inputs": [], "name": "AlreadyInitialized", "type": "error" },
-        { "inputs": [], "name": "NotInitializing", "type": "error" },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "ERC20_TOKEN_ADDRESS",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "MIN_BALANCE",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
-      "name": "ERC721 Eligibility",
-      "details": [
-        "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligibility"
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
-        }
-      ],
-      "parameters": [
-        {
-          "label": "Token Address",
-          "functionName": "ERC721_TOKEN_ADDRESS",
-          "displayType": "erc721"
-        },
-        {
-          "label": "Minimum Balance",
-          "functionName": "MIN_BALANCE",
-          "displayType": "default"
-        }
-      ],
-      "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [],
-      "implementationAddress": "0xF37cf12fB4493D29270806e826fDDf50dd722bab",
-      "deployments": [
-        { "chainId": "5", "block": "9611065" },
-        { "chainId": "11155111", "block": "4655346" },
-        { "chainId": "1", "block": "18936352" },
-        { "chainId": "10", "block": "110684542" },
-        { "chainId": "137", "block": "48563224" },
-        { "chainId": "42161", "block": "139452888" },
-        { "chainId": "100", "block": "30405902" },
-        { "chainId": "424", "block": "6052014" },
-        { "chainId": "8453", "block": "7556195" },
-        { "chainId": "42220", "block": "22842339" }
-      ],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Token Address",
-            "description": "ERC721 token address",
-            "type": "address",
-            "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-            "displayType": "token"
-          },
-          {
-            "name": "Minimum Balance",
-            "description": "Minimum amount of tokens in order to be eligible",
-            "type": "uint256",
-            "example": "500",
-            "displayType": "default"
-          }
-        ],
-        "mutable": []
-      },
-      "customRoles": [],
-      "writeFunctions": [],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        { "inputs": [], "name": "AlreadyInitialized", "type": "error" },
-        { "inputs": [], "name": "NotInitializing", "type": "error" },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "ERC721_TOKEN_ADDRESS",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "MIN_BALANCE",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
-      "name": "Gitcoin Passport Eligibility",
-      "details": [
-        "An eligibility module requiring that hat wearers have a Gitcoin Passport score over a configurable threshold"
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/daocoa/gitcoin-passport-eligibility/"
-        }
-      ],
-      "parameters": [
-        {
-          "label": "Gitcoin Passport Decoder",
-          "functionName": "gitcoinPassportDecoder",
-          "displayType": "default"
-        },
-        {
-          "label": "Score Criterion",
-          "functionName": "scoreCriterion",
-          "displayType": "default"
-        }
-      ],
-      "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [],
-      "implementationAddress": "0xD9FB39d25E714908ACDA64164a3488d83B6FD3a3",
-      "deployments": [{ "chainId": "10", "block": "119896172" }],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Gitcoin Passport Decoder",
-            "description": "The address of the Gitcoin Passport Decoder contract, from which Passport scores are retrieved. You can find the latest deployment here: https://github.com/gitcoinco/passport/blob/main/deployments/onchainInfo.json",
-            "type": "address",
-            "example": "0xe53C60F8069C2f0c3a84F9B3DB5cf56f3100ba56",
-            "displayType": "default"
-          },
-          {
-            "name": "Score Criterion",
-            "description": "Minimum threshold of passport to be considered eligible.",
-            "type": "uint256",
-            "example": "10",
-            "displayType": { "type": "amountWithDecimals", "decimals": "4" }
-          }
-        ],
-        "mutable": []
-      },
-      "customRoles": [],
-      "writeFunctions": [],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "gitcoinPassportDecoder",
-          "outputs": [
-            {
-              "internalType": "contract IGitcoinPassportDecoder",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "wearer", "type": "address" }
-          ],
-          "name": "isHuman",
-          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "scoreCriterion",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
-      "name": "Hat Wearing Eligibility",
-      "details": [
-        "A Hats Protocol eligibility module that conditions eligibility for one hat based on wearing another hat.",
-        "One use of a hat is to serve as an encapsulation of a set of logic and conditions that serve as baseline eligibility criteria for other hats. This eligibility module builds on that idea by allowing a hat to be used as an eligibility criterion for another hat."
-      ],
-      "links": [
-        {
-          "label": "GitHub",
-          "link": "https://github.com/Hats-Protocol/hat-wearing-eligibility"
-        }
-      ],
-      "parameters": [
-        {
-          "label": "Hat To Wear",
-          "functionName": "CRITERION_HAT",
-          "displayType": "hat"
-        }
-      ],
-      "type": { "eligibility": true, "toggle": false, "hatter": false },
-      "tags": [],
-      "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
-      "deployments": [
-        { "chainId": "5", "block": "9719807" },
-        { "chainId": "11155111", "block": "4655381" },
-        { "chainId": "1", "block": "18936188" },
-        { "chainId": "10", "block": "109769331" },
-        { "chainId": "137", "block": "48562276" },
-        { "chainId": "42161", "block": "139445749" },
-        { "chainId": "100", "block": "30406067" },
-        { "chainId": "424", "block": "6051557" },
-        { "chainId": "8453", "block": "7577549" },
-        { "chainId": "42220", "block": "22842434" }
-      ],
-      "creationArgs": {
-        "useHatId": true,
-        "immutable": [
-          {
-            "name": "Criterion Hat",
-            "description": "The ID of the hat which users will be required to wear in order to be eligible.",
-            "type": "uint256",
-            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-            "displayType": "hat"
-          }
-        ],
-        "mutable": []
-      },
-      "customRoles": [],
-      "writeFunctions": [],
-      "abi": [
-        {
-          "inputs": [
-            { "internalType": "string", "name": "_version", "type": "string" }
-          ],
-          "stateMutability": "nonpayable",
-          "type": "constructor"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "uint8",
-              "name": "version",
-              "type": "uint8"
-            }
-          ],
-          "name": "Initialized",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "CRITERION_HAT",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "HATS",
-          "outputs": [
-            { "internalType": "contract IHats", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "IMPLEMENTATION",
-          "outputs": [
-            { "internalType": "address", "name": "", "type": "address" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "address", "name": "_wearer", "type": "address" },
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "name": "getWearerStatus",
-          "outputs": [
-            { "internalType": "bool", "name": "eligible", "type": "bool" },
-            { "internalType": "bool", "name": "standing", "type": "bool" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "hatId",
-          "outputs": [
-            { "internalType": "uint256", "name": "", "type": "uint256" }
-          ],
-          "stateMutability": "pure",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
-          ],
-          "name": "setUp",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [],
-          "name": "version_",
-          "outputs": [
-            { "internalType": "string", "name": "", "type": "string" }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ]
-    },
-    {
+      "id": "haberdasher-labs_hats-election-eligibility",
+      "version": "v0.2.0",
       "name": "Hats Election Eligibility",
       "details": [
         "This module enables organizations to elect wearers of a given hat. More specifically, it makes certain accounts eligible to wear the given hat based on the submitted results of an election.",
@@ -6167,6 +4624,357 @@
       ]
     },
     {
+      "id": "haberdasher-labs_jokerace-eligibility",
+      "version": "v0.1.0",
+      "name": "JokeRace Eligibility",
+      "details": [
+        "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
+        "The number of winners of an election, and thus the number of possible wearers made eligible through this integration, is configurable. Additionally, a term period can be set, after which the winners will no longer be eligible to wear the hat.",
+        "You must have already deployed a JokeRace contest before deploying this Eligibility Module."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/jokerace-eligibility"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Module Admin Hat ID",
+          "functionName": "ADMIN_HAT",
+          "displayType": "hat"
+        },
+        {
+          "label": "Contest Address",
+          "functionName": "underlyingContest",
+          "displayType": "jokerace"
+        },
+        {
+          "label": "Term End",
+          "functionName": "termEnd",
+          "displayType": "timestamp"
+        },
+        {
+          "label": "Number Of Elected Hat Wearers",
+          "functionName": "topK",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is now deprecated",
+          "label": "Deprecated",
+          "value": "deprecated"
+        }
+      ],
+      "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
+      "deployments": [
+        { "chainId": "5", "block": "9597388" },
+        { "chainId": "11155111", "block": "4655405" },
+        { "chainId": "10", "block": "110683218" },
+        { "chainId": "137", "block": "48562046" },
+        { "chainId": "42161", "block": "139443958" },
+        { "chainId": "100", "block": "30406089" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Admin Hat",
+            "description": "Optional admin hat, granted a permission to create a new term (reelection). If not provided (equals zero), then this permission is granted to the admins of the hat",
+            "type": "uint256",
+            "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+            "displayType": "hat",
+            "optional": true
+          }
+        ],
+        "mutable": [
+          {
+            "name": "JokeRace Contest",
+            "description": "The JokeRace contest that facilitates the election",
+            "type": "address",
+            "example": "0xd00F6a711522a84C73aED9997Fcf207B41E97311",
+            "displayType": "jokerace"
+          },
+          {
+            "name": "Term End",
+            "description": "Timestamp of the term ending (in seconds)",
+            "type": "uint256",
+            "example": "1723155807",
+            "displayType": "timestamp"
+          },
+          {
+            "name": "Top K",
+            "description": "First K winners of the election will be eligible",
+            "type": "uint256",
+            "example": "3",
+            "displayType": "default"
+          }
+        ]
+      },
+      "customRoles": [
+        {
+          "id": "jokeraceAdmin",
+          "name": "JokeRace Admin",
+          "criteria": "ADMIN_HAT",
+          "hatAdminsFallback": true
+        }
+      ],
+      "writeFunctions": [
+        {
+          "roles": ["public"],
+          "functionName": "pullElectionResults",
+          "label": "Pull Election Results",
+          "description": "Pulls the election's final results",
+          "primary": true,
+          "args": []
+        },
+        {
+          "roles": ["jokeraceAdmin"],
+          "functionName": "reelection",
+          "label": "New Term",
+          "description": "Setup a new term, once the current term has ended",
+          "primary": true,
+          "args": [
+            {
+              "name": "Election",
+              "description": "Address of the new JokeRace election",
+              "type": "address",
+              "displayType": "jokerace"
+            },
+            {
+              "name": "Term End",
+              "description": "Timestamp of the new term ending",
+              "type": "uint256",
+              "displayType": "timestamp"
+            },
+            {
+              "name": "Top K",
+              "description": "Amount of election winners",
+              "type": "uint256",
+              "displayType": "default"
+            }
+          ]
+        }
+      ],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "JokeraceEligibility_ContestNotCompleted",
+          "type": "error"
+        },
+        { "inputs": [], "name": "JokeraceEligibility_NoTies", "type": "error" },
+        {
+          "inputs": [],
+          "name": "JokeraceEligibility_NotAdmin",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "JokeraceEligibility_TermNotCompleted",
+          "type": "error"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "NewContest",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "newTopK",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "newTermEnd",
+              "type": "uint256"
+            }
+          ],
+          "name": "NewTerm",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ADMIN_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "wearer", "type": "address" },
+            { "internalType": "address", "name": "contest", "type": "address" }
+          ],
+          "name": "eligibleWearersPerContest",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "pullElectionResults",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newUnderlyingContest",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "newTermEnd",
+              "type": "uint256"
+            },
+            { "internalType": "uint256", "name": "newTopK", "type": "uint256" }
+          ],
+          "name": "reelection",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "reelectionAllowed",
+          "outputs": [
+            { "internalType": "bool", "name": "allowed", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "termEnd",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "topK",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "underlyingContest",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "haberdasher-labs_jokerace-eligibility",
+      "version": "v0.2.0",
       "name": "JokeRace Eligibility",
       "details": [
         "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
@@ -6522,6 +5330,8 @@
       ]
     },
     {
+      "id": "haberdasher-labs_multi-claims-hatter",
+      "version": "v0.1.0",
       "name": "Multi Claims Hatter",
       "details": [
         "A Hats Protocol hatter contract enabling explicitly eligible wearers to claim a hat."
@@ -6970,6 +5780,8 @@
       ]
     },
     {
+      "id": "haberdasher-labs_passthrough-module",
+      "version": "v0.1.0",
       "name": "Passthrough Module",
       "details": [
         "A Hats Protocol module that enables an authorized hat to serve as the eligibility and/or toggle module for other hat(s).",
@@ -7188,6 +6000,8 @@
       ]
     },
     {
+      "id": "haberdasher-labs_season-toggle",
+      "version": "v0.1.0",
       "name": "Season Toggle",
       "details": [
         "A Hats Protocol toggle module that allows an organization to configure certain hats to be automatically toggled off after a given interval, i.e. a 'season'.",
@@ -7468,6 +6282,8 @@
       ]
     },
     {
+      "id": "haberdasher-labs_staking-eligibility",
+      "version": "v0.1.0",
       "name": "Staking Eligibility",
       "details": [
         "A Hats Protocol eligibility module which requires wearers of a given hat to stake a minimum amount of a specified token in order to be eligible, and enables others in the Hat tree's organization to slash the stake of a wearer who is behaving badly."
@@ -8233,6 +7049,1238 @@
           "name": "withdraw",
           "outputs": [],
           "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "haberdasher-labs_toggle-chain",
+      "version": "v0.1.0",
+      "name": "Toggles Chain",
+      "details": [
+        "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
+        "Modules are chained in a format of a disjunction of conjunction clauses."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/hats-module"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Number Of Conjunction Clauses",
+          "functionName": "NUM_CONJUNCTION_CLAUSES",
+          "displayType": "default"
+        },
+        {
+          "label": "Length Of Each Clause",
+          "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
+          "displayType": "default"
+        },
+        {
+          "label": "Module Addresses",
+          "functionName": "MODULES",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": false, "toggle": true, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is now deprecated",
+          "label": "Deprecated",
+          "value": "deprecated"
+        },
+        {
+          "description": "Indicates that the module is extending the behavior of existing module instances",
+          "label": "Meta Module",
+          "value": "meta"
+        }
+      ],
+      "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
+      "deployments": [
+        { "chainId": "5", "block": "10009649" },
+        { "chainId": "11155111", "block": "5313437" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Number Of Conjunction Clauses",
+            "description": "The number of conjunction clauses",
+            "type": "uint256",
+            "example": "1",
+            "displayType": "default"
+          },
+          {
+            "name": "Clause Lengths",
+            "description": "Length of each clause, provided as a list",
+            "type": "uint256[]",
+            "example": [2],
+            "displayType": "default"
+          },
+          {
+            "name": "Modules",
+            "description": "The list of module instances to chain together",
+            "type": "address[]",
+            "example": [
+              "0xe1f50cd1078b4f7920c7d6657dc3d8d2e5155ae0",
+              "0x4f28253ece7b52dd800160e7fecdb1c531a3fe1f"
+            ],
+            "displayType": "default"
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [],
+      "writeFunctions": [],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "CONJUNCTION_CLAUSE_LENGTHS",
+          "outputs": [
+            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MODULES",
+          "outputs": [
+            { "internalType": "address[]", "name": "", "type": "address[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "NUM_CONJUNCTION_CLAUSES",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+          ],
+          "name": "getHatStatus",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "haberdasher-labs_toggle-chain",
+      "version": "v0.2.0",
+      "name": "Toggles Chain",
+      "details": [
+        "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
+        "Modules are chained in a format of a disjunction of conjunction clauses."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/hats-module"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Number Of Conjunction Clauses",
+          "functionName": "NUM_CONJUNCTION_CLAUSES",
+          "displayType": "default"
+        },
+        {
+          "label": "Length Of Each Clause",
+          "functionName": "CONJUNCTION_CLAUSE_LENGTHS",
+          "displayType": "default"
+        },
+        {
+          "label": "Module Addresses",
+          "functionName": "MODULES",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": false, "toggle": true, "hatter": false },
+      "tags": [
+        {
+          "description": "Indicates that the module is extending the behavior of existing module instances",
+          "label": "Meta Module",
+          "value": "meta"
+        }
+      ],
+      "implementationAddress": "0x841Bc396ad88A9C6b78F05b7754a9d22E3fB264b",
+      "deployments": [
+        { "chainId": "1", "block": "19574207" },
+        { "chainId": "11155111", "block": "5619421" },
+        { "chainId": "10", "block": "118267698" },
+        { "chainId": "42161", "block": "197106268" },
+        { "chainId": "8453", "block": "12672610" },
+        { "chainId": "100", "block": "33253854" },
+        { "chainId": "42220", "block": "24892768" },
+        { "chainId": "137", "block": "55392404" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Number Of Conjunction Clauses",
+            "description": "The number of conjunction clauses",
+            "type": "uint256",
+            "example": "1",
+            "displayType": "default"
+          },
+          {
+            "name": "Clause Lengths",
+            "description": "Length of each clause, provided as a list",
+            "type": "uint256[]",
+            "example": [2],
+            "displayType": "default"
+          },
+          {
+            "name": "Modules",
+            "description": "The list of module instances to chain together",
+            "type": "address[]",
+            "example": [
+              "0xe1f50cd1078b4f7920c7d6657dc3d8d2e5155ae0",
+              "0x4f28253ece7b52dd800160e7fecdb1c531a3fe1f"
+            ],
+            "displayType": "default"
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [],
+      "writeFunctions": [],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "CONJUNCTION_CLAUSE_LENGTHS",
+          "outputs": [
+            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MODULES",
+          "outputs": [
+            { "internalType": "address[]", "name": "", "type": "address[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "NUM_CONJUNCTION_CLAUSES",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+          ],
+          "name": "getHatStatus",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "pumpedlunch_erc1155-eligibility",
+      "version": "v0.1.0",
+      "name": "ERC1155 Eligibility",
+      "details": [
+        "A Hats Protocol eligibility module that checks if an address holds at least one minimum balance of a set of ERC1155 token Ids to determine eligibility"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Token Address",
+          "functionName": "TOKEN_ADDRESS",
+          "displayType": "erc1155"
+        },
+        {
+          "label": "Token IDs",
+          "functionName": "TOKEN_IDS",
+          "displayType": "default"
+        },
+        {
+          "label": "Minimum Balances",
+          "functionName": "MIN_BALANCES",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
+      "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
+      "deployments": [
+        { "chainId": "5", "block": "9608205" },
+        { "chainId": "11155111", "block": "4655335" },
+        { "chainId": "1", "block": "18936373" },
+        { "chainId": "10", "block": "110684714" },
+        { "chainId": "137", "block": "48563371" },
+        { "chainId": "42161", "block": "139454273" },
+        { "chainId": "100", "block": "30405871" },
+        { "chainId": "424", "block": "6051886" },
+        { "chainId": "8453", "block": "7556151" },
+        { "chainId": "42220", "block": "22842397" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "ERC1155 Contract Address",
+            "description": "ERC1155 contract address",
+            "type": "address",
+            "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
+            "displayType": "token"
+          },
+          {
+            "name": "Number Of Tokens",
+            "description": "Number of token IDs in the set of tokens that allow eligiblity",
+            "type": "uint256",
+            "example": "2",
+            "displayType": "default"
+          },
+          {
+            "name": "Token IDs",
+            "description": "The token IDs within the ERC1155 contract that allow eligibilty",
+            "type": "uint256[]",
+            "example": ["1", "2"],
+            "displayType": "default"
+          },
+          {
+            "name": "Minimum Balances",
+            "description": "The minimum balances required (for token ID in the corresponding index) for eligibility",
+            "type": "uint256[]",
+            "example": ["100", "500"],
+            "displayType": "default"
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [],
+      "writeFunctions": [],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        { "inputs": [], "name": "AlreadyInitialized", "type": "error" },
+        { "inputs": [], "name": "NotInitializing", "type": "error" },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ARRAY_LENGTH",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MIN_BALANCES",
+          "outputs": [
+            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "TOKEN_ADDRESS",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "TOKEN_IDS",
+          "outputs": [
+            { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "pumpedlunch_erc20-eligibility",
+      "version": "v0.1.0",
+      "name": "ERC20 Eligibility",
+      "details": [
+        "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC20 token to determine eligibility"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Token Address",
+          "functionName": "ERC20_TOKEN_ADDRESS",
+          "displayType": "erc20"
+        },
+        {
+          "label": "Minimum Balance",
+          "functionName": "MIN_BALANCE",
+          "displayType": "amountWithDecimals"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
+      "implementationAddress": "0xbA5b218e6685D0607139c06f81442681a32a0EC3",
+      "deployments": [
+        { "chainId": "5", "block": "9611056" },
+        { "chainId": "11155111", "block": "4655367" },
+        { "chainId": "1", "block": "18936346" },
+        { "chainId": "10", "block": "110684393" },
+        { "chainId": "137", "block": "48563085" },
+        { "chainId": "42161", "block": "139452101" },
+        { "chainId": "100", "block": "30405925" },
+        { "chainId": "424", "block": "6052075" },
+        { "chainId": "8453", "block": "7577516" },
+        { "chainId": "42220", "block": "22842287" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Token Address",
+            "description": "ERC20 token address",
+            "type": "address",
+            "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
+            "displayType": "erc20"
+          },
+          {
+            "name": "Minimum Balance",
+            "description": "Minimum amount of tokens in order to be eligible",
+            "type": "uint256",
+            "example": "500",
+            "displayType": "amountWithDecimals"
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [],
+      "writeFunctions": [],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        { "inputs": [], "name": "AlreadyInitialized", "type": "error" },
+        { "inputs": [], "name": "NotInitializing", "type": "error" },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ERC20_TOKEN_ADDRESS",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MIN_BALANCE",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "pumpedlunch_erc721-eligibility",
+      "version": "v0.1.0",
+      "name": "ERC721 Eligibility",
+      "details": [
+        "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligibility"
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Token Address",
+          "functionName": "ERC721_TOKEN_ADDRESS",
+          "displayType": "erc721"
+        },
+        {
+          "label": "Minimum Balance",
+          "functionName": "MIN_BALANCE",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
+      "implementationAddress": "0xF37cf12fB4493D29270806e826fDDf50dd722bab",
+      "deployments": [
+        { "chainId": "5", "block": "9611065" },
+        { "chainId": "11155111", "block": "4655346" },
+        { "chainId": "1", "block": "18936352" },
+        { "chainId": "10", "block": "110684542" },
+        { "chainId": "137", "block": "48563224" },
+        { "chainId": "42161", "block": "139452888" },
+        { "chainId": "100", "block": "30405902" },
+        { "chainId": "424", "block": "6052014" },
+        { "chainId": "8453", "block": "7556195" },
+        { "chainId": "42220", "block": "22842339" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Token Address",
+            "description": "ERC721 token address",
+            "type": "address",
+            "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
+            "displayType": "token"
+          },
+          {
+            "name": "Minimum Balance",
+            "description": "Minimum amount of tokens in order to be eligible",
+            "type": "uint256",
+            "example": "500",
+            "displayType": "default"
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [],
+      "writeFunctions": [],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        { "inputs": [], "name": "AlreadyInitialized", "type": "error" },
+        { "inputs": [], "name": "NotInitializing", "type": "error" },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ERC721_TOKEN_ADDRESS",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MIN_BALANCE",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "id": "raid-guild_character-sheets-level-eligibility",
+      "version": "v0.1.0",
+      "name": "CharacterSheets Level",
+      "details": [
+        "A Hats Protocol eligibility module that checks players for CharacterSheets characters with a minimum level for specific classes."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/raid-guild/character-sheets-contracts"
+        },
+        { "label": "CharacterSheets", "link": "https://charactersheets.io" },
+        { "label": "RaidGuild", "link": "https://raidguild.org" }
+      ],
+      "deployments": [{ "chainId": "100", "block": "31196970" }],
+      "parameters": [
+        {
+          "label": "CharacterSheet",
+          "functionName": "SHEETS_ADDRESS",
+          "displayType": "address"
+        },
+        {
+          "label": "Classes Token",
+          "functionName": "CLASSES_ADDRESS",
+          "displayType": "default"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": false, "hatter": false },
+      "tags": [],
+      "implementationAddress": "0xB2Ad134eB41695Ca87a62C7529259dC271d810Ce",
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "CharacterSheets Address",
+            "description": "The address for the CharacterSheets game where players have characters.",
+            "type": "address",
+            "example": "0x083c4e685f64411747548a5ea090630ab0bf17bf",
+            "displayType": "default"
+          },
+          {
+            "name": "Classes Address",
+            "description": "The address for the Classes token used in the character sheets game",
+            "type": "address",
+            "example": "0x7e029eFCbD96804B7284a9eEb74f2F5aB5F79a7e",
+            "displayType": "token"
+          }
+        ],
+        "mutable": [
+          {
+            "name": "Class IDs",
+            "description": "Initial classes to be included for eligibility",
+            "type": "uint256[]",
+            "example": [1],
+            "displayType": "default"
+          },
+          {
+            "name": "Minimum Levels",
+            "description": "Initial levels needed for each class to be included for eligibility",
+            "type": "uint256[]",
+            "example": [2],
+            "displayType": "default"
+          }
+        ]
+      },
+      "customRoles": [],
+      "writeFunctions": [
+        {
+          "roles": ["hatAdmins"],
+          "functionName": "addClasses",
+          "label": "Add Classes",
+          "description": "Add classes and their minimum levels",
+          "primary": true,
+          "args": [
+            {
+              "name": "Class IDs",
+              "description": "Classes to add",
+              "type": "uint256[]",
+              "displayType": "default"
+            },
+            {
+              "name": "Min Levels",
+              "description": "The min levels corrsponding to each new class, in the same order",
+              "type": "uint256[]",
+              "displayType": "default"
+            }
+          ]
+        }
+      ],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "ElderEligibility_HatImmutable",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "ElderEligibility_NotHatAdmin",
+          "type": "error"
+        },
+        { "inputs": [], "name": "LengthMismatch", "type": "error" },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256[]",
+              "name": "",
+              "type": "uint256[]"
+            }
+          ],
+          "name": "ClassesAdded",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "ElderEligibilityDeployed",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ARRAY_LENGTH",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "CLASSES_ADDRESS",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "SHEETS_ADDRESS",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256[]",
+              "name": "_classIds",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "_minLevels",
+              "type": "uint256[]"
+            }
+          ],
+          "name": "addClasses",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "classIds",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "name": "minLevels",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
           "type": "function"
         }
       ]
