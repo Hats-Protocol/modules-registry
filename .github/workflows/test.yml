@@ -5,13 +5,13 @@ on:
   workflow_dispatch:
 
 env:
-  SEPOLIA_RPC: https://sepolia.drpc.org
+  SEPOLIA_RPC: https://ethereum-sepolia-rpc.publicnode.com
   MAINNET_RPC: https://cloudflare-eth.com
   POLYGON_RPC: https://polygon-rpc.com
   OPTIMISM_RPC: https://mainnet.optimism.io
   ARBITRUM_RPC: https://arb1.arbitrum.io/rpc
   GNOSIS_RPC: https://gnosis.publicnode.com
-  BASE_RPC: https://base.publicnode.com
+  BASE_RPC: https://mainnet.base.org
   PGN_RPC: https://rpc.publicgoods.network
   CELO_RPC: https://forno.celo.org
   ETHERSCAN_KEY: HDMPWG86NYEF1Y5KWZU1XI4HZX4SNHFW3B

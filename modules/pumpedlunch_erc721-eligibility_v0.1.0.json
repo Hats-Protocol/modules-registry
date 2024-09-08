@@ -1,7 +1,9 @@
 {
-  "name": "ERC1155 Eligibility",
+  "id": "pumpedlunch_erc721-eligibility",
+  "version": "v0.1.0",
+  "name": "ERC721 Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that checks if an address holds at least one minimum balance of a set of ERC1155 token Ids to determine eligibility"
+    "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligibility"
   ],
   "links": [
     {
@@ -12,17 +14,12 @@
   "parameters": [
     {
       "label": "Token Address",
-      "functionName": "TOKEN_ADDRESS",
-      "displayType": "erc1155"
+      "functionName": "ERC721_TOKEN_ADDRESS",
+      "displayType": "erc721"
     },
     {
-      "label": "Token IDs",
-      "functionName": "TOKEN_IDS",
-      "displayType": "default"
-    },
-    {
-      "label": "Minimum Balances",
-      "functionName": "MIN_BALANCES",
+      "label": "Minimum Balance",
+      "functionName": "MIN_BALANCE",
       "displayType": "default"
     }
   ],
@@ -32,78 +29,64 @@
     "hatter": false
   },
   "tags": [],
-  "implementationAddress": "0x0089FbD2e0c42F2090890e1d9A3bd8d40E0e2e17",
+  "implementationAddress": "0xF37cf12fB4493D29270806e826fDDf50dd722bab",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9608205"
+      "block": "9611065"
     },
     {
       "chainId": "11155111",
-      "block": "4655335"
+      "block": "4655346"
     },
     {
       "chainId": "1",
-      "block": "18936373"
+      "block": "18936352"
     },
     {
       "chainId": "10",
-      "block": "110684714"
+      "block": "110684542"
     },
     {
       "chainId": "137",
-      "block": "48563371"
+      "block": "48563224"
     },
     {
       "chainId": "42161",
-      "block": "139454273"
+      "block": "139452888"
     },
     {
       "chainId": "100",
-      "block": "30405871"
+      "block": "30405902"
     },
     {
       "chainId": "424",
-      "block": "6051886"
+      "block": "6052014"
     },
     {
       "chainId": "8453",
-      "block": "7556151"
+      "block": "7556195"
     },
     {
       "chainId": "42220",
-      "block": "22842397"
+      "block": "22842339"
     }
   ],
   "creationArgs": {
     "useHatId": true,
     "immutable": [
       {
-        "name": "ERC1155 Contract Address",
-        "description": "ERC1155 contract address",
+        "name": "Token Address",
+        "description": "ERC721 token address",
         "type": "address",
         "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
         "displayType": "token"
       },
       {
-        "name": "Number Of Tokens",
-        "description": "Number of token IDs in the set of tokens that allow eligiblity",
+        "name": "Minimum Balance",
+        "description": "Minimum amount of tokens in order to be eligible",
         "type": "uint256",
-        "example": "2",
-        "displayType": "default"
-      },
-      {
-        "name": "Token IDs",
-        "description": "The token IDs within the ERC1155 contract that allow eligibilty",
-        "type": "uint256[]",
-        "example": ["1", "2"],
-        "displayType": "default"
-      },
-      {
-        "name": "Minimum Balances",
-        "description": "The minimum balances required (for token ID in the corresponding index) for eligibility",
-        "type": "uint256[]",
-        "example": ["100", "500"],
+        "example": "500",
         "displayType": "default"
       }
     ],
@@ -148,12 +131,12 @@
     },
     {
       "inputs": [],
-      "name": "ARRAY_LENGTH",
+      "name": "ERC721_TOKEN_ADDRESS",
       "outputs": [
         {
-          "internalType": "uint256",
+          "internalType": "address",
           "name": "",
-          "type": "uint256"
+          "type": "address"
         }
       ],
       "stateMutability": "pure",
@@ -187,38 +170,12 @@
     },
     {
       "inputs": [],
-      "name": "MIN_BALANCES",
+      "name": "MIN_BALANCE",
       "outputs": [
         {
-          "internalType": "uint256[]",
+          "internalType": "uint256",
           "name": "",
-          "type": "uint256[]"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "TOKEN_ADDRESS",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "TOKEN_IDS",
-      "outputs": [
-        {
-          "internalType": "uint256[]",
-          "name": "",
-          "type": "uint256[]"
+          "type": "uint256"
         }
       ],
       "stateMutability": "pure",
