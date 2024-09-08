@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_eligibility-chain",
+  "version": "v0.2.0",
   "name": "Eligibilities Chain",
   "details": [
     "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",

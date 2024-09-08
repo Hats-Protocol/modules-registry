@@ -43,6 +43,8 @@ const moduleWriteFunctionSchema = z
 
 export const moduleSchema = z
   .object({
+    id: z.string(),
+    version: z.string(),
     name: z.string(),
     details: z.array(z.string()),
     links: z.array(z.object({ label: z.string(), link: z.string() })),

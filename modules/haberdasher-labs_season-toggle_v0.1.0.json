@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_season-toggle",
+  "version": "v0.1.0",
   "name": "Season Toggle",
   "details": [
     "A Hats Protocol toggle module that allows an organization to configure certain hats to be automatically toggled off after a given interval, i.e. a 'season'.",

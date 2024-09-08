@@ -1,4 +1,6 @@
 {
+  "id": "pumpedlunch_erc20-eligibility",
+  "version": "v0.1.0",
   "name": "ERC20 Eligibility",
   "details": [
     "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC20 token to determine eligibility"
