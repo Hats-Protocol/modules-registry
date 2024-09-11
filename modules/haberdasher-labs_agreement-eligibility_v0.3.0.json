@@ -1,9 +1,10 @@
 {
   "id": "haberdasher-labs_agreement-eligibility",
-  "version": "v0.2.0",
+  "version": "v0.3.0",
   "name": "Agreement Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that a community or organization can use to enable individuals to join the community by signing an agreement."
+    "A Hats Protocol eligibility module that a community or organization can use to enable individuals to join the community by signing an agreement.",
+    "This version is compatible with module chaining."
   ],
   "links": [
     {
@@ -38,42 +39,40 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0x8126d02F4EcDE43eca4543a0D90B755C3E225F09",
-  "tags": [
-    {
-      "description": "Indicates that the module is now deprecated",
-      "label": "Deprecated",
-      "value": "deprecated"
-    }
-  ],
+  "implementationAddress": "0x6AE5a62698f23dB7CAca13FFa7391ac782a94116",
+  "tags": [],
   "deployments": [
     {
       "chainId": "11155111",
-      "block": "5906105"
+      "block": "6668466"
     },
     {
       "chainId": "10",
-      "block": "120018528"
+      "block": "125200844"
     },
     {
       "chainId": "42161",
-      "block": "210962674"
+      "block": "252171575"
     },
     {
       "chainId": "100",
-      "block": "33952979"
+      "block": "35935044"
     },
     {
       "chainId": "42220",
-      "block": "25593018"
+      "block": "27665681"
     },
     {
       "chainId": "8453",
-      "block": "14482815"
+      "block": "19605730"
     },
     {
       "chainId": "137",
-      "block": "56934657"
+      "block": "61667610"
+    },
+    {
+      "chainId": "1",
+      "block": "20722687"
     }
   ],
   "creationArgs": {
