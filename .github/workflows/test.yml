@@ -7,9 +7,9 @@ on:
 env:
   SEPOLIA_RPC: https://ethereum-sepolia-rpc.publicnode.com
   MAINNET_RPC: https://cloudflare-eth.com
-  POLYGON_RPC: https://polygon-rpc.com
+  POLYGON_RPC: wss://polygon.drpc.org
   OPTIMISM_RPC: https://mainnet.optimism.io
-  ARBITRUM_RPC: https://arb1.arbitrum.io/rpc
+  ARBITRUM_RPC: https://1rpc.io/arb
   GNOSIS_RPC: https://gnosis.publicnode.com
   BASE_RPC: https://mainnet.base.org
   PGN_RPC: https://rpc.publicgoods.network

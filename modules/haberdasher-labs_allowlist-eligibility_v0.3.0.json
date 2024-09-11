@@ -1,10 +1,11 @@
 {
   "id": "haberdasher-labs_allowlist-eligibility",
-  "version": "v0.2.0",
+  "version": "v0.3.0",
   "name": "Allowlist Eligibility",
   "details": [
     "A Hats Protocol eligibility module that uses an allowlist to determine eligibility.",
-    "This module sets up a simple allowlist to determine eligibility for a hat. For a given account (i.e., potential hat wearer), the allowlist stores values for that account's eligibility and standing for the hat. The wearer(s) of the Owner Hat can add or remove accounts from the allowlist. The wearer(s) of the Arbitrator Hat can set the standing of accounts."
+    "This module sets up a simple allowlist to determine eligibility for a hat. For a given account (i.e., potential hat wearer), the allowlist stores values for that account's eligibility and standing for the hat. The wearer(s) of the Owner Hat can add or remove accounts from the allowlist. The wearer(s) of the Arbitrator Hat can set the standing of accounts.",
+    "This version is compatible with module chaining."
   ],
   "links": [
     {
@@ -29,42 +30,36 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0x5302757E4CEAD88d52D014113FCC8cb51dd36255",
-  "tags": [
-    {
-      "description": "Indicates that the module is now deprecated",
-      "label": "Deprecated",
-      "value": "deprecated"
-    }
-  ],
+  "implementationAddress": "0x80336fb7b6B653686eBe71d2c3ee685b70108B8f",
+  "tags": [],
   "deployments": [
     {
       "chainId": "11155111",
-      "block": "5906201"
+      "block": "6669160"
     },
     {
       "chainId": "10",
-      "block": "120018916"
+      "block": "125208683"
     },
     {
       "chainId": "137",
-      "block": "56934846"
+      "block": "61674801"
     },
     {
       "chainId": "42161",
-      "block": "210966200"
+      "block": "252235066"
     },
     {
       "chainId": "100",
-      "block": "33953289"
+      "block": "35938116"
     },
     {
       "chainId": "8453",
-      "block": "14483153"
+      "block": "19613487"
     },
     {
       "chainId": "42220",
-      "block": "25623525"
+      "block": "27668833"
     }
   ],
   "creationArgs": {
