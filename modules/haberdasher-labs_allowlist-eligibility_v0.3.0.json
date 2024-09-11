@@ -106,9 +106,7 @@
   ],
   "writeFunctions": [
     {
-      "roles": [
-        "allowListOwner"
-      ],
+      "roles": ["allowListOwner"],
       "functionName": "addAccount",
       "label": "Add Account",
       "description": "Add an account to the allowlist",
@@ -123,9 +121,7 @@
       ]
     },
     {
-      "roles": [
-        "allowListOwner"
-      ],
+      "roles": ["allowListOwner"],
       "functionName": "addAccounts",
       "label": "Add Accounts",
       "description": "Add multiple accounts to the allowlist",
@@ -139,9 +135,7 @@
       ]
     },
     {
-      "roles": [
-        "allowListOwner"
-      ],
+      "roles": ["allowListOwner"],
       "functionName": "removeAccount",
       "label": "Remove Account",
       "description": "Remove an account from the allowlist",
@@ -155,9 +149,7 @@
       ]
     },
     {
-      "roles": [
-        "allowListOwner"
-      ],
+      "roles": ["allowListOwner"],
       "functionName": "removeAccountAndBurnHat",
       "label": "Remove and Burn",
       "description": "Remove an account from the allowlist and burn their hat",
@@ -171,9 +163,7 @@
       ]
     },
     {
-      "roles": [
-        "allowListOwner"
-      ],
+      "roles": ["allowListOwner"],
       "functionName": "removeAccounts",
       "label": "Remove Accounts",
       "description": "Remove multiple accounts from the allowlist",
@@ -187,9 +177,7 @@
       ]
     },
     {
-      "roles": [
-        "allowListArbitrator"
-      ],
+      "roles": ["allowListArbitrator"],
       "functionName": "setStandingForAccount",
       "label": "Set Standing",
       "description": "Set the standing for an account",
@@ -210,9 +198,7 @@
       ]
     },
     {
-      "roles": [
-        "allowListArbitrator"
-      ],
+      "roles": ["allowListArbitrator"],
       "functionName": "setBadStandingAndBurnHat",
       "label": "Set Bad Standing and Burn Hat",
       "description": "Puts an account in bad standing and burns their hat",
@@ -226,9 +212,7 @@
       ]
     },
     {
-      "roles": [
-        "allowListArbitrator"
-      ],
+      "roles": ["allowListArbitrator"],
       "functionName": "setStandingForAccounts",
       "label": "Set Standings",
       "description": "Set the standing for multiple accounts",
@@ -248,9 +232,7 @@
       ]
     },
     {
-      "roles": [
-        "allowlistOwner"
-      ],
+      "roles": ["allowlistOwner"],
       "functionName": "setOwnerHat",
       "label": "Set Allowlist Owner Hat",
       "description": "Set the id of the allowlist owner hat",
@@ -264,9 +246,7 @@
       ]
     },
     {
-      "roles": [
-        "allowlistOwner"
-      ],
+      "roles": ["allowlistOwner"],
       "functionName": "setArbitratorHat",
       "label": "Set Allowlist Arbitrator Hat",
       "description": "Set the id of the allowlist arbitrator hat",
