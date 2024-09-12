@@ -1,0 +1,565 @@
+{
+  "name": "Subscription Eligibility (Unlock Protocol V14)",
+  "details": [
+    "This module adds a subscription requirement to a hat. Wearers must make a recurring payment to keep the hat.",
+    "This module is powered by Unlock Protocol. Deploying this module will also create a new lock contract (Public Lock version 14), and will automatically mint a hat to the recipient of a newly purchased key. The wearer will remain eligible as long as their subscription is active.",
+    "To work properly, this module must be set as the eligibility module for the target hat and wear one of the target hat's admin hats."
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/Hats-Protocol/unlock-eligibility"
+    }
+  ],
+  "parameters": [
+    {
+      "label": "Referrer",
+      "functionName": "REFERRER",
+      "displayType": "address"
+    },
+    {
+      "label": "Referrer Fee Percentage",
+      "functionName": "referrerFeePercentage",
+      "displayType": "uint256"
+    },
+    {
+      "label": "Lock Contract",
+      "functionName": "lock",
+      "displayType": "address"
+    },
+    {
+      "label": "Price",
+      "functionName": "keyPurchasePrice",
+      "displayType": "amountWithDecimals"
+    },
+    {
+      "label": "Token",
+      "functionName": "keyPurchaseToken",
+      "displayType": "token"
+    },
+    {
+      "label": "Renewal Period",
+      "functionName": "expirationDuration",
+      "displayType": "seconds"
+    },
+    {
+      "label": "Max Purchasers",
+      "functionName": "maxNumberOfKeys",
+      "displayType": "default"
+    }
+  ],
+  "type": {
+    "eligibility": true,
+    "toggle": false,
+    "hatter": true
+  },
+  "tags": ["version: 0.1.0"],
+  "implementationAddress": "0xA235F37A5e98980Ee439deB0600F06d956707D61",
+  "deployments": [
+    {
+      "chainId": "11155111",
+      "block": "6678414"
+    }
+  ],
+  "creationArgs": {
+    "useHatId": true,
+    "immutable": [],
+    "mutable": [
+      {
+        "name": "Subscription Period",
+        "description": "How often a payment must be made to keep the hat",
+        "type": "uint256",
+        "example": "2592000",
+        "displayType": "seconds"
+      },
+      {
+        "name": "Payment Token",
+        "description": "The token used to make payments",
+        "type": "address",
+        "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
+        "displayType": "token"
+      },
+      {
+        "name": "Subscription Price",
+        "description": "The price of a payment for a single subscription period",
+        "type": "uint256",
+        "example": "5000000000000000000",
+        "displayType": "amountWithDecimals"
+      },
+      {
+        "name": "Max Subscribers",
+        "description": "The maximum number of addresses that can pay for this hat. Suggested greater than or equal to the max wearers for this hat.",
+        "type": "uint256",
+        "example": "100",
+        "displayType": "default"
+      },
+      {
+        "name": "Lock Manager",
+        "description": "The manager of the lock contract, who can modify many of the lock's settings.",
+        "type": "address",
+        "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
+        "displayType": "address"
+      },
+      {
+        "name": "Lock Name",
+        "description": "The name of the lock NFT. Suggested to include the name of this hat.",
+        "type": "string",
+        "example": "My Hat Lock",
+        "displayType": "default"
+      }
+    ]
+  },
+  "customRoles": [],
+  "writeFunctions": [],
+  "abi": [
+    [
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_version",
+            "type": "string"
+          },
+          {
+            "internalType": "contract IUnlock",
+            "name": "_unlock",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_referrer",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "__referrerFeePercentage",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [],
+        "name": "HatMintFailed",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "InvalidReferrerFee",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NotLock",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NotReferrer",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "NotTransferable",
+        "type": "error"
+      },
+      {
+        "inputs": [],
+        "name": "UnsupportedNetwork",
+        "type": "error"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "referrerFeePercentage",
+            "type": "uint256"
+          }
+        ],
+        "name": "ImplementationReferrerFeePercentageSet",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint8",
+            "name": "version",
+            "type": "uint8"
+          }
+        ],
+        "name": "Initialized",
+        "type": "event"
+      },
+      {
+        "inputs": [],
+        "name": "HATS",
+        "outputs": [
+          {
+            "internalType": "contract IHats",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "IMPLEMENTATION",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "LOCK_VERSION",
+        "outputs": [
+          {
+            "internalType": "uint16",
+            "name": "",
+            "type": "uint16"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "REFERRER",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "expirationDuration",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_wearer",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "getWearerStatus",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "eligible",
+            "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "standing",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "hatId",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "implementationReferrerFeePercentage",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "",
+            "type": "bytes"
+          }
+        ],
+        "name": "keyPurchasePrice",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "minKeyPrice",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "keyPurchaseToken",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "lock",
+        "outputs": [
+          {
+            "internalType": "contract IPublicLock",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "maxNumberOfKeys",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "recipient",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes",
+            "name": "",
+            "type": "bytes"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "onKeyPurchase",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "onKeyTransfer",
+        "outputs": [],
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "referrerFeePercentage",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_referrerFeePercentage",
+            "type": "uint256"
+          }
+        ],
+        "name": "setImplementationReferrerFeePercentage",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes",
+            "name": "_initData",
+            "type": "bytes"
+          }
+        ],
+        "name": "setUp",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "unlock",
+        "outputs": [
+          {
+            "internalType": "contract IUnlock",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "unlock_",
+        "outputs": [
+          {
+            "internalType": "contract IUnlock",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "version",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "version_",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ]
+  ]
+}
