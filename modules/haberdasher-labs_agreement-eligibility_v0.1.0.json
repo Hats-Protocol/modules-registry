@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_agreement-eligibility",
+  "version": "v0.1.0",
   "name": "Agreement Eligibility",
   "details": [
     "A Hats Protocol eligibility module that a community or organization can use to enable individuals to join the community by signing an agreement."
@@ -36,7 +38,13 @@
     "toggle": false,
     "hatter": false
   },
-  "tags": [],
+  "tags": [
+    {
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
+    }
+  ],
   "implementationAddress": "0xF6bc6Dd30403e6ff5b3Bebead32B8fce1b753aA1",
   "deployments": [
     {
@@ -185,7 +193,11 @@
   "abi": [
     {
       "inputs": [
-        { "internalType": "string", "name": "_version", "type": "string" }
+        {
+          "internalType": "string",
+          "name": "_version",
+          "type": "string"
+        }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
@@ -195,7 +207,11 @@
       "name": "AgreementEligibility_NotArbitrator",
       "type": "error"
     },
-    { "inputs": [], "name": "AgreementEligibility_NotOwner", "type": "error" },
+    {
+      "inputs": [],
+      "name": "AgreementEligibility_NotOwner",
+      "type": "error"
+    },
     {
       "anonymous": false,
       "inputs": [
@@ -275,7 +291,13 @@
     {
       "inputs": [],
       "name": "ARBITRATOR_HAT",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
@@ -283,7 +305,11 @@
       "inputs": [],
       "name": "HATS",
       "outputs": [
-        { "internalType": "contract IHats", "name": "", "type": "address" }
+        {
+          "internalType": "contract IHats",
+          "name": "",
+          "type": "address"
+        }
       ],
       "stateMutability": "pure",
       "type": "function"
@@ -291,24 +317,44 @@
     {
       "inputs": [],
       "name": "IMPLEMENTATION",
-      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "OWNER_HAT",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "claimer", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "claimer",
+          "type": "address"
+        }
       ],
       "name": "claimerAgreements",
       "outputs": [
-        { "internalType": "uint256", "name": "agreementId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "agreementId",
+          "type": "uint256"
+        }
       ],
       "stateMutability": "view",
       "type": "function"
@@ -316,20 +362,36 @@
     {
       "inputs": [],
       "name": "currentAgreement",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "currentAgreementId",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        }
       ],
       "name": "forgive",
       "outputs": [],
@@ -338,13 +400,29 @@
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" },
-        { "internalType": "uint256", "name": "", "type": "uint256" }
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
       ],
       "name": "getWearerStatus",
       "outputs": [
-        { "internalType": "bool", "name": "eligible", "type": "bool" },
-        { "internalType": "bool", "name": "standing", "type": "bool" }
+        {
+          "internalType": "bool",
+          "name": "eligible",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "standing",
+          "type": "bool"
+        }
       ],
       "stateMutability": "view",
       "type": "function"
@@ -352,20 +430,36 @@
     {
       "inputs": [],
       "name": "graceEndsAt",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "hatId",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        }
       ],
       "name": "revoke",
       "outputs": [],
@@ -374,8 +468,16 @@
     },
     {
       "inputs": [
-        { "internalType": "string", "name": "_agreement", "type": "string" },
-        { "internalType": "uint256", "name": "_grace", "type": "uint256" }
+        {
+          "internalType": "string",
+          "name": "_agreement",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_grace",
+          "type": "uint256"
+        }
       ],
       "name": "setAgreement",
       "outputs": [],
@@ -384,7 +486,11 @@
     },
     {
       "inputs": [
-        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        }
       ],
       "name": "setUp",
       "outputs": [],
@@ -414,23 +520,45 @@
     {
       "inputs": [],
       "name": "version",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "version_",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        }
       ],
       "name": "wearerStanding",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     }

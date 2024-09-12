@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_gitcoin-passport-eligibility",
+  "version": "v0.1.0",
   "name": "Gitcoin Passport Eligibility",
   "details": [
     "An eligibility module requiring that hat wearers have a Gitcoin Passport score over a configurable threshold"

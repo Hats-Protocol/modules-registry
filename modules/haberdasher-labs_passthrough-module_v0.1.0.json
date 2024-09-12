@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_passthrough-module",
+  "version": "v0.1.0",
   "name": "Passthrough Module",
   "details": [
     "A Hats Protocol module that enables an authorized hat to serve as the eligibility and/or toggle module for other hat(s).",

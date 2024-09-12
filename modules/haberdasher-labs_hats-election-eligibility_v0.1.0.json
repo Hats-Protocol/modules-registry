@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_hats-election-eligibility",
+  "version": "v0.1.0",
   "name": "Hats Election Eligibility",
   "details": [
     "This module enables organizations to elect wearers of a given hat. More specifically, it makes certain accounts eligible to wear the given hat based on the submitted results of an election.",

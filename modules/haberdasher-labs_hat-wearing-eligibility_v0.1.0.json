@@ -1,24 +1,22 @@
 {
-  "name": "ERC721 Eligibility",
+  "id": "haberdasher-labs_hat-wearing-eligibility",
+  "version": "v0.1.0",
+  "name": "Hat Wearing Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that checks if an address owns a minimum balance of an ERC721 token to determine eligibility"
+    "A Hats Protocol eligibility module that conditions eligibility for one hat based on wearing another hat.",
+    "One use of a hat is to serve as an encapsulation of a set of logic and conditions that serve as baseline eligibility criteria for other hats. This eligibility module builds on that idea by allowing a hat to be used as an eligibility criterion for another hat."
   ],
   "links": [
     {
       "label": "GitHub",
-      "link": "https://github.com/pumpedlunch/HatsEligibilityModules"
+      "link": "https://github.com/Hats-Protocol/hat-wearing-eligibility"
     }
   ],
   "parameters": [
     {
-      "label": "Token Address",
-      "functionName": "ERC721_TOKEN_ADDRESS",
-      "displayType": "erc721"
-    },
-    {
-      "label": "Minimum Balance",
-      "functionName": "MIN_BALANCE",
-      "displayType": "default"
+      "label": "Hat To Wear",
+      "functionName": "CRITERION_HAT",
+      "displayType": "hat"
     }
   ],
   "type": {
@@ -27,65 +25,58 @@
     "hatter": false
   },
   "tags": [],
-  "implementationAddress": "0xF37cf12fB4493D29270806e826fDDf50dd722bab",
+  "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
   "deployments": [
     {
       "chainId": "5",
-      "block": "9611065"
+      "block": "9719807"
     },
     {
       "chainId": "11155111",
-      "block": "4655346"
+      "block": "4655381"
     },
     {
       "chainId": "1",
-      "block": "18936352"
+      "block": "18936188"
     },
     {
       "chainId": "10",
-      "block": "110684542"
+      "block": "109769331"
     },
     {
       "chainId": "137",
-      "block": "48563224"
+      "block": "48562276"
     },
     {
       "chainId": "42161",
-      "block": "139452888"
+      "block": "139445749"
     },
     {
       "chainId": "100",
-      "block": "30405902"
+      "block": "30406067"
     },
     {
       "chainId": "424",
-      "block": "6052014"
+      "block": "6051557"
     },
     {
       "chainId": "8453",
-      "block": "7556195"
+      "block": "7577549"
     },
     {
       "chainId": "42220",
-      "block": "22842339"
+      "block": "22842434"
     }
   ],
   "creationArgs": {
     "useHatId": true,
     "immutable": [
       {
-        "name": "Token Address",
-        "description": "ERC721 token address",
-        "type": "address",
-        "example": "0x72b51ba24452Cd5b5443B7d6725755E4d77C04e5",
-        "displayType": "token"
-      },
-      {
-        "name": "Minimum Balance",
-        "description": "Minimum amount of tokens in order to be eligible",
+        "name": "Criterion Hat",
+        "description": "The ID of the hat which users will be required to wear in order to be eligible.",
         "type": "uint256",
-        "example": "500",
-        "displayType": "default"
+        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
+        "displayType": "hat"
       }
     ],
     "mutable": []
@@ -105,16 +96,6 @@
       "type": "constructor"
     },
     {
-      "inputs": [],
-      "name": "AlreadyInitialized",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "NotInitializing",
-      "type": "error"
-    },
-    {
       "anonymous": false,
       "inputs": [
         {
@@ -129,12 +110,12 @@
     },
     {
       "inputs": [],
-      "name": "ERC721_TOKEN_ADDRESS",
+      "name": "CRITERION_HAT",
       "outputs": [
         {
-          "internalType": "address",
+          "internalType": "uint256",
           "name": "",
-          "type": "address"
+          "type": "uint256"
         }
       ],
       "stateMutability": "pure",
@@ -161,19 +142,6 @@
           "internalType": "address",
           "name": "",
           "type": "address"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "MIN_BALANCE",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
         }
       ],
       "stateMutability": "pure",

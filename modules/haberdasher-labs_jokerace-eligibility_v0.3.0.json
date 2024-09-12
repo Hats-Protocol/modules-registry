@@ -1,9 +1,12 @@
 {
+  "id": "haberdasher-labs_jokerace-eligibility",
+  "version": "v0.3.0",
   "name": "JokeRace Eligibility",
   "details": [
     "By using this module, communities can elect the wearers of a hat through a JokeRace election. More specifically, the eligible wearers are creators of the top voted proposals in the election",
     "The number of winners of an election, and thus the number of possible wearers made eligible through this integration, is configurable. Additionally, a term period can be set, after which the winners will no longer be eligible to wear the hat.",
-    "You must have already deployed a JokeRace contest before deploying this Eligibility Module."
+    "You must have already deployed a JokeRace contest before deploying this Eligibility Module.",
+    "NOTE: proposals ranking is currently only supported in Jokerace contests with down-voting disabled, and so this module only works with down-voting disabled contests."
   ],
   "links": [
     {
@@ -16,21 +19,6 @@
       "label": "Module Admin Hat ID",
       "functionName": "ADMIN_HAT",
       "displayType": "hat"
-    },
-    {
-      "label": "Contest Address",
-      "functionName": "underlyingContest",
-      "displayType": "jokerace"
-    },
-    {
-      "label": "Term End",
-      "functionName": "termEnd",
-      "displayType": "timestamp"
-    },
-    {
-      "label": "Number Of Elected Hat Wearers",
-      "functionName": "topK",
-      "displayType": "default"
     }
   ],
   "type": {
@@ -38,38 +26,40 @@
     "toggle": false,
     "hatter": false
   },
-  "tags": [
-    {
-      "description": "Indicates that the module is now deprecated",
-      "label": "Deprecated",
-      "value": "deprecated"
-    }
-  ],
-  "implementationAddress": "0x2bb30E1786a656EC6cD81e79EEf1A28607c9AE5A",
+  "tags": [],
+  "implementationAddress": "0x0Bb0a2B9bc5Da206fead8e87D7Cbc6fCBa455320",
   "deployments": [
     {
-      "chainId": "5",
-      "block": "9597388"
+      "chainId": "1",
+      "block": "20658461"
     },
     {
       "chainId": "11155111",
-      "block": "4655405"
+      "block": "6583390"
     },
     {
       "chainId": "10",
-      "block": "110683218"
+      "block": "124813980"
     },
     {
       "chainId": "137",
-      "block": "48562046"
+      "block": "61314105"
     },
     {
       "chainId": "42161",
-      "block": "139443958"
+      "block": "249098102"
     },
     {
       "chainId": "100",
-      "block": "30406089"
+      "block": "35784447"
+    },
+    {
+      "chainId": "8453",
+      "block": "19218822"
+    },
+    {
+      "chainId": "42220",
+      "block": "27524522"
     }
   ],
   "creationArgs": {
@@ -77,7 +67,7 @@
     "immutable": [
       {
         "name": "Admin Hat",
-        "description": "Optional admin hat, granted a permission to create a new term (reelection). If not provided (equals zero), then this permission is granted to the admins of the hat",
+        "description": "Optional admin hat, granted a permission to create a new term. If not provided (equals zero), then this permission is granted to the admins of the hat",
         "type": "uint256",
         "example": "26959946667150639794667015087019630673637144422540572481103610249216",
         "displayType": "hat",
@@ -89,7 +79,7 @@
         "name": "JokeRace Contest",
         "description": "The JokeRace contest that facilitates the election",
         "type": "address",
-        "example": "0xd00F6a711522a84C73aED9997Fcf207B41E97311",
+        "example": "0x8E612AD3CD04981A69e8ad532b5c20466e3Af5E0",
         "displayType": "jokerace"
       },
       {
@@ -98,6 +88,13 @@
         "type": "uint256",
         "example": "1723155807",
         "displayType": "timestamp"
+      },
+      {
+        "name": "Transition Period",
+        "description": "Period of time after the term end when previous elected members are still considered eligible until a new term begins (in seconds)",
+        "type": "uint256",
+        "example": "86400",
+        "displayType": "seconds"
       },
       {
         "name": "Top K",
@@ -119,22 +116,22 @@
   "writeFunctions": [
     {
       "roles": ["public"],
-      "functionName": "pullElectionResults",
-      "label": "Pull Election Results",
-      "description": "Pulls the election's final results",
+      "functionName": "startNextTerm",
+      "label": "Start Next Term",
+      "description": "Pulls the election's final results and starts the next term",
       "primary": true,
       "args": []
     },
     {
       "roles": ["jokeraceAdmin"],
-      "functionName": "reelection",
-      "label": "New Term",
+      "functionName": "setNextTerm",
+      "label": "Set Next Term",
       "description": "Setup a new term, once the current term has ended",
       "primary": true,
       "args": [
         {
-          "name": "Election",
-          "description": "Address of the new JokeRace election",
+          "name": "Contest",
+          "description": "Address of the new JokeRace contest",
           "type": "address",
           "displayType": "jokerace"
         },
@@ -143,6 +140,12 @@
           "description": "Timestamp of the new term ending",
           "type": "uint256",
           "displayType": "timestamp"
+        },
+        {
+          "name": "Transition Period",
+          "description": "Transition period for the new term",
+          "type": "uint256",
+          "displayType": "seconds"
         },
         {
           "name": "Top K",
@@ -156,11 +159,7 @@
   "abi": [
     {
       "inputs": [
-        {
-          "internalType": "string",
-          "name": "_version",
-          "type": "string"
-        }
+        { "internalType": "string", "name": "_version", "type": "string" }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
@@ -170,16 +169,18 @@
       "name": "JokeraceEligibility_ContestNotCompleted",
       "type": "error"
     },
+    { "inputs": [], "name": "JokeraceEligibility_ContestTie", "type": "error" },
     {
       "inputs": [],
-      "name": "JokeraceEligibility_NoTies",
+      "name": "JokeraceEligibility_MustHaveDownvotingDisabled",
       "type": "error"
     },
     {
       "inputs": [],
-      "name": "JokeraceEligibility_NotAdmin",
+      "name": "JokeraceEligibility_MustHaveSortingEnabled",
       "type": "error"
     },
+    { "inputs": [], "name": "JokeraceEligibility_NotAdmin", "type": "error" },
     {
       "inputs": [],
       "name": "JokeraceEligibility_TermNotCompleted",
@@ -204,7 +205,7 @@
         {
           "indexed": false,
           "internalType": "address",
-          "name": "NewContest",
+          "name": "newContest",
           "type": "address"
         },
         {
@@ -218,21 +219,52 @@
           "internalType": "uint256",
           "name": "newTermEnd",
           "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "newTransitionPeriod",
+          "type": "uint256"
         }
       ],
-      "name": "NewTerm",
+      "name": "NextTermSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "contest",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "topK",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "termEnd",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "transitionPeriod",
+          "type": "uint256"
+        }
+      ],
+      "name": "TermStarted",
       "type": "event"
     },
     {
       "inputs": [],
       "name": "ADMIN_HAT",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "pure",
       "type": "function"
     },
@@ -240,11 +272,7 @@
       "inputs": [],
       "name": "HATS",
       "outputs": [
-        {
-          "internalType": "contract IHats",
-          "name": "",
-          "type": "address"
-        }
+        { "internalType": "contract IHats", "name": "", "type": "address" }
       ],
       "stateMutability": "pure",
       "type": "function"
@@ -252,65 +280,54 @@
     {
       "inputs": [],
       "name": "IMPLEMENTATION",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
+      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
       "stateMutability": "pure",
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "wearer",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "contest",
-          "type": "address"
-        }
-      ],
-      "name": "eligibleWearersPerContest",
+      "inputs": [],
+      "name": "canStartNextTerm",
       "outputs": [
-        {
-          "internalType": "bool",
-          "name": "eligible",
-          "type": "bool"
-        }
+        { "internalType": "bool", "name": "allowed", "type": "bool" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "currentTermEnded",
+      "outputs": [{ "internalType": "bool", "name": "ended", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "currentTermIndex",
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "address", "name": "wearer", "type": "address" },
+        { "internalType": "uint256", "name": "termIndex", "type": "uint256" }
+      ],
+      "name": "eligibleWearersPerTerm",
+      "outputs": [
+        { "internalType": "bool", "name": "eligible", "type": "bool" }
       ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        {
-          "internalType": "address",
-          "name": "_wearer",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
+        { "internalType": "address", "name": "_wearer", "type": "address" },
+        { "internalType": "uint256", "name": "", "type": "uint256" }
       ],
       "name": "getWearerStatus",
       "outputs": [
-        {
-          "internalType": "bool",
-          "name": "eligible",
-          "type": "bool"
-        },
-        {
-          "internalType": "bool",
-          "name": "standing",
-          "type": "bool"
-        }
+        { "internalType": "bool", "name": "eligible", "type": "bool" },
+        { "internalType": "bool", "name": "standing", "type": "bool" }
       ],
       "stateMutability": "view",
       "type": "function"
@@ -318,66 +335,38 @@
     {
       "inputs": [],
       "name": "hatId",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
+      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "pullElectionResults",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "newUnderlyingContest",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "newTermEnd",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "newTopK",
-          "type": "uint256"
-        }
-      ],
-      "name": "reelection",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "reelectionAllowed",
+      "name": "nextContestCompleted",
       "outputs": [
-        {
-          "internalType": "bool",
-          "name": "allowed",
-          "type": "bool"
-        }
+        { "internalType": "bool", "name": "completed", "type": "bool" }
       ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
+        { "internalType": "address", "name": "newContest", "type": "address" },
+        { "internalType": "uint256", "name": "newTermEnd", "type": "uint256" },
         {
-          "internalType": "bytes",
-          "name": "_initData",
-          "type": "bytes"
-        }
+          "internalType": "uint256",
+          "name": "newTransitionPeriod",
+          "type": "uint256"
+        },
+        { "internalType": "uint96", "name": "newTopK", "type": "uint96" }
+      ],
+      "name": "setNextTerm",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
       ],
       "name": "setUp",
       "outputs": [],
@@ -386,38 +375,24 @@
     },
     {
       "inputs": [],
-      "name": "termEnd",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
+      "name": "startNextTerm",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "topK",
+      "inputs": [
+        { "internalType": "uint256", "name": "termIndex", "type": "uint256" }
+      ],
+      "name": "terms",
       "outputs": [
+        { "internalType": "address", "name": "contest", "type": "address" },
+        { "internalType": "uint96", "name": "topK", "type": "uint96" },
+        { "internalType": "uint256", "name": "termEnd", "type": "uint256" },
         {
           "internalType": "uint256",
-          "name": "",
+          "name": "transitionPeriod",
           "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "underlyingContest",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
         }
       ],
       "stateMutability": "view",
@@ -426,26 +401,14 @@
     {
       "inputs": [],
       "name": "version",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "version_",
-      "outputs": [
-        {
-          "internalType": "string",
-          "name": "",
-          "type": "string"
-        }
-      ],
+      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
       "stateMutability": "view",
       "type": "function"
     }

@@ -24,7 +24,9 @@ Each module in the registry is represented by JSON file with the a number of det
 
 ```json
 {
-  "name": "<module's name (string)>",
+  "id": "<module's creator (string with no spaces)>_<module's name (string with no spaces)>",
+  "version": "<version, e.g. v0.1.0>",
+  "name": "<module's display name (string)>",
   "details": ["<first paragraph describing the module (string)>", "<second paragraph describing the module (string)>"],
   "links": [
   {
@@ -117,6 +119,14 @@ The exact schema is declared using the [ZOD](https://zod.dev/) library, which is
 The source of truth for the full schema — specified in ZOD — can be found [here](./schema.ts).
 
 ### Schema Notes
+
+#### `id`
+
+A string in the format "<creator>\_<name>", while both "name" and "creator" are strings with no spaces and no underscores.
+
+#### `version`
+
+A string in the format "v<version as x.x.x>", e.g. v0.1.0. The semantic logic of the version scheme is not predefined, i.e. the creator of the module can use its own versioning logic.
 
 #### `details`
 
@@ -230,7 +240,7 @@ The module's write functions. Each write function is associated with a role and 
 
 ### Step 1 - Add your module's JSON file to the modules directory.
 
-Following the [example JSON](#module-registry-schema) and existing modules, fill out the relevant details and metadata for your module and add the file to the [modules](./modules) directory. The name of the file should be the module's name in camelCase, with the `.json` extension.
+Following the [example JSON](#module-registry-schema) and existing modules, fill out the relevant details and metadata for your module and add the file to the [modules](./modules) directory. The name of the file should be in the following format: "<module's id>\_<module's version>.json", e.g. "module-creator_module-name_v0.1.0.json".
 
 Keep in mind that much of the metadata will be seen by end users in apps that use the registry, so make sure to be clear and concise.
 

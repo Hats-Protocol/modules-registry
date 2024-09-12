@@ -1,7 +1,9 @@
 {
-  "name": "Toggles Chain",
+  "id": "haberdasher-labs_eligibility-chain",
+  "version": "v0.1.0",
+  "name": "Eligibilities Chain",
   "details": [
-    "Toggle module that chains any amount of toggle modules with 'and' & 'or' logical operations.",
+    "Eligibility module that chains any amount of eligibility modules with 'and' & 'or' logical operations.",
     "Modules are chained in a format of a disjunction of conjunction clauses."
   ],
   "links": [
@@ -28,26 +30,35 @@
     }
   ],
   "type": {
-    "eligibility": false,
-    "toggle": true,
+    "eligibility": true,
+    "toggle": false,
     "hatter": false
   },
   "tags": [
+    {
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
+    },
     {
       "description": "Indicates that the module is extending the behavior of existing module instances",
       "label": "Meta Module",
       "value": "meta"
     }
   ],
-  "implementationAddress": "0x2f1388e095BEc051dB9F1B226Faf222ef5c33f16",
+  "implementationAddress": "0x83200f1633cDb6C8f28F202CEA1B6a9105862D83",
   "deployments": [
     {
       "chainId": "5",
-      "block": "10009649"
+      "block": "10009615"
+    },
+    {
+      "chainId": "10",
+      "block": "111939238"
     },
     {
       "chainId": "11155111",
-      "block": "5313437"
+      "block": "5313413"
     }
   ],
   "creationArgs": {
@@ -57,14 +68,14 @@
         "name": "Number Of Conjunction Clauses",
         "description": "The number of conjunction clauses",
         "type": "uint256",
-        "example": "1",
+        "example": "2",
         "displayType": "default"
       },
       {
         "name": "Clause Lengths",
         "description": "Length of each clause, provided as a list",
         "type": "uint256[]",
-        "example": [2],
+        "example": [1, 2],
         "displayType": "default"
       },
       {
@@ -72,8 +83,9 @@
         "description": "The list of module instances to chain together",
         "type": "address[]",
         "example": [
-          "0xe1f50cd1078b4f7920c7d6657dc3d8d2e5155ae0",
-          "0x4f28253ece7b52dd800160e7fecdb1c531a3fe1f"
+          "0x8a1f28732c984e5a80111bc06115b1302189859d",
+          "0x3232a9ab82800ff2ee966d6db5c6152d863bfc66",
+          "0xd700dcc4949dfc8fcb3b4246e7137bf759795ca0"
         ],
         "displayType": "default"
       }
@@ -146,10 +158,14 @@
     },
     {
       "inputs": [
+        { "internalType": "address", "name": "_wearer", "type": "address" },
         { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
       ],
-      "name": "getHatStatus",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "name": "getWearerStatus",
+      "outputs": [
+        { "internalType": "bool", "name": "eligible", "type": "bool" },
+        { "internalType": "bool", "name": "standing", "type": "bool" }
+      ],
       "stateMutability": "view",
       "type": "function"
     },

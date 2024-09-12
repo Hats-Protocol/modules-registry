@@ -1,20 +1,31 @@
 {
-  "name": "Hat Wearing Eligibility",
+  "id": "haberdasher-labs_colinks-supply-eligibility",
+  "version": "v0.1.0",
+  "name": "CoLinks Supply Eligibility",
   "details": [
-    "A Hats Protocol eligibility module that conditions eligibility for one hat based on wearing another hat.",
-    "One use of a hat is to serve as an encapsulation of a set of logic and conditions that serve as baseline eligibility criteria for other hats. This eligibility module builds on that idea by allowing a hat to be used as an eligibility criterion for another hat."
+    "Determines eligibility based on the supply of CoLinks links targeting a given account.",
+    "An account (i.e. potential hat wearer) is eligible if the current supply of their links meets a configurable threshold., "
   ],
   "links": [
     {
       "label": "GitHub",
-      "link": "https://github.com/Hats-Protocol/hat-wearing-eligibility"
+      "link": "https://github.com/Hats-Protocol/colinks-eligibility"
+    },
+    {
+      "label": "CoLinks",
+      "link": "https://colinks.coordinape.com/"
     }
   ],
   "parameters": [
     {
-      "label": "Hat To Wear",
-      "functionName": "CRITERION_HAT",
-      "displayType": "hat"
+      "label": "Link Supply Threshold",
+      "functionName": "THRESHOLD",
+      "displayType": "uint256"
+    },
+    {
+      "label": "CoLinks Contract",
+      "functionName": "COLINKS",
+      "displayType": "address"
     }
   ],
   "type": {
@@ -23,58 +34,23 @@
     "hatter": false
   },
   "tags": [],
-  "implementationAddress": "0xa2e614CE4FAaD60e266127F4006b812d69977265",
+  "implementationAddress": "0x64DB769cBC4de73a09BCA715604B27FA8704d3Eb",
   "deployments": [
     {
-      "chainId": "5",
-      "block": "9719807"
-    },
-    {
-      "chainId": "11155111",
-      "block": "4655381"
-    },
-    {
-      "chainId": "1",
-      "block": "18936188"
-    },
-    {
       "chainId": "10",
-      "block": "109769331"
-    },
-    {
-      "chainId": "137",
-      "block": "48562276"
-    },
-    {
-      "chainId": "42161",
-      "block": "139445749"
-    },
-    {
-      "chainId": "100",
-      "block": "30406067"
-    },
-    {
-      "chainId": "424",
-      "block": "6051557"
-    },
-    {
-      "chainId": "8453",
-      "block": "7577549"
-    },
-    {
-      "chainId": "42220",
-      "block": "22842434"
+      "block": "114023601"
     }
   ],
   "creationArgs": {
     "useHatId": true,
     "immutable": [
       {
-        "name": "Criterion Hat",
-        "description": "The ID of the hat which users will be required to wear in order to be eligible.",
+        "name": "Link Supply Threshold",
+        "description": "The minimum supply of an account's links that must exist for the account to be eligible.",
         "type": "uint256",
-        "example": "26959946667150639794667015087019630673637144422540572481103610249216",
-        "displayType": "hat"
+        "example": "10",
+        "displayType": "default",
+        "optional": false
       }
     ],
     "mutable": []
@@ -108,15 +84,15 @@
     },
     {
       "inputs": [],
-      "name": "CRITERION_HAT",
+      "name": "COLINKS",
       "outputs": [
         {
-          "internalType": "uint256",
+          "internalType": "contract CoLinksLike",
           "name": "",
-          "type": "uint256"
+          "type": "address"
         }
       ],
-      "stateMutability": "pure",
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -140,6 +116,19 @@
           "internalType": "address",
           "name": "",
           "type": "address"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "THRESHOLD",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "stateMutability": "pure",

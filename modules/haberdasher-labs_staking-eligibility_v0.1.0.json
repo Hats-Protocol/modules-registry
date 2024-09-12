@@ -1,4 +1,6 @@
 {
+  "id": "haberdasher-labs_staking-eligibility",
+  "version": "v0.1.0",
   "name": "Staking Eligibility",
   "details": [
     "A Hats Protocol eligibility module which requires wearers of a given hat to stake a minimum amount of a specified token in order to be eligible, and enables others in the Hat tree's organization to slash the stake of a wearer who is behaving badly."
