@@ -1,7 +1,7 @@
 {
   "id": "haberdasher-labs_public-lock-v14-eligibility-hatter",
   "version": "v0.1.0",
-  "name": "Subscription Eligibility — Unlock Protocol V14",
+  "name": "Subscription Eligibility (Unlock Protocol V14)",
   "details": [
     "This module adds a subscription requirement to a hat. Wearers must make a recurring payment to keep the hat.",
     "This module is powered by Unlock Protocol. Deploying this module will also create a new lock contract (Public Lock version 14), and will automatically mint a hat to the recipient of a newly purchased key. The wearer will remain eligible as long as their subscription is active.",
@@ -56,11 +56,11 @@
     "hatter": true
   },
   "tags": [],
-  "implementationAddress": "0xA235F37A5e98980Ee439deB0600F06d956707D61",
+  "implementationAddress": "0x717BfAb137Cd514Eff4753EFad06266083950233",
   "deployments": [
     {
       "chainId": "11155111",
-      "block": "6678414"
+      "block": "6680028"
     }
   ],
   "creationArgs": {
