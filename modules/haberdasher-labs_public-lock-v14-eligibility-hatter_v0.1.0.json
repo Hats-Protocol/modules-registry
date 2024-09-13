@@ -56,11 +56,11 @@
     "hatter": true
   },
   "tags": [],
-  "implementationAddress": "0x717BfAb137Cd514Eff4753EFad06266083950233",
+  "implementationAddress": "0x24C2EAb36d41324688475e25Bbe37559615874bE",
   "deployments": [
     {
       "chainId": "11155111",
-      "block": "6680028"
+      "block": "6686244"
     }
   ],
   "creationArgs": {
@@ -78,7 +78,7 @@
         "name": "Payment Token",
         "description": "The token used to make payments",
         "type": "address",
-        "example": "0x1d256A1154382921067d4B17CA52209f2d3bE106",
+        "example": "0xb16f35c0ae2912430dac15764477e179d9b9ebea",
         "displayType": "token"
       },
       {
@@ -115,451 +115,464 @@
   "writeFunctions": [],
   "abi": [
     {
+      "type": "constructor",
       "inputs": [
         {
-          "internalType": "string",
           "name": "_version",
-          "type": "string"
+          "type": "string",
+          "internalType": "string"
         },
         {
-          "internalType": "contract IUnlock",
           "name": "_unlock",
-          "type": "address"
+          "type": "address",
+          "internalType": "contract IUnlock"
         },
         {
-          "internalType": "address",
           "name": "_referrer",
-          "type": "address"
+          "type": "address",
+          "internalType": "address"
         },
         {
-          "internalType": "uint256",
           "name": "__referrerFeePercentage",
-          "type": "uint256"
+          "type": "uint256",
+          "internalType": "uint256"
         }
       ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
+      "stateMutability": "nonpayable"
     },
     {
-      "inputs": [],
-      "name": "HatMintFailed",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "InvalidReferrerFee",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "NotLock",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "NotReferrer",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "NotTransferable",
-      "type": "error"
-    },
-    {
-      "inputs": [],
-      "name": "UnsupportedNetwork",
-      "type": "error"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "referrerFeePercentage",
-          "type": "uint256"
-        }
-      ],
-      "name": "ImplementationReferrerFeePercentageSet",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint8",
-          "name": "version",
-          "type": "uint8"
-        }
-      ],
-      "name": "Initialized",
-      "type": "event"
-    },
-    {
-      "inputs": [],
+      "type": "function",
       "name": "HATS",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "contract IHats",
           "name": "",
-          "type": "address"
+          "type": "address",
+          "internalType": "contract IHats"
         }
       ],
-      "stateMutability": "pure",
-      "type": "function"
+      "stateMutability": "pure"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "IMPLEMENTATION",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "address",
           "name": "",
-          "type": "address"
+          "type": "address",
+          "internalType": "address"
         }
       ],
-      "stateMutability": "pure",
-      "type": "function"
+      "stateMutability": "pure"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "LOCK_VERSION",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "uint16",
           "name": "",
-          "type": "uint16"
+          "type": "uint16",
+          "internalType": "uint16"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "REFERRER",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "address",
           "name": "",
-          "type": "address"
+          "type": "address",
+          "internalType": "address"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "expirationDuration",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "uint256",
           "name": "",
-          "type": "uint256"
+          "type": "uint256",
+          "internalType": "uint256"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_wearer",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
+      "type": "function",
       "name": "getWearerStatus",
+      "inputs": [
+        {
+          "name": "_wearer",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
       "outputs": [
         {
-          "internalType": "bool",
           "name": "eligible",
-          "type": "bool"
+          "type": "bool",
+          "internalType": "bool"
         },
         {
-          "internalType": "bool",
           "name": "standing",
-          "type": "bool"
+          "type": "bool",
+          "internalType": "bool"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "hatId",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "uint256",
           "name": "",
-          "type": "uint256"
+          "type": "uint256",
+          "internalType": "uint256"
         }
       ],
-      "stateMutability": "pure",
-      "type": "function"
+      "stateMutability": "pure"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "implementationReferrerFeePercentage",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "uint256",
           "name": "",
-          "type": "uint256"
+          "type": "uint256",
+          "internalType": "uint256"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes",
-          "name": "",
-          "type": "bytes"
-        }
-      ],
+      "type": "function",
       "name": "keyPurchasePrice",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "uint256",
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "keyPurchasePrice",
+      "inputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [
+        {
           "name": "minKeyPrice",
-          "type": "uint256"
+          "type": "uint256",
+          "internalType": "uint256"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "keyPurchaseToken",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "address",
           "name": "",
-          "type": "address"
+          "type": "address",
+          "internalType": "address"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "lock",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "contract IPublicLock",
           "name": "",
-          "type": "address"
+          "type": "address",
+          "internalType": "contract IPublicLock"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "maxNumberOfKeys",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "uint256",
           "name": "",
-          "type": "uint256"
+          "type": "uint256",
+          "internalType": "uint256"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "recipient",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes",
-          "name": "",
-          "type": "bytes"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
+      "type": "function",
       "name": "onKeyPurchase",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
-          "internalType": "address",
           "name": "",
-          "type": "address"
+          "type": "uint256",
+          "internalType": "uint256"
         },
         {
-          "internalType": "uint256",
           "name": "",
-          "type": "uint256"
+          "type": "address",
+          "internalType": "address"
         },
         {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
+          "name": "recipient",
+          "type": "address",
+          "internalType": "address"
         },
         {
-          "internalType": "address",
           "name": "",
-          "type": "address"
+          "type": "address",
+          "internalType": "address"
         },
         {
-          "internalType": "address",
           "name": "",
-          "type": "address"
+          "type": "bytes",
+          "internalType": "bytes"
         },
         {
-          "internalType": "uint256",
           "name": "",
-          "type": "uint256"
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
         }
       ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
       "name": "onKeyTransfer",
+      "inputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        },
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
       "outputs": [],
-      "stateMutability": "pure",
-      "type": "function"
+      "stateMutability": "pure"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "referrerFeePercentage",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "uint256",
           "name": "",
-          "type": "uint256"
+          "type": "uint256",
+          "internalType": "uint256"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_referrerFeePercentage",
-          "type": "uint256"
-        }
-      ],
+      "type": "function",
       "name": "setImplementationReferrerFeePercentage",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
-          "internalType": "bytes",
-          "name": "_initData",
-          "type": "bytes"
+          "name": "_referrerFeePercentage",
+          "type": "uint256",
+          "internalType": "uint256"
         }
       ],
-      "name": "setUp",
       "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
+      "stateMutability": "nonpayable"
     },
     {
-      "inputs": [],
+      "type": "function",
+      "name": "setUp",
+      "inputs": [
+        {
+          "name": "_initData",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
       "name": "unlock",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "contract IUnlock",
           "name": "",
-          "type": "address"
+          "type": "address",
+          "internalType": "contract IUnlock"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "unlock_",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "contract IUnlock",
           "name": "",
-          "type": "address"
+          "type": "address",
+          "internalType": "contract IUnlock"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "version",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "string",
           "name": "",
-          "type": "string"
+          "type": "string",
+          "internalType": "string"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
     },
     {
-      "inputs": [],
+      "type": "function",
       "name": "version_",
+      "inputs": [],
       "outputs": [
         {
-          "internalType": "string",
           "name": "",
-          "type": "string"
+          "type": "string",
+          "internalType": "string"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
+      "stateMutability": "view"
+    },
+    {
+      "type": "event",
+      "name": "ImplementationReferrerFeePercentageSet",
+      "inputs": [
+        {
+          "name": "referrerFeePercentage",
+          "type": "uint256",
+          "indexed": false,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "Initialized",
+      "inputs": [
+        {
+          "name": "version",
+          "type": "uint8",
+          "indexed": false,
+          "internalType": "uint8"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "error",
+      "name": "HatMintFailed",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "InvalidReferrerFee",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotLock",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotReferrer",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NotTransferable",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "UnsupportedNetwork",
+      "inputs": []
     }
   ]
 }
