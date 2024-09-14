@@ -54,9 +54,7 @@
   ],
   "writeFunctions": [
     {
-      "roles": [
-        "controller"
-      ],
+      "roles": ["controller"],
       "functionName": "setWearerStatus",
       "label": "Set Wearer's Status",
       "description": "Set the eligibility and standing of a chosen hat wearer",
@@ -89,9 +87,7 @@
       ]
     },
     {
-      "roles": [
-        "controller"
-      ],
+      "roles": ["controller"],
       "functionName": "setHatStatus",
       "label": "Set Hat's Status",
       "description": "Set the status of a chosen hat",
