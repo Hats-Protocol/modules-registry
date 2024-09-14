@@ -4,20 +4,51 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  SEPOLIA_RPC: https://ethereum-sepolia-rpc.publicnode.com
-  MAINNET_RPC: https://cloudflare-eth.com
-  POLYGON_RPC: wss://polygon.drpc.org
-  OPTIMISM_RPC: https://mainnet.optimism.io
-  ARBITRUM_RPC: https://1rpc.io/arb
-  GNOSIS_RPC: https://gnosis.publicnode.com
-  BASE_RPC: https://mainnet.base.org
-  PGN_RPC: https://rpc.publicgoods.network
-  CELO_RPC: https://forno.celo.org
-  ETHERSCAN_KEY: HDMPWG86NYEF1Y5KWZU1XI4HZX4SNHFW3B
-
 jobs:
-  test:
+  test-fork:
+    if: github.event.pull_request.head.repo.fork == true && github.event.pull_request.head.repo.private == false
+    env:
+      SEPOLIA_RPC: https://ethereum-sepolia-rpc.publicnode.com
+      MAINNET_RPC: https://cloudflare-eth.com
+      POLYGON_RPC: wss://polygon.drpc.org
+      OPTIMISM_RPC: https://mainnet.optimism.io
+      ARBITRUM_RPC: https://1rpc.io/arb
+      GNOSIS_RPC: https://gnosis.publicnode.com
+      BASE_RPC: https://mainnet.base.org
+      CELO_RPC: https://forno.celo.org
+      ETHERSCAN_KEY: HDMPWG86NYEF1Y5KWZU1XI4HZX4SNHFW3B
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.1
+      - name: Set up foundry
+        uses: foundry-rs/foundry-toolchain@v1
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Check Format
+        run: yarn prettier . --check
+      - name: Test
+        uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: yarn test
+  test-branch:
+    if: github.event.pull_request.head.repo.full_name == github.event.pull_request.base.repo.full_name
+    env:
+      SEPOLIA_RPC: https://sepolia.infura.io/v3/${{ secrets.INFURA_KEY }}
+      MAINNET_RPC: https://mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+      POLYGON_RPC: https://polygon-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+      OPTIMISM_RPC: https://optimism-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+      ARBITRUM_RPC: https://arbitrum-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
+      GNOSIS_RPC: https://gnosis.publicnode.com
+      BASE_RPC: https://mainnet.base.org
+      CELO_RPC: https://forno.celo.org
+      ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
