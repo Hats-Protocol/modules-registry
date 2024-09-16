@@ -156,7 +156,7 @@ describe("Base deployments", () => {
 
       if (res === undefined || res.length !== module?.parameters.length) {
         throw new Error(
-          "Error: could not read all the module's parameters from the instance",
+          `Error: could not read all parameters from the instance of module ${module?.name}`,
         );
       }
     }

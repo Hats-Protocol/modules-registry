@@ -51,7 +51,7 @@ describe("Schema Validation Tests", () => {
   }, 30000);
 
   test("Test modules ABI", async () => {
-    const lim = RateLimit(3);
+    const lim = RateLimit(1);
     for (const [id, module] of Object.entries(modules)) {
       await lim();
       console.log(`module: ${module.name}`);
