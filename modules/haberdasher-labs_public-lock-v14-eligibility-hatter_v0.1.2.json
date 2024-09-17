@@ -17,17 +17,17 @@
     {
       "label": "Referrer",
       "functionName": "REFERRER",
-      "displayType": "address"
+      "displayType": "default"
     },
     {
       "label": "Referrer Fee Percentage",
       "functionName": "referrerFeePercentage",
-      "displayType": "uint256"
+      "displayType": "default"
     },
     {
       "label": "Lock Contract",
       "functionName": "lock",
-      "displayType": "address"
+      "displayType": "default"
     },
     {
       "label": "Price",
@@ -84,7 +84,7 @@
     },
     {
       "chainId": "42220",
-      "block": ""
+      "block": "27754441"
     }
   ],
   "creationArgs": {
