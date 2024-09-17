@@ -85,16 +85,16 @@
       "primary": true,
       "args": [
         {
-          "name": "Hat",
-          "description": "ID of the hat to set the wearer status for",
-          "type": "uint256",
-          "displayType": "hat"
-        },
-        {
           "name": "Wearer",
           "description": "The address to set the wearer status for",
           "type": "address",
           "displayType": "default"
+        },
+        {
+          "name": "Hat",
+          "description": "ID of the hat to set the wearer status for",
+          "type": "uint256",
+          "displayType": "hat"
         },
         {
           "name": "Eligibility",
@@ -134,12 +134,20 @@
   "abi": [
     {
       "inputs": [
-        { "internalType": "string", "name": "_version", "type": "string" }
+        {
+          "internalType": "string",
+          "name": "_version",
+          "type": "string"
+        }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
     },
-    { "inputs": [], "name": "NotAuthorized", "type": "error" },
+    {
+      "inputs": [],
+      "name": "NotAuthorized",
+      "type": "error"
+    },
     {
       "anonymous": false,
       "inputs": [
@@ -206,7 +214,13 @@
     {
       "inputs": [],
       "name": "CONTROLLER_HAT",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
@@ -214,7 +228,11 @@
       "inputs": [],
       "name": "HATS",
       "outputs": [
-        { "internalType": "contract IHats", "name": "", "type": "address" }
+        {
+          "internalType": "contract IHats",
+          "name": "",
+          "type": "address"
+        }
       ],
       "stateMutability": "pure",
       "type": "function"
@@ -222,28 +240,60 @@
     {
       "inputs": [],
       "name": "IMPLEMENTATION",
-      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        }
       ],
       "name": "getHatStatus",
-      "outputs": [{ "internalType": "bool", "name": "active", "type": "bool" }],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "active",
+          "type": "bool"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" },
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        }
       ],
       "name": "getWearerStatus",
       "outputs": [
-        { "internalType": "bool", "name": "eligible", "type": "bool" },
-        { "internalType": "bool", "name": "standing", "type": "bool" }
+        {
+          "internalType": "bool",
+          "name": "eligible",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "standing",
+          "type": "bool"
+        }
       ],
       "stateMutability": "view",
       "type": "function"
@@ -251,14 +301,28 @@
     {
       "inputs": [],
       "name": "hatId",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
-        { "internalType": "bool", "name": "_newStatus", "type": "bool" }
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_newStatus",
+          "type": "bool"
+        }
       ],
       "name": "setHatStatus",
       "outputs": [],
@@ -267,7 +331,11 @@
     },
     {
       "inputs": [
-        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        }
       ],
       "name": "setUp",
       "outputs": [],
@@ -276,10 +344,26 @@
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" },
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
-        { "internalType": "bool", "name": "_eligible", "type": "bool" },
-        { "internalType": "bool", "name": "_standing", "type": "bool" }
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_eligible",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "_standing",
+          "type": "bool"
+        }
       ],
       "name": "setWearerStatus",
       "outputs": [],
@@ -289,14 +373,26 @@
     {
       "inputs": [],
       "name": "version",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "version_",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     }
