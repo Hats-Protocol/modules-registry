@@ -4747,6 +4747,297 @@
       ]
     },
     {
+      "id": "haberdasher-labs_hat-controlled-module",
+      "version": "v0.1.0",
+      "name": "Hat Controlled Module",
+      "details": [
+        "Enables an authorized controller hat to set wearer status and/or hat activation status for other hat(s).",
+        "Unlike Passthrough Module, this module will work even when chained together with other modules."
+      ],
+      "links": [
+        {
+          "label": "GitHub",
+          "link": "https://github.com/Hats-Protocol/passthrough-modules"
+        }
+      ],
+      "parameters": [
+        {
+          "label": "Controller Hat",
+          "functionName": "CONTROLLER_HAT",
+          "displayType": "hat"
+        }
+      ],
+      "type": { "eligibility": true, "toggle": true, "hatter": false },
+      "tags": [],
+      "implementationAddress": "0x94702C4337BB5BF59A2B6c4E0187333b180d153B",
+      "deployments": [
+        { "chainId": "11155111", "block": "6686024" },
+        { "chainId": "10", "block": "125364801" },
+        { "chainId": "137", "block": "61819779" },
+        { "chainId": "42161", "block": "253476246" },
+        { "chainId": "100", "block": "35999017" },
+        { "chainId": "8453", "block": "19769801" },
+        { "chainId": "42220", "block": "27731366" }
+      ],
+      "creationArgs": {
+        "useHatId": true,
+        "immutable": [
+          {
+            "name": "Controller Hat",
+            "description": "The hat that will control wearer eligibility and/or activation status of hats controlled by this module",
+            "type": "uint256",
+            "example": "53919893334301279589334030174039261347274288845081144962207220498432",
+            "displayType": "hat"
+          }
+        ],
+        "mutable": []
+      },
+      "customRoles": [
+        {
+          "id": "controller",
+          "name": "Eligibility/Toggle Controller",
+          "criteria": "CONTROLLER_HAT"
+        }
+      ],
+      "writeFunctions": [
+        {
+          "roles": ["controller"],
+          "functionName": "setWearerStatus",
+          "label": "Set Wearer's Status",
+          "description": "Set the eligibility and standing of a chosen hat wearer",
+          "primary": true,
+          "args": [
+            {
+              "name": "Wearer",
+              "description": "The address to set the wearer status for",
+              "type": "address",
+              "displayType": "default"
+            },
+            {
+              "name": "Hat",
+              "description": "ID of the hat to set the wearer status for",
+              "type": "uint256",
+              "displayType": "hat"
+            },
+            {
+              "name": "Eligibility",
+              "description": "Is the wearer eligible for the hat",
+              "type": "bool",
+              "displayType": "default"
+            },
+            {
+              "name": "Standing",
+              "description": "Is the wearer in good standing for the hat",
+              "type": "bool",
+              "displayType": "default"
+            }
+          ]
+        },
+        {
+          "roles": ["controller"],
+          "functionName": "setHatStatus",
+          "label": "Set Hat's Status",
+          "description": "Set the status of a chosen hat",
+          "args": [
+            {
+              "name": "Hat",
+              "description": "ID of the hat to set the status for",
+              "type": "uint256",
+              "displayType": "hat"
+            },
+            {
+              "name": "Status",
+              "description": "Is the hat active",
+              "type": "bool",
+              "displayType": "default"
+            }
+          ]
+        }
+      ],
+      "abi": [
+        {
+          "inputs": [
+            { "internalType": "string", "name": "_version", "type": "string" }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        { "inputs": [], "name": "NotAuthorized", "type": "error" },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "hatId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "active",
+              "type": "bool"
+            }
+          ],
+          "name": "HatStatusSet",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint8",
+              "name": "version",
+              "type": "uint8"
+            }
+          ],
+          "name": "Initialized",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "wearer",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "hatId",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "eligible",
+              "type": "bool"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "standing",
+              "type": "bool"
+            }
+          ],
+          "name": "WearerStatusSet",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "CONTROLLER_HAT",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "HATS",
+          "outputs": [
+            { "internalType": "contract IHats", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "IMPLEMENTATION",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+          ],
+          "name": "getHatStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "active", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+          ],
+          "name": "getWearerStatus",
+          "outputs": [
+            { "internalType": "bool", "name": "eligible", "type": "bool" },
+            { "internalType": "bool", "name": "standing", "type": "bool" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "hatId",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "pure",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
+            { "internalType": "bool", "name": "_newStatus", "type": "bool" }
+          ],
+          "name": "setHatStatus",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+          ],
+          "name": "setUp",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "_wearer", "type": "address" },
+            { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
+            { "internalType": "bool", "name": "_eligible", "type": "bool" },
+            { "internalType": "bool", "name": "_standing", "type": "bool" }
+          ],
+          "name": "setWearerStatus",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "version_",
+          "outputs": [
+            { "internalType": "string", "name": "", "type": "string" }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    },
+    {
       "id": "haberdasher-labs_hat-wearing-eligibility",
       "version": "v0.1.0",
       "name": "Hat Wearing Eligibility",
