@@ -69,6 +69,15 @@ describe("Base deployments", () => {
       if (module.name === "JokeRace Eligibility") {
         continue;
       }
+
+      // the unlock module has dependencies on other external contracts
+      if (
+        module.implementationAddress ===
+        "0x4c7803041851f7a17Fc6b5Ff5c911FC748160637"
+      ) {
+        continue;
+      }
+
       // check if module is deployed on goerli. If not, then skip
       let isOnBase = false;
       for (let i = 0; i < module.deployments.length; i++) {
