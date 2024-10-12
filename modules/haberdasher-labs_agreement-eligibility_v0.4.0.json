@@ -116,9 +116,7 @@
   ],
   "writeFunctions": [
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "signAgreementAndClaimHat",
       "label": "Sign Agreement and Claim",
       "description": "Sign the current agreement and claim the hat",
@@ -133,18 +131,14 @@
       ]
     },
     {
-      "roles": [
-        "public"
-      ],
+      "roles": ["public"],
       "functionName": "signAgreement",
       "label": "Sign Agreement",
       "description": "Sign the current agreement (without claiming the hat)",
       "args": []
     },
     {
-      "roles": [
-        "agreementOwner"
-      ],
+      "roles": ["agreementOwner"],
       "functionName": "setAgreement",
       "label": "Set Agreement",
       "description": "Set a new agreement, with a grace period",
@@ -165,9 +159,7 @@
       ]
     },
     {
-      "roles": [
-        "agreementArbitrator"
-      ],
+      "roles": ["agreementArbitrator"],
       "functionName": "revoke",
       "label": "Revoke",
       "description": "Revoke the wearer's hat and place them in bad standing",
@@ -182,9 +174,7 @@
       ]
     },
     {
-      "roles": [
-        "agreementArbitrator"
-      ],
+      "roles": ["agreementArbitrator"],
       "functionName": "revoke",
       "label": "Revoke Multiple",
       "description": "Revoke multiple wearers' hats and place them in bad standing",
@@ -199,9 +189,7 @@
       ]
     },
     {
-      "roles": [
-        "agreementArbitrator"
-      ],
+      "roles": ["agreementArbitrator"],
       "functionName": "forgive",
       "label": "Forgive",
       "description": "Forgive the wearer's bad standing, allowing them to claim the hat again",
@@ -215,9 +203,7 @@
       ]
     },
     {
-      "roles": [
-        "agreementArbitrator"
-      ],
+      "roles": ["agreementArbitrator"],
       "functionName": "forgive",
       "label": "Forgive Multiple",
       "description": "Forgive multiple wearers' bad standing, allowing them to claim the hat again",
@@ -231,9 +217,7 @@
       ]
     },
     {
-      "roles": [
-        "agreementOwner"
-      ],
+      "roles": ["agreementOwner"],
       "functionName": "setOwnerHat",
       "label": "Set Agreement Owner Hat",
       "description": "Set the id of the agreement owner hat",
@@ -247,9 +231,7 @@
       ]
     },
     {
-      "roles": [
-        "agreementOwner"
-      ],
+      "roles": ["agreementOwner"],
       "functionName": "setArbitratorHat",
       "label": "Set Agreement Arbitrator Hat",
       "description": "Set the id of the agreement arbitrator hat",
