@@ -39,12 +39,12 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0xeC61e2Fca88BBa42B7e251A1A9738d9ad001B08B",
+  "implementationAddress": "0x4F10B9e99ce11f081652646f4b192ed1b812D5Bb",
   "tags": [],
   "deployments": [
     {
       "chainId": "11155111",
-      "block": "6863721"
+      "block": "6871117"
     },
     {
       "chainId": "10",
