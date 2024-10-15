@@ -48,31 +48,27 @@
     },
     {
       "chainId": "10",
-      "block": ""
+      "block": "126708838"
     },
     {
       "chainId": "42161",
-      "block": ""
+      "block": "264150811"
     },
     {
       "chainId": "100",
-      "block": ""
+      "block": "36521638"
     },
     {
       "chainId": "42220",
-      "block": ""
+      "block": "28268854"
     },
     {
       "chainId": "8453",
-      "block": ""
+      "block": "21113616"
     },
     {
       "chainId": "137",
-      "block": ""
-    },
-    {
-      "chainId": "1",
-      "block": ""
+      "block": "63077931"
     }
   ],
   "creationArgs": {
