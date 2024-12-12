@@ -94,7 +94,11 @@
   "abi": [
     {
       "inputs": [
-        { "internalType": "string", "name": "_version", "type": "string" }
+        {
+          "internalType": "string",
+          "name": "_version",
+          "type": "string"
+        }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
@@ -106,30 +110,54 @@
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "hatId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "hatId",
+          "type": "uint256"
+        }
       ],
       "name": "MultiClaimsHatter_HatNotClaimable",
       "type": "error"
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "hatId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "hatId",
+          "type": "uint256"
+        }
       ],
       "name": "MultiClaimsHatter_HatNotClaimableFor",
       "type": "error"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "account", "type": "address" },
-        { "internalType": "uint256", "name": "hatId", "type": "uint256" }
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "hatId",
+          "type": "uint256"
+        }
       ],
       "name": "MultiClaimsHatter_NotAdminOfHat",
       "type": "error"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "account", "type": "address" },
-        { "internalType": "uint256", "name": "hatId", "type": "uint256" }
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "hatId",
+          "type": "uint256"
+        }
       ],
       "name": "MultiClaimsHatter_NotExplicitlyEligible",
       "type": "error"
@@ -189,7 +217,11 @@
       "inputs": [],
       "name": "HATS",
       "outputs": [
-        { "internalType": "contract IHats", "name": "", "type": "address" }
+        {
+          "internalType": "contract IHats",
+          "name": "",
+          "type": "address"
+        }
       ],
       "stateMutability": "pure",
       "type": "function"
@@ -197,33 +229,71 @@
     {
       "inputs": [],
       "name": "IMPLEMENTATION",
-      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_account", "type": "address" },
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+        {
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        }
       ],
       "name": "accountCanClaim",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_account", "type": "address" },
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+        {
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        }
       ],
       "name": "canClaimForAccount",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        }
       ],
       "name": "claimHat",
       "outputs": [],
@@ -232,8 +302,16 @@
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
-        { "internalType": "address", "name": "_account", "type": "address" }
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        }
       ],
       "name": "claimHatFor",
       "outputs": [],
@@ -242,7 +320,11 @@
     },
     {
       "inputs": [
-        { "internalType": "uint256[]", "name": "_hatIds", "type": "uint256[]" }
+        {
+          "internalType": "uint256[]",
+          "name": "_hatIds",
+          "type": "uint256[]"
+        }
       ],
       "name": "claimHats",
       "outputs": [],
@@ -251,7 +333,11 @@
     },
     {
       "inputs": [
-        { "internalType": "uint256[]", "name": "_hatIds", "type": "uint256[]" },
+        {
+          "internalType": "uint256[]",
+          "name": "_hatIds",
+          "type": "uint256[]"
+        },
         {
           "internalType": "address[]",
           "name": "_accounts",
@@ -265,23 +351,43 @@
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        }
       ],
       "name": "hatExists",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "hatId",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "hatId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "hatId",
+          "type": "uint256"
+        }
       ],
       "name": "hatToClaimType",
       "outputs": [
@@ -296,25 +402,49 @@
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        }
       ],
       "name": "isClaimableBy",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        }
       ],
       "name": "isClaimableFor",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        },
         {
           "internalType": "enum MultiClaimsHatter.ClaimType",
           "name": "_claimType",
@@ -348,8 +478,16 @@
           "name": "_otherImmutableArgs",
           "type": "bytes"
         },
-        { "internalType": "bytes", "name": "_initData", "type": "bytes" },
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" },
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        },
         {
           "internalType": "enum MultiClaimsHatter.ClaimType",
           "name": "_claimType",
@@ -358,14 +496,22 @@
       ],
       "name": "setHatClaimabilityAndCreateModule",
       "outputs": [
-        { "internalType": "address", "name": "_instance", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "_instance",
+          "type": "address"
+        }
       ],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "uint256[]", "name": "_hatIds", "type": "uint256[]" },
+        {
+          "internalType": "uint256[]",
+          "name": "_hatIds",
+          "type": "uint256[]"
+        },
         {
           "internalType": "enum MultiClaimsHatter.ClaimType[]",
           "name": "_claimTypes",
@@ -404,7 +550,11 @@
           "name": "_initDataArray",
           "type": "bytes[]"
         },
-        { "internalType": "uint256[]", "name": "_hatIds", "type": "uint256[]" },
+        {
+          "internalType": "uint256[]",
+          "name": "_hatIds",
+          "type": "uint256[]"
+        },
         {
           "internalType": "enum MultiClaimsHatter.ClaimType[]",
           "name": "_claimTypes",
@@ -413,14 +563,22 @@
       ],
       "name": "setHatsClaimabilityAndCreateModules",
       "outputs": [
-        { "internalType": "bool", "name": "success", "type": "bool" }
+        {
+          "internalType": "bool",
+          "name": "success",
+          "type": "bool"
+        }
       ],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        }
       ],
       "name": "setUp",
       "outputs": [],
@@ -430,23 +588,45 @@
     {
       "inputs": [],
       "name": "version",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "version_",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_hatId", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "_hatId",
+          "type": "uint256"
+        }
       ],
       "name": "wearsAdmin",
-      "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     }
