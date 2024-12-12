@@ -22,12 +22,8 @@
   "implementationAddress": "0xBf931B514DECA60Fd386dEC2DCBd42650c7417d9",
   "deployments": [
     {
-      "chainId": "5",
-      "block": "5996152"
-    },
-    {
       "chainId": "11155111",
-      "block": ""
+      "block": "5996152"
     },
     {
       "chainId": "1",
@@ -35,31 +31,27 @@
     },
     {
       "chainId": "10",
-      "block": ""
+      "block": "129187047"
     },
     {
       "chainId": "137",
-      "block": ""
+      "block": "65376155"
     },
     {
       "chainId": "42161",
-      "block": ""
+      "block": "283858084"
     },
     {
       "chainId": "100",
-      "block": ""
-    },
-    {
-      "chainId": "424",
-      "block": ""
+      "block": "37481665"
     },
     {
       "chainId": "8453",
-      "block": ""
+      "block": "23592025"
     },
     {
       "chainId": "42220",
-      "block": ""
+      "block": "29260055"
     }
   ],
   "creationArgs": {
@@ -79,9 +71,7 @@
         "name": "Initial Claimability Types",
         "description": "'1' to make a hat claimable by its wearers, '2' to make a hat also claimable on behalf of wearers",
         "type": "uint8[]",
-        "example": [
-          1
-        ],
+        "example": [1],
         "displayType": "default"
       }
     ]
