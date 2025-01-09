@@ -40,14 +40,14 @@ jobs:
   test-branch:
     if: github.event.pull_request.head.repo.full_name == github.event.pull_request.base.repo.full_name
     env:
-      SEPOLIA_RPC: https://sepolia.infura.io/v3/${{ secrets.INFURA_KEY }}
-      MAINNET_RPC: https://mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
-      POLYGON_RPC: https://polygon-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
-      OPTIMISM_RPC: https://optimism-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
-      ARBITRUM_RPC: https://arbitrum-mainnet.infura.io/v3/${{ secrets.INFURA_KEY }}
-      GNOSIS_RPC: https://gnosis.publicnode.com
-      BASE_RPC: https://mainnet.base.org
-      CELO_RPC: https://forno.celo.org
+      SEPOLIA_RPC: ${{ secrets.SEPOLIA_HTTP_PROVIDER }}
+      MAINNET_RPC: ${{ secrets.MAINNET_HTTP_PROVIDER }}
+      POLYGON_RPC: ${{ secrets.POLYGON_HTTP_PROVIDER }}
+      OPTIMISM_RPC: ${{ secrets.OPTIMISM_HTTP_PROVIDER }}
+      ARBITRUM_RPC: ${{ secrets.ARBITRUM_HTTP_PROVIDER }}
+      GNOSIS_RPC: ${{ secrets.GNOSIS_HTTP_PROVIDER }}
+      BASE_RPC: ${{ secrets.BASE_HTTP_PROVIDER }}
+      CELO_RPC: ${{ secrets.CELO_HTTP_PROVIDER }}
       ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}
     runs-on: ubuntu-latest
     steps:
