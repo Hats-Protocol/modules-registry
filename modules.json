@@ -1024,7 +1024,13 @@
       ],
       "type": { "eligibility": true, "toggle": false, "hatter": false },
       "implementationAddress": "0x6AE5a62698f23dB7CAca13FFa7391ac782a94116",
-      "tags": [],
+      "tags": [
+        {
+          "description": "Indicates that the module is now deprecated",
+          "label": "Deprecated",
+          "value": "deprecated"
+        }
+      ],
       "deployments": [
         { "chainId": "11155111", "block": "6668466" },
         { "chainId": "10", "block": "125200844" },
