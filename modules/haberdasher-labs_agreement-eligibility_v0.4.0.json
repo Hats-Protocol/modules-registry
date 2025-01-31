@@ -1,6 +1,6 @@
 {
   "id": "haberdasher-labs_agreement-eligibility",
-  "version": "v0.3.0",
+  "version": "v0.4.0",
   "name": "Agreement Eligibility",
   "details": [
     "A Hats Protocol eligibility module that a community or organization can use to enable individuals to join the community by signing an agreement.",
@@ -39,46 +39,40 @@
     "toggle": false,
     "hatter": false
   },
-  "implementationAddress": "0x6AE5a62698f23dB7CAca13FFa7391ac782a94116",
-  "tags": [
-    {
-      "description": "Indicates that the module is now deprecated",
-      "label": "Deprecated",
-      "value": "deprecated"
-    }
-  ],
+  "implementationAddress": "0x4F10B9e99ce11f081652646f4b192ed1b812D5Bb",
+  "tags": [],
   "deployments": [
     {
       "chainId": "11155111",
-      "block": "6668466"
+      "block": "6871117"
     },
     {
       "chainId": "10",
-      "block": "125200844"
+      "block": "126708838"
     },
     {
       "chainId": "42161",
-      "block": "252171575"
+      "block": "264150811"
     },
     {
       "chainId": "100",
-      "block": "35935044"
+      "block": "36521638"
     },
     {
       "chainId": "42220",
-      "block": "27665681"
+      "block": "28268854"
     },
     {
       "chainId": "8453",
-      "block": "19605730"
+      "block": "21113616"
     },
     {
       "chainId": "137",
-      "block": "61667610"
+      "block": "63077931"
     },
     {
       "chainId": "1",
-      "block": "20722687"
+      "block": "21017026"
     }
   ],
   "creationArgs": {
@@ -181,6 +175,21 @@
     },
     {
       "roles": ["agreementArbitrator"],
+      "functionName": "revoke",
+      "label": "Revoke Multiple",
+      "description": "Revoke multiple wearers' hats and place them in bad standing",
+      "primary": true,
+      "args": [
+        {
+          "name": "Wearers",
+          "description": "The addresses of the wearers from whom to revoke the hats",
+          "type": "address[]",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["agreementArbitrator"],
       "functionName": "forgive",
       "label": "Forgive",
       "description": "Forgive the wearer's bad standing, allowing them to claim the hat again",
@@ -189,6 +198,20 @@
           "name": "Wearer",
           "description": "The address of the wearer to forgive",
           "type": "address",
+          "displayType": "default"
+        }
+      ]
+    },
+    {
+      "roles": ["agreementArbitrator"],
+      "functionName": "forgive",
+      "label": "Forgive Multiple",
+      "description": "Forgive multiple wearers' bad standing, allowing them to claim the hat again",
+      "args": [
+        {
+          "name": "Wearers",
+          "description": "The addresses of the wearers to forgive",
+          "type": "address[]",
           "displayType": "default"
         }
       ]
@@ -306,6 +329,32 @@
         {
           "indexed": false,
           "internalType": "address",
+          "name": "wearer",
+          "type": "address"
+        }
+      ],
+      "name": "AgreementEligibility_Forgiven",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address[]",
+          "name": "wearers",
+          "type": "address[]"
+        }
+      ],
+      "name": "AgreementEligibility_Forgiven",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
           "name": "claimer",
           "type": "address"
         },
@@ -336,6 +385,32 @@
         }
       ],
       "name": "AgreementEligibility_OwnerHatSet",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "wearer",
+          "type": "address"
+        }
+      ],
+      "name": "AgreementEligibility_Revoked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address[]",
+          "name": "wearers",
+          "type": "address[]"
+        }
+      ],
+      "name": "AgreementEligibility_Revoked",
       "type": "event"
     },
     {
@@ -451,6 +526,19 @@
     {
       "inputs": [
         {
+          "internalType": "address[]",
+          "name": "_wearers",
+          "type": "address[]"
+        }
+      ],
+      "name": "forgive",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "address",
           "name": "_wearer",
           "type": "address"
@@ -514,6 +602,19 @@
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_wearers",
+          "type": "address[]"
+        }
+      ],
+      "name": "revoke",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
