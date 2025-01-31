@@ -1,0 +1,94 @@
+{
+  "id": "haberdasher-labs_multi-claims-hatter",
+  "version": "v0.3.0",
+  "name": "Multi Claims Hatter",
+  "details": [
+    "A hatter contract enabling accounts that are explicitly eligible for a hat to claim it.",
+    "This version is compatible with HatsModuleFactory v0.7.0, which uses a saltNonce parameter for module deployments.",
+    "This version also supports hooks, enabling additional actions to be bundled with hat claims."
+  ],
+  "links": [
+    {
+      "label": "GitHub",
+      "link": "https://github.com/Hats-Protocol/multi-claims-hatter"
+    }
+  ],
+  "parameters": [],
+  "type": {
+    "eligibility": false,
+    "toggle": false,
+    "hatter": true
+  },
+  "tags": [],
+  "implementationAddress": "",
+  "deployments": [
+    {
+      "chainId": "11155111",
+      "block": ""
+    },
+    {
+      "chainId": "1",
+      "block": ""
+    },
+    {
+      "chainId": "10",
+      "block": ""
+    },
+    {
+      "chainId": "137",
+      "block": ""
+    },
+    {
+      "chainId": "42161",
+      "block": ""
+    },
+    {
+      "chainId": "100",
+      "block": ""
+    },
+    {
+      "chainId": "8453",
+      "block": ""
+    },
+    {
+      "chainId": "42220",
+      "block": ""
+    }
+  ],
+  "creationArgs": {
+    "useHatId": true,
+    "immutable": [],
+    "mutable": [
+      {
+        "name": "Initial Claimable Hats",
+        "description": "The IDs of the hats to set claimability for",
+        "type": "uint256[]",
+        "example": [
+          "26959946667150639794667015087019630673637144422540572481103610249216"
+        ],
+        "displayType": "hat"
+      },
+      {
+        "name": "Initial Claimability Types",
+        "description": "'1' to make a hat claimable by its wearers, '2' to make a hat also claimable on behalf of wearers",
+        "type": "uint8[]",
+        "example": [
+          1
+        ],
+        "displayType": "default"
+      },
+      {
+        "name": "Initial Mint Hooks",
+        "description": "The addresses of the mint hooks to set for each hat. Use zero address to skip setting a mint hook.",
+        "type": "address[]",
+        "example": [
+          "0x0000000000000000000000000000000000000000"
+        ],
+        "displayType": "address"
+      }
+    ]
+  },
+  "customRoles": [],
+  "writeFunctions": [],
+  "abi": []
+}
