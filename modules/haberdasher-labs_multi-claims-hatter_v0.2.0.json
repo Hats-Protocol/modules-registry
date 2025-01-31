@@ -18,7 +18,13 @@
     "toggle": false,
     "hatter": true
   },
-  "tags": [],
+  "tags": [
+    {
+      "description": "Indicates that the module is now deprecated",
+      "label": "Deprecated",
+      "value": "deprecated"
+    }
+  ],
   "implementationAddress": "0xBf931B514DECA60Fd386dEC2DCBd42650c7417d9",
   "deployments": [
     {
@@ -71,7 +77,9 @@
         "name": "Initial Claimability Types",
         "description": "'1' to make a hat claimable by its wearers, '2' to make a hat also claimable on behalf of wearers",
         "type": "uint8[]",
-        "example": [1],
+        "example": [
+          1
+        ],
         "displayType": "default"
       }
     ]
