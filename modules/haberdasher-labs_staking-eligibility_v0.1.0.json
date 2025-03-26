@@ -70,6 +70,10 @@
       "block": "12330400"
     },
     {
+      "chainId": "84532",
+      "block": "23161100"
+    },
+    {
       "chainId": "42220",
       "block": "24755933"
     }
@@ -284,7 +288,11 @@
   "abi": [
     {
       "inputs": [
-        { "internalType": "string", "name": "_version", "type": "string" }
+        {
+          "internalType": "string",
+          "name": "_version",
+          "type": "string"
+        }
       ],
       "stateMutability": "nonpayable",
       "type": "constructor"
@@ -309,15 +317,31 @@
       "name": "StakingEligibility_InsufficientStake",
       "type": "error"
     },
-    { "inputs": [], "name": "StakingEligibility_NoCooldown", "type": "error" },
-    { "inputs": [], "name": "StakingEligibility_NotHatAdmin", "type": "error" },
-    { "inputs": [], "name": "StakingEligibility_NotJudge", "type": "error" },
+    {
+      "inputs": [],
+      "name": "StakingEligibility_NoCooldown",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "StakingEligibility_NotHatAdmin",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "StakingEligibility_NotJudge",
+      "type": "error"
+    },
     {
       "inputs": [],
       "name": "StakingEligibility_NotRecipient",
       "type": "error"
     },
-    { "inputs": [], "name": "StakingEligibility_NotSlashed", "type": "error" },
+    {
+      "inputs": [],
+      "name": "StakingEligibility_NotSlashed",
+      "type": "error"
+    },
     {
       "inputs": [],
       "name": "StakingEligibility_NothingToWithdraw",
@@ -522,7 +546,11 @@
       "inputs": [],
       "name": "HATS",
       "outputs": [
-        { "internalType": "contract IHats", "name": "", "type": "address" }
+        {
+          "internalType": "contract IHats",
+          "name": "",
+          "type": "address"
+        }
       ],
       "stateMutability": "pure",
       "type": "function"
@@ -530,7 +558,13 @@
     {
       "inputs": [],
       "name": "IMPLEMENTATION",
-      "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
@@ -538,14 +572,22 @@
       "inputs": [],
       "name": "TOKEN",
       "outputs": [
-        { "internalType": "contract IERC20", "name": "", "type": "address" }
+        {
+          "internalType": "contract IERC20",
+          "name": "",
+          "type": "address"
+        }
       ],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "uint248", "name": "_amount", "type": "uint248" }
+        {
+          "internalType": "uint248",
+          "name": "_amount",
+          "type": "uint248"
+        }
       ],
       "name": "beginUnstake",
       "outputs": [],
@@ -567,7 +609,11 @@
     },
     {
       "inputs": [
-        { "internalType": "uint256", "name": "_judgeHat", "type": "uint256" }
+        {
+          "internalType": "uint256",
+          "name": "_judgeHat",
+          "type": "uint256"
+        }
       ],
       "name": "changeJudgeHat",
       "outputs": [],
@@ -576,7 +622,11 @@
     },
     {
       "inputs": [
-        { "internalType": "uint248", "name": "_minStake", "type": "uint248" }
+        {
+          "internalType": "uint248",
+          "name": "_minStake",
+          "type": "uint248"
+        }
       ],
       "name": "changeMinStake",
       "outputs": [],
@@ -598,7 +648,11 @@
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_staker", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "_staker",
+          "type": "address"
+        }
       ],
       "name": "completeUnstake",
       "outputs": [],
@@ -615,25 +669,47 @@
     {
       "inputs": [],
       "name": "cooldownPeriod",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "staker", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "staker",
+          "type": "address"
+        }
       ],
       "name": "cooldowns",
       "outputs": [
-        { "internalType": "uint248", "name": "amount", "type": "uint248" },
-        { "internalType": "uint256", "name": "endsAt", "type": "uint256" }
+        {
+          "internalType": "uint248",
+          "name": "amount",
+          "type": "uint248"
+        },
+        {
+          "internalType": "uint256",
+          "name": "endsAt",
+          "type": "uint256"
+        }
       ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_staker", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "_staker",
+          "type": "address"
+        }
       ],
       "name": "forgive",
       "outputs": [],
@@ -642,13 +718,29 @@
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_wearer", "type": "address" },
-        { "internalType": "uint256", "name": "", "type": "uint256" }
+        {
+          "internalType": "address",
+          "name": "_wearer",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
       ],
       "name": "getWearerStatus",
       "outputs": [
-        { "internalType": "bool", "name": "eligible", "type": "bool" },
-        { "internalType": "bool", "name": "standing", "type": "bool" }
+        {
+          "internalType": "bool",
+          "name": "eligible",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "standing",
+          "type": "bool"
+        }
       ],
       "stateMutability": "view",
       "type": "function"
@@ -656,34 +748,62 @@
     {
       "inputs": [],
       "name": "hatId",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "pure",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "judgeHat",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "minStake",
-      "outputs": [{ "internalType": "uint248", "name": "", "type": "uint248" }],
+      "outputs": [
+        {
+          "internalType": "uint248",
+          "name": "",
+          "type": "uint248"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "recipientHat",
-      "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "bytes", "name": "_initData", "type": "bytes" }
+        {
+          "internalType": "bytes",
+          "name": "_initData",
+          "type": "bytes"
+        }
       ],
       "name": "setUp",
       "outputs": [],
@@ -692,7 +812,11 @@
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_staker", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "_staker",
+          "type": "address"
+        }
       ],
       "name": "slash",
       "outputs": [],
@@ -701,7 +825,11 @@
     },
     {
       "inputs": [
-        { "internalType": "uint248", "name": "_amount", "type": "uint248" }
+        {
+          "internalType": "uint248",
+          "name": "_amount",
+          "type": "uint248"
+        }
       ],
       "name": "stake",
       "outputs": [],
@@ -710,12 +838,24 @@
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "staker", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "staker",
+          "type": "address"
+        }
       ],
       "name": "stakes",
       "outputs": [
-        { "internalType": "uint248", "name": "amount", "type": "uint248" },
-        { "internalType": "bool", "name": "slashed", "type": "bool" }
+        {
+          "internalType": "uint248",
+          "name": "amount",
+          "type": "uint248"
+        },
+        {
+          "internalType": "bool",
+          "name": "slashed",
+          "type": "bool"
+        }
       ],
       "stateMutability": "view",
       "type": "function"
@@ -723,27 +863,49 @@
     {
       "inputs": [],
       "name": "totalSlashedStakes",
-      "outputs": [{ "internalType": "uint248", "name": "", "type": "uint248" }],
+      "outputs": [
+        {
+          "internalType": "uint248",
+          "name": "",
+          "type": "uint248"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "version",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [],
       "name": "version_",
-      "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
       "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
-        { "internalType": "address", "name": "_recipient", "type": "address" }
+        {
+          "internalType": "address",
+          "name": "_recipient",
+          "type": "address"
+        }
       ],
       "name": "withdraw",
       "outputs": [],
