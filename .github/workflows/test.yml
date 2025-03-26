@@ -15,6 +15,7 @@ jobs:
       ARBITRUM_RPC: https://1rpc.io/arb
       GNOSIS_RPC: https://gnosis.publicnode.com
       BASE_RPC: https://mainnet.base.org
+      BASE_SEPOLIA_RPC: https://sepolia.base.org
       CELO_RPC: https://forno.celo.org
       ETHERSCAN_KEY: HDMPWG86NYEF1Y5KWZU1XI4HZX4SNHFW3B
     runs-on: ubuntu-latest
@@ -47,6 +48,7 @@ jobs:
       ARBITRUM_RPC: ${{ secrets.ARBITRUM_HTTP_PROVIDER }}
       GNOSIS_RPC: ${{ secrets.GNOSIS_HTTP_PROVIDER }}
       BASE_RPC: ${{ secrets.BASE_HTTP_PROVIDER }}
+      BASE_SEPOLIA_RPC: ${{ secrets.BASE_SEPOLIA_HTTP_PROVIDER }}
       CELO_RPC: ${{ secrets.CELO_HTTP_PROVIDER }}
       ETHERSCAN_KEY: ${{ secrets.ETHERSCAN_KEY }}
     runs-on: ubuntu-latest
