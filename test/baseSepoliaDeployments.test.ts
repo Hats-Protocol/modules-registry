@@ -17,7 +17,7 @@ import type { Anvil } from "@viem/anvil";
 import type { Module, Registry } from "@hatsprotocol/modules-sdk";
 import "dotenv/config";
 
-describe("Base deployments", () => {
+describe("Base Sepolia deployments", () => {
   let publicClient: PublicClient;
   let walletClient: WalletClient;
   let hatsModulesClient: HatsModulesClient;
