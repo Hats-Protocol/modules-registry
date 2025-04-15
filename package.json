@@ -5,15 +5,15 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules yarn exec jest -- -i",
+    "test": "NODE_OPTIONS=--experimental-vm-modules pnpm jest test.ts -i",
     "bundle": "tsx ./publish.ts",
     "format-all": "prettier --write .",
     "format-bundle": "prettier --write modules.json"
   },
   "devDependencies": {
-    "@hatsprotocol/modules-sdk": "1.0.0",
+    "@hatsprotocol/modules-sdk": "1.5.0",
     "@types/jest": "^29.5.4",
-    "@viem/anvil": "0.0.5",
+    "@viem/anvil": "0.0.10",
     "async-sema": "^3.1.1",
     "axios": "^1.6.1",
     "dotenv": "^16.3.1",
@@ -24,7 +24,7 @@
     "tslib": "^2.6.2",
     "tsx": "^4.7.0",
     "typescript": "^5.1.6",
-    "viem": "1.16.5",
+    "viem": "2.26.3",
     "zod": "^3.22.4"
   }
 }

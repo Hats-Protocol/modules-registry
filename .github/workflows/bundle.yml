@@ -20,15 +20,20 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.16.1
+          node-version: 20
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
       - name: Set up foundry
         uses: foundry-rs/foundry-toolchain@v1
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Bundle
         run: |
-          yarn bundle
-          yarn format-bundle
+          pnpm bundle
+          pnpm format-bundle
           git config user.name modules-registry-bot
           git config user.email infra@hatsprotocol.xyz
           git add .
