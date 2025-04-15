@@ -25,19 +25,24 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.16.1
+          node-version: 20
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
       - name: Set up foundry
         uses: foundry-rs/foundry-toolchain@v1
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Check Format
-        run: yarn prettier . --check
+        run: pnpm prettier . --check
       - name: Test
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 10
           max_attempts: 3
-          command: yarn test
+          command: pnpm test
   test-branch:
     if: github.event.pull_request.head.repo.full_name == github.event.pull_request.base.repo.full_name
     env:
@@ -58,16 +63,21 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.16.1
+          node-version: 20
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
       - name: Set up foundry
         uses: foundry-rs/foundry-toolchain@v1
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Check Format
-        run: yarn prettier . --check
+        run: pnpm prettier . --check
       - name: Test
         uses: nick-fields/retry@v2
         with:
           timeout_minutes: 10
           max_attempts: 3
-          command: yarn test
+          command: pnpm test
