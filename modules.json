@@ -3349,6 +3349,7 @@
       "tags": [],
       "deployments": [
         { "chainId": "11155111", "block": "6669160" },
+        { "chainId": "1", "block": "21947580" },
         { "chainId": "10", "block": "125208683" },
         { "chainId": "137", "block": "61674801" },
         { "chainId": "42161", "block": "252235066" },
