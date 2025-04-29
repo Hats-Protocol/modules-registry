@@ -1,9 +1,10 @@
 {
   "id": "haberdasher-labs_multi-claims-hatter",
-  "version": "v0.1.0",
+  "version": "v0.2.0",
   "name": "Multi Claims Hatter",
   "details": [
-    "A Hats Protocol hatter contract enabling explicitly eligible wearers to claim a hat."
+    "A Hats Protocol hatter contract enabling explicitly eligible wearers to claim a hat.",
+    "This version is compatible with HatsModuleFactory v0.7.0, which uses a saltNonce parameter for module deployments."
   ],
   "links": [
     {
@@ -24,51 +25,39 @@
       "value": "deprecated"
     }
   ],
-  "implementationAddress": "0xB985eA1be961f7c4A4C45504444C02c88c4fdEF9",
+  "implementationAddress": "0xBf931B514DECA60Fd386dEC2DCBd42650c7417d9",
   "deployments": [
     {
-      "chainId": "5",
-      "block": "9797988"
-    },
-    {
       "chainId": "11155111",
-      "block": "4655431"
+      "block": "5996152"
     },
     {
       "chainId": "1",
-      "block": "18265713"
+      "block": "19970940"
     },
     {
       "chainId": "10",
-      "block": "110337588"
+      "block": "129187047"
     },
     {
       "chainId": "137",
-      "block": "48249349"
+      "block": "65376155"
     },
     {
       "chainId": "42161",
-      "block": "136869560"
+      "block": "283858084"
     },
     {
       "chainId": "100",
-      "block": "30266574"
-    },
-    {
-      "chainId": "424",
-      "block": "5531500"
+      "block": "37481665"
     },
     {
       "chainId": "8453",
-      "block": "7577706"
-    },
-    {
-      "chainId": "84532",
-      "block": "23160786"
+      "block": "23592025"
     },
     {
       "chainId": "42220",
-      "block": "22586368"
+      "block": "29260055"
     }
   ],
   "creationArgs": {
@@ -77,7 +66,7 @@
     "mutable": [
       {
         "name": "Initial Claimable Hats",
-        "description": "The ID of the hats to set claimability for",
+        "description": "The IDs of the hats to set claimability for",
         "type": "uint256[]",
         "example": [
           "26959946667150639794667015087019630673637144422540572481103610249216"
@@ -88,7 +77,9 @@
         "name": "Initial Claimability Types",
         "description": "'1' to make a hat claimable by its wearers, '2' to make a hat also claimable on behalf of wearers",
         "type": "uint8[]",
-        "example": [1],
+        "example": [
+          1
+        ],
         "displayType": "default"
       }
     ]
@@ -489,6 +480,11 @@
         },
         {
           "internalType": "uint256",
+          "name": "_saltNonce",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
           "name": "_hatId",
           "type": "uint256"
         },
@@ -553,6 +549,11 @@
           "internalType": "bytes[]",
           "name": "_initDataArray",
           "type": "bytes[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "_saltNonces",
+          "type": "uint256[]"
         },
         {
           "internalType": "uint256[]",
