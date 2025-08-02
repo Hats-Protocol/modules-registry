@@ -17,6 +17,7 @@ jobs:
       BASE_RPC: https://mainnet.base.org
       BASE_SEPOLIA_RPC: https://sepolia.base.org
       CELO_RPC: https://forno.celo.org
+      AVALANCHE_RPC: https://api.avax.network/ext/bc/C/rpc
       ETHERSCAN_KEY: HDMPWG86NYEF1Y5KWZU1XI4HZX4SNHFW3B
     runs-on: ubuntu-latest
     steps:
