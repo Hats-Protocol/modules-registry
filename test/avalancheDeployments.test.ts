@@ -170,4 +170,4 @@ describe("Avalanche deployments", () => {
       }
     }
   }, 30000);
-}); 
+});
