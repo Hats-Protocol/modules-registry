@@ -70,6 +70,10 @@
     {
       "chainId": "42220",
       "block": "22842477"
+    },
+    {
+      "chainId": "43114",
+      "block": "64681307"
     }
   ],
   "creationArgs": {
@@ -94,7 +98,9 @@
   ],
   "writeFunctions": [
     {
-      "roles": ["eligibilityTogglePassthrough"],
+      "roles": [
+        "eligibilityTogglePassthrough"
+      ],
       "functionName": "setHatWearerStatus",
       "label": "Set Wearer's Status",
       "description": "Set the eligibility and standing of a chosen hat wearer",
@@ -127,7 +133,9 @@
       ]
     },
     {
-      "roles": ["eligibilityTogglePassthrough"],
+      "roles": [
+        "eligibilityTogglePassthrough"
+      ],
       "functionName": "setHatStatus",
       "label": "Set Hat's Status",
       "description": "Set the status of a chosen hat",
